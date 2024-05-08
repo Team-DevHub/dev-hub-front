@@ -1,10 +1,12 @@
 import Banner from "@/components/common/Banner";
+import PostItem from "@/components/common/PostItem";
 import styled from "styled-components";
 
 function HomePage() {
   return (
     <RootDiv>
-      <Banner hasBackBtn={true} />
+      <Banner hasBackBtn={false} />
+      <PostItem />
     </RootDiv>
   );
 }

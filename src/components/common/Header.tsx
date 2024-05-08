@@ -30,6 +30,6 @@ const HeaderContainer = styled.header`
 
   & span {
     font-size: ${({ theme }) => theme.fontSize.base};
-    font-weight: 500;
+    font-weight: 600;
   }
 `;

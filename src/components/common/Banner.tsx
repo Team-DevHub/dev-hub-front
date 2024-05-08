@@ -42,6 +42,7 @@ const Container = styled.div`
   border-radius: 12px;
   background-color: ${({ theme }) => theme.color.bgWhite};
   border: 1px solid ${({ theme }) => theme.color.borderGray};
+  color: ${({ theme }) => theme.color.textBlack};
 
   display: flex;
   justify-content: space-between;
