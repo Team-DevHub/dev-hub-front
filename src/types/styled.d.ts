@@ -1,4 +1,4 @@
-import { theme } from "./theme";
+import { theme } from "../styles/theme";
 
 declare module "styled-components" {
   export interface DefaultTheme {

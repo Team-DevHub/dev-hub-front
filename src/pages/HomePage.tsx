@@ -1,7 +1,12 @@
+import Banner from "@/components/common/Banner";
 import styled from "styled-components";
 
 function HomePage() {
-  return <RootDiv>홈</RootDiv>;
+  return (
+    <RootDiv>
+      <Banner hasBackBtn={true} />
+    </RootDiv>
+  );
 }
 
 export default HomePage;
