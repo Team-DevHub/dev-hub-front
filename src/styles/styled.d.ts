@@ -1,7 +1,8 @@
-import { theme } from './theme';
+import { theme } from "./theme";
 
-declare module 'styled-components' {
+declare module "styled-components" {
   export interface DefaultTheme {
     color: typeof theme.color;
+    fontSize: typeof theme.fontSize;
   }
 }

@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import "./assets/font/font.css";
+import "../assets/font/font.css";
 import reset from "styled-reset";
 
 export const GlobalStyle = createGlobalStyle`
@@ -9,9 +9,17 @@ export const GlobalStyle = createGlobalStyle`
     font-family: "Pretendard";
   }
 
-  #root {
+  body {
     width: 100vw;
     height: 100vh;
+    background-color: #F9FAFB;
+  }
+
+  #root {
+    width: 100%;
+    max-width: 1200px;
+    min-height: 100%;
+    margin: 0 auto;
   }
 
   * {
