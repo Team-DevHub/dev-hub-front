@@ -1,4 +1,5 @@
 import Checkbox from '@/components/common/FormInput/Checkbox';
+import FormButton from '@/components/common/FormInput/FormButton';
 import FormInput from '@/components/common/FormInput/FormInput';
 import { FormRegex } from '@/utils/regex';
 import { useState } from 'react';
@@ -23,6 +24,12 @@ const ComponentPage = () => {
         checked={checked}
         label='로그인 정보 저장'
         onClick={() => setChecked(!checked)}
+      />
+      <FormButton
+        text={'로그인'}
+        onClick={function (): void {
+          throw new Error('Function not implemented.');
+        }}
       />
     </div>
   );
