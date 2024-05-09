@@ -1,6 +1,4 @@
-import { S } from './styles/HomeStyle';
-
 const HomePage = () => {
-  return <S.RootDiv>홈</S.RootDiv>;
+  return <div></div>;
 };
 export default HomePage;

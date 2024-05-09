@@ -2,6 +2,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/home/HomePage';
+import ComponentPage from './pages/components/ComponentPage';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       { index: true, element: <div>test</div> },
       { path: 'nesting', element: <div>/test/nesting</div> },
     ],
+  },
+  {
+    path: 'components',
+    children: [{ index: true, element: <ComponentPage /> }],
   },
 ]);
 

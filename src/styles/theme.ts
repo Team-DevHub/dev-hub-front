@@ -5,6 +5,7 @@ export const theme = {
     textKey: '#263747',
     textWhite: '#FFFFFF',
     textGray: '#909090',
+    textRed: '#EB1E1E',
     bgWhite: '#F9FAFB',
     bgLightGray: '#E1E1E1',
     borderGray: '#EAEAEA',
