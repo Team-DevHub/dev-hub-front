@@ -1,10 +1,14 @@
+import { ChangeEventHandler } from 'react';
 import styled from 'styled-components';
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+interface Props {
+  id: string;
   label: string;
   value: string;
   regex?: RegExp;
   errorMessage?: string;
+  placeholder?: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
 const FormInput = ({
@@ -13,7 +17,8 @@ const FormInput = ({
   value,
   regex,
   errorMessage,
-  ...props
+  placeholder,
+  onChange,
 }: Props) => {
   const isError = regex ? value.length > 0 && !regex.test(value) : false;
 
@@ -26,7 +31,14 @@ const FormInput = ({
         <span className='error-message'>{isError && errorMessage}</span>
       </LabelContainer>
       <InputContainer $isError={isError}>
-        <input className='input' id={id} type='text' value={value} {...props} />
+        <input
+          className='input'
+          id={id}
+          type='text'
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+        />
       </InputContainer>
     </FormInputRoot>
   );
