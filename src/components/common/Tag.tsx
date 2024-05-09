@@ -11,7 +11,6 @@ function Tag({ isClicked }: TagProps) {
 export default Tag;
 
 const TagContainer = styled.span<{ $isClicked: boolean }>`
-  box-sizing: content-box;
   display: inline-block;
   padding: 4px 20px;
   border-radius: 12px;
