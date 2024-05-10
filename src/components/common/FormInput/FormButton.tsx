@@ -1,23 +1,21 @@
 import styled from 'styled-components';
 
 interface Props {
-  type?: 'default' | 'gray';
+  disabled?: boolean;
   text: string;
   onClick: () => void;
 }
 
-const FormButton = ({ type = 'default', text, onClick }: Props) => {
+const FormButton = ({ disabled = false, text, onClick }: Props) => {
   return (
-    <Button onClick={onClick} $type={type}>
+    <Button onClick={onClick} disabled={disabled}>
       {text}
     </Button>
   );
 };
 export default FormButton;
 
-const Button = styled.button<{
-  $type: Props['type'];
-}>`
+const Button = styled.button`
   width: 100%;
   max-width: 380px;
   border-radius: 10px;
@@ -27,22 +25,22 @@ const Button = styled.button<{
   outline: 0;
   border: 0;
 
-  ${({ $type, theme }) => {
-    if ($type === 'default')
+  ${({ disabled, theme }) => {
+    if (!disabled)
       return {
         backgroundColor: theme.color.key,
         color: theme.color.textWhite,
       };
 
-    if ($type === 'gray')
+    if (disabled)
       return {
         backgroundColor: '#CFD3D8',
         color: theme.color.textBlack,
+        cursor: 'default',
       };
   }}
 
-  &:hover {
+  &:hover:not(:disabled) {
     opacity: 0.95;
-    cursor: pointer;
   }
 `;
