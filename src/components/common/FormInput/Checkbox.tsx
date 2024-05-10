@@ -19,6 +19,7 @@ const Checkbox = ({ id, checked, label, onClick }: Props) => {
         onClick={onClick}
         checked={checked}
         hidden
+        readOnly
       />
     </RootContainer>
   );
@@ -29,6 +30,7 @@ const RootContainer = styled.label<{ $isChecked: boolean }>`
   display: flex;
   align-items: center;
   gap: 7px;
+  cursor: pointer;
 
   .label {
     color: ${({ theme, $isChecked }) =>
