@@ -32,9 +32,10 @@ const ComponentPage = () => {
       </Container>
       <Container>
         <FormButton
+          // disabled={true}
           text={'로그인'}
-          onClick={function (): void {
-            throw new Error('Function not implemented.');
+          onClick={() => {
+            console.log('click');
           }}
         />
       </Container>
