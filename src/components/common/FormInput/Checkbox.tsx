@@ -27,6 +27,7 @@ const Checkbox = ({ id, checked, label, onClick }: Props) => {
 export default Checkbox;
 
 const RootContainer = styled.label<{ $isChecked: boolean }>`
+  width: fit-content;
   display: flex;
   align-items: center;
   gap: 7px;
