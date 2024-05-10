@@ -80,6 +80,7 @@ const InputContainer = styled.div<{ $isError: boolean }>`
     width: 100%;
     border: 0;
     outline: 0;
+    background-color: ${({ theme }) => theme.color.keyWhite};
 
     &::placeholder {
       color: ${({ theme }) => theme.color.textGray};
