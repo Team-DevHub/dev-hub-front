@@ -42,6 +42,7 @@ const StyledInput = styled.input`
   background-color: ${({ theme }) => theme.color_bgWhite};
   border: 1px solid ${({ theme }) => theme.color_borderGray};
   border-radius: 8px;
+  transition: all 0.2s ease-in-out;
 
   &:focus {
     border: 1px solid ${({ theme }) => theme.color_key};
