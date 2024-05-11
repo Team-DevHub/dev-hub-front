@@ -47,7 +47,7 @@ const Wrapper = styled.div`
   & h3 {
     font-weight: 700;
     font-size: ${({ theme }) => theme.fontSize.md};
-    color: ${({ theme }) => theme.color.key};
+    color: ${({ theme }) => theme.color_key};
   }
 `;
 
@@ -60,8 +60,8 @@ const Container = styled.div`
   align-items: center;
   gap: 16px;
 
-  background-color: ${({ theme }) => theme.color.bgWhite};
-  border: 1px solid ${({ theme }) => theme.color.borderGray};
+  background-color: ${({ theme }) => theme.color_bgWhite};
+  border: 1px solid ${({ theme }) => theme.color_borderGray};
   border-radius: 12px;
 `;
 
@@ -75,13 +75,13 @@ const UserInfo = styled.div`
   & h4 {
     font-weight: 700;
     font-size: ${({ theme }) => theme.fontSize.lg};
-    color: ${({ theme }) => theme.color.key};
+    color: ${({ theme }) => theme.color_key};
   }
 
   & span {
     font-weight: 300;
     font-size: ${({ theme }) => theme.fontSize.sm};
-    color: ${({ theme }) => theme.color.textGray};
+    color: ${({ theme }) => theme.color_textGray};
     letter-spacing: 0.3px;
   }
 `;
@@ -102,13 +102,13 @@ const Activity = styled.div`
   & h5 {
     font-weight: 600;
     font-size: ${({ theme }) => theme.fontSize.md};
-    color: ${({ theme }) => theme.color.key};
+    color: ${({ theme }) => theme.color_key};
   }
 
   & span {
     font-weight: 300;
     font-size: ${({ theme }) => theme.fontSize.sm};
-    color: ${({ theme }) => theme.color.textGray};
+    color: ${({ theme }) => theme.color_textGray};
     letter-spacing: 0.3px;
   }
 `;

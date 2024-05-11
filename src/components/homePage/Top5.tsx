@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   & h3 {
     font-weight: 700;
     font-size: ${({ theme }) => theme.fontSize.md};
-    color: ${({ theme }) => theme.color.key};
+    color: ${({ theme }) => theme.color_key};
   }
 `;
 
@@ -39,7 +39,7 @@ const Container = styled.div`
   flex-direction: column;
   gap: 24px;
 
-  background-color: ${({ theme }) => theme.color.bgWhite};
-  border: 1px solid ${({ theme }) => theme.color.borderGray};
+  background-color: ${({ theme }) => theme.color_bgWhite};
+  border: 1px solid ${({ theme }) => theme.color_borderGray};
   border-radius: 12px;
 `;

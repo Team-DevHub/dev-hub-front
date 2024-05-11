@@ -40,9 +40,9 @@ const Container = styled.div`
   width: 100%;
   height: 180px;
   border-radius: 12px;
-  background-color: ${({ theme }) => theme.color.bgWhite};
-  border: 1px solid ${({ theme }) => theme.color.borderGray};
-  color: ${({ theme }) => theme.color.textBlack};
+  background-color: ${({ theme }) => theme.color_bgWhite};
+  border: 1px solid ${({ theme }) => theme.color_borderGray};
+  color: ${({ theme }) => theme.color_textBlack};
 
   display: flex;
   justify-content: space-between;
@@ -60,7 +60,7 @@ const TitleWrapper = styled.div`
 const BackButton = styled.button`
   display: flex;
   gap: 8px;
-  color: ${({ theme }) => theme.color.textGray};
+  color: ${({ theme }) => theme.color_textGray};
   font-size: ${({ theme }) => theme.fontSize.base};
   font-weight: 500;
 `;

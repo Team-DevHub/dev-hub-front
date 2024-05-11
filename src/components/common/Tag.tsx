@@ -29,15 +29,15 @@ const TagContainer = styled.span<{ $isClicked: boolean }>`
   ${({ theme, $isClicked }) => {
     if ($isClicked) {
       return {
-        color: theme.color.textWhite,
-        backgroundColor: theme.color.key,
-        border: `1px solid ${theme.color.key}`,
+        color: theme.color_textWhite,
+        backgroundColor: theme.color_key,
+        border: `1px solid ${theme.color_key}`,
       };
     } else {
       return {
-        color: theme.color.key,
-        backgroundColor: theme.color.bgWhite,
-        border: `1px solid ${theme.color.borderGray}`,
+        color: theme.color_key,
+        backgroundColor: theme.color_bgWhite,
+        border: `1px solid ${theme.color_borderGray}`,
       };
     }
   }}

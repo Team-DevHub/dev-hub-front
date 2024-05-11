@@ -29,8 +29,8 @@ export default PostItem;
 const Container = styled.div`
   width: 300px;
   height: 130px;
-  background-color: ${({ theme }) => theme.color.bgWhite};
-  border: 1px solid ${({ theme }) => theme.color.borderGray};
+  background-color: ${({ theme }) => theme.color_bgWhite};
+  border: 1px solid ${({ theme }) => theme.color_borderGray};
   border-radius: 12px;
   padding: 16px;
 
@@ -53,8 +53,8 @@ const TopBar = styled.div`
 `;
 
 const Tag = styled.span`
-  color: ${({ theme }) => theme.color.textWhite};
-  background-color: ${({ theme }) => theme.color.key};
+  color: ${({ theme }) => theme.color_textWhite};
+  background-color: ${({ theme }) => theme.color_key};
   font-size: ${({ theme }) => theme.fontSize.sm};
   padding: 5px 14px;
   border-radius: 10px;
@@ -62,7 +62,7 @@ const Tag = styled.span`
 `;
 
 const Date = styled.span`
-  color: ${({ theme }) => theme.color.textGray};
+  color: ${({ theme }) => theme.color_textGray};
   font-size: ${({ theme }) => theme.fontSize.sm};
   font-weight: 300;
 `;
@@ -91,7 +91,7 @@ const Comment = styled.div`
   align-items: center;
   gap: 4px;
   font-size: ${({ theme }) => theme.fontSize.xs};
-  color: ${({ theme }) => theme.color.textGray};
+  color: ${({ theme }) => theme.color_textGray};
 `;
 
 const Writer = styled.div`
@@ -99,6 +99,6 @@ const Writer = styled.div`
   align-items: center;
   gap: 6px;
   font-size: ${({ theme }) => theme.fontSize.sm};
-  color: ${({ theme }) => theme.color.key};
+  color: ${({ theme }) => theme.color_key};
   font-weight: 500;
 `;

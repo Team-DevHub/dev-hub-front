@@ -14,8 +14,8 @@ export default Header;
 const HeaderContainer = styled.header`
   width: 100%;
   height: 60px;
-  background-color: ${({ theme }) => theme.color.key};
-  color: ${({ theme }) => theme.color.textWhite};
+  background-color: ${({ theme }) => theme.color_key};
+  color: ${({ theme }) => theme.color_textWhite};
   display: flex;
   align-items: center;
   justify-content: space-between;

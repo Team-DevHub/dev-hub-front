@@ -25,8 +25,8 @@ const StyledButton = styled.button<{ $size: string }>`
   justify-content: center;
   gap: 6px;
 
-  color: ${({ theme }) => theme.color.textWhite};
-  background-color: ${({ theme }) => theme.color.key};
+  color: ${({ theme }) => theme.color_textWhite};
+  background-color: ${({ theme }) => theme.color_key};
   border-radius: 8px;
   font-weight: 600;
 
