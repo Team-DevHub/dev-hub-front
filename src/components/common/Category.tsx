@@ -7,7 +7,7 @@ function Category() {
   const [selected, setSelected] = useState(categories[0].id);
   return (
     <Container>
-      <Title>카테고리</Title>
+      <h2>카테고리</h2>
       <TagContainer>
         {categories.map((data) => (
           <Tag
@@ -29,12 +29,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-`;
-
-const Title = styled.h2`
-  font-size: ${({ theme }) => theme.fontSize_xl};
-  color: ${({ theme }) => theme.color_key};
-  font-weight: 600;
 `;
 
 const TagContainer = styled.div`

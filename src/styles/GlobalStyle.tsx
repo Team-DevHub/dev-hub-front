@@ -36,4 +36,10 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     cursor: pointer;
   }
+
+  h2 {
+    font-size: 20px;
+    color: #1D2A3D;
+    font-weight: 600;
+  }
 `;
