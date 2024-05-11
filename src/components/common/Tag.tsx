@@ -1,28 +1,44 @@
 import styled from "styled-components";
 
 interface TagProps {
+  content: string;
   isClicked: boolean;
+  onClick: () => void;
 }
 
-function Tag({ isClicked }: TagProps) {
-  return <TagContainer $isClicked={isClicked}>Tag</TagContainer>;
+function Tag({ content, isClicked, onClick }: TagProps) {
+  return (
+    <TagContainer onClick={onClick} $isClicked={isClicked}>
+      {content}
+    </TagContainer>
+  );
 }
 
 export default Tag;
 
 const TagContainer = styled.span<{ $isClicked: boolean }>`
   display: inline-block;
-  padding: 4px 20px;
+  padding: 6px 20px;
   border-radius: 12px;
-  color: ${({ theme, $isClicked }) =>
-    $isClicked ? theme.color.textWhite : theme.color.key};
-  background-color: ${({ theme, $isClicked }) =>
-    $isClicked ? theme.color.key : theme.color.bgWhite};
-  border: 1px solid
-    ${({ theme, $isClicked }) =>
-      $isClicked ? theme.color.key : theme.color.borderGray};
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+
   font-size: ${({ theme }) => theme.fontSize.base};
   font-weight: 500;
 
-  cursor: pointer;
+  ${({ theme, $isClicked }) => {
+    if ($isClicked) {
+      return {
+        color: theme.color.textWhite,
+        backgroundColor: theme.color.key,
+        border: `1px solid ${theme.color.key}`,
+      };
+    } else {
+      return {
+        color: theme.color.key,
+        backgroundColor: theme.color.bgWhite,
+        border: `1px solid ${theme.color.borderGray}`,
+      };
+    }
+  }}
 `;
