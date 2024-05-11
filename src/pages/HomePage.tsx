@@ -1,5 +1,6 @@
 import Banner from "@/components/common/Banner";
 import Category from "@/components/common/Category";
+import PostList from "@/components/homePage/PostList";
 import SearchInput from "@/components/homePage/SearchInput";
 import SideBar from "@/components/homePage/SideBar";
 import styled from "styled-components";
@@ -14,6 +15,7 @@ function HomePage() {
             <Category />
             <SearchInput />
           </TopBar>
+          <PostList />
         </Content>
         <SideBar />
       </Container>
@@ -25,14 +27,17 @@ export default HomePage;
 
 const Container = styled.div`
   width: 100%;
+  height: 1000px;
   display: flex;
-  gap: 50px;
+  gap: 30px;
+  padding: 40px 0;
 `;
 
 const Content = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 50px;
 `;
 
 const TopBar = styled.div`

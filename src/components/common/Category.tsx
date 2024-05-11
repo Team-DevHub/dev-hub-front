@@ -25,7 +25,7 @@ function Category() {
 export default Category;
 
 const Container = styled.div`
-  width: 600px;
+  width: 650px;
   display: flex;
   flex-direction: column;
   gap: 12px;

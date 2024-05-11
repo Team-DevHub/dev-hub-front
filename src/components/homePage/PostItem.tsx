@@ -2,22 +2,30 @@ import styled from "styled-components";
 import CommentIcon from "@/assets/icon/comment-icon.svg?react";
 import PersonIcon from "@/assets/icon/person-icon.svg?react";
 
-function PostItem() {
+interface PostItemProps {
+  postData: {
+    id: number;
+    category: string;
+    title: string;
+    comments: number;
+    writer: string;
+  };
+}
+
+function PostItem({ postData }: PostItemProps) {
   return (
     <Container>
       <TopBar>
-        <Tag>React</Tag>
+        <Tag>{postData.category}</Tag>
         <Date>2024.04.28</Date>
       </TopBar>
-      <PostTitle>
-        모달 바깥 클릭 시 닫히도록 하는 React 커스텀 hook 코드 공유
-      </PostTitle>
+      <PostTitle>{postData.title}</PostTitle>
       <BottomBar>
         <Comment>
-          <CommentIcon /> 16
+          <CommentIcon /> {postData.comments}
         </Comment>
         <Writer>
-          <PersonIcon /> 류지민
+          <PersonIcon /> {postData.writer}
         </Writer>
       </BottomBar>
     </Container>
@@ -42,6 +50,7 @@ const Container = styled.div`
 
   &:hover {
     scale: calc(1.03);
+    border: 1px solid ${({ theme }) => theme.color_key};
   }
 `;
 

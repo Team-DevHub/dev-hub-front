@@ -23,12 +23,14 @@ export default SideBar;
 
 const Container = styled.aside`
   width: 220px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   gap: 36px;
-  padding: 24px 0;
+  padding: 30px 0;
 
   position: sticky;
+  position: -webkit-sticky;
   top: 0;
   left: 0;
 `;
