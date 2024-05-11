@@ -44,7 +44,7 @@ const CustomSelect = styled.div`
 const Content = styled.span`
   flex: 1;
   text-align: center;
-  font-size: ${({ theme }) => theme.fontSize.base};
+  font-size: ${({ theme }) => theme.fontSize_base};
   color: ${({ theme }) => theme.color_textBlack};
   font-weight: 500;
 `;
@@ -67,7 +67,7 @@ const Option = styled.div`
   padding: 8px 14px;
   cursor: pointer;
 
-  font-size: ${({ theme }) => theme.fontSize.sm};
+  font-size: ${({ theme }) => theme.fontSize_sm};
   color: ${({ theme }) => theme.color_textBlack};
   transition: all 0.15s ease-in;
 

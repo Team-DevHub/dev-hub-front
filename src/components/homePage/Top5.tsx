@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 
   & h3 {
     font-weight: 700;
-    font-size: ${({ theme }) => theme.fontSize.md};
+    font-size: ${({ theme }) => theme.fontSize_md};
     color: ${({ theme }) => theme.color_key};
   }
 `;

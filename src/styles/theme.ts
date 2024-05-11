@@ -9,12 +9,10 @@ export const theme = {
   color_bgWhite: "#FFFFFF",
   color_bgLightGray: "#E1E1E1",
   color_borderGray: "#EAEAEA",
-  fontSize: {
-    xs: "10px",
-    sm: "12px",
-    base: "14px",
-    md: "16px",
-    lg: "18px",
-    xl: "20px",
-  },
+  fontSize_xs: "10px",
+  fontSize_sm: "12px",
+  fontSize_base: "14px",
+  fontSize_md: "16px",
+  fontSize_lg: "18px",
+  fontSize_xl: "20px",
 } as const;

@@ -46,7 +46,7 @@ const Wrapper = styled.div`
 
   & h3 {
     font-weight: 700;
-    font-size: ${({ theme }) => theme.fontSize.md};
+    font-size: ${({ theme }) => theme.fontSize_md};
     color: ${({ theme }) => theme.color_key};
   }
 `;
@@ -74,13 +74,13 @@ const UserInfo = styled.div`
 
   & h4 {
     font-weight: 700;
-    font-size: ${({ theme }) => theme.fontSize.lg};
+    font-size: ${({ theme }) => theme.fontSize_lg};
     color: ${({ theme }) => theme.color_key};
   }
 
   & span {
     font-weight: 300;
-    font-size: ${({ theme }) => theme.fontSize.sm};
+    font-size: ${({ theme }) => theme.fontSize_sm};
     color: ${({ theme }) => theme.color_textGray};
     letter-spacing: 0.3px;
   }
@@ -101,13 +101,13 @@ const Activity = styled.div`
 
   & h5 {
     font-weight: 600;
-    font-size: ${({ theme }) => theme.fontSize.md};
+    font-size: ${({ theme }) => theme.fontSize_md};
     color: ${({ theme }) => theme.color_key};
   }
 
   & span {
     font-weight: 300;
-    font-size: ${({ theme }) => theme.fontSize.sm};
+    font-size: ${({ theme }) => theme.fontSize_sm};
     color: ${({ theme }) => theme.color_textGray};
     letter-spacing: 0.3px;
   }

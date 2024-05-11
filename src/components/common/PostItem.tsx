@@ -55,7 +55,7 @@ const TopBar = styled.div`
 const Tag = styled.span`
   color: ${({ theme }) => theme.color_textWhite};
   background-color: ${({ theme }) => theme.color_key};
-  font-size: ${({ theme }) => theme.fontSize.sm};
+  font-size: ${({ theme }) => theme.fontSize_sm};
   padding: 5px 14px;
   border-radius: 10px;
   font-weight: 500;
@@ -63,12 +63,12 @@ const Tag = styled.span`
 
 const Date = styled.span`
   color: ${({ theme }) => theme.color_textGray};
-  font-size: ${({ theme }) => theme.fontSize.sm};
+  font-size: ${({ theme }) => theme.fontSize_sm};
   font-weight: 300;
 `;
 
 const PostTitle = styled.h3`
-  font-size: ${({ theme }) => theme.fontSize.base};
+  font-size: ${({ theme }) => theme.fontSize_base};
   font-weight: 500;
 
   line-height: 140%;
@@ -90,7 +90,7 @@ const Comment = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: ${({ theme }) => theme.fontSize.xs};
+  font-size: ${({ theme }) => theme.fontSize_xs};
   color: ${({ theme }) => theme.color_textGray};
 `;
 
@@ -98,7 +98,7 @@ const Writer = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: ${({ theme }) => theme.fontSize.sm};
+  font-size: ${({ theme }) => theme.fontSize_sm};
   color: ${({ theme }) => theme.color_key};
   font-weight: 500;
 `;

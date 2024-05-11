@@ -23,7 +23,7 @@ const TagContainer = styled.span<{ $isClicked: boolean }>`
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 
-  font-size: ${({ theme }) => theme.fontSize.base};
+  font-size: ${({ theme }) => theme.fontSize_base};
   font-weight: 500;
 
   ${({ theme, $isClicked }) => {

@@ -33,12 +33,12 @@ const StyledButton = styled.button<{ $size: string }>`
   ${({ theme, $size }) => {
     if ($size === "small") {
       return {
-        fontSize: theme.fontSize.sm,
+        fontSize: theme.fontSize_sm,
         padding: `8px 0px`,
       };
     } else if ($size === "medium") {
       return {
-        fontSize: theme.fontSize.base,
+        fontSize: theme.fontSize_base,
         padding: `10px 0px`,
       };
     }

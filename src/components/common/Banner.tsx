@@ -61,7 +61,7 @@ const BackButton = styled.button`
   display: flex;
   gap: 8px;
   color: ${({ theme }) => theme.color_textGray};
-  font-size: ${({ theme }) => theme.fontSize.base};
+  font-size: ${({ theme }) => theme.fontSize_base};
   font-weight: 500;
 `;
 

@@ -29,7 +29,7 @@ const HeaderContainer = styled.header`
   }
 
   & span {
-    font-size: ${({ theme }) => theme.fontSize.base};
+    font-size: ${({ theme }) => theme.fontSize_base};
     font-weight: 600;
   }
 `;

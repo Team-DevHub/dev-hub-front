@@ -32,7 +32,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: ${({ theme }) => theme.fontSize.xl};
+  font-size: ${({ theme }) => theme.fontSize_xl};
   color: ${({ theme }) => theme.color_key};
   font-weight: 600;
 `;

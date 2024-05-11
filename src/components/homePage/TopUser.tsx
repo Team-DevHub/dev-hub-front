@@ -27,12 +27,12 @@ const Container = styled.div`
 
   & h5 {
     font-weight: 600;
-    font-size: ${({ theme }) => theme.fontSize.base};
+    font-size: ${({ theme }) => theme.fontSize_base};
     color: ${({ theme }) => theme.color_key};
   }
 
   & span {
-    font-size: ${({ theme }) => theme.fontSize.base};
+    font-size: ${({ theme }) => theme.fontSize_base};
     color: ${({ theme }) => theme.color_textGray};
   }
 `;
@@ -52,7 +52,7 @@ const Rank = styled.div`
 
   border-radius: 50%;
   font-weight: 600;
-  font-size: ${({ theme }) => theme.fontSize.base};
+  font-size: ${({ theme }) => theme.fontSize_base};
   background-color: ${({ theme }) => theme.color_key};
   color: ${({ theme }) => theme.color_textWhite};
 `;
