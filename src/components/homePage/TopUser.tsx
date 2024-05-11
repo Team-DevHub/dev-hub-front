@@ -25,12 +25,6 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  & h5 {
-    font-weight: 600;
-    font-size: ${({ theme }) => theme.fontSize_base};
-    color: ${({ theme }) => theme.color_key};
-  }
-
   & span {
     font-size: ${({ theme }) => theme.fontSize_base};
     color: ${({ theme }) => theme.color_textGray};

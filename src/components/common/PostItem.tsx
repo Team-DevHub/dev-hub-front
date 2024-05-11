@@ -70,7 +70,6 @@ const Date = styled.span`
 const PostTitle = styled.h3`
   font-size: ${({ theme }) => theme.fontSize_base};
   font-weight: 500;
-
   line-height: 140%;
 
   // 2줄 이상인 경우 말줄임표

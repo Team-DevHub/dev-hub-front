@@ -4,7 +4,7 @@ import TopUser from "./TopUser";
 function Top5() {
   return (
     <Wrapper>
-      <h3>지식 공유 Top5 수강생! 🔥</h3>
+      <h4>지식 공유 Top5 수강생! 🔥</h4>
       <Container>
         <TopUser rank={1} userName="류지민" points={204} />
         <TopUser rank={2} userName="류지민" points={204} />
@@ -23,12 +23,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-
-  & h3 {
-    font-weight: 700;
-    font-size: ${({ theme }) => theme.fontSize_md};
-    color: ${({ theme }) => theme.color_key};
-  }
 `;
 
 const Container = styled.div`

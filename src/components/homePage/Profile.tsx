@@ -8,20 +8,20 @@ function Profile() {
   const navigate = useNavigate();
   return (
     <Wrapper>
-      <h3>내 프로필</h3>
+      <h4>내 프로필</h4>
       <Container>
         <Lv5 />
         <UserInfo>
-          <h4>류지민</h4>
+          <h3>류지민</h3>
           <span>Lv.5 개발자에게 밤샘은 기본</span>
         </UserInfo>
         <ActivityInfo>
           <Activity>
-            <h5>19개</h5>
+            <h4>19개</h4>
             <span>공유한 지식</span>
           </Activity>
           <Activity>
-            <h5>204점</h5>
+            <h4>204점</h4>
             <span>보유 포인트</span>
           </Activity>
         </ActivityInfo>
@@ -43,12 +43,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-
-  & h3 {
-    font-weight: 700;
-    font-size: ${({ theme }) => theme.fontSize_md};
-    color: ${({ theme }) => theme.color_key};
-  }
 `;
 
 const Container = styled.div`
@@ -72,12 +66,6 @@ const UserInfo = styled.div`
   align-items: center;
   gap: 6px;
 
-  & h4 {
-    font-weight: 700;
-    font-size: ${({ theme }) => theme.fontSize_lg};
-    color: ${({ theme }) => theme.color_key};
-  }
-
   & span {
     font-weight: 300;
     font-size: ${({ theme }) => theme.fontSize_sm};
@@ -98,12 +86,6 @@ const Activity = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 6px;
-
-  & h5 {
-    font-weight: 600;
-    font-size: ${({ theme }) => theme.fontSize_md};
-    color: ${({ theme }) => theme.color_key};
-  }
 
   & span {
     font-weight: 300;
