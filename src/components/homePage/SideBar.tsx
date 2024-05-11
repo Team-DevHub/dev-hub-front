@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Profile from "./Profile";
 import Button from "../common/Button";
 import PencilIcon from "@/assets/icon/pencil-icon.svg";
+import Top5 from "./Top5";
 
 function SideBar() {
   return (
@@ -13,6 +14,7 @@ function SideBar() {
         icon={PencilIcon}
       />
       <Profile />
+      <Top5 />
     </Container>
   );
 }
