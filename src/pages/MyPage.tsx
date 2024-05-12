@@ -9,9 +9,9 @@ function MyPage(){
    <Container>
       <Banner hasBackBtn={true} title={"마이페이지"} />
        <Content>
-       <MyInfo/>
-       <MyLevel/>
-       <MyActivity/>
+        <MyInfo/>
+        <MyLevel/>
+        <MyActivity/>
        </Content>
     </Container>
  )
