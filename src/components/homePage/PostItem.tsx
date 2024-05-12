@@ -2,22 +2,30 @@ import styled from "styled-components";
 import CommentIcon from "@/assets/icon/comment-icon.svg?react";
 import PersonIcon from "@/assets/icon/person-icon.svg?react";
 
-function PostItem() {
+interface PostItemProps {
+  postData: {
+    id: number;
+    category: string;
+    title: string;
+    comments: number;
+    writer: string;
+  };
+}
+
+function PostItem({ postData }: PostItemProps) {
   return (
     <Container>
       <TopBar>
-        <Tag>React</Tag>
+        <Tag>{postData.category}</Tag>
         <Date>2024.04.28</Date>
       </TopBar>
-      <PostTitle>
-        모달 바깥 클릭 시 닫히도록 하는 React 커스텀 hook 코드 공유
-      </PostTitle>
+      <PostTitle>{postData.title}</PostTitle>
       <BottomBar>
         <Comment>
-          <CommentIcon /> 16
+          <CommentIcon /> {postData.comments}
         </Comment>
         <Writer>
-          <PersonIcon /> 류지민
+          <PersonIcon /> {postData.writer}
         </Writer>
       </BottomBar>
     </Container>
@@ -29,8 +37,8 @@ export default PostItem;
 const Container = styled.div`
   width: 300px;
   height: 130px;
-  background-color: ${({ theme }) => theme.color.bgWhite};
-  border: 1px solid ${({ theme }) => theme.color.borderGray};
+  background-color: ${({ theme }) => theme.color_bgWhite};
+  border: 1px solid ${({ theme }) => theme.color_borderGray};
   border-radius: 12px;
   padding: 16px;
 
@@ -42,6 +50,7 @@ const Container = styled.div`
 
   &:hover {
     scale: calc(1.03);
+    border: 1px solid ${({ theme }) => theme.color_key};
   }
 `;
 
@@ -53,24 +62,23 @@ const TopBar = styled.div`
 `;
 
 const Tag = styled.span`
-  color: ${({ theme }) => theme.color.textWhite};
-  background-color: ${({ theme }) => theme.color.key};
-  font-size: ${({ theme }) => theme.fontSize.sm};
+  color: ${({ theme }) => theme.color_textWhite};
+  background-color: ${({ theme }) => theme.color_key};
+  font-size: ${({ theme }) => theme.fontSize_sm};
   padding: 5px 14px;
   border-radius: 10px;
   font-weight: 500;
 `;
 
 const Date = styled.span`
-  color: ${({ theme }) => theme.color.textGray};
-  font-size: ${({ theme }) => theme.fontSize.sm};
+  color: ${({ theme }) => theme.color_textGray};
+  font-size: ${({ theme }) => theme.fontSize_sm};
   font-weight: 300;
 `;
 
 const PostTitle = styled.h3`
-  font-size: ${({ theme }) => theme.fontSize.base};
+  font-size: ${({ theme }) => theme.fontSize_base};
   font-weight: 500;
-
   line-height: 140%;
 
   // 2줄 이상인 경우 말줄임표
@@ -90,15 +98,15 @@ const Comment = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  color: ${({ theme }) => theme.color.textGray};
+  font-size: ${({ theme }) => theme.fontSize_xs};
+  color: ${({ theme }) => theme.color_textGray};
 `;
 
 const Writer = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: ${({ theme }) => theme.fontSize.sm};
-  color: ${({ theme }) => theme.color.key};
+  font-size: ${({ theme }) => theme.fontSize_sm};
+  color: ${({ theme }) => theme.color_key};
   font-weight: 500;
 `;

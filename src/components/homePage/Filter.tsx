@@ -35,8 +35,8 @@ const CustomSelect = styled.div`
   justify-content: flex-end;
   border-radius: 8px;
 
-  background-color: ${({ theme }) => theme.color.bgWhite};
-  border: 1px solid ${({ theme }) => theme.color.borderGray};
+  background-color: ${({ theme }) => theme.color_bgWhite};
+  border: 1px solid ${({ theme }) => theme.color_borderGray};
   position: relative;
   cursor: pointer;
 `;
@@ -44,8 +44,8 @@ const CustomSelect = styled.div`
 const Content = styled.span`
   flex: 1;
   text-align: center;
-  font-size: ${({ theme }) => theme.fontSize.base};
-  color: ${({ theme }) => theme.color.textBlack};
+  font-size: ${({ theme }) => theme.fontSize_base};
+  color: ${({ theme }) => theme.color_textBlack};
   font-weight: 500;
 `;
 
@@ -55,9 +55,10 @@ const OptionBox = styled.div`
   position: absolute;
   top: 32px;
   left: 0px;
+  z-index: 10;
 
-  background-color: ${({ theme }) => theme.color.bgWhite};
-  border: 1px solid ${({ theme }) => theme.color.borderGray};
+  background-color: ${({ theme }) => theme.color_bgWhite};
+  border: 1px solid ${({ theme }) => theme.color_borderGray};
   border-radius: 8px;
   overflow-x: hidden;
 `;
@@ -67,8 +68,8 @@ const Option = styled.div`
   padding: 8px 14px;
   cursor: pointer;
 
-  font-size: ${({ theme }) => theme.fontSize.sm};
-  color: ${({ theme }) => theme.color.textBlack};
+  font-size: ${({ theme }) => theme.fontSize_sm};
+  color: ${({ theme }) => theme.color_textBlack};
   transition: all 0.15s ease-in;
 
   &:hover {
