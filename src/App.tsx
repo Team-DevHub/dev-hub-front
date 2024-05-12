@@ -4,11 +4,16 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import { GlobalStyle } from "./styles/GlobalStyle";
 import Header from "./components/common/Header";
+import MyPage from "./pages/MyPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
+  },
+  {
+    path :"/mypage",
+    element: <MyPage/>
   },
   {
     path: "test",
