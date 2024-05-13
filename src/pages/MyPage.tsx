@@ -3,6 +3,7 @@ import Banner from "@/components/common/Banner";
 import MyInfo from "@/components/myPage/MyInfo";
 import MyLevel from "@/components/myPage/MyLevel";
 import MyActivity from "@/components/myPage/MyActivity";
+import MyPostList from "@/components/myPage/MyPostLIst";
 
 function MyPage(){
  return(
@@ -13,6 +14,7 @@ function MyPage(){
         <MyLevel/>
         <MyActivity/>
        </Content>
+        <MyPostList/>
     </Container>
  )
 }
@@ -27,5 +29,5 @@ const Container = styled.div`
 const Content = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 50px;
+  margin: 35px 0;
 `;

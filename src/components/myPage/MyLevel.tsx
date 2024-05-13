@@ -44,7 +44,7 @@ const Container = styled.div`
   position: relative; 
 `;
 
-const Title = styled.h2`
+const Title = styled.h4`
   font-size: ${({ theme }) => theme.fontSize.xl};
   font-weight: 700;
   padding-bottom: 13px;
