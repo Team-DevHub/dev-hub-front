@@ -94,6 +94,8 @@ const SubmitContainer = styled.div`
 const GotoPage = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 8px;
 
   a {
     color: ${({ theme }) => theme.color_key};

@@ -5,4 +5,5 @@ export const ICONS = {
     inactive: PATH + 'ic-checkbox-inactive.svg',
     active: PATH + 'ic-checkbox-active.svg',
   },
+  join: PATH + 'ic-join.svg',
 };

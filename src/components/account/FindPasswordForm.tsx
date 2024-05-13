@@ -11,6 +11,7 @@ import { FormRegex } from '@/utils/regex';
 import FormButton from '../common/FormInput/FormButton';
 import { Link, useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTER_PATH } from '@/routes/LoginRouter';
+import { ICONS } from '@/assets/icon/icons';
 
 interface FindPasswordForm {
   name: string;
@@ -65,6 +66,7 @@ const FindPasswordForm = () => {
       <SubmitContainer>
         <FormButton type='submit' text={'비밀번호 찾기'} onClick={() => {}} />
         <GotoPage>
+          <img src={ICONS.join} />
           <Link to={LOGIN_ROUTER_PATH.login}>{'로그인'}</Link>
         </GotoPage>
       </SubmitContainer>

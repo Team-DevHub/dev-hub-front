@@ -10,6 +10,7 @@ import { useState } from 'react';
 import FormButton from '../common/FormInput/FormButton';
 import { Link } from 'react-router-dom';
 import { LOGIN_ROUTER_PATH } from '@/routes/LoginRouter';
+import { ICONS } from '@/assets/icon/icons';
 
 interface ResetPasswordForm {
   password: string;
@@ -62,6 +63,7 @@ const ResetPasswordForm = () => {
       <SubmitContainer>
         <FormButton type='submit' text={'비밀번호 재설정'} onClick={() => {}} />
         <GotoPage>
+          <img src={ICONS.join} />
           <Link to={LOGIN_ROUTER_PATH.login}>{'로그인'}</Link>
         </GotoPage>
       </SubmitContainer>

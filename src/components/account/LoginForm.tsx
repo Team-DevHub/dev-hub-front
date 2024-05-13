@@ -15,6 +15,7 @@ import { LoginContext } from '@/provider/LoginProvider';
 import { UserKeyFromStorage } from '@/constants/storage';
 import { Link } from 'react-router-dom';
 import { LOGIN_ROUTER_PATH } from '@/routes/LoginRouter';
+import { ICONS } from '@/assets/icon/icons';
 
 interface LoginForm {
   email: string;
@@ -94,6 +95,7 @@ const LoginForm = () => {
           </Link>
         </GotoFindPassword>
         <GotoPage>
+          <img src={ICONS.join} />
           <Link to={LOGIN_ROUTER_PATH.join}>{'회원가입'}</Link>
         </GotoPage>
       </SubmitContainer>
