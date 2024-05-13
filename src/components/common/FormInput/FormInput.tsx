@@ -55,7 +55,7 @@ const LabelContainer = styled.div<{ $isError: boolean }>`
   justify-content: space-between;
   align-items: center;
   color: ${({ theme, $isError }) =>
-    $isError ? theme.color.textRed : theme.color.key};
+    $isError ? theme.color_textRed : theme.color_key};
 
   .label {
     font-size: 14px;
@@ -73,17 +73,17 @@ const InputContainer = styled.div<{ $isError: boolean }>`
   padding: 10px 0;
   border-bottom: 1px solid
     ${({ theme, $isError }) =>
-      $isError ? theme.color.textRed : theme.color.key};
+      $isError ? theme.color_textRed : theme.color_key};
 
   .input {
     font-size: 14px;
     width: 100%;
     border: 0;
     outline: 0;
-    background-color: ${({ theme }) => theme.color.keyWhite};
+    background-color: ${({ theme }) => theme.color_keyWhite};
 
     &::placeholder {
-      color: ${({ theme }) => theme.color.textGray};
+      color: ${({ theme }) => theme.color_textGray};
     }
   }
 `;
