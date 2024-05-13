@@ -1,19 +1,19 @@
-import styled from "styled-components";
-import SearchIcon from "@/assets/icon/search-icon.svg?react";
-import { useState } from "react";
+import styled from 'styled-components';
+import { useState } from 'react';
+import { ICONS } from '@/assets/icon/icons';
 
 function SearchInput() {
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState<string>('');
   return (
     <Container>
       <h2>검색</h2>
       <Wrapper>
         <StyledInput
-          type="text"
+          type='text'
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <Icon />
+        <SearchIcon src={ICONS.search} alt='search' />
       </Wrapper>
     </Container>
   );
@@ -49,7 +49,7 @@ const StyledInput = styled.input`
   }
 `;
 
-const Icon = styled(SearchIcon)`
+const SearchIcon = styled.img`
   position: absolute;
   right: 10px;
   top: 50%;

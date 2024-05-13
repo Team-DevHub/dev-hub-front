@@ -1,17 +1,17 @@
-import styled from "styled-components";
-import Profile from "./Profile";
-import Button from "../common/Button";
-import PencilIcon from "@/assets/icon/pencil-icon.svg";
-import Top5 from "./Top5";
+import styled from 'styled-components';
+import Profile from './Profile';
+import Button from '../common/Button';
+import Top5 from './Top5';
+import { ICONS } from '@/assets/icon/icons';
 
 function SideBar() {
   return (
     <Container>
       <Button
-        size="medium"
-        text="지식 공유하기"
+        size='medium'
+        text='지식 공유하기'
         onClick={() => {}}
-        icon={PencilIcon}
+        icon={ICONS.pencil}
       />
       <Profile />
       <Top5 />
