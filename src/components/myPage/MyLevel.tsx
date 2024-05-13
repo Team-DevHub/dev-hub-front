@@ -1,30 +1,28 @@
-import styled from "styled-components";
-import Lv5 from "@/assets/image/lv5.svg?react";
-import InfoIcon from "@/assets/icon/info-icon.svg?react"
+import styled from 'styled-components';
+import Lv5 from '@/assets/image/lv5.svg?react';
+import InfoIcon from '@/assets/icon/info-icon.svg?react';
 
-
-function MyLevel(){
+function MyLevel() {
   return (
     <Wrapper>
-      <Title>나의 레벨</Title>
-        <Container>
-          <InfoIconWrapper>
-            <InfoIcon />
-          </InfoIconWrapper>
-          <Content>
-            <Lv5/>
-            <UserLevel>
-              <h2>Lv.5 </h2>
-              <span>개발자에게 밤샘은 기본</span>
-            </UserLevel>
-          </Content>
-        </Container>
-  </Wrapper>
-  )
+      <h2>나의 레벨</h2>
+      <Container>
+        <InfoIconWrapper>
+          <InfoIcon />
+        </InfoIconWrapper>
+        <Content>
+          <Lv5 />
+          <UserLevel>
+            <h2>Lv.5</h2>
+            <span>개발자에게 밤샘은 기본</span>
+          </UserLevel>
+        </Content>
+      </Container>
+    </Wrapper>
+  );
 }
 
 export default MyLevel;
-
 
 const Wrapper = styled.div`
   width: 365px;
@@ -34,35 +32,32 @@ const Wrapper = styled.div`
 const Container = styled.div`
   width: 365px;
   height: 150px;
-  background-color: ${({ theme }) => theme.color.bgWhite};
-  border: 1px solid ${({ theme }) => theme.color.borderGray};
+  margin-top: 15px;
+  background-color: ${({ theme }) => theme.color_bgWhite};
+  border: 1px solid ${({ theme }) => theme.color_borderGray};
   border-radius: 12px;
   padding: 16px;
-  display: flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
-  position: relative; 
-`;
-
-const Title = styled.h4`
-  font-size: ${({ theme }) => theme.fontSize.xl};
-  font-weight: 700;
-  padding-bottom: 13px;
+  position: relative;
 `;
 
 const Content = styled.div`
- display: flex;
- align-items: center;
- gap: 25px
+  display: flex;
+  align-items: center;
+  gap: 25px;
 `;
 
 const UserLevel = styled.div`
-align-items: center;
+  & h2 {
+    margin-bottom: 10px;
+  }
 
-& h2{
-  font-weight: 700;
-  padding-bottom: 10px;
-}
+  & span {
+    font-size: ${({ theme }) => theme.fontSize_md};
+    font-weight: 500;
+  }
 `;
 
 const InfoIconWrapper = styled.div`

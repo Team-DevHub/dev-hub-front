@@ -1,34 +1,49 @@
 import Banner from "@/components/common/Banner";
-import PostItem from "@/components/common/PostItem";
-import Tag from "@/components/common/Tag";
-import Filter from "@/components/homePage/Filter";
+import Category from "@/components/common/Category";
+import Pagination from "@/components/common/Pagination";
+import PostList from "@/components/homePage/PostList";
+import SearchInput from "@/components/homePage/SearchInput";
+import SideBar from "@/components/homePage/SideBar";
 import styled from "styled-components";
 
 function HomePage() {
   return (
-    <RootDiv>
+    <>
       <Banner hasBackBtn={false} />
-
-      <TempWrapper>
-        <PostItem />
-        <div>
-          <Tag isClicked={true} />
-          <Tag isClicked={false} />
-        </div>
-        <Filter />
-      </TempWrapper>
-    </RootDiv>
+      <Container>
+        <Content>
+          <TopBar>
+            <Category />
+            <SearchInput />
+          </TopBar>
+          <PostList />
+          <Pagination />
+        </Content>
+        <SideBar />
+      </Container>
+    </>
   );
 }
 
 export default HomePage;
 
-const RootDiv = styled.div`
+const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: 1200px; // 임시
+  display: flex;
+  gap: 30px;
+  padding: 40px 0;
 `;
 
-const TempWrapper = styled.div`
+const Content = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+`;
+
+const TopBar = styled.div`
+  width: 100%;
   display: flex;
   gap: 10px;
 `;

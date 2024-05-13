@@ -1,8 +1,6 @@
-import { theme } from "../styles/theme";
+import { theme } from "@/styles/theme";
+type themeType = typeof theme;
 
 declare module "styled-components" {
-  export interface DefaultTheme {
-    color: typeof theme.color;
-    fontSize: typeof theme.fontSize;
-  }
+  export interface DefaultTheme extends themeType {}
 }

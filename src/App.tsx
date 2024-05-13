@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import { GlobalStyle } from "./styles/GlobalStyle";
 import Header from "./components/common/Header";
+import ComponentPage from './pages/components/ComponentPage';
 import MyPage from "./pages/MyPage";
 
 const router = createBrowserRouter([
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       { index: true, element: <div>test</div> },
       { path: "nesting", element: <div>/test/nesting</div> },
     ],
+  },
+  {
+    path: 'components',
+    children: [{ index: true, element: <ComponentPage /> }],
   },
 ]);
 
