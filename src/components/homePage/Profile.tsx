@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import Lv5 from "@/assets/image/lv5.svg?react";
-import Button from "../common/Button";
-import { useNavigate } from "react-router-dom";
-import HouseIcon from "@/assets/icon/house-icon.svg";
+import styled from 'styled-components';
+import Lv5 from '@/assets/image/lv5.svg?react';
+import Button from '../common/Button';
+import { useNavigate } from 'react-router-dom';
+import { ICONS } from '@/assets/icon/icons';
 
 function Profile() {
   const navigate = useNavigate();
@@ -26,10 +26,10 @@ function Profile() {
           </Activity>
         </ActivityInfo>
         <Button
-          size="small"
-          text="마이페이지"
-          onClick={() => navigate("/my-page")}
-          icon={HouseIcon}
+          size='small'
+          text='마이페이지'
+          onClick={() => navigate('/my-page')}
+          icon={ICONS.house}
         />
       </Container>
     </Wrapper>
