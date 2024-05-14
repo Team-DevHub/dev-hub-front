@@ -3,12 +3,18 @@ import styled from 'styled-components';
 interface Props {
   disabled?: boolean;
   text: string;
+  type?: 'button' | 'reset' | 'submit';
   onClick: () => void;
 }
 
-const FormButton = ({ disabled = false, text, onClick }: Props) => {
+const FormButton = ({
+  disabled = false,
+  text,
+  type = 'button',
+  onClick,
+}: Props) => {
   return (
-    <Button onClick={onClick} disabled={disabled}>
+    <Button type={type} onClick={onClick} disabled={disabled}>
       {text}
     </Button>
   );
@@ -28,14 +34,14 @@ const Button = styled.button`
   ${({ disabled, theme }) => {
     if (!disabled)
       return {
-        backgroundColor: theme.color.key,
-        color: theme.color.textWhite,
+        backgroundColor: theme.color_key,
+        color: theme.color_textWhite,
       };
 
     if (disabled)
       return {
         backgroundColor: '#CFD3D8',
-        color: theme.color.textBlack,
+        color: theme.colortextBlack,
         cursor: 'default',
       };
   }}

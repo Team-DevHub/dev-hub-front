@@ -1,20 +1,25 @@
-import styled from "styled-components";
-import PostItem from "./PostItem";
-import Filter from "./Filter";
-import { postDummy } from "@/data/postDummy";
+import styled from 'styled-components';
+import PostItem from './PostItem';
+import Filter from './Filter';
+import { Post } from '@/data/postDummy';
 
-function PostList() {
+interface PostListProps {
+  postData: Post[];
+  totalPosts: number;
+}
+
+function PostList({ postData, totalPosts }: PostListProps) {
   return (
     <Container>
       <TitleBar>
         <TitleWrapper>
           <h2>게시글</h2>
-          <span>58개</span>
+          <span>{totalPosts}개</span>
         </TitleWrapper>
         <Filter />
       </TitleBar>
       <Posts>
-        {postDummy.map((data) => (
+        {postData.map((data: Post) => (
           <PostItem key={data.id} postData={data} />
         ))}
       </Posts>
