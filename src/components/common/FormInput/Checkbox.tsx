@@ -35,7 +35,7 @@ const RootContainer = styled.label<{ $isChecked: boolean }>`
 
   .label {
     color: ${({ theme, $isChecked }) =>
-      $isChecked ? theme.color.key : theme.color_textGray};
+      $isChecked ? theme.color_key : theme.color_textGray};
     font-size: 14px;
     font-weight: 500;
   }

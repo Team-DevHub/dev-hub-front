@@ -1,26 +1,40 @@
-import { ThemeProvider } from "styled-components";
-import { theme } from "./styles/theme";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import { GlobalStyle } from "./styles/GlobalStyle";
-import Header from "./components/common/Header";
-import ComponentPage from './pages/components/ComponentPage';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './styles/theme';
+import { GlobalStyle } from './styles/GlobalStyle';
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Header from './components/common/Header';
+import AccountLayout from './components/account/AccountLayout';
+import LoginForm from './components/account/LoginForm';
+import JoinForm from './components/account/JoinForm';
+import FindPasswordForm from './components/account/FindPasswordForm';
+import ResetPasswordForm from './components/account/ResetPasswordForm';
+import HomePage from './pages/HomePage';
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <HomePage />,
-  },
-  {
-    path: "test",
+    path: '/',
+    element: (
+      <>
+        <Header />
+        <Outlet />,
+      </>
+    ),
     children: [
-      { index: true, element: <div>test</div> },
-      { path: "nesting", element: <div>/test/nesting</div> },
+      {
+        index: true,
+        element: <HomePage />,
+      },
     ],
   },
   {
-    path: 'components',
-    children: [{ index: true, element: <ComponentPage /> }],
+    path: '/account',
+    element: <AccountLayout />,
+    children: [
+      { path: 'login', element: <LoginForm /> },
+      { path: 'join', element: <JoinForm /> },
+      { path: 'password/find', element: <FindPasswordForm /> },
+      { path: 'password/reset', element: <ResetPasswordForm /> },
+    ],
   },
 ]);
 
@@ -28,8 +42,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Header />
-      <RouterProvider router={router} />
+      <RouterProvider router={router} />;
     </ThemeProvider>
   );
 }

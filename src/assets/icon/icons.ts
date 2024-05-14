@@ -16,4 +16,5 @@ export const ICONS = {
   pencil: PATH + 'pencil-icon.svg',
   person: PATH + 'person-icon.svg',
   search: PATH + 'search-icon.svg',
+  join: PATH + 'ic-join.svg',
 };

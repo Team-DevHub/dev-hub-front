@@ -1,6 +1,6 @@
-import { createGlobalStyle } from "styled-components";
-import "../assets/font/font.css";
-import reset from "styled-reset";
+import { createGlobalStyle } from 'styled-components';
+import '../assets/font/font.css';
+import reset from 'styled-reset';
 
 export const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -18,6 +18,7 @@ export const GlobalStyle = createGlobalStyle`
   #root {
     width: 100%;
     max-width: 1200px;
+    height: 100%;
     min-height: 100%;
     margin: 0 auto;
   }

@@ -1,5 +1,5 @@
 import { ChangeEventHandler } from 'react';
-import styled from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 
 interface Props {
   id: string;
@@ -8,6 +8,8 @@ interface Props {
   regex?: RegExp;
   errorMessage?: string;
   placeholder?: string;
+  type?: 'text' | 'password';
+  style?: CSSProperties;
   onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -18,12 +20,14 @@ const FormInput = ({
   regex,
   errorMessage,
   placeholder,
+  type = 'text',
+  style,
   onChange,
 }: Props) => {
   const isError = regex ? value.length > 0 && !regex.test(value) : false;
 
   return (
-    <FormInputRoot>
+    <FormInputRoot style={style}>
       <LabelContainer $isError={isError}>
         <label htmlFor={id} className='label'>
           {label}
@@ -34,7 +38,7 @@ const FormInput = ({
         <input
           className='input'
           id={id}
-          type='text'
+          type={type}
           value={value}
           onChange={onChange}
           placeholder={placeholder}
@@ -55,7 +59,7 @@ const LabelContainer = styled.div<{ $isError: boolean }>`
   justify-content: space-between;
   align-items: center;
   color: ${({ theme, $isError }) =>
-    $isError ? theme.color_textRed : theme.color_key};
+    $isError ? theme.color_textRedr : theme.color_key};
 
   .label {
     font-size: 14px;
@@ -80,7 +84,7 @@ const InputContainer = styled.div<{ $isError: boolean }>`
     width: 100%;
     border: 0;
     outline: 0;
-    background-color: ${({ theme }) => theme.color_keyWhite};
+    background-color: transparent;
 
     &::placeholder {
       color: ${({ theme }) => theme.color_textGray};
