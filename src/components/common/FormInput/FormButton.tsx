@@ -28,14 +28,14 @@ const Button = styled.button`
   ${({ disabled, theme }) => {
     if (!disabled)
       return {
-        backgroundColor: theme.color.key,
+        backgroundColor: theme.color_key,
         color: theme.color.textWhite,
       };
 
     if (disabled)
       return {
         backgroundColor: '#CFD3D8',
-        color: theme.color.textBlack,
+        color: theme.color_textBlack,
         cursor: 'default',
       };
   }}

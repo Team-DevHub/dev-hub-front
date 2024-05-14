@@ -1,18 +1,9 @@
-import styled from "styled-components";
-import CommentIcon from "@/assets/icon/comment-icon.svg?react";
-import PersonIcon from "@/assets/icon/person-icon.svg?react";
+import styled from 'styled-components';
+import CommentIcon from '@/assets/icon/comment-icon.svg?react';
+import PersonIcon from '@/assets/icon/person-icon.svg?react';
+import { Post } from '@/data/postDummy';
 
-interface PostItemProps {
-  postData: {
-    id: number;
-    category: string;
-    title: string;
-    comments: number;
-    writer: string;
-  };
-}
-
-function PostItem({ postData }: PostItemProps) {
+function PostItem({ postData }: { postData: Post }) {
   return (
     <Container>
       <TopBar>
