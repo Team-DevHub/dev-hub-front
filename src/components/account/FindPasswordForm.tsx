@@ -10,8 +10,8 @@ import { useState } from 'react';
 import { FormRegex } from '@/utils/regex';
 import FormButton from '../common/FormInput/FormButton';
 import { Link, useNavigate } from 'react-router-dom';
-import { LOGIN_ROUTER_PATH } from '@/routes/LoginRouter';
 import { ICONS } from '@/assets/icon/icons';
+import { LOGIN_ROUTER_PATH } from '@/constants/path';
 
 interface FindPasswordForm {
   name: string;

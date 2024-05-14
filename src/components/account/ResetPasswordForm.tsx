@@ -9,8 +9,8 @@ import FormInput from '../common/FormInput/FormInput';
 import { useState } from 'react';
 import FormButton from '../common/FormInput/FormButton';
 import { Link } from 'react-router-dom';
-import { LOGIN_ROUTER_PATH } from '@/routes/LoginRouter';
 import { ICONS } from '@/assets/icon/icons';
+import { LOGIN_ROUTER_PATH } from '@/constants/path';
 
 interface ResetPasswordForm {
   password: string;

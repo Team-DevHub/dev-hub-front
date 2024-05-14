@@ -7,15 +7,13 @@ import {
   SubmitContainer,
 } from './AccountLayout';
 import FormInput from '../common/FormInput/FormInput';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { FormRegex } from '@/utils/regex';
 import Checkbox from '../common/FormInput/Checkbox';
 import FormButton from '../common/FormInput/FormButton';
-import { LoginContext } from '@/provider/LoginProvider';
-import { UserKeyFromStorage } from '@/constants/storage';
-import { Link } from 'react-router-dom';
-import { LOGIN_ROUTER_PATH } from '@/routes/LoginRouter';
+import { Link, useNavigate } from 'react-router-dom';
 import { ICONS } from '@/assets/icon/icons';
+import { LOGIN_ROUTER_PATH } from '@/constants/path';
 
 interface LoginForm {
   email: string;
@@ -23,7 +21,7 @@ interface LoginForm {
 }
 
 const LoginForm = () => {
-  const { handleUserChange } = useContext(LoginContext);
+  const navigate = useNavigate();
 
   const [form, setForm] = useState<LoginForm>({
     email: '',
@@ -43,17 +41,7 @@ const LoginForm = () => {
   };
 
   const handleSubmitForm = () => {
-    //로그인 api 요청 성공시
-
-    const user = { name: '머쓱이' };
-
-    handleUserChange(user);
-
-    if (isChecked) {
-      window.localStorage.setItem(UserKeyFromStorage, JSON.stringify(user));
-    }
-
-    window.location.replace('/');
+    navigate('/', { replace: true });
   };
 
   return (
