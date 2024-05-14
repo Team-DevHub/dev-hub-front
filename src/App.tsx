@@ -9,6 +9,7 @@ import JoinForm from './components/account/JoinForm';
 import FindPasswordForm from './components/account/FindPasswordForm';
 import ResetPasswordForm from './components/account/ResetPasswordForm';
 import HomePage from './pages/HomePage';
+import MyPage from './pages/MyPage';
 
 const router = createBrowserRouter([
   {
@@ -16,13 +17,17 @@ const router = createBrowserRouter([
     element: (
       <>
         <Header />
-        <Outlet />,
+        <Outlet />
       </>
     ),
     children: [
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: 'my-page',
+        element: <MyPage />,
       },
     ],
   },
@@ -42,7 +47,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }
