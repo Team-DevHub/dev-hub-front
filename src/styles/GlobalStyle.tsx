@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     width: 100vw;
     height: 100vh;
     background-color: #F9FAFB;
+    position: relative;
   }
 
   #root {
