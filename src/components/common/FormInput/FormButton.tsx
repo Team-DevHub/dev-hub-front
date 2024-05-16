@@ -51,7 +51,6 @@ const Button = styled.button<{ $fontSize: string }>`
         cursor: 'default',
       };
   }}
-
   &:hover:not(:disabled) {
     opacity: 0.95;
   }

@@ -14,6 +14,7 @@ function MyInfo() {
   } else {
     document.body.style.overflow = 'auto';
   }
+
   return (
     <Wrapper>
       <h2>나의 정보</h2>
