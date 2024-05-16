@@ -7,6 +7,14 @@ import { AnimatePresence } from 'framer-motion';
 
 function MyLevel() {
   const [open, setOpen] = useState<boolean>(false);
+
+  // 팝업 등장 시 뒷배경 스크롤 방지
+  if (open) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = 'auto';
+  }
+
   return (
     <Wrapper>
       <h2>나의 레벨</h2>

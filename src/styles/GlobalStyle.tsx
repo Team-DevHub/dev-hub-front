@@ -64,4 +64,9 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 14px;
     font-weight: 600;
   }
+  
+  h6 {
+    font-size: 12px;
+    font-weight: 600;
+  }
 `;
