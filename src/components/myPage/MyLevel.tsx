@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 import Lv5 from '@/assets/image/lv5.svg?react';
 import InfoIcon from '@/assets/icon/info-icon.svg?react';
+import { useState } from 'react';
+import LevelPopUp from '../popup/LevelPopUp';
+import { AnimatePresence } from 'framer-motion';
 
 function MyLevel() {
+  const [open, setOpen] = useState<boolean>(false);
   return (
     <Wrapper>
       <h2>나의 레벨</h2>
       <Container>
-        <InfoIconWrapper>
+        <InfoIconWrapper onClick={() => setOpen(true)}>
           <InfoIcon />
         </InfoIconWrapper>
         <Content>
@@ -18,6 +22,9 @@ function MyLevel() {
           </UserLevel>
         </Content>
       </Container>
+      <AnimatePresence>
+        {open && <LevelPopUp closePopup={() => setOpen(false)} />}
+      </AnimatePresence>
     </Wrapper>
   );
 }
@@ -60,7 +67,7 @@ const UserLevel = styled.div`
   }
 `;
 
-const InfoIconWrapper = styled.div`
+const InfoIconWrapper = styled.button`
   position: absolute;
   top: 16px;
   right: 16px;

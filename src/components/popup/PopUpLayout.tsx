@@ -1,15 +1,26 @@
+'use client';
+
 import { modalBackgroundVariants } from '@/styles/variants';
+import useClickOutside from '@/utils/useClickOutside';
 import { motion } from 'framer-motion';
+import { useRef } from 'react';
 import styled from 'styled-components';
 
-function PopUpLayout({ children }: { children: React.ReactNode }) {
+interface Props {
+  children: React.ReactNode;
+  closePopup: () => void;
+}
+
+function PopUpLayout({ children, closePopup }: Props) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  useClickOutside(ref, () => closePopup());
   return (
     <Background
       variants={modalBackgroundVariants}
       initial='initial'
       animate='animate'
       exit='exit'>
-      <PopUp>{children}</PopUp>
+      <PopUp ref={ref}>{children}</PopUp>
     </Background>
   );
 }
