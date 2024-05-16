@@ -1,8 +1,19 @@
 import styled from 'styled-components';
 import LogoutIcon from '@/assets/icon/logout-icon.svg?react';
 import DeleteAccountIcon from '@/assets/icon/delete-account-icon.svg?react';
+import { useState } from 'react';
+import DeleteAccountPopUp from '../popup/DeleteAccountPopUp';
+import { AnimatePresence } from 'framer-motion';
 
 function MyInfo() {
+  const [open, setOpen] = useState<boolean>(false);
+
+  // 팝업 등장 시 뒷배경 스크롤 방지
+  if (open) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = 'auto';
+  }
   return (
     <Wrapper>
       <h2>나의 정보</h2>
@@ -22,10 +33,13 @@ function MyInfo() {
           </Info>
         </Content>
         <IconContainer>
-          <LogoutIcon />
-          <DeleteAccountIcon />
+          <LogOutButton />
+          <DeleteButton onClick={() => setOpen(true)} />
         </IconContainer>
       </Container>
+      <AnimatePresence>
+        {open && <DeleteAccountPopUp closePopup={() => setOpen(false)} />}
+      </AnimatePresence>
     </Wrapper>
   );
 }
@@ -72,4 +86,12 @@ const Info = styled.div`
 const IconContainer = styled.div`
   display: flex;
   gap: 15px;
+`;
+
+const LogOutButton = styled(LogoutIcon)`
+  cursor: pointer;
+`;
+
+const DeleteButton = styled(DeleteAccountIcon)`
+  cursor: pointer;
 `;

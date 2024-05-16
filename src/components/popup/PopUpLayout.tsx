@@ -52,6 +52,7 @@ const Background = styled(motion.div)`
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 10;
 `;
 
 const PopUp = styled(motion.div)`
@@ -64,6 +65,7 @@ const PopUp = styled(motion.div)`
   align-items: center;
   padding: 40px;
   gap: 12px;
+  z-index: 20;
 `;
 
 const TitleBox = styled.div`
