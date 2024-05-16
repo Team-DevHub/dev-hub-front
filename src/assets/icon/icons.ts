@@ -17,4 +17,7 @@ export const ICONS = {
   person: PATH + 'person-icon.svg',
   search: PATH + 'search-icon.svg',
   join: PATH + 'ic-join.svg',
+  level: PATH + 'level-icon.svg',
+  signout: PATH + 'signout-icon.svg',
+  warning: PATH + 'warning-icon.svg',
 };

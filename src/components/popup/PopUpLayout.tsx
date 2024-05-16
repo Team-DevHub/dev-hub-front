@@ -9,9 +9,12 @@ import styled from 'styled-components';
 interface Props {
   children: React.ReactNode;
   closePopup: () => void;
+  title: string;
+  desc: string;
+  icon: string;
 }
 
-function PopUpLayout({ children, closePopup }: Props) {
+function PopUpLayout({ children, closePopup, title, desc, icon }: Props) {
   const ref = useRef<HTMLDivElement | null>(null);
   useClickOutside(ref, () => closePopup());
   return (
@@ -20,7 +23,18 @@ function PopUpLayout({ children, closePopup }: Props) {
       initial='initial'
       animate='animate'
       exit='exit'>
-      <PopUp ref={ref}>{children}</PopUp>
+      <PopUp
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 10 }}
+        ref={ref}>
+        <img src={icon} alt='icon' />
+        <TitleBox>
+          <h2>{title}</h2>
+          <span>{desc}</span>
+        </TitleBox>
+        <Content>{children}</Content>
+      </PopUp>
     </Background>
   );
 }
@@ -45,4 +59,26 @@ const PopUp = styled(motion.div)`
   height: fit-content;
   background-color: ${({ theme }) => theme.color_bgWhite};
   border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  gap: 12px;
+`;
+
+const TitleBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  & span {
+    font-size: ${({ theme }) => theme.fontSize_base};
+    color: ${({ theme }) => theme.color_textGray};
+  }
+`;
+
+const Content = styled.div`
+  width: 100%;
 `;
