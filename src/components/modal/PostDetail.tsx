@@ -12,9 +12,8 @@ function PostDetail() {
             <span>Lv.5</span>
             <h6>류지민</h6>
           </UserInfo>
-          <IconWrapper>
-            <StyledLv5 />
-          </IconWrapper>
+
+          <StyledLv5 />
         </TopBar>
         <Post>
           <h2>모달 바깥 클릭 시 닫히도록 하는 React 커스텀 hook 코드 공유</h2>
@@ -89,11 +88,6 @@ const UserInfo = styled.div`
   }
 `;
 
-const IconWrapper = styled.div`
-  display: flex;
-  height: 100%;
-`;
-
 const StyledLv5 = styled(Lv5)`
   max-height: 100%;
   width: auto;
@@ -105,6 +99,8 @@ const Post = styled.div`
     margin-bottom: 20px;
   }
   & span {
+    font-size: ${({ theme }) => theme.fontSize_md};
+    color: ${({ theme }) => theme.color_textBlack};
     line-height: 160%;
   }
 `;

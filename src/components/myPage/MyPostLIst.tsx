@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
 import { myPostDummy } from '@/data/myPostDummy';
 import DeleteIcon from '@/assets/icon/delete-red-icon.svg?react';
@@ -10,7 +9,7 @@ interface Post {
   createAt: string;
 }
 
-const MyPostList: React.FC = () => {
+function MyPostList() {
   return (
     <Wrapper>
       <Title>
@@ -40,7 +39,7 @@ const MyPostList: React.FC = () => {
                     <Td className='title'>{post.title}</Td>
                     <Td className='createAt'>{post.createAt}</Td>
                     <Td className='delete'>
-                      <DeleteIcon />
+                      <DeleteButton />
                     </Td>
                   </tr>
                 ))}
@@ -51,13 +50,13 @@ const MyPostList: React.FC = () => {
       </Container>
     </Wrapper>
   );
-};
+}
 
 export default MyPostList;
 
 const Wrapper = styled.div`
   width: 100%;
-  padding-bottom: 40px;
+  padding-bottom: 50px;
 `;
 
 const Title = styled.div`
@@ -77,8 +76,6 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.color_bgWhite};
   border: 1px solid ${({ theme }) => theme.color_borderGray};
   border-radius: 12px;
-  overflow: hidden;
-  max-height: 1000px;
 `;
 
 const TableWrapper = styled.div`
@@ -88,6 +85,8 @@ const TableWrapper = styled.div`
 const TBodyWrapper = styled.div`
   max-height: 400px; 
   overflow-y: auto;  
+  cursor: pointer;
+
    &::-webkit-scrollbar {
     width: 5px;
     }
@@ -155,4 +154,8 @@ const Tag = styled.span`
   padding: 5px 14px;
   border-radius: 10px;
   font-weight: 500;
+`;
+
+const DeleteButton = styled(DeleteIcon)`
+  cursor: pointer;
 `;
