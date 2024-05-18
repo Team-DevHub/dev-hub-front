@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     width: 100vw;
     height: 100vh;
     background-color: #F9FAFB;
+    position: relative;
   }
 
   #root {
@@ -61,6 +62,11 @@ export const GlobalStyle = createGlobalStyle`
 
   h5 {
     font-size: 14px;
+    font-weight: 600;
+  }
+  
+  h6 {
+    font-size: 12px;
     font-weight: 600;
   }
 `;
