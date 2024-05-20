@@ -1,12 +1,23 @@
 import styled from 'styled-components';
 import ArrowIcon from '@/assets/icon/comment-arrow.svg?react';
+import { ChangeEvent, useState } from 'react';
 
 function CommentInputBar() {
+  const [inputText, setInputText] = useState<string>('');
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputText(event.target.value);
+  };
+
   return (
     <>
       <Container>
-        <StyledInput placeholder='댓글 달기' />
-        <SubmitButton />
+        <StyledInput
+          placeholder='댓글 달기'
+          value={inputText}
+          onChange={handleInputChange}
+        />
+        <SubmitButton onClick={() => {}} />
       </Container>
     </>
   );
