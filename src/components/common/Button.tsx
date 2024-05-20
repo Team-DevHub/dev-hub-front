@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface ButtonProps {
-  size: "small" | "medium";
+  size: 'small' | 'medium';
   text: string;
   onClick: () => void;
   icon: string;
@@ -9,8 +9,8 @@ interface ButtonProps {
 
 function Button({ size, text, onClick, icon }: ButtonProps) {
   return (
-    <StyledButton type="button" $size={size} onClick={onClick}>
-      <img src={icon} alt="icon" />
+    <StyledButton type='button' $size={size} onClick={onClick}>
+      <img src={icon} alt='icon' />
       {text}
     </StyledButton>
   );
@@ -31,16 +31,20 @@ const StyledButton = styled.button<{ $size: string }>`
   font-weight: 600;
 
   ${({ theme, $size }) => {
-    if ($size === "small") {
+    if ($size === 'small') {
       return {
         fontSize: theme.fontSize_sm,
         padding: `8px 0px`,
       };
-    } else if ($size === "medium") {
+    } else if ($size === 'medium') {
       return {
         fontSize: theme.fontSize_base,
         padding: `10px 0px`,
       };
     }
   }}
+
+  &:hover:not(:disabled) {
+    opacity: 0.95;
+  }
 `;
