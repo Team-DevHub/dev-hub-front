@@ -46,6 +46,7 @@ const Container = styled.div`
   max-height: 100vh;
   display: flex;
   flex-direction: column;
+
   &::-webkit-scrollbar {
     display: none;
   }

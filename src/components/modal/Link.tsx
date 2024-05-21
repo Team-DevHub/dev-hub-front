@@ -22,11 +22,11 @@ function Link() {
 export default Link;
 
 const Container = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
-  width: 100%;
-  border-radius: 12px;
   padding: 11px;
+  border-radius: 12px;
   overflow: hidden;
 
   background-color: ${({ theme }) => theme.color_keyWhite};

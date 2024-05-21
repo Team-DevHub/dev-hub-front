@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ArrowIcon from '@/assets/icon/comment-arrow.svg?react';
+import ArrowIcon from '@/assets/icon/comment-send-icon.svg?react';
 import { ChangeEvent, useState } from 'react';
 
 function CommentInputBar() {
@@ -17,7 +17,7 @@ function CommentInputBar() {
           value={inputText}
           onChange={handleInputChange}
         />
-        <SubmitButton onClick={() => {}} />
+        <SubmitButton />
       </Container>
     </>
   );

@@ -29,7 +29,7 @@ export default PostList;
 
 const Wrapper = styled.div`
   width: 500px;
-  padding: 30px 40px 5px;
+  padding: 0 40px 5px;
 `;
 
 const Title = styled.div`
