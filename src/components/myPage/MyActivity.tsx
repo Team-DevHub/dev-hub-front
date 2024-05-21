@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import BookIcon from '@/assets/icon/myactivity-book-icon.svg?react';
-import PointIcon from '@/assets/icon/myactivity-point-icon.svg?react';
+import BookIcon from '@/assets/icon/book-icon.svg?react';
+import PointIcon from '@/assets/icon/point-icon.svg?react';
 
 function MyActivity() {
   return (

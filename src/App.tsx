@@ -10,6 +10,7 @@ import FindPasswordForm from './components/account/FindPasswordForm';
 import ResetPasswordForm from './components/account/ResetPasswordForm';
 import HomePage from './pages/HomePage';
 import MyPage from './pages/MyPage';
+import PostModal from './components/modal/PostModal';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: 'my-page',
         element: <MyPage />,
+      },
+      {
+        path: 'test',
+        element: <PostModal />,
       },
     ],
   },

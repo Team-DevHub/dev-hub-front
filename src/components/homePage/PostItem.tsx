@@ -3,9 +3,14 @@ import CommentIcon from '@/assets/icon/comment-icon.svg?react';
 import PersonIcon from '@/assets/icon/person-icon.svg?react';
 import { Post } from '@/data/postDummy';
 
-function PostItem({ postData }: { postData: Post }) {
+interface PostItemProps {
+  postData: Post;
+  onClick: () => void;
+}
+
+function PostItem({ postData, onClick }: PostItemProps) {
   return (
-    <Container>
+    <Container onClick={onClick}>
       <TopBar>
         <Tag>{postData.category}</Tag>
         <Date>2024.04.28</Date>

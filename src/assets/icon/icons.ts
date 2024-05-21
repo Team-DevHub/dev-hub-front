@@ -9,6 +9,10 @@ export const ICONS = {
     left: PATH + 'arrow-left.svg',
     right: PATH + 'arrow-right.svg',
   },
+  delete: {
+    red: PATH + 'delete-red-icon.svg',
+    black: PATH + 'delete-black-icon.svg',
+  },
   back: PATH + 'back-icon.svg',
   comment: PATH + 'comment-icon.svg',
   filter: PATH + 'filter-arrow.svg',
@@ -20,4 +24,8 @@ export const ICONS = {
   level: PATH + 'level-icon.svg',
   signout: PATH + 'signout-icon.svg',
   warning: PATH + 'warning-icon.svg',
+  send: PATH + 'commnet-send-icon.svg',
+  info: PATH + 'info-icon.svg',
+  book: PATH + 'book-icon.svg',
+  point: PATH + 'point-icon.svg',
 };
