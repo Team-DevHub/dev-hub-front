@@ -7,14 +7,14 @@ import {
   SubmitContainer,
 } from './AccountLayout';
 import FormInput from '../common/FormInput/FormInput';
-import { useContext, useState } from 'react';
-import { FormRegex } from '@/utils/regex';
+import { useContext, useEffect, useState } from 'react';
 import Checkbox from '../common/FormInput/Checkbox';
 import FormButton from '../common/FormInput/FormButton';
 import { Link, useNavigate } from 'react-router-dom';
 import { ICONS } from '@/assets/icon/icons';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { LoginContext } from '@/provider/LoginProvider';
+import { UserEmailKey, UserPasswordKey } from '@/constants/storage';
 
 interface LoginForm {
   email: string;
@@ -32,6 +32,16 @@ const LoginForm = () => {
 
   const [isChecked, setIsChecked] = useState(false);
 
+  useEffect(() => {
+    if (localStorage.getItem(UserEmailKey)) {
+      setIsChecked(true);
+      setForm({
+        email: localStorage.getItem(UserEmailKey)!,
+        password: localStorage.getItem(UserPasswordKey)!,
+      });
+    }
+  }, []);
+
   const handleFormChange = <T extends keyof LoginForm>(
     key: T,
     value: LoginForm[T],
@@ -43,6 +53,11 @@ const LoginForm = () => {
   };
 
   const handleSubmitForm = () => {
+    // 로그인 정보 저장
+    if (isChecked) {
+      localStorage.setItem(UserEmailKey, form.email);
+      localStorage.setItem(UserPasswordKey, form.password);
+    }
     handleLoginUser({ name: 'test' });
     navigate('/', { replace: true });
   };
@@ -59,7 +74,6 @@ const LoginForm = () => {
           label={'Email'}
           value={form.email}
           onChange={(e) => handleFormChange('email', e.target.value)}
-          regex={FormRegex.email}
           placeholder='이메일을 입력해주세요'
         />
         <FormInput
