@@ -7,13 +7,14 @@ import {
   SubmitContainer,
 } from './AccountLayout';
 import FormInput from '../common/FormInput/FormInput';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { FormRegex } from '@/utils/regex';
 import Checkbox from '../common/FormInput/Checkbox';
 import FormButton from '../common/FormInput/FormButton';
 import { Link, useNavigate } from 'react-router-dom';
 import { ICONS } from '@/assets/icon/icons';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
+import { LoginContext } from '@/provider/LoginProvider';
 
 interface LoginForm {
   email: string;
@@ -22,6 +23,7 @@ interface LoginForm {
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const { handleLoginUser } = useContext(LoginContext);
 
   const [form, setForm] = useState<LoginForm>({
     email: '',
@@ -41,13 +43,13 @@ const LoginForm = () => {
   };
 
   const handleSubmitForm = () => {
+    handleLoginUser({ name: 'test' });
     navigate('/', { replace: true });
   };
 
   return (
     <FormRoot
-      onSubmit={(e) => {
-        e.preventDefault();
+      onSubmit={() => {
         handleSubmitForm();
       }}>
       <AccountCardTitle>{'로그인'}</AccountCardTitle>
@@ -76,7 +78,7 @@ const LoginForm = () => {
           label={'로그인 정보 저장'}
           onClick={() => setIsChecked((prev) => !prev)}
         />
-        <FormButton type='submit' text={'로그인'} onClick={() => {}} />
+        <FormButton text={'로그인'} onClick={handleSubmitForm} />
         <GotoFindPassword>
           <Link to={LOGIN_ROUTER_PATH.password.find}>
             {'비밀번호를 잊으셨나요?'}
