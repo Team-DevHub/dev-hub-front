@@ -4,52 +4,26 @@ import { IComment } from '@/data/commentDummy';
 
 interface CommentListProps {
   commentData: IComment[];
-  totalComments: number;
 }
 
-function PostList({ commentData, totalComments }: CommentListProps) {
+function CommentList({ commentData }: CommentListProps) {
   return (
-    <>
-      <Wrapper>
-        <Title>
-          <h4>댓글</h4>
-          <span>{totalComments}</span>
-        </Title>
-        <Container>
-          {commentData.map((item: IComment) => (
-            <CommentItem key={item.id} commentData={item} />
-          ))}
-        </Container>
-      </Wrapper>
-    </>
+    <Container>
+      {commentData.map((item: IComment) => (
+        <CommentItem key={item.id} commentData={item} />
+      ))}
+    </Container>
   );
 }
 
-export default PostList;
-
-const Wrapper = styled.div`
-  width: 500px;
-  padding: 0 40px 5px;
-`;
-
-const Title = styled.div`
-  display: flex;
-  gap: 6px;
-  align-items: flex-end;
-
-  & span {
-    font-weight: 500;
-    font-size: ${({ theme }) => theme.fontSize_sm};
-    color: ${({ theme }) => theme.color_textGray};
-  }
-`;
+export default CommentList;
 
 const Container = styled.div`
+  flex: 1;
   width: 100%;
   display: flex;
   flex-direction: column;
   overflow: auto;
-  height: 350px;
   margin: 10px 0;
   padding: 20px;
   gap: 15px;

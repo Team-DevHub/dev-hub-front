@@ -10,16 +10,14 @@ function CommentInputBar() {
   };
 
   return (
-    <>
-      <Container>
-        <StyledInput
-          placeholder='댓글 달기'
-          value={inputText}
-          onChange={handleInputChange}
-        />
-        <SubmitButton />
-      </Container>
-    </>
+    <Container>
+      <StyledInput
+        placeholder='댓글 달기'
+        value={inputText}
+        onChange={handleInputChange}
+      />
+      <SubmitButton />
+    </Container>
   );
 }
 
@@ -27,8 +25,7 @@ export default CommentInputBar;
 
 const Container = styled.div`
   display: flex;
-  width: 500px;
-  padding: 0 40px;
+  width: 100%;
   gap: 10px;
 `;
 
