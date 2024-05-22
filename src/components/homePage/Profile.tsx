@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import Lv5 from '@/assets/image/lv5.svg?react';
 import Button from '../common/Button';
-import { useNavigate } from 'react-router-dom';
 import { ICONS } from '@/assets/icon/icons';
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
   const navigate = useNavigate();

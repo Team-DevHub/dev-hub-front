@@ -17,6 +17,7 @@ import HomePage from './pages/HomePage';
 import MyPage from './pages/MyPage';
 import { useContext } from 'react';
 import LoginProvider, { LoginContext } from './provider/LoginProvider';
+import PostingPage from './pages/PostingPage';
 
 const ProtectedRoute = ({ redirectPath = '/' }) => {
   const { user } = useContext(LoginContext);
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: 'my-page',
         element: <MyPage />,
+      },
+      {
+        path: 'posting',
+        element: <PostingPage />,
       },
     ],
   },
