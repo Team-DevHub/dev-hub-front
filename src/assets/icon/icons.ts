@@ -24,7 +24,7 @@ export const ICONS = {
   level: PATH + 'level-icon.svg',
   signout: PATH + 'signout-icon.svg',
   warning: PATH + 'warning-icon.svg',
-  send: PATH + 'commnet-send-icon.svg',
+  send: PATH + 'comment-send-icon.svg',
   info: PATH + 'info-icon.svg',
   book: PATH + 'book-icon.svg',
   point: PATH + 'point-icon.svg',
