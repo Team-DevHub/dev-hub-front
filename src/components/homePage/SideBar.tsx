@@ -8,6 +8,7 @@ import { LoginContext } from '@/provider/LoginProvider';
 import { useNavigate } from 'react-router-dom';
 import NonMemberPopUp from '../popup/NonMemberPopUp';
 import { AnimatePresence } from 'framer-motion';
+import NonMemberProfile from './NonMemberProfile';
 
 function SideBar() {
   const [open, setOpen] = useState<boolean>(false);
@@ -28,7 +29,7 @@ function SideBar() {
         onClick={user ? () => navigate('/posting') : () => setOpen(true)}
         icon={ICONS.pencil}
       />
-      <Profile />
+      {user ? <Profile /> : <NonMemberProfile />}
       <Top5 />
       <AnimatePresence>
         {open && <NonMemberPopUp closePopUp={() => setOpen(false)} />}
