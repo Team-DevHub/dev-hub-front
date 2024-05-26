@@ -23,7 +23,6 @@ const ProtectedRoute = ({ redirectPath = '/' }) => {
   const { user } = useContext(LoginContext);
   return user ? <Navigate to={redirectPath} /> : <AccountLayout />;
 };
-import CreatePost from './pages/CreatePost';
 
 const router = createBrowserRouter([
   {
@@ -46,8 +45,6 @@ const router = createBrowserRouter([
       {
         path: 'posting',
         element: <PostingPage />,
-        path: 'create-post',
-        element: <CreatePost />,
       },
     ],
   },
