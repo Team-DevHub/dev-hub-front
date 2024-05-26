@@ -14,7 +14,8 @@ interface User {
 
 interface LoginContext {
   user: User | null;
-  handleUserChange: (user: User | null) => void;
+  handleLoginUser: (user: User | null) => void;
+  handleLogOutUser: () => void;
 }
 
 interface Props {
@@ -23,27 +24,34 @@ interface Props {
 
 export const LoginContext = createContext<LoginContext>({
   user: null,
-  handleUserChange: () => {},
+  handleLoginUser: () => {},
+  handleLogOutUser: () => {},
 });
 
 const LoginProvider = ({ children }: Props) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(
+    sessionStorage.getItem(UserKeyFromStorage)
+      ? (JSON.parse(sessionStorage.getItem(UserKeyFromStorage)!) as User)
+      : null,
+  );
 
-  const setUserInfoToStorage = (user: User | null) => {
-    window.sessionStorage.setItem(UserKeyFromStorage, JSON.stringify(user));
-  };
-
-  const handleUserChange = useCallback((user: User | null) => {
+  const handleLoginUser = useCallback((user: User | null) => {
     setUser(user);
-    setUserInfoToStorage(user);
+    sessionStorage.setItem(UserKeyFromStorage, JSON.stringify(user));
+  }, []);
+
+  const handleLogOutUser = useCallback(() => {
+    setUser(null);
+    sessionStorage.removeItem(UserKeyFromStorage);
   }, []);
 
   const value = useMemo(() => {
     return {
       user,
-      handleUserChange,
+      handleLoginUser,
+      handleLogOutUser,
     };
-  }, [user, handleUserChange]);
+  }, [user, handleLoginUser, handleLogOutUser]);
 
   return (
     <LoginContext.Provider value={value}>{children}</LoginContext.Provider>

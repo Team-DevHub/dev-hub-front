@@ -4,6 +4,7 @@ import Filter from './Filter';
 import { Post } from '@/data/postDummy';
 import { useState } from 'react';
 import PostModal from '../modal/PostModal';
+import { AnimatePresence } from 'framer-motion';
 
 interface PostListProps {
   postData: Post[];
@@ -41,7 +42,9 @@ function PostList({ postData, totalPosts }: PostListProps) {
           <PostItem key={data.id} postData={data} onClick={handlePostClick} />
         ))}
       </Posts>
-      {isModalOpen && <PostModal closeModal={closeModal} />}
+      <AnimatePresence>
+        {isModalOpen && <PostModal closeModal={closeModal} />}
+      </AnimatePresence>
     </Container>
   );
 }

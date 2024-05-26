@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 import LogoutIcon from '@/assets/icon/logout-icon.svg?react';
 import DeleteAccountIcon from '@/assets/icon/delete-account-icon.svg?react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import DeleteAccountPopUp from '../popup/DeleteAccountPopUp';
 import { AnimatePresence } from 'framer-motion';
+import { LoginContext } from '@/provider/LoginProvider';
+import { useNavigate } from 'react-router-dom';
+import { LOGIN_ROUTER_PATH } from '@/constants/path';
 
 function MyInfo() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState<boolean>(false);
+  const { handleLogOutUser } = useContext(LoginContext);
 
   // 팝업 등장 시 뒷배경 스크롤 방지
   if (open) {
@@ -14,6 +19,11 @@ function MyInfo() {
   } else {
     document.body.style.overflow = 'auto';
   }
+
+  const handleLogOut = () => {
+    handleLogOutUser();
+    navigate(LOGIN_ROUTER_PATH.login);
+  };
 
   return (
     <Wrapper>
@@ -34,7 +44,7 @@ function MyInfo() {
           </Info>
         </Content>
         <IconContainer>
-          <LogOutButton />
+          <LogOutButton onClick={handleLogOut} />
           <DeleteButton onClick={() => setOpen(true)} />
         </IconContainer>
       </Container>

@@ -25,7 +25,7 @@ export const commentDummy = [
     createdAt: '2024.05.17 오후 6:28',
   },
   {
-    id: 3,
+    id: 33,
     writer: '류지민',
     comment: '댓글 4',
     createdAt: '2024.05.17 오후 6:28',

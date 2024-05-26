@@ -5,20 +5,18 @@ import { IComment } from '@/data/commentDummy';
 
 function CommentItem({ commentData }: { commentData: IComment }) {
   return (
-    <>
-      <Container>
-        <Musseuk />
-        <Content>
-          <Writer>
-            <h5>{commentData.writer}</h5>
-            <span>{commentData.createdAt}</span>
-          </Writer>
+    <Container>
+      <Musseuk />
+      <Content>
+        <Writer>
+          <h5>{commentData.writer}</h5>
+          <span>{commentData.createdAt}</span>
+        </Writer>
 
-          <Comment>{commentData.comment}</Comment>
-        </Content>
-        <DeleteButton />
-      </Container>
-    </>
+        <Comment>{commentData.comment}</Comment>
+      </Content>
+      <DeleteButton />
+    </Container>
   );
 }
 
@@ -29,10 +27,11 @@ const Container = styled.div`
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
+  gap: 12px;
 `;
 
 const Content = styled.div`
-  width: 275px;
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 3px;
