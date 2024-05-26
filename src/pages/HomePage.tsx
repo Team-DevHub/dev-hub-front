@@ -25,7 +25,7 @@ function HomePage() {
       <Container>
         <Content>
           <TopBar>
-            <Category />
+            <Category width='650px' />
             <SearchInput />
           </TopBar>
           <PostList totalPosts={postDummy.length} postData={posts} />

@@ -10,7 +10,7 @@ import FindPasswordForm from './components/account/FindPasswordForm';
 import ResetPasswordForm from './components/account/ResetPasswordForm';
 import HomePage from './pages/HomePage';
 import MyPage from './pages/MyPage';
-import PostModal from './components/modal/PostModal';
+import CreatePost from './pages/CreatePost';
 
 const router = createBrowserRouter([
   {
@@ -31,8 +31,8 @@ const router = createBrowserRouter([
         element: <MyPage />,
       },
       {
-        path: 'test',
-        element: <PostModal />,
+        path: 'create-post',
+        element: <CreatePost />,
       },
     ],
   },
