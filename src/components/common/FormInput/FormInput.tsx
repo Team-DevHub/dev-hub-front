@@ -59,7 +59,7 @@ const LabelContainer = styled.div<{ $isError: boolean }>`
   justify-content: space-between;
   align-items: center;
   color: ${({ theme, $isError }) =>
-    $isError ? theme.color_textRedr : theme.color_key};
+    $isError ? theme.color_textRed : theme.color_key};
 
   .label {
     font-size: 14px;

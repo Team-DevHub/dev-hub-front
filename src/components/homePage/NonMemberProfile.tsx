@@ -1,42 +1,35 @@
 import styled from 'styled-components';
-import Lv5 from '@/assets/image/lv5.svg?react';
+import NonMember from '@/assets/image/non-member-profile.svg?react';
 import Button from '../common/Button';
 import { ICONS } from '@/assets/icon/icons';
 import { useNavigate } from 'react-router-dom';
+import { LOGIN_ROUTER_PATH } from '@/constants/path';
 
-function Profile() {
+function NonMemberProfile() {
   const navigate = useNavigate();
   return (
     <Wrapper>
       <h4>내 프로필</h4>
       <Container>
-        <Lv5 />
-        <UserInfo>
-          <h3>류지민</h3>
-          <span>Lv.5 개발자에게 밤샘은 기본</span>
-        </UserInfo>
-        <ActivityInfo>
-          <Activity>
-            <h4>19개</h4>
-            <span>공유한 지식</span>
-          </Activity>
-          <Activity>
-            <h4>204점</h4>
-            <span>보유 포인트</span>
-          </Activity>
-        </ActivityInfo>
+        <ContentWrapper>
+          <NonMember />
+          <UserInfo>
+            <h3>비회원</h3>
+            <span>로그인하고 지식을 공유해보세요!</span>
+          </UserInfo>
+        </ContentWrapper>
         <Button
           size='small'
-          text='마이페이지'
-          onClick={() => navigate('/my-page')}
-          icon={ICONS.house}
+          text='로그인'
+          onClick={() => navigate(LOGIN_ROUTER_PATH.login)}
+          icon={ICONS.user}
         />
       </Container>
     </Wrapper>
   );
 }
 
-export default Profile;
+export default NonMemberProfile;
 
 const Wrapper = styled.div`
   width: 100%;
@@ -52,36 +45,23 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 32px;
 
   background-color: ${({ theme }) => theme.color_bgWhite};
   border: 1px solid ${({ theme }) => theme.color_borderGray};
   border-radius: 12px;
 `;
 
-const UserInfo = styled.div`
+const ContentWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-
-  & span {
-    font-weight: 300;
-    font-size: ${({ theme }) => theme.fontSize_sm};
-    color: ${({ theme }) => theme.color_textGray};
-    letter-spacing: 0.3px;
-  }
+  gap: 16px;
 `;
 
-const ActivityInfo = styled.div`
+const UserInfo = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-`;
-
-const Activity = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -12,8 +12,7 @@ function PostDetail() {
             <span>Lv.5</span>
             <h6>류지민</h6>
           </UserInfo>
-
-          <StyledLv5 />
+          <Lv5 width={30} height={30} />
         </TopBar>
         <Post>
           <h2>모달 바깥 클릭 시 닫히도록 하는 React 커스텀 hook 코드 공유</h2>
@@ -40,10 +39,9 @@ function PostDetail() {
 export default PostDetail;
 
 const Container = styled.div`
-  width: 700px;
-  padding: 30px 40px;
+  width: 670px;
+  height: 100%;
   overflow: auto;
-  max-height: 100vh;
   display: flex;
   flex-direction: column;
 
@@ -56,7 +54,6 @@ const Container = styled.div`
 
 const TopBar = styled.div`
   display: flex;
-  height: 25px;
   align-items: center;
   justify-content: space-between;
 `;
@@ -74,6 +71,7 @@ const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 4px;
   margin-right: 10px;
   flex-grow: 1;
   text-align: right;
@@ -87,11 +85,6 @@ const UserInfo = styled.div`
     font-size: ${({ theme }) => theme.fontSize_sm};
     font-weight: 500;
   }
-`;
-
-const StyledLv5 = styled(Lv5)`
-  max-height: 100%;
-  width: auto;
 `;
 
 const Post = styled.div`
