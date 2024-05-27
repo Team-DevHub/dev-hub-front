@@ -69,4 +69,10 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 12px;
     font-weight: 600;
   }
+
+  .toastui-editor-contents {
+    font-size: ${({ theme }) => theme.fontSize_md};
+    color: ${({ theme }) => theme.color_textBlack};
+    line-height: 160%;
+  }
 `;

@@ -20,7 +20,7 @@ function ContentInput() {
   const editorRef = useRef<Editor>(null);
 
   const handleOnChange = () => {
-    const data = editorRef.current?.getInstance().getHTML() || '';
+    const data = editorRef.current?.getInstance().getMarkdown() || '';
     console.log(data);
   };
 
@@ -30,10 +30,12 @@ function ContentInput() {
 
       <Editor
         toolbarItems={toolbar}
-        initialEditType='wysiwyg'
-        initialValue='내용을 입력해 주세요.'
-        hideModeSwitch
-        height='400px'
+        initialEditType='markdown'
+        placeholder='내용을 입력해주세요.'
+        initialValue=' '
+        hideModeSwitch={true}
+        minHeight='400px'
+        height='auto'
         language='ko-KR'
         ref={editorRef}
         onChange={handleOnChange}
