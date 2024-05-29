@@ -1,6 +1,64 @@
 import styled from 'styled-components';
 import Lv5 from '@/assets/image/lv5.svg?react';
 import Link from './Link';
+import { Viewer } from '@toast-ui/react-editor';
+import '@toast-ui/editor/dist/toastui-editor.css';
+
+import 'prismjs/themes/prism.css';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
+import Prism from 'prismjs';
+
+const markdownText = `
+** editor test**
+* editor test*
+~~ editor test~~
+
+
+
+> editor test
+
+*  editor test
+*  editor test
+ 
+ ***
+
+모달 바깥 클릭 시 닫히도록 하는 React 커스텀 hook 만들었는데 필요하신 분들은 이거 사용해보세요~~~!
+\`\`\`js
+import { useEffect } from 'react';
+
+/* ----- 모달 바깥 클릭 시 모달이 닫히도록 하는 hook -----
+
+- ref: 모달에 해당하는 ref 객체
+- handler: 바깥 클릭 시 실행할 함수
+
+  ** 예시 **
+  const ref = useRef<HTMLDivElement | null>(null);
+  useClickOutside(ref, () => setOpen(false));
+*/
+
+function useClickOutside(
+  ref: React.RefObject<HTMLElement>,
+  handler: () => void,
+) {
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        handler();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref, handler]);
+}
+
+export default useClickOutside;
+\`\`\`
+`;
 
 function PostDetail() {
   return (
@@ -16,18 +74,13 @@ function PostDetail() {
         </TopBar>
         <Post>
           <h2>모달 바깥 클릭 시 닫히도록 하는 React 커스텀 hook 코드 공유</h2>
-          <span>
-            모달 바깥 클릭 시 닫히도록 하는 React 커스텀 hook 만들었는데
-            필요하신 분들은 이거 사용해보세요~~~! 모달 바깥 클릭 시 닫히도록
-            하는 React 커스텀 hook 만들었는데 필요하신 분들은 이거
-            사용해보세요~~~! 모달 바깥 클릭 시 닫히도록 하는 React 커스텀 hook
-            만들었는데 필요하신 분들은 이거 사용해보세요~~~! 모달 바깥 클릭 시
-            닫히도록 하는 React 커스텀 hook 만들었는데 필요하신 분들은 이거
-            사용해보세요~~~!모달 바깥 클릭 시 닫히도록 하는 React 커스텀 hook
-            만들었는데 필요하신 분들은 이거 사용해보세요~~~! 모달 바깥 클릭 시
-            닫히도록 하는 React 커스텀 hook 만들었는데 필요하신 분들은 이거
-            사용해보세요~~~!
-          </span>
+
+          <Viewer
+            width='100%'
+            plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
+            initialValue={markdownText}
+            theme='dark'
+          />
         </Post>
         <Link />
         <Date>2024.04.28</Date>
@@ -91,11 +144,6 @@ const Post = styled.div`
   margin: 30px 0;
   & h2 {
     margin-bottom: 20px;
-  }
-  & span {
-    font-size: ${({ theme }) => theme.fontSize_md};
-    color: ${({ theme }) => theme.color_textBlack};
-    line-height: 160%;
   }
 `;
 

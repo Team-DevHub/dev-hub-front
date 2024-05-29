@@ -69,4 +69,17 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 12px;
     font-weight: 600;
   }
+  .ProseMirror{
+    font-size: ${({ theme }) => theme.fontSize_md};
+    color: ${({ theme }) => theme.color_textBlack}
+  }
+
+  .toastui-editor-contents {
+    font-size: ${({ theme }) => theme.fontSize_md};
+    color: ${({ theme }) => theme.color_textBlack};
+    line-height: 160%;
+  }
+
+  .toastui-editor-main .toastui-editor-md-tab-style > .active {
+    background-color: ${({ theme }) => theme.color_bgWhite};
 `;
