@@ -61,7 +61,7 @@ const Background = styled(motion.div)`
 
 const Container = styled(motion.div)`
   width: 1200px;
-  height: 600px;
+  height: 700px;
   display: flex;
   justify-content: center;
   align-items: center;

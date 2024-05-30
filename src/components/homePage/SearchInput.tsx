@@ -46,7 +46,7 @@ const StyledInput = styled.input`
   transition: all 0.2s ease-in-out;
 
   &:focus {
-    border: 1px solid ${({ theme }) => theme.color_key};
+    box-shadow: ${({ theme }) => theme.shadow};
   }
 `;
 

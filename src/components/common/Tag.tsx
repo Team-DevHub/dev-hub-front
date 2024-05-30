@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface TagProps {
   content: string;
@@ -32,6 +32,7 @@ const TagContainer = styled.span<{ $isClicked: boolean }>`
         color: theme.color_textWhite,
         backgroundColor: theme.color_key,
         border: `1px solid ${theme.color_key}`,
+        boxShadow: theme.shadow,
       };
     } else {
       return {
