@@ -10,12 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "axios": "^1.7.2",
-=======
     "@toast-ui/editor-plugin-code-syntax-highlight": "3.1.0",
     "@toast-ui/react-editor": "^3.2.3",
->>>>>>> develop
+    "axios": "^1.7.2",
     "framer-motion": "^11.2.4",
     "prismjs": "^1.29.0",
     "react": "^18.2.0",
@@ -23,7 +20,8 @@
     "react-router-dom": "^6.23.0",
     "styled-components": "^6.1.9",
     "styled-reset": "^4.5.2",
-    "vite-plugin-svgr": "^4.2.0"
+    "vite-plugin-svgr": "^4.2.0",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/prismjs": "^1.26.4",

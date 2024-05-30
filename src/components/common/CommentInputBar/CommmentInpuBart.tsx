@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { ChangeEvent, useContext, useState } from 'react';
-import { LoginContext } from '@/provider/LoginProvider';
+import { ChangeEvent, useState } from 'react';
 import { ICONS } from '@/assets/icon/icons';
+import useStore from '@/store/store';
 
 function CommentInputBar() {
-  const { user } = useContext(LoginContext);
+  const { user } = useStore();
   const [inputText, setInputText] = useState<string>('');
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {

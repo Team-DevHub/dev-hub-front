@@ -3,17 +3,17 @@ import Profile from './Profile';
 import Button from '../common/Button';
 import Top5 from './Top5';
 import { ICONS } from '@/assets/icon/icons';
-import { useContext, useState } from 'react';
-import { LoginContext } from '@/provider/LoginProvider';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NonMemberPopUp from '../popup/NonMemberPopUp';
 import { AnimatePresence } from 'framer-motion';
 import NonMemberProfile from './NonMemberProfile';
+import useStore from '@/store/store';
 
 function SideBar() {
   const [open, setOpen] = useState<boolean>(false);
   const navigate = useNavigate();
-  const { user } = useContext(LoginContext);
+  const { user } = useStore();
 
   if (open) {
     document.body.style.overflow = 'hidden';
