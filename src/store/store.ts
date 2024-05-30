@@ -8,9 +8,7 @@ interface User {
 
 interface Store {
   user: User | null;
-  accessToken: string | null;
   setUser: (id: string) => void;
-  setToken: (token: string) => void;
   logOut: () => void;
 }
 
@@ -25,8 +23,6 @@ const useStore = create(
               id: userId,
             },
           })),
-        accessToken: null,
-        setToken: (token: string) => set(() => ({ accessToken: token })),
         logOut: () => set(() => ({ user: null, accessToken: null })),
       }),
       {

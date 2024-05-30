@@ -13,7 +13,7 @@ import FormButton from '../common/FormInput/FormButton';
 import { Link, useNavigate } from 'react-router-dom';
 import { ICONS } from '@/assets/icon/icons';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
-import { UserEmailKey, UserPasswordKey } from '@/constants/storage';
+import { TokenKey, UserEmailKey, UserPasswordKey } from '@/constants/storage';
 import { userAPI } from '@/api/userAPI';
 import useStore from '@/store/store';
 import { LoginRes } from '@/types/api/response';
@@ -25,7 +25,7 @@ interface LoginForm {
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const { setUser, setToken } = useStore();
+  const { setUser } = useStore();
   const [error, setError] = useState<string>('');
   const [form, setForm] = useState<LoginForm>({
     email: '',
@@ -64,7 +64,7 @@ const LoginForm = () => {
       .then((data: LoginRes) => {
         if (data.isSuccess) {
           setUser(data.userId!);
-          setToken(data.accessToken!);
+          localStorage.setItem(TokenKey, data.accessToken!);
 
           // 로그인 정보 저장
           if (isChecked) {
