@@ -10,11 +10,11 @@ import FormInput from '../common/FormInput/FormInput';
 import { useEffect, useState } from 'react';
 import { FormRegex } from '@/utils/regex';
 import FormButton from '../common/FormInput/FormButton';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ICONS } from '@/assets/icon/icons';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { userAPI } from '@/api/userAPI';
-import { EmailCheckRes } from '@/types/api/response';
+import { CommonRes, EmailCheckRes } from '@/types/api/response';
 
 interface JoinForm {
   name: string;
@@ -29,6 +29,7 @@ interface EmailCheck {
 }
 
 const JoinForm = () => {
+  const navigate = useNavigate();
   const [emailCheck, setEmailCheck] = useState<EmailCheck>({
     canUse: null,
     message: '',
@@ -57,7 +58,25 @@ const JoinForm = () => {
     });
   }, [form.email]);
 
-  const handleSubmitForm = () => {};
+  const handleSubmitForm = async () => {
+    if (emailCheck.canUse && form.password === form.passwordCheck) {
+      await userAPI
+        .join({
+          nickname: form.name,
+          email: form.email,
+          password: form.password,
+        })
+        .then((data: CommonRes) => {
+          if (data.isSuccess) {
+            alert('회원가입 되었습니다.');
+            navigate('/account/login');
+          } else {
+            alert('회원가입을 실패했습니다.');
+          }
+        })
+        .catch(() => alert('오류가 발생했습니다.'));
+    }
+  };
 
   const handleCheckDuplicateClick = async () => {
     await userAPI
@@ -132,13 +151,7 @@ const JoinForm = () => {
         />
       </InputContainer>
       <SubmitContainer>
-        <FormButton
-          type='submit'
-          text={'회원가입'}
-          onClick={function (): void {
-            throw new Error('Function not implemented.');
-          }}
-        />
+        <FormButton type='submit' text={'회원가입'} onClick={() => {}} />
         <GotoPage>
           <img src={ICONS.join} />
           <Link to={LOGIN_ROUTER_PATH.login}>{'로그인'}</Link>

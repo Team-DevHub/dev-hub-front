@@ -1,4 +1,4 @@
-import { LoginReq } from '@/types/api/request';
+import { JoinReq, LoginReq } from '@/types/api/request';
 import { baseInstance } from './instance';
 
 export const userAPI = {
@@ -13,6 +13,14 @@ export const userAPI = {
   emailCheck: async (email: string) => {
     try {
       const { data } = await baseInstance.post(`/users/check-email`, { email });
+      return data;
+    } catch (err) {
+      throw err;
+    }
+  },
+  join: async (formData: JoinReq) => {
+    try {
+      const { data } = await baseInstance.post(`/users/join`, formData);
       return data;
     } catch (err) {
       throw err;
