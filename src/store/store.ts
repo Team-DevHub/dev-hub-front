@@ -11,6 +11,7 @@ interface Store {
   accessToken: string | null;
   setUser: (id: string) => void;
   setToken: (token: string) => void;
+  logOut: () => void;
 }
 
 const useStore = create(
@@ -26,6 +27,7 @@ const useStore = create(
           })),
         accessToken: null,
         setToken: (token: string) => set(() => ({ accessToken: token })),
+        logOut: () => set(() => ({ user: null, accessToken: null })),
       }),
       {
         name: 'store',

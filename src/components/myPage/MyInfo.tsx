@@ -6,9 +6,11 @@ import DeleteAccountPopUp from '../popup/DeleteAccountPopUp';
 import { AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
+import useStore from '@/store/store';
 
 function MyInfo() {
   const navigate = useNavigate();
+  const { logOut } = useStore();
   const [open, setOpen] = useState<boolean>(false);
 
   // 팝업 등장 시 뒷배경 스크롤 방지
@@ -19,6 +21,7 @@ function MyInfo() {
   }
 
   const handleLogOut = () => {
+    logOut();
     navigate(LOGIN_ROUTER_PATH.login);
   };
 
