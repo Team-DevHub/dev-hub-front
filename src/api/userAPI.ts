@@ -7,7 +7,15 @@ export const userAPI = {
       const { data } = await baseInstance.post(`/users/login`, user);
       return data;
     } catch (err) {
-      console.log(err);
+      throw err;
+    }
+  },
+  emailCheck: async (email: string) => {
+    try {
+      const { data } = await baseInstance.post(`/users/check-email`, { email });
+      return data;
+    } catch (err) {
+      throw err;
     }
   },
 };
