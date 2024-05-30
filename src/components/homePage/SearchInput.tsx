@@ -36,6 +36,7 @@ const Wrapper = styled.div`
 const StyledInput = styled.input`
   width: 100%;
   padding: 10px 14px;
+  padding-right: 40px;
 
   color: ${({ theme }) => theme.color_textBlack};
   font-size: ${({ theme }) => theme.fontSize_base};
