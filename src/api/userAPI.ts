@@ -1,15 +1,13 @@
+import { LoginReq } from '@/types/api/request';
 import { baseInstance } from './instance';
 
 export const userAPI = {
-  login: async (email: string, password: string) => {
+  login: async (user: LoginReq) => {
     try {
-      const { data } = await baseInstance.post(`/users/login`, {
-        email,
-        password,
-      });
+      const { data } = await baseInstance.post(`/users/login`, user);
       return data;
     } catch (err) {
-      return err;
+      console.log(err);
     }
   },
 };

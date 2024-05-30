@@ -16,6 +16,7 @@ import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { UserEmailKey, UserPasswordKey } from '@/constants/storage';
 import { userAPI } from '@/api/userAPI';
 import useStore from '@/store/store';
+import { LoginRes } from '@/types/api/response';
 
 interface LoginForm {
   email: string;
@@ -25,7 +26,7 @@ interface LoginForm {
 const LoginForm = () => {
   const navigate = useNavigate();
   const { setUser, setToken } = useStore();
-
+  const [error, setError] = useState<string>('');
   const [form, setForm] = useState<LoginForm>({
     email: '',
     password: '',
@@ -43,6 +44,10 @@ const LoginForm = () => {
     }
   }, []);
 
+  useEffect(() => {
+    setError('');
+  }, [form]);
+
   const handleFormChange = <T extends keyof LoginForm>(
     key: T,
     value: LoginForm[T],
@@ -54,21 +59,25 @@ const LoginForm = () => {
   };
 
   const handleSubmitForm = async () => {
-    // 로그인 정보 저장
-    if (isChecked) {
-      localStorage.setItem(UserEmailKey, form.email);
-      localStorage.setItem(UserPasswordKey, form.password);
-    }
-
     await userAPI
-      .login(form.email, form.password)
-      .then((data) => {
-        setUser(data.userId);
-        setToken(data.accessToken);
+      .login({ email: form.email, password: form.password })
+      .then((data: LoginRes) => {
+        if (data.isSuccess) {
+          setUser(data.userId!);
+          setToken(data.accessToken!);
+
+          // 로그인 정보 저장
+          if (isChecked) {
+            localStorage.setItem(UserEmailKey, form.email);
+            localStorage.setItem(UserPasswordKey, form.password);
+          }
+
+          navigate('/', { replace: true });
+        } else {
+          setError('이메일 또는 비밀번호가 틀렸습니다');
+        }
       })
       .catch((err) => console.log(err));
-
-    navigate('/', { replace: true });
   };
 
   return (
@@ -101,7 +110,10 @@ const LoginForm = () => {
           label={'로그인 정보 저장'}
           onClick={() => setIsChecked((prev) => !prev)}
         />
-        <FormButton text={'로그인'} onClick={handleSubmitForm} />
+        <ButtonWrapper>
+          <ErrorMessage>{error}</ErrorMessage>
+          <FormButton text={'로그인'} onClick={handleSubmitForm} />
+        </ButtonWrapper>
         <GotoFindPassword>
           <Link to={LOGIN_ROUTER_PATH.password.find}>
             {'비밀번호를 잊으셨나요?'}
@@ -126,4 +138,19 @@ const GotoFindPassword = styled.div`
     font-size: ${({ theme }) => theme.fontSize_sm};
     text-decoration: none;
   }
+`;
+
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+`;
+
+const ErrorMessage = styled.span`
+  height: 14px;
+  width: 100%;
+  text-align: center;
+  color: ${({ theme }) => theme.color_textRed};
+  font-size: ${({ theme }) => theme.fontSize_sm};
 `;
