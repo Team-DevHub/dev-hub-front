@@ -15,6 +15,7 @@ import { ICONS } from '@/assets/icon/icons';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { LoginContext } from '@/provider/LoginProvider';
 import { UserEmailKey, UserPasswordKey } from '@/constants/storage';
+import { userAPI } from '@/api/userAPI';
 
 interface LoginForm {
   email: string;
@@ -52,12 +53,18 @@ const LoginForm = () => {
     });
   };
 
-  const handleSubmitForm = () => {
+  const handleSubmitForm = async () => {
     // 로그인 정보 저장
     if (isChecked) {
       localStorage.setItem(UserEmailKey, form.email);
       localStorage.setItem(UserPasswordKey, form.password);
     }
+
+    await userAPI
+      .login(form.email, form.password)
+      .then((data) => console.log('성공!', data))
+      .catch((err) => console.log(err));
+
     handleLoginUser({ name: 'test' });
     navigate('/', { replace: true });
   };
