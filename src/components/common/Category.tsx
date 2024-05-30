@@ -1,12 +1,17 @@
-import { categories } from "@/data/categories";
-import styled from "styled-components";
-import Tag from "./Tag";
-import { useState } from "react";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { categories } from '@/data/categories';
+import Tag from './Tag';
 
-function Category() {
-  const [selected, setSelected] = useState(categories[0].id);
+interface CategoryProps {
+  width?: string;
+}
+
+const Category: React.FC<CategoryProps> = ({ width = '650px' }) => {
+  const [selected, setSelected] = useState<number>(categories[0].id);
+
   return (
-    <Container>
+    <Container width={width}>
       <h2>카테고리</h2>
       <TagContainer>
         {categories.map((data) => (
@@ -20,12 +25,16 @@ function Category() {
       </TagContainer>
     </Container>
   );
-}
+};
 
 export default Category;
 
-const Container = styled.div`
-  width: 650px;
+interface ContainerProps {
+  width: string;
+}
+
+const Container = styled.div<ContainerProps>`
+  width: ${(props) => props.width};
   display: flex;
   flex-direction: column;
   gap: 12px;
