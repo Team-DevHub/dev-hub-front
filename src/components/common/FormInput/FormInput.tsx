@@ -11,6 +11,7 @@ interface Props {
   type?: 'text' | 'password';
   style?: CSSProperties;
   onChange: ChangeEventHandler<HTMLInputElement>;
+  isError?: boolean;
 }
 
 const FormInput = ({
@@ -23,9 +24,8 @@ const FormInput = ({
   type = 'text',
   style,
   onChange,
+  isError = regex ? value.length > 0 && !regex.test(value) : false,
 }: Props) => {
-  const isError = regex ? value.length > 0 && !regex.test(value) : false;
-
   return (
     <FormInputRoot style={style}>
       <LabelContainer $isError={isError}>

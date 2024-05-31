@@ -15,12 +15,11 @@ import FindPasswordForm from './components/account/FindPasswordForm';
 import ResetPasswordForm from './components/account/ResetPasswordForm';
 import HomePage from './pages/HomePage';
 import MyPage from './pages/MyPage';
-import { useContext } from 'react';
-import LoginProvider, { LoginContext } from './provider/LoginProvider';
 import PostingPage from './pages/PostingPage';
+import useStore from './store/store';
 
 const ProtectedRoute = ({ redirectPath = '/' }) => {
-  const { user } = useContext(LoginContext);
+  const { user } = useStore();
   return user ? <Navigate to={redirectPath} /> : <AccountLayout />;
 };
 
@@ -63,10 +62,8 @@ const router = createBrowserRouter([
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <LoginProvider>
-        <GlobalStyle />
-        <RouterProvider router={router} />
-      </LoginProvider>
+      <GlobalStyle />
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }

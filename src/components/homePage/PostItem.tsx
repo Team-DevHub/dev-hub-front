@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import CommentIcon from '@/assets/icon/comment-icon.svg?react';
 import PersonIcon from '@/assets/icon/person-icon.svg?react';
 import { Post } from '@/data/postDummy';
+import { motion } from 'framer-motion';
 
 interface PostItemProps {
   postData: Post;
@@ -10,7 +11,10 @@ interface PostItemProps {
 
 function PostItem({ postData, onClick }: PostItemProps) {
   return (
-    <Container onClick={onClick}>
+    <Container
+      onClick={onClick}
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.05 }}>
       <TopBar>
         <Tag>{postData.category}</Tag>
         <Date>2024.04.28</Date>
@@ -30,7 +34,7 @@ function PostItem({ postData, onClick }: PostItemProps) {
 
 export default PostItem;
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   width: 300px;
   height: 130px;
   background-color: ${({ theme }) => theme.color_bgWhite};
@@ -45,8 +49,7 @@ const Container = styled.div`
   cursor: pointer;
 
   &:hover {
-    scale: calc(1.03);
-    border: 1px solid ${({ theme }) => theme.color_key};
+    box-shadow: ${({ theme }) => theme.shadow};
   }
 `;
 

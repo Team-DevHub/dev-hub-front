@@ -1,32 +1,38 @@
-import styled from "styled-components";
-import FilterIcon from "@/assets/icon/filter-arrow.svg?react";
-import { useState } from "react";
+import styled from 'styled-components';
+import FilterIcon from '@/assets/icon/filter-arrow.svg?react';
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 function Filter() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selected, setSelected] = useState<string>("최신 순");
+  const [selected, setSelected] = useState<string>('최신 순');
 
   return (
-    <CustomSelect onClick={() => setIsOpen((prev) => !prev)}>
+    <CustomSelect $isOpen={isOpen} onClick={() => setIsOpen((prev) => !prev)}>
       <Content>{selected}</Content>
       <FilterIcon />
 
-      {isOpen && (
-        <OptionBox>
-          <Option onClick={() => setSelected("최신 순")}>최신 순</Option>
-          <Option onClick={() => setSelected("오래된 순")}>오래된 순</Option>
-          <Option onClick={() => setSelected("댓글 많은 순")}>
-            댓글 많은 순
-          </Option>
-        </OptionBox>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <OptionBox
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}>
+            <Option onClick={() => setSelected('최신 순')}>최신 순</Option>
+            <Option onClick={() => setSelected('오래된 순')}>오래된 순</Option>
+            <Option onClick={() => setSelected('댓글 많은 순')}>
+              댓글 많은 순
+            </Option>
+          </OptionBox>
+        )}
+      </AnimatePresence>
     </CustomSelect>
   );
 }
 
 export default Filter;
 
-const CustomSelect = styled.div`
+const CustomSelect = styled(motion.div)<{ $isOpen: boolean }>`
   width: 120px;
   height: 30px;
   padding: 0 4px;
@@ -39,6 +45,8 @@ const CustomSelect = styled.div`
   border: 1px solid ${({ theme }) => theme.color_borderGray};
   position: relative;
   cursor: pointer;
+
+  box-shadow: ${({ theme, $isOpen }) => ($isOpen ? theme.shadow : 'none')};
 `;
 
 const Content = styled.span`
@@ -49,7 +57,7 @@ const Content = styled.span`
   font-weight: 500;
 `;
 
-const OptionBox = styled.div`
+const OptionBox = styled(motion.div)`
   width: 100%;
   height: auto;
   position: absolute;
@@ -68,7 +76,7 @@ const Option = styled.div`
   padding: 8px 14px;
   cursor: pointer;
 
-  font-size: ${({ theme }) => theme.fontSize_sm};
+  font-size: ${({ theme }) => theme.fontSize_base};
   color: ${({ theme }) => theme.color_textBlack};
   transition: all 0.15s ease-in;
 

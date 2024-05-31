@@ -36,6 +36,7 @@ const Wrapper = styled.div`
 const StyledInput = styled.input`
   width: 100%;
   padding: 10px 14px;
+  padding-right: 40px;
 
   color: ${({ theme }) => theme.color_textBlack};
   font-size: ${({ theme }) => theme.fontSize_base};
@@ -45,7 +46,7 @@ const StyledInput = styled.input`
   transition: all 0.2s ease-in-out;
 
   &:focus {
-    border: 1px solid ${({ theme }) => theme.color_key};
+    box-shadow: ${({ theme }) => theme.shadow};
   }
 `;
 

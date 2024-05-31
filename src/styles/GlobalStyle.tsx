@@ -82,4 +82,5 @@ export const GlobalStyle = createGlobalStyle`
 
   .toastui-editor-main .toastui-editor-md-tab-style > .active {
     background-color: ${({ theme }) => theme.color_bgWhite};
+  }
 `;
