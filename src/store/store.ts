@@ -3,12 +3,17 @@ import { devtools } from 'zustand/middleware';
 import { persist } from 'zustand/middleware';
 
 interface User {
-  id: string;
+  userId: string;
+  nickname: string;
+  level: number;
+  totalPosts: number;
+  totalPoints: number;
 }
 
 interface Store {
   user: User | null;
-  setUser: (id: string) => void;
+  setUserId: (id: string) => void;
+  setUserInfo: (data: User) => void;
   logOut: () => void;
 }
 
@@ -17,13 +22,22 @@ const useStore = create(
     persist<Store>(
       (set) => ({
         user: null,
-        setUser: (userId: string) =>
+        setUserId: (id: string) =>
           set(() => ({
             user: {
-              id: userId,
+              userId: id,
+              nickname: '',
+              level: 1,
+              totalPoints: 0,
+              totalPosts: 0,
             },
           })),
-        logOut: () => set(() => ({ user: null, accessToken: null })),
+        setUserInfo: (userData: User) => {
+          set(() => ({
+            user: userData,
+          }));
+        },
+        logOut: () => set(() => ({ user: null })),
       }),
       {
         name: 'store',

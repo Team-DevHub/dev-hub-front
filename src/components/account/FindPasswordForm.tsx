@@ -12,6 +12,7 @@ import FormButton from '../common/FormInput/FormButton';
 import { Link, useNavigate } from 'react-router-dom';
 import { ICONS } from '@/assets/icon/icons';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
+import { userAPI } from '@/api/userAPI';
 
 interface FindPasswordForm {
   name: string;
@@ -35,8 +36,18 @@ const FindPasswordForm = () => {
     });
   };
 
-  const handleSubmitForm = () => {
-    navigate(LOGIN_ROUTER_PATH.password.reset);
+  const handleSubmitForm = async () => {
+    await userAPI
+      .requestReset({ email: form.email, nickname: form.name })
+      .then((res) => {
+        if (res?.isSuccess) {
+          navigate(LOGIN_ROUTER_PATH.password.reset, {
+            state: { email: form.email },
+          });
+        } else {
+          window.alert('존재하지 않는 유저입니다.');
+        }
+      });
   };
 
   return (
@@ -61,10 +72,18 @@ const FindPasswordForm = () => {
           regex={FormRegex.email}
           onChange={(e) => handleFormChange('email', e.target.value)}
           placeholder='이메일을 입력해주세요'
+          errorMessage='이메일 형식이 유효하지 않습니다'
         />
       </InputContainer>
       <SubmitContainer>
-        <FormButton type='submit' text={'비밀번호 찾기'} onClick={() => {}} />
+        <FormButton
+          type='submit'
+          disabled={
+            !FormRegex.email.test(form.email) || !form.email || !form.name
+          }
+          text={'비밀번호 찾기'}
+          onClick={() => {}}
+        />
         <GotoPage>
           <img src={ICONS.join} />
           <Link to={LOGIN_ROUTER_PATH.login}>{'로그인'}</Link>

@@ -16,7 +16,6 @@ import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { TokenKey, UserEmailKey, UserPasswordKey } from '@/constants/storage';
 import { userAPI } from '@/api/userAPI';
 import useStore from '@/store/store';
-import { LoginRes } from '@/types/api/response';
 
 interface LoginForm {
   email: string;
@@ -25,7 +24,7 @@ interface LoginForm {
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const { setUser } = useStore();
+  const { setUserId } = useStore();
   const [error, setError] = useState<string>('');
   const [form, setForm] = useState<LoginForm>({
     email: '',
@@ -61,9 +60,9 @@ const LoginForm = () => {
   const handleSubmitForm = async () => {
     await userAPI
       .login({ email: form.email, password: form.password })
-      .then((data: LoginRes) => {
+      .then((data) => {
         if (data.isSuccess) {
-          setUser(data.userId!);
+          setUserId(data.userId!);
           localStorage.setItem(TokenKey, data.accessToken!);
 
           // 로그인 정보 저장
@@ -76,8 +75,7 @@ const LoginForm = () => {
         } else {
           setError('이메일 또는 비밀번호가 틀렸습니다');
         }
-      })
-      .catch(() => alert('로그인 중 오류가 발생했습니다.'));
+      });
   };
 
   return (
@@ -112,7 +110,11 @@ const LoginForm = () => {
         />
         <ButtonWrapper>
           <ErrorMessage>{error}</ErrorMessage>
-          <FormButton text={'로그인'} onClick={handleSubmitForm} />
+          <FormButton
+            text={'로그인'}
+            disabled={!form.email || !form.password}
+            onClick={handleSubmitForm}
+          />
         </ButtonWrapper>
         <GotoFindPassword>
           <Link to={LOGIN_ROUTER_PATH.password.find}>

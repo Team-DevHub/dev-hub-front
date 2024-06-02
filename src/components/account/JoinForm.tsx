@@ -14,7 +14,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ICONS } from '@/assets/icon/icons';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { userAPI } from '@/api/userAPI';
-import { CommonRes, EmailCheckRes } from '@/types/api/response';
 
 interface JoinForm {
   name: string;
@@ -41,6 +40,9 @@ const JoinForm = () => {
     passwordCheck: '',
   });
 
+  const isEmpty =
+    !form.name || !form.email || !form.password || !form.passwordCheck;
+
   const handleFormChange = <T extends keyof JoinForm>(
     key: T,
     value: JoinForm[T],
@@ -66,32 +68,26 @@ const JoinForm = () => {
           email: form.email,
           password: form.password,
         })
-        .then((data: CommonRes) => {
-          if (data.isSuccess) {
+        .then((data) => {
+          if (data?.isSuccess) {
             alert('회원가입 되었습니다.');
             navigate('/account/login');
-          } else {
-            alert('회원가입을 실패했습니다.');
           }
-        })
-        .catch(() => alert('오류가 발생했습니다.'));
+        });
     }
   };
 
   const handleCheckDuplicateClick = async () => {
-    await userAPI
-      .emailCheck(form.email)
-      .then((data: EmailCheckRes) => {
-        if (data.result) {
-          setEmailCheck({ canUse: true, message: '사용 가능한 이메일입니다' });
-        } else {
-          setEmailCheck({
-            canUse: false,
-            message: '이미 사용 중인 이메일입니다',
-          });
-        }
-      })
-      .catch(() => alert('오류가 발생했습니다.'));
+    await userAPI.emailCheck(form.email).then((data) => {
+      if (data?.result) {
+        setEmailCheck({ canUse: true, message: '사용 가능한 이메일입니다' });
+      } else {
+        setEmailCheck({
+          canUse: false,
+          message: '이미 사용 중인 이메일입니다',
+        });
+      }
+    });
   };
 
   return (
@@ -146,12 +142,24 @@ const JoinForm = () => {
           value={form.passwordCheck}
           onChange={(e) => handleFormChange('passwordCheck', e.target.value)}
           placeholder='비밀번호를 한 번 더 입력해주세요'
-          isError={form.passwordCheck !== form.password}
+          isError={
+            Boolean(form.password && form.passwordCheck) &&
+            form.passwordCheck !== form.password
+          }
           errorMessage='비밀번호가 일치하지 않습니다'
         />
       </InputContainer>
       <SubmitContainer>
-        <FormButton type='submit' text={'회원가입'} onClick={() => {}} />
+        <FormButton
+          type='submit'
+          disabled={
+            isEmpty ||
+            form.passwordCheck !== form.password ||
+            !emailCheck.canUse
+          }
+          text={'회원가입'}
+          onClick={() => {}}
+        />
         <GotoPage>
           <img src={ICONS.join} />
           <Link to={LOGIN_ROUTER_PATH.login}>{'로그인'}</Link>

@@ -1,3 +1,4 @@
+import { userAPI } from '@/api/userAPI';
 import Banner from '@/components/common/Banner';
 import Category from '@/components/common/Category';
 import Pagination from '@/components/common/Pagination';
@@ -5,11 +6,13 @@ import PostList from '@/components/homePage/PostList';
 import SearchInput from '@/components/homePage/SearchInput';
 import SideBar from '@/components/homePage/SideBar';
 import { Post, postDummy } from '@/data/postDummy';
+import useStore from '@/store/store';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 function HomePage() {
+  const { setUserInfo } = useStore();
   const page = useSearchParams()[0].get('page');
   const [posts, setPosts] = useState<Post[]>([]);
   const pageNum = page ? +page : 1;
@@ -18,6 +21,15 @@ function HomePage() {
     setPosts(postDummy.slice(21 * (pageNum - 1), 21 * pageNum)); // 임시 (서버 연동 부분)
     window.scroll(0, 0);
   }, [page]);
+
+  useEffect(() => {
+    const getUser = async () => {
+      await userAPI.getUserInfo().then((res) => {
+        setUserInfo(res!.result);
+      });
+    };
+    getUser();
+  }, []);
 
   return (
     <>

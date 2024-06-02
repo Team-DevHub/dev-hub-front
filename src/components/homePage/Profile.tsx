@@ -1,27 +1,31 @@
 import styled from 'styled-components';
-import Lv5 from '@/assets/image/lv5.svg?react';
 import Button from '../common/Button';
 import { ICONS } from '@/assets/icon/icons';
 import { useNavigate } from 'react-router-dom';
+import { useLevel } from '@/hooks/useLevel';
+import useStore from '@/store/store';
 
 function Profile() {
+  const { user } = useStore();
+  const { userLevel } = useLevel();
   const navigate = useNavigate();
+
   return (
     <Wrapper>
       <h4>내 프로필</h4>
       <Container>
-        <Lv5 />
+        <img src={userLevel.icon} alt='level icon' width={80} height={80} />
         <UserInfo>
-          <h3>류지민</h3>
-          <span>Lv.5 개발자에게 밤샘은 기본</span>
+          <h3>{user!.nickname}</h3>
+          <span>{`${userLevel.level} ${userLevel.name}`}</span>
         </UserInfo>
         <ActivityInfo>
           <Activity>
-            <h4>19개</h4>
+            <h4>{user!.totalPosts}개</h4>
             <span>공유한 지식</span>
           </Activity>
           <Activity>
-            <h4>204점</h4>
+            <h4>{user!.totalPoints}점</h4>
             <span>보유 포인트</span>
           </Activity>
         </ActivityInfo>

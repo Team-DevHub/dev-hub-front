@@ -7,10 +7,12 @@ import { AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import useStore from '@/store/store';
+import { TokenKey } from '@/constants/storage';
 
 function MyInfo() {
   const navigate = useNavigate();
-  const { logOut } = useStore();
+  const { logOut, user } = useStore();
+  const clearStorage = useStore.persist.clearStorage;
   const [open, setOpen] = useState<boolean>(false);
 
   // 팝업 등장 시 뒷배경 스크롤 방지
@@ -22,6 +24,8 @@ function MyInfo() {
 
   const handleLogOut = () => {
     logOut();
+    localStorage.removeItem(TokenKey);
+    clearStorage();
     navigate(LOGIN_ROUTER_PATH.login);
   };
 
@@ -32,7 +36,7 @@ function MyInfo() {
         <Content>
           <Info>
             <h4>이름</h4>
-            <span>연하영</span>
+            <span>{user!.nickname}</span>
           </Info>
           <Info>
             <h4>ID</h4>

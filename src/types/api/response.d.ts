@@ -11,3 +11,20 @@ export interface LoginRes extends CommonRes {
 export interface EmailCheckRes extends CommonRes {
   result?: boolean;
 }
+
+export interface UserInfoRes extends CommonRes {
+  result: {
+    userId: string;
+    nickname: string;
+    level: number;
+    totalPosts: number;
+    totalPoints: number;
+  };
+}
+
+export interface TopFiveRes extends CommonRes {
+  id: string;
+  name: string;
+  level: number;
+  points: number;
+}

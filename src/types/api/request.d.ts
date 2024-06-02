@@ -8,3 +8,8 @@ export interface JoinReq {
   email: string;
   password: string;
 }
+
+export interface RequestResetReq {
+  email: string;
+  nickname: string;
+}
