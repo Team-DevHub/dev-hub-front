@@ -110,7 +110,11 @@ const LoginForm = () => {
         />
         <ButtonWrapper>
           <ErrorMessage>{error}</ErrorMessage>
-          <FormButton text={'로그인'} onClick={handleSubmitForm} />
+          <FormButton
+            text={'로그인'}
+            disabled={!form.email || !form.password}
+            onClick={handleSubmitForm}
+          />
         </ButtonWrapper>
         <GotoFindPassword>
           <Link to={LOGIN_ROUTER_PATH.password.find}>

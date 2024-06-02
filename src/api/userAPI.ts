@@ -1,4 +1,4 @@
-import { JoinReq, LoginReq } from '@/types/api/request';
+import { JoinReq, LoginReq, RequestResetReq } from '@/types/api/request';
 import { authInstance, baseInstance } from './instance';
 import { AxiosResponse } from 'axios';
 import {
@@ -20,6 +20,8 @@ export const userAPI = {
     } catch (err: any) {
       if (err.response.status === 401) {
         return err.response.data;
+      } else {
+        window.alert('오류가 발생했습니다.');
       }
     }
   },
@@ -43,6 +45,21 @@ export const userAPI = {
       return data;
     } catch (err) {
       window.alert('오류가 발생했습니다.');
+    }
+  },
+  requestReset: async (userData: RequestResetReq) => {
+    try {
+      const { data }: AxiosResponse<CommonRes> = await baseInstance.post(
+        `/users/password`,
+        userData,
+      );
+      return data;
+    } catch (err: any) {
+      if (err.response.status === 403) {
+        return err.response.data;
+      } else {
+        window.alert('오류가 발생했습니다.');
+      }
     }
   },
   getUserInfo: async () => {
