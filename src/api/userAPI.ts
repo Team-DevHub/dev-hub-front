@@ -54,4 +54,14 @@ export const userAPI = {
       window.alert('오류가 발생했습니다.');
     }
   },
+  deleteAccount: async () => {
+    try {
+      const { data }: AxiosResponse<CommonRes> = await authInstance.delete(
+        `/users`,
+      );
+      return data;
+    } catch (err) {
+      window.alert('오류가 발생했습니다.');
+    }
+  },
 };

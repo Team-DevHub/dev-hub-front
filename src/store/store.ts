@@ -37,7 +37,7 @@ const useStore = create(
             user: userData,
           }));
         },
-        logOut: () => set(() => ({ user: null, accessToken: null })),
+        logOut: () => set(() => ({ user: null })),
       }),
       {
         name: 'store',
