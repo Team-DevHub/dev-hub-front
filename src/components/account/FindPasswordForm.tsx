@@ -37,16 +37,13 @@ const FindPasswordForm = () => {
   };
 
   const handleSubmitForm = async () => {
-    if (!form.email || !form.name) {
-      alert('값을 모두 입력해주세요.');
-      return;
-    }
-
     await userAPI
       .requestReset({ email: form.email, nickname: form.name })
       .then((res) => {
         if (res?.isSuccess) {
-          navigate(LOGIN_ROUTER_PATH.password.reset);
+          navigate(LOGIN_ROUTER_PATH.password.reset, {
+            state: { email: form.email },
+          });
         } else {
           window.alert('존재하지 않는 유저입니다.');
         }
@@ -81,7 +78,9 @@ const FindPasswordForm = () => {
       <SubmitContainer>
         <FormButton
           type='submit'
-          disabled={!FormRegex.email.test(form.email)}
+          disabled={
+            !FormRegex.email.test(form.email) || !form.email || !form.name
+          }
           text={'비밀번호 찾기'}
           onClick={() => {}}
         />

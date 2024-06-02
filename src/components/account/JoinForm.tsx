@@ -40,6 +40,9 @@ const JoinForm = () => {
     passwordCheck: '',
   });
 
+  const isEmpty =
+    !form.name || !form.email || !form.password || !form.passwordCheck;
+
   const handleFormChange = <T extends keyof JoinForm>(
     key: T,
     value: JoinForm[T],
@@ -139,12 +142,24 @@ const JoinForm = () => {
           value={form.passwordCheck}
           onChange={(e) => handleFormChange('passwordCheck', e.target.value)}
           placeholder='비밀번호를 한 번 더 입력해주세요'
-          isError={form.passwordCheck !== form.password}
+          isError={
+            Boolean(form.password && form.passwordCheck) &&
+            form.passwordCheck !== form.password
+          }
           errorMessage='비밀번호가 일치하지 않습니다'
         />
       </InputContainer>
       <SubmitContainer>
-        <FormButton type='submit' text={'회원가입'} onClick={() => {}} />
+        <FormButton
+          type='submit'
+          disabled={
+            isEmpty ||
+            form.passwordCheck !== form.password ||
+            !emailCheck.canUse
+          }
+          text={'회원가입'}
+          onClick={() => {}}
+        />
         <GotoPage>
           <img src={ICONS.join} />
           <Link to={LOGIN_ROUTER_PATH.login}>{'로그인'}</Link>

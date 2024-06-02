@@ -62,6 +62,21 @@ export const userAPI = {
       }
     }
   },
+  resetPassword: async (formData: LoginReq) => {
+    try {
+      const { data }: AxiosResponse<CommonRes> = await baseInstance.put(
+        `/users/password`,
+        formData,
+      );
+      return data;
+    } catch (err: any) {
+      if (err.response.status === 403) {
+        return err.response.data;
+      } else {
+        window.alert('오류가 발생했습니다.');
+      }
+    }
+  },
   getUserInfo: async () => {
     try {
       const { data }: AxiosResponse<UserInfoRes> = await authInstance.get(
