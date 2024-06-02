@@ -1,3 +1,4 @@
+import { TokenKey } from '@/constants/storage';
 import axios from 'axios';
 // const baseUrl = 'http://localhost:8888';
 const baseUrl = 'http://dev-hub.ap-northeast-2.elasticbeanstalk.com';
@@ -33,7 +34,7 @@ authInstance.interceptors.response.use(
 // authInstance 요청에 대한 interceptor -> 요청 직전 header에 access token 추가
 authInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem(TokenKey);
     config.headers['Authorization'] = `Bearer ${token}`;
     return config;
   },

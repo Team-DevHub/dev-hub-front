@@ -14,7 +14,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ICONS } from '@/assets/icon/icons';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { userAPI } from '@/api/userAPI';
-import { CommonRes, EmailCheckRes } from '@/types/api/response';
 
 interface JoinForm {
   name: string;
@@ -66,8 +65,8 @@ const JoinForm = () => {
           email: form.email,
           password: form.password,
         })
-        .then((data: CommonRes) => {
-          if (data.isSuccess) {
+        .then((data) => {
+          if (data?.isSuccess) {
             alert('회원가입 되었습니다.');
             navigate('/account/login');
           }
@@ -76,8 +75,8 @@ const JoinForm = () => {
   };
 
   const handleCheckDuplicateClick = async () => {
-    await userAPI.emailCheck(form.email).then((data: EmailCheckRes) => {
-      if (data.result) {
+    await userAPI.emailCheck(form.email).then((data) => {
+      if (data?.result) {
         setEmailCheck({ canUse: true, message: '사용 가능한 이메일입니다' });
       } else {
         setEmailCheck({
