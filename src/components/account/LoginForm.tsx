@@ -76,8 +76,7 @@ const LoginForm = () => {
         } else {
           setError('이메일 또는 비밀번호가 틀렸습니다');
         }
-      })
-      .catch(() => alert('로그인 중 오류가 발생했습니다.'));
+      });
   };
 
   return (

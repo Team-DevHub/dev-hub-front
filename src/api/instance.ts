@@ -12,6 +12,24 @@ export const authInstance = axios.create({
   baseURL: baseUrl,
 });
 
+baseInstance.interceptors.response.use(
+  (res) => {
+    return res;
+  },
+  (err) => {
+    return Promise.reject(err);
+  },
+);
+
+authInstance.interceptors.response.use(
+  (res) => {
+    return res;
+  },
+  (err) => {
+    return Promise.reject(err);
+  },
+);
+
 // authInstance 요청에 대한 interceptor -> 요청 직전 header에 access token 추가
 authInstance.interceptors.request.use(
   (config) => {

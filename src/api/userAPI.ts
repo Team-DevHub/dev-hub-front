@@ -6,8 +6,10 @@ export const userAPI = {
     try {
       const { data } = await baseInstance.post(`/users/login`, user);
       return data;
-    } catch (err) {
-      throw err;
+    } catch (err: any) {
+      if (err.response.status === 401) {
+        return err.response.data;
+      }
     }
   },
   emailCheck: async (email: string) => {
@@ -15,7 +17,7 @@ export const userAPI = {
       const { data } = await baseInstance.post(`/users/check-email`, { email });
       return data;
     } catch (err) {
-      throw err;
+      window.alert('오류가 발생했습니다.');
     }
   },
   join: async (formData: JoinReq) => {
@@ -23,7 +25,7 @@ export const userAPI = {
       const { data } = await baseInstance.post(`/users/join`, formData);
       return data;
     } catch (err) {
-      throw err;
+      window.alert('오류가 발생했습니다.');
     }
   },
 };

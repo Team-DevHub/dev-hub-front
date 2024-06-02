@@ -70,28 +70,22 @@ const JoinForm = () => {
           if (data.isSuccess) {
             alert('회원가입 되었습니다.');
             navigate('/account/login');
-          } else {
-            alert('회원가입을 실패했습니다.');
           }
-        })
-        .catch(() => alert('오류가 발생했습니다.'));
+        });
     }
   };
 
   const handleCheckDuplicateClick = async () => {
-    await userAPI
-      .emailCheck(form.email)
-      .then((data: EmailCheckRes) => {
-        if (data.result) {
-          setEmailCheck({ canUse: true, message: '사용 가능한 이메일입니다' });
-        } else {
-          setEmailCheck({
-            canUse: false,
-            message: '이미 사용 중인 이메일입니다',
-          });
-        }
-      })
-      .catch(() => alert('오류가 발생했습니다.'));
+    await userAPI.emailCheck(form.email).then((data: EmailCheckRes) => {
+      if (data.result) {
+        setEmailCheck({ canUse: true, message: '사용 가능한 이메일입니다' });
+      } else {
+        setEmailCheck({
+          canUse: false,
+          message: '이미 사용 중인 이메일입니다',
+        });
+      }
+    });
   };
 
   return (
