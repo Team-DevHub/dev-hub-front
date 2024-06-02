@@ -5,6 +5,7 @@ import {
   CommonRes,
   EmailCheckRes,
   LoginRes,
+  TopFiveRes,
   UserInfoRes,
 } from '@/types/api/response';
 
@@ -58,6 +59,16 @@ export const userAPI = {
     try {
       const { data }: AxiosResponse<CommonRes> = await authInstance.delete(
         `/users`,
+      );
+      return data;
+    } catch (err) {
+      window.alert('오류가 발생했습니다.');
+    }
+  },
+  getTopFive: async () => {
+    try {
+      const { data }: AxiosResponse<TopFiveRes[]> = await baseInstance.get(
+        `/users/top`,
       );
       return data;
     } catch (err) {

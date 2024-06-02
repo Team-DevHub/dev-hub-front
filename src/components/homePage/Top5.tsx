@@ -1,16 +1,30 @@
-import styled from "styled-components";
-import TopUser from "./TopUser";
+import styled from 'styled-components';
+import TopUser from './TopUser';
+import { useEffect, useState } from 'react';
+import { TopFiveRes } from '@/types/api/response';
+import { userAPI } from '@/api/userAPI';
 
 function Top5() {
+  const [topFive, setTopFive] = useState<TopFiveRes[] | null>(null);
+
+  useEffect(() => {
+    const getTopFiveUser = async () => {
+      await userAPI.getTopFive().then((res) => {
+        if (res) {
+          setTopFive(res);
+        }
+      });
+    };
+    getTopFiveUser();
+  }, []);
+
   return (
     <Wrapper>
       <h4>지식 공유 Top5 수강생! 🔥</h4>
       <Container>
-        <TopUser rank={1} userName="류지민" points={204} />
-        <TopUser rank={2} userName="류지민" points={204} />
-        <TopUser rank={3} userName="류지민" points={204} />
-        <TopUser rank={4} userName="류지민" points={204} />
-        <TopUser rank={5} userName="류지민" points={204} />
+        {topFive?.map((user, i) => (
+          <TopUser rank={i + 1} userName={user.name} points={user.points} />
+        ))}
       </Container>
     </Wrapper>
   );

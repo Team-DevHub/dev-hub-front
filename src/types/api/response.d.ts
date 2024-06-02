@@ -21,3 +21,10 @@ export interface UserInfoRes extends CommonRes {
     totalPoints: number;
   };
 }
+
+export interface TopFiveRes extends CommonRes {
+  id: string;
+  name: string;
+  level: number;
+  points: number;
+}
