@@ -2,16 +2,13 @@ import styled from 'styled-components';
 import Button from '../common/Button';
 import { ICONS } from '@/assets/icon/icons';
 import { useNavigate } from 'react-router-dom';
+import { useLevel } from '@/hooks/useLevel';
 import useStore from '@/store/store';
-import { LEVEL } from '@/constants/level';
-
-type LevelKeys = keyof typeof LEVEL;
 
 function Profile() {
   const { user } = useStore();
+  const { userLevel } = useLevel();
   const navigate = useNavigate();
-
-  const userLevel = LEVEL[user!.level as LevelKeys];
 
   return (
     <Wrapper>

@@ -1,6 +1,16 @@
 const PATH = '/src/assets/level/';
 
-export const LEVEL = {
+export interface LevelType {
+  level: string;
+  icon: string;
+  name: string;
+}
+
+export type LevelKeys = keyof typeof LEVEL;
+
+export const LEVEL: {
+  [key: number]: LevelType;
+} = {
   1: {
     level: 'Lv.1',
     icon: PATH + 'Lv.1.svg',
