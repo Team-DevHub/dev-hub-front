@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import BannerMusseuk from "@/assets/image/banner-musseuk.svg?react";
-import BackIcon from "@/assets/icon/back-icon.svg?react";
-import { useNavigate } from "react-router-dom";
+import styled from 'styled-components';
+import BannerMusseuk from '@/assets/image/banner-musseuk.svg?react';
+import BackIcon from '@/assets/icon/back-icon.svg?react';
+import { useNavigate } from 'react-router-dom';
 
 interface BannerProps {
   hasBackBtn: boolean; // back 버튼 여부

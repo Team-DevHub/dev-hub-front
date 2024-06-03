@@ -28,3 +28,16 @@ export interface TopFiveRes extends CommonRes {
   level: number;
   points: number;
 }
+
+export interface Post {
+  postId: number;
+  title: string;
+  categoryId: number;
+  totalComments: number;
+  writer: string;
+  createdAt: string;
+}
+
+export interface PostsRes extends CommonRes {
+  result: Post[];
+}

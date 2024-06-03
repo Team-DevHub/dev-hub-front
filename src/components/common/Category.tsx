@@ -5,10 +5,19 @@ import Tag from './Tag';
 
 interface CategoryProps {
   width?: string;
+  onCategorySelect: (id: number) => void;
 }
 
-const Category: React.FC<CategoryProps> = ({ width = '650px' }) => {
+const Category: React.FC<CategoryProps> = ({
+  width = '650px',
+  onCategorySelect,
+}) => {
   const [selected, setSelected] = useState<number>(categories[0].id);
+
+  const handleSelect = (id: number) => {
+    setSelected(id);
+    onCategorySelect(id);
+  };
 
   return (
     <Container width={width}>
@@ -19,7 +28,7 @@ const Category: React.FC<CategoryProps> = ({ width = '650px' }) => {
             key={data.id}
             content={data.name}
             isClicked={selected === data.id}
-            onClick={() => setSelected(data.id)}
+            onClick={() => handleSelect(data.id)}
           />
         ))}
       </TagContainer>

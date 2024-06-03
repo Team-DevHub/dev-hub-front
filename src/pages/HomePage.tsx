@@ -37,7 +37,7 @@ function HomePage() {
       <Container>
         <Content>
           <TopBar>
-            <Category width='650px' />
+            <Category width='650px' onCategorySelect={() => {}} />
             <SearchInput />
           </TopBar>
           <PostList totalPosts={postDummy.length} postData={posts} />
