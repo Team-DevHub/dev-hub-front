@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import DeleteMusseuk from '@/assets/image/delete-musseuk.svg?react';
 
