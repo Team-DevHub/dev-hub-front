@@ -1,5 +1,6 @@
 export const theme = {
   color_key: '#1D2A3D',
+  color_keyBlue: '#0078FF',
   color_keyWhite: '#F9FAFB',
   color_textBlack: '#111111',
   color_textKey: '#263747',
@@ -9,6 +10,7 @@ export const theme = {
   color_bgWhite: '#FFFFFF',
   color_bgLightGray: '#E1E1E1',
   color_borderGray: '#EAEAEA',
+  color_borderBlue: '#006CE6',
   fontSize_xs: '10px',
   fontSize_sm: '12px',
   fontSize_base: '14px',

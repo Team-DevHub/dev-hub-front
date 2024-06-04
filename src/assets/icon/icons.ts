@@ -8,6 +8,7 @@ export const ICONS = {
   arrow: {
     left: PATH + 'arrow-left.svg',
     right: PATH + 'arrow-right.svg',
+    home: PATH + 'arrow-home.svg',
   },
   delete: {
     red: PATH + 'delete-red-icon.svg',
@@ -29,4 +30,8 @@ export const ICONS = {
   book: PATH + 'book-icon.svg',
   point: PATH + 'point-icon.svg',
   user: PATH + 'user-icon.svg',
+  share: PATH + 'share.svg',
+  logout: PATH + 'logout-icon.svg',
+  deleteAccount: PATH + 'delete-account-icon.svg',
+  warning404: PATH + 'warning.svg',
 };

@@ -26,6 +26,7 @@ function SideBar() {
       <Button
         size='medium'
         text='지식 공유하기'
+        bgColor='color_keyBlue'
         onClick={user ? () => navigate('/posting') : () => setOpen(true)}
         icon={ICONS.pencil}
       />

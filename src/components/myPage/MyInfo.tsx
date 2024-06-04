@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import LogoutIcon from '@/assets/icon/logout-icon.svg?react';
-import DeleteAccountIcon from '@/assets/icon/delete-account-icon.svg?react';
 import { useState } from 'react';
 import DeleteAccountPopUp from '../popup/DeleteAccountPopUp';
 import { AnimatePresence } from 'framer-motion';
@@ -8,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import useStore from '@/store/store';
 import { TokenKey } from '@/constants/storage';
+import { ICONS } from '@/assets/icon/icons';
 
 function MyInfo() {
   const navigate = useNavigate();
@@ -48,8 +47,14 @@ function MyInfo() {
           </Info>
         </Content>
         <IconContainer>
-          <LogOutButton onClick={handleLogOut} />
-          <DeleteButton onClick={() => setOpen(true)} />
+          <CircleButton onClick={handleLogOut}>
+            <img src={ICONS.logout} alt='logout' />
+            <span>로그아웃</span>
+          </CircleButton>
+          <CircleButton onClick={() => setOpen(true)}>
+            <img src={ICONS.deleteAccount} alt='deleteAccount' />
+            <span>회원탈퇴</span>
+          </CircleButton>
         </IconContainer>
       </Container>
       <AnimatePresence>
@@ -103,10 +108,22 @@ const IconContainer = styled.div`
   gap: 15px;
 `;
 
-const LogOutButton = styled(LogoutIcon)`
-  cursor: pointer;
-`;
+const CircleButton = styled.button`
+  background-color: rgba(225, 225, 225, 0.35);
+  border: 1px solid #dfdfdf;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  color: ${({ theme }) => theme.color_textBlack};
+  font-size: ${({ theme }) => theme.fontSize_xs};
+  font-weight: 500;
 
-const DeleteButton = styled(DeleteAccountIcon)`
-  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
 `;

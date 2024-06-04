@@ -1,9 +1,16 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import LogoWhite from '@/assets/logo/logo-no-bg.svg?react';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
+  const navigate = useNavigate();
   return (
     <HeaderContainer>
-      <h1>DevHub</h1>
+      <Logo onClick={() => navigate('/')}>
+        <LogoWhite width={32} height={32} />
+        <h1>DevHub</h1>
+      </Logo>
+
       <h5>데브코스 지식 공유 공간</h5>
     </HeaderContainer>
   );
@@ -27,4 +34,11 @@ const HeaderContainer = styled.header`
     color: ${({ theme }) => theme.color_textWhite};
     letter-spacing: 1px;
   }
+`;
+
+const Logo = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
 `;

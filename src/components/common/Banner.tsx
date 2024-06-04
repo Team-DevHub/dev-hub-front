@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import BannerMusseuk from "@/assets/image/banner-musseuk.svg?react";
-import BackIcon from "@/assets/icon/back-icon.svg?react";
-import { useNavigate } from "react-router-dom";
+import styled from 'styled-components';
+import BannerMusseuk from '@/assets/image/banner-musseuk.svg?react';
+import BackIcon from '@/assets/icon/back-icon.svg?react';
+import { useNavigate } from 'react-router-dom';
 
 interface BannerProps {
   hasBackBtn: boolean; // back 버튼 여부
@@ -60,9 +60,13 @@ const TitleWrapper = styled.div`
 const BackButton = styled.button`
   display: flex;
   gap: 8px;
-  color: ${({ theme }) => theme.color_textGray};
+  color: ${({ theme }) => theme.color_keyBlue};
   font-size: ${({ theme }) => theme.fontSize_base};
   font-weight: 500;
+
+  svg {
+    fill: ${({ theme }) => theme.color_keyBlue};
+  }
 `;
 
 const Title = styled.h2`
