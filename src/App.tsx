@@ -17,6 +17,7 @@ import HomePage from './pages/HomePage';
 import MyPage from './pages/MyPage';
 import PostingPage from './pages/PostingPage';
 import useStore from './store/store';
+import NotFoundPage from './pages/NotFoundPage';
 
 const ProtectedRoute = ({ redirectPath = '/' }) => {
   const { user } = useStore();
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       { path: 'password/find', element: <FindPasswordForm /> },
       { path: 'password/reset', element: <ResetPasswordForm /> },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
   },
 ]);
 
