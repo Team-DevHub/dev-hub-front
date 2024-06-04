@@ -32,6 +32,7 @@ function Profile() {
         <Button
           size='small'
           text='마이페이지'
+          bgColor='color_keyBlue'
           onClick={() => navigate('/my-page')}
           icon={ICONS.house}
         />

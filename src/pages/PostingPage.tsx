@@ -4,7 +4,9 @@ import TitleInput from '@/components/posting/TitleInput';
 import LinkInput from '@/components/posting/LinkInput';
 import ContentInput from '@/components/posting/ContentInput';
 import Banner from '@/components/common/Banner';
-import FormButton from '@/components/common/FormInput/FormButton';
+// import FormButton from '@/components/common/FormInput/FormButton';
+import Button from '@/components/common/Button';
+import { ICONS } from '@/assets/icon/icons';
 
 function PostingPage() {
   return (
@@ -16,7 +18,13 @@ function PostingPage() {
         <ContentInput />
         <LinkInput />
         <ButtonWrapper>
-          <FormButton text='공유하기' fontSize='14px' onClick={() => {}} />
+          <Button
+            text='공유하기'
+            size='medium'
+            bgColor='color_keyBlue'
+            icon={ICONS.share}
+            onClick={() => {}}
+          />
         </ButtonWrapper>
       </FormWrapper>
     </Container>
@@ -42,5 +50,6 @@ const FormWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+  align-self: end;
+  width: 300px;
 `;

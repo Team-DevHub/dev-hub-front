@@ -5,11 +5,22 @@ interface ButtonProps {
   text: string;
   onClick: () => void;
   icon: string;
+  bgColor?: string;
 }
 
-function Button({ size, text, onClick, icon }: ButtonProps) {
+function Button({
+  size,
+  text,
+  onClick,
+  icon,
+  bgColor = 'color_key',
+}: ButtonProps) {
   return (
-    <StyledButton type='button' $size={size} onClick={onClick}>
+    <StyledButton
+      type='button'
+      $size={size}
+      onClick={onClick}
+      $bgColor={bgColor}>
       <img src={icon} alt='icon' />
       {text}
     </StyledButton>
@@ -18,7 +29,7 @@ function Button({ size, text, onClick, icon }: ButtonProps) {
 
 export default Button;
 
-const StyledButton = styled.button<{ $size: string }>`
+const StyledButton = styled.button<{ $size: string; $bgColor: string }>`
   width: 100%;
   display: flex;
   align-items: center;
@@ -26,7 +37,7 @@ const StyledButton = styled.button<{ $size: string }>`
   gap: 6px;
 
   color: ${({ theme }) => theme.color_textWhite};
-  background-color: ${({ theme }) => theme.color_key};
+  background-color: ${({ theme, $bgColor }) => theme[$bgColor]};
   border-radius: 8px;
   font-weight: 600;
 
