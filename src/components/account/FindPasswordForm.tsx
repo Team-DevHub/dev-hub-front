@@ -6,83 +6,77 @@ import {
   SubmitContainer,
 } from '../layouts/AccountLayout';
 import FormInput from '../common/FormInput/FormInput';
-import { useState } from 'react';
-import { FormRegex } from '@/utils/regex';
 import FormButton from '../common/FormInput/FormButton';
 import { Link, useNavigate } from 'react-router-dom';
 import { ICONS } from '@/assets/icon/icons';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { userAPI } from '@/api/userAPI';
+import { useForm } from 'react-hook-form';
+import { FormRegex } from '@/utils/regex';
 
 interface FindPasswordForm {
-  name: string;
+  nickname: string;
   email: string;
 }
 
 const FindPasswordForm = () => {
   const navigate = useNavigate();
-  const [form, setForm] = useState<FindPasswordForm>({
-    name: '',
-    email: '',
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    watch,
+  } = useForm<FindPasswordForm>({
+    mode: 'onChange',
+    defaultValues: {
+      email: '',
+      nickname: '',
+    },
   });
 
-  const handleFormChange = <T extends keyof FindPasswordForm>(
-    key: T,
-    value: FindPasswordForm[T],
-  ) => {
-    setForm((prev) => {
-      const clone = { ...prev, [key]: value };
-      return clone;
+  const handleSubmitForm = async (data: FindPasswordForm) => {
+    await userAPI.requestReset(data).then((res) => {
+      if (res?.isSuccess) {
+        navigate(LOGIN_ROUTER_PATH.password.reset, {
+          state: { email: data.email },
+        });
+      } else {
+        window.alert('존재하지 않는 유저입니다.');
+      }
     });
   };
 
-  const handleSubmitForm = async () => {
-    await userAPI
-      .requestReset({ email: form.email, nickname: form.name })
-      .then((res) => {
-        if (res?.isSuccess) {
-          navigate(LOGIN_ROUTER_PATH.password.reset, {
-            state: { email: form.email },
-          });
-        } else {
-          window.alert('존재하지 않는 유저입니다.');
-        }
-      });
-  };
-
   return (
-    <FormRoot
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleSubmitForm();
-      }}>
+    <FormRoot onSubmit={handleSubmit(handleSubmitForm)}>
       <AccountCardTitle>{'비밀번호 찾기'}</AccountCardTitle>
       <InputContainer>
         <FormInput
           id={'name-input'}
           label={'Name'}
-          value={form.name}
-          onChange={(e) => handleFormChange('name', e.target.value)}
           placeholder='회원님의 닉네임을 입력해주세요'
+          {...register('nickname')}
         />
         <FormInput
           id={'email-input'}
           label={'Email'}
-          value={form.email}
-          regex={FormRegex.email}
-          onChange={(e) => handleFormChange('email', e.target.value)}
           placeholder='이메일을 입력해주세요'
-          errorMessage='이메일 형식이 유효하지 않습니다'
+          errorMessage={errors.email?.message}
+          {...register('email', {
+            pattern: {
+              value: FormRegex.email,
+              message: '이메일 형식이 유효하지 않습니다',
+            },
+          })}
         />
       </InputContainer>
       <SubmitContainer>
         <FormButton
           type='submit'
           disabled={
-            !FormRegex.email.test(form.email) || !form.email || !form.name
+            !watch('email') || !watch('nickname') || Boolean(errors.email)
           }
           text={'비밀번호 찾기'}
-          onClick={() => {}}
         />
         <GotoPage>
           <img src={ICONS.join} />

@@ -6,12 +6,13 @@ import {
   SubmitContainer,
 } from '../layouts/AccountLayout';
 import FormInput from '../common/FormInput/FormInput';
-import { useState } from 'react';
 import FormButton from '../common/FormInput/FormButton';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ICONS } from '@/assets/icon/icons';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { userAPI } from '@/api/userAPI';
+import { useForm } from 'react-hook-form';
+import { FormRegex } from '@/utils/regex';
 
 interface ResetPasswordForm {
   password: string;
@@ -23,24 +24,23 @@ const ResetPasswordForm = () => {
   const {
     state: { email },
   } = useLocation();
-  const [form, setForm] = useState<ResetPasswordForm>({
-    password: '',
-    passwordCheck: '',
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    watch,
+  } = useForm<ResetPasswordForm>({
+    mode: 'onChange',
+    defaultValues: {
+      password: '',
+      passwordCheck: '',
+    },
   });
 
-  const handleFormChange = <T extends keyof ResetPasswordForm>(
-    key: T,
-    value: ResetPasswordForm[T],
-  ) => {
-    setForm((prev) => {
-      const clone = { ...prev, [key]: value };
-      return clone;
-    });
-  };
-
-  const handleSubmitForm = async () => {
+  const handleSubmitForm = async (data: ResetPasswordForm) => {
     await userAPI
-      .resetPassword({ email: email, password: form.password })
+      .resetPassword({ email: email, password: data.password })
       .then((res) => {
         if (res.isSuccess) {
           alert('비밀번호가 정상적으로 재설정되었습니다.');
@@ -50,45 +50,43 @@ const ResetPasswordForm = () => {
   };
 
   return (
-    <FormRoot
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleSubmitForm();
-      }}>
+    <FormRoot onSubmit={handleSubmit(handleSubmitForm)}>
       <AccountCardTitle>{'비밀번호 재설정'}</AccountCardTitle>
       <InputContainer>
         <FormInput
           id={'password-input'}
           label={'Password'}
           type='password'
-          value={form.password}
-          onChange={(e) => handleFormChange('password', e.target.value)}
-          placeholder='비밀번호를 입력해주세요'
+          placeholder='8~15자 이내 영문 대소문자, 숫자 포함'
+          errorMessage={errors.password?.message}
+          {...register('password', {
+            pattern: {
+              value: FormRegex.password,
+              message: '8~15자 이내로 영문 대소문자, 숫자를 조합하세요',
+            },
+          })}
         />
         <FormInput
           id={'passwordCheck-input'}
           label={'Password Check'}
-          value={form.passwordCheck}
           type='password'
-          onChange={(e) => handleFormChange('passwordCheck', e.target.value)}
           placeholder='비밀번호를 한 번 더 입력해주세요'
-          isError={
-            Boolean(form.password && form.passwordCheck) &&
-            form.passwordCheck !== form.password
-          }
-          errorMessage='비밀번호가 일치하지 않습니다'
+          errorMessage={errors.passwordCheck?.message}
+          {...register('passwordCheck', {
+            validate: (value) =>
+              value === watch('password') || '비밀번호가 일치하지 않습니다',
+          })}
         />
       </InputContainer>
       <SubmitContainer>
         <FormButton
           type='submit'
           disabled={
-            !form.password ||
-            !form.passwordCheck ||
-            form.passwordCheck !== form.password
+            !watch('password') ||
+            !watch('passwordCheck') ||
+            Boolean(errors.passwordCheck)
           }
           text={'비밀번호 재설정'}
-          onClick={() => {}}
         />
         <GotoPage>
           <img src={ICONS.join} />
