@@ -35,7 +35,9 @@ export default AccountLayout;
 
 const Root = styled.div`
   width: 100%;
-  height: 100%;
+  max-width: 1200px;
+  height: 100vh;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;

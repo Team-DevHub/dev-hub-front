@@ -47,6 +47,7 @@ const FooterStyle = styled.footer`
   background-color: ${({ theme }) => theme.color_bgLightGray};
   color: ${({ theme }) => theme.color_textGray};
   padding: 30px 0;
+  /* margin-top: 60px; */
 `;
 
 const Content = styled.div`

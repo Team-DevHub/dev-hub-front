@@ -23,7 +23,12 @@ function Top5() {
       <h4>지식 공유 Top5 수강생! 🔥</h4>
       <Container>
         {topFive?.map((user, i) => (
-          <TopUser rank={i + 1} userName={user.name} points={user.points} />
+          <TopUser
+            key={user.id}
+            rank={i + 1}
+            userName={user.name}
+            points={user.points}
+          />
         ))}
       </Container>
     </Wrapper>
