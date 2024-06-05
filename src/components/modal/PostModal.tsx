@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import styled from 'styled-components';
 import PostDetail from './PostDetail';
 import PostComment from './CommentList';
-import CommentInputBar from '../common/CommentInputBar/CommmentInpuBart';
+import CommentInputBar from './CommmentInpuBar';
 import { commentDummy } from '@/data/commentDummy';
 import { motion } from 'framer-motion';
 

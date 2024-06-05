@@ -22,3 +22,20 @@ export const Button = styled.button`
     margin-bottom: 2px;
   }
 `;
+
+export const Input = styled.input`
+  width: 100%;
+  padding: 10px 14px;
+  padding-right: 40px;
+
+  color: ${({ theme }) => theme.color_textBlack};
+  font-size: ${({ theme }) => theme.fontSize_base};
+  background-color: ${({ theme }) => theme.color_bgWhite};
+  border: 1px solid ${({ theme }) => theme.color_borderGray};
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    box-shadow: ${({ theme }) => theme.shadow};
+  }
+`;

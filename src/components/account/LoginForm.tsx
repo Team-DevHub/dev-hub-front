@@ -5,7 +5,7 @@ import {
   GotoPage,
   InputContainer,
   SubmitContainer,
-} from './AccountLayout';
+} from '../layouts/AccountLayout';
 import FormInput from '../common/FormInput/FormInput';
 import { useEffect, useState } from 'react';
 import Checkbox from '../common/FormInput/Checkbox';

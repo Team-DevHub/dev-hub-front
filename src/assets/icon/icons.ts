@@ -35,4 +35,6 @@ export const ICONS = {
   logout: PATH + 'logout-icon.svg',
   deleteAccount: PATH + 'delete-account-icon.svg',
   warning404: PATH + 'warning.svg',
+  notion: PATH + 'notion.svg',
+  github: PATH + 'github.svg',
 };

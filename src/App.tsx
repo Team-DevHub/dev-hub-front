@@ -8,7 +8,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom';
 import Header from './components/common/Header';
-import AccountLayout from './components/account/AccountLayout';
+import AccountLayout from './components/layouts/AccountLayout';
 import LoginForm from './components/account/LoginForm';
 import JoinForm from './components/account/JoinForm';
 import FindPasswordForm from './components/account/FindPasswordForm';
@@ -18,6 +18,8 @@ import MyPage from './pages/MyPage';
 import PostingPage from './pages/PostingPage';
 import useStore from './store/store';
 import NotFoundPage from './pages/NotFoundPage';
+import MainLayout from './components/layouts/MainLayout';
+import Footer from './components/common/Footer';
 
 const ProtectedRoute = ({ redirectPath = '/' }) => {
   const { user } = useStore();
@@ -30,7 +32,10 @@ const router = createBrowserRouter([
     element: (
       <>
         <Header />
-        <Outlet />
+        <MainLayout>
+          <Outlet />
+        </MainLayout>
+        <Footer />
       </>
     ),
     children: [

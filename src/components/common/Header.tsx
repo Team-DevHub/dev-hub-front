@@ -20,6 +20,8 @@ export default Header;
 
 const HeaderContainer = styled.header`
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   height: 60px;
   background-color: ${({ theme }) => theme.color_key};
   color: ${({ theme }) => theme.color_textWhite};
