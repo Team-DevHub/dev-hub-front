@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.3.3",
     "@toast-ui/editor-plugin-code-syntax-highlight": "3.1.0",
     "@toast-ui/react-editor": "^3.2.3",
     "axios": "^1.7.2",

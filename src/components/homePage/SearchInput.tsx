@@ -13,6 +13,7 @@ function SearchInput() {
           type='text'
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          style={{ paddingRight: '40px' }}
         />
         <SearchIcon src={ICONS.search} alt='search' />
       </Wrapper>

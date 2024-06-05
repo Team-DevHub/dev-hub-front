@@ -1,4 +1,4 @@
-import PopUpLayout from './PopUpLayout';
+import PopUpLayout from '../layouts/PopUpLayout';
 import { ICONS } from '@/assets/icon/icons';
 import ActivityBox from './item/ActivityBox';
 import styled from 'styled-components';

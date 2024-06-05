@@ -1,5 +1,5 @@
 import { modalBackgroundVariants } from '@/styles/variants';
-import useClickOutside from '@/utils/useClickOutside';
+import useClickOutside from '@/hooks/useClickOutside';
 import { useRef } from 'react';
 import styled from 'styled-components';
 import PostDetail from './PostDetail';

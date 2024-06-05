@@ -19,7 +19,7 @@ import PostingPage from './pages/PostingPage';
 import useStore from './store/store';
 import NotFoundPage from './pages/NotFoundPage';
 import MainLayout from './components/layouts/MainLayout';
-import Footer from './components/common/Footer';
+import Footer from './components/common/Footer/Footer';
 
 const ProtectedRoute = ({ redirectPath = '/' }) => {
   const { user } = useStore();

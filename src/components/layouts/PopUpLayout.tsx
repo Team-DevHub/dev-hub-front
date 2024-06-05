@@ -1,7 +1,7 @@
 'use client';
 
 import { modalBackgroundVariants } from '@/styles/variants';
-import useClickOutside from '@/utils/useClickOutside';
+import useClickOutside from '@/hooks/useClickOutside';
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import styled from 'styled-components';

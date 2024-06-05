@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import LogoGray from '@/assets/logo/logo-gray.svg?react';
-import { Input } from '@/styles/component';
 import { ICONS } from '@/assets/icon/icons';
+import FeedBackInput from './FeedBackInput';
 
 function Footer() {
   return (
@@ -18,15 +18,7 @@ function Footer() {
               공간입니다.
             </span>
           </LogoContent>
-          <FeedBack>
-            <span>DevHub 팀에게 소중한 피드백을 전달해주세요!</span>
-            <div className='inputWrapper'>
-              <Input type='text' />
-              <SendIcon>
-                <img src={ICONS.share} alt='send' />
-              </SendIcon>
-            </div>
-          </FeedBack>
+          <FeedBackInput />
         </RowWrapper>
         <RowWrapper style={{ alignItems: 'start' }}>
           <div className='copyright'>
@@ -104,51 +96,5 @@ const LogoContent = styled.div`
   span {
     font-size: ${({ theme }) => theme.fontSize_base};
     line-height: 180%;
-  }
-`;
-
-const FeedBack = styled.div`
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  span {
-    font-size: ${({ theme }) => theme.fontSize_sm};
-    color: ${({ theme }) => theme.color_keyBlue_light};
-    margin-left: 4px;
-    font-weight: 500;
-  }
-
-  .inputWrapper {
-    width: fit-content;
-    display: flex;
-    gap: 10px;
-
-    input {
-      width: 300px;
-    }
-  }
-`;
-
-const SendIcon = styled.button`
-  width: 36px;
-  height: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background-color: ${({ theme }) => theme.color_keyBlue};
-  border: none;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: all 0.15s ease-in;
-
-  img {
-    margin-right: 2px;
-  }
-
-  &:hover {
-    opacity: 1;
   }
 `;
