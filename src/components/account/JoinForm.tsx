@@ -7,66 +7,66 @@ import {
   SubmitContainer,
 } from '../layouts/AccountLayout';
 import FormInput from '../common/FormInput/FormInput';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FormRegex } from '@/utils/regex';
 import FormButton from '../common/FormInput/FormButton';
 import { Link, useNavigate } from 'react-router-dom';
 import { ICONS } from '@/assets/icon/icons';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { userAPI } from '@/api/userAPI';
+import { useForm } from 'react-hook-form';
 
 interface JoinForm {
-  name: string;
+  nickname: string;
   email: string;
   password: string;
   passwordCheck: string;
 }
 
-interface EmailCheck {
+interface Check {
   canUse: boolean | null;
   message: string;
 }
 
 const JoinForm = () => {
   const navigate = useNavigate();
-  const [emailCheck, setEmailCheck] = useState<EmailCheck>({
+  const [nameCheck, setNameCheck] = useState<Check>({
     canUse: null,
     message: '',
   });
-  const [form, setForm] = useState<JoinForm>({
-    name: '',
-    email: '',
-    password: '',
-    passwordCheck: '',
+  const [emailCheck, setEmailCheck] = useState<Check>({
+    canUse: null,
+    message: '',
+  });
+
+  const {
+    register,
+    formState: { errors },
+    watch,
+    handleSubmit,
+  } = useForm<JoinForm>({
+    mode: 'onChange',
+    defaultValues: {
+      nickname: '',
+      email: '',
+      password: '',
+      passwordCheck: '',
+    },
   });
 
   const isEmpty =
-    !form.name || !form.email || !form.password || !form.passwordCheck;
+    !watch('nickname') ||
+    !watch('email') ||
+    !watch('password') ||
+    !watch('passwordCheck');
 
-  const handleFormChange = <T extends keyof JoinForm>(
-    key: T,
-    value: JoinForm[T],
-  ) => {
-    setForm((prev) => {
-      const clone = { ...prev, [key]: value };
-      return clone;
-    });
-  };
-
-  useEffect(() => {
-    setEmailCheck({
-      canUse: null,
-      message: '',
-    });
-  }, [form.email]);
-
-  const handleSubmitForm = async () => {
-    if (emailCheck.canUse && form.password === form.passwordCheck) {
+  const handleSubmitForm = async (data: JoinForm) => {
+    if (emailCheck.canUse && nameCheck.canUse) {
       await userAPI
         .join({
-          nickname: form.name,
-          email: form.email,
-          password: form.password,
+          nickname: data.nickname.trim(),
+          email: data.email,
+          password: data.password,
         })
         .then((data) => {
           if (data?.isSuccess) {
@@ -77,8 +77,8 @@ const JoinForm = () => {
     }
   };
 
-  const handleCheckDuplicateClick = async () => {
-    await userAPI.emailCheck(form.email).then((data) => {
+  const handleCheckEmail = async () => {
+    await userAPI.emailCheck(watch('email')).then((data) => {
       if (data?.result) {
         setEmailCheck({ canUse: true, message: '사용 가능한 이메일입니다' });
       } else {
@@ -90,73 +90,117 @@ const JoinForm = () => {
     });
   };
 
+  const handleCheckName = async () => {
+    await userAPI.nameCheck(watch('nickname').trim()).then((data) => {
+      if (data?.result) {
+        setNameCheck({ canUse: true, message: '사용 가능한 닉네임입니다' });
+      } else {
+        setNameCheck({
+          canUse: false,
+          message: '이미 사용 중인 닉네임입니다',
+        });
+      }
+    });
+  };
+
   return (
-    <FormRoot
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleSubmitForm();
-      }}>
+    <FormRoot onSubmit={handleSubmit(handleSubmitForm)}>
       <AccountCardTitle>{'회원가입'}</AccountCardTitle>
       <InputContainer>
-        <FormInput
-          id={'name-input'}
-          label={'Name'}
-          value={form.name}
-          onChange={(e) => handleFormChange('name', e.target.value)}
-          placeholder='닉네임을 입력해주세요'
-        />
-        <EmailWrapper>
-          <EmailContainer>
+        <InputWrapper>
+          <InputWithButton>
+            <FormInput
+              style={{ flex: 1 }}
+              id={'name-input'}
+              label={'Name'}
+              placeholder='닉네임을 입력해주세요'
+              errorMessage={errors.nickname?.message}
+              {...register('nickname', {
+                onChange: () => {
+                  setNameCheck({
+                    canUse: null,
+                    message: '',
+                  });
+                },
+                minLength: {
+                  value: 2,
+                  message: '닉네임은 2~20자 이내로 만들어주세요',
+                },
+                maxLength: {
+                  value: 20,
+                  message: '닉네임은 2~20자 이내로 만들어주세요',
+                },
+              })}
+            />
+            <button
+              type='button'
+              onClick={handleCheckName}
+              className='duplicateBtn'>
+              {'중복확인'}
+            </button>
+          </InputWithButton>
+          <Message $isError={!nameCheck.canUse}>{nameCheck.message}</Message>
+        </InputWrapper>
+        <InputWrapper>
+          <InputWithButton>
             <FormInput
               style={{ flex: 1 }}
               id={'email-input'}
               label={'Email'}
-              value={form.email}
-              onChange={(e) => handleFormChange('email', e.target.value)}
-              regex={FormRegex.email}
               placeholder='이메일을 입력해주세요'
-              errorMessage='이메일 형식이 유효하지 않습니다'
+              errorMessage={errors.email?.message}
+              {...register('email', {
+                onChange: () => {
+                  setEmailCheck({
+                    canUse: null,
+                    message: '',
+                  });
+                },
+                pattern: {
+                  value: FormRegex.email,
+                  message: '이메일 형식이 유효하지 않습니다',
+                },
+              })}
             />
             <button
               type='button'
-              onClick={handleCheckDuplicateClick}
+              onClick={handleCheckEmail}
               className='duplicateBtn'>
               {'중복확인'}
             </button>
-          </EmailContainer>
+          </InputWithButton>
           <Message $isError={!emailCheck.canUse}>{emailCheck.message}</Message>
-        </EmailWrapper>
+        </InputWrapper>
 
         <FormInput
           id={'password-input'}
           label={'Password'}
           type='password'
-          value={form.password}
-          onChange={(e) => handleFormChange('password', e.target.value)}
-          placeholder='비밀번호를 입력해주세요'
+          placeholder='8~15자 이내 영문 대소문자, 숫자 포함'
+          errorMessage={errors.password?.message}
+          {...register('password', {
+            pattern: {
+              value: FormRegex.password,
+              message: '8~15자 이내로 영문 대소문자, 숫자를 조합하세요',
+            },
+          })}
         />
         <FormInput
           id={'password-check-input'}
           label={'Password Check'}
           type='password'
-          value={form.passwordCheck}
-          onChange={(e) => handleFormChange('passwordCheck', e.target.value)}
           placeholder='비밀번호를 한 번 더 입력해주세요'
-          isError={
-            Boolean(form.password && form.passwordCheck) &&
-            form.passwordCheck !== form.password
-          }
-          errorMessage='비밀번호가 일치하지 않습니다'
+          errorMessage={errors.passwordCheck?.message}
+          {...register('passwordCheck', {
+            validate: (value) =>
+              value === watch('password') || '비밀번호가 일치하지 않습니다',
+          })}
         />
       </InputContainer>
       <SubmitContainer>
         <FormButton
           type='submit'
-          disabled={
-            isEmpty ||
-            form.passwordCheck !== form.password ||
-            !emailCheck.canUse
-          }
+          disabled={isEmpty || !emailCheck.canUse || !nameCheck.canUse}
           text={'회원가입'}
           onClick={() => {}}
         />
@@ -170,7 +214,7 @@ const JoinForm = () => {
 };
 export default JoinForm;
 
-const EmailContainer = styled.div`
+const InputWithButton = styled.div`
   width: 100%;
   display: flex;
   align-items: flex-end;
@@ -190,7 +234,7 @@ const EmailContainer = styled.div`
   }
 `;
 
-const EmailWrapper = styled.div`
+const InputWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;

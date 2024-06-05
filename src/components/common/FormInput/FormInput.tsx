@@ -1,5 +1,5 @@
 import { ChangeEventHandler, ForwardedRef, forwardRef } from 'react';
-import styled, { CSSProperties } from 'styled-components';
+import styled from 'styled-components';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
@@ -8,7 +8,6 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string;
   placeholder?: string;
   type?: 'text' | 'password';
-  style?: CSSProperties;
   onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
