@@ -4,7 +4,7 @@ interface Props {
   disabled?: boolean;
   text: string;
   type?: 'button' | 'reset' | 'submit';
-  onClick: () => void;
+  onClick?: () => void;
   fontSize?: string;
 }
 
