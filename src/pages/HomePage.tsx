@@ -5,6 +5,7 @@ import Pagination from '@/components/common/Pagination';
 import PostList from '@/components/homePage/PostList';
 import SearchInput from '@/components/homePage/SearchInput';
 import SideBar from '@/components/homePage/SideBar';
+import PostEmpty from '@/components/posts/PostEmpty';
 import { Post, postDummy } from '@/data/postDummy';
 import useStore from '@/store/store';
 import { useEffect, useState } from 'react';
@@ -41,6 +42,7 @@ function HomePage() {
             <SearchInput />
           </TopBar>
           <PostList totalPosts={postDummy.length} postData={posts} />
+          <PostEmpty />
           <Pagination totalPosts={postDummy.length} currentPage={pageNum} />
         </Content>
         <SideBar />

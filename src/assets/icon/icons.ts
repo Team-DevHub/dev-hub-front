@@ -29,4 +29,5 @@ export const ICONS = {
   book: PATH + 'book-icon.svg',
   point: PATH + 'point-icon.svg',
   user: PATH + 'user-icon.svg',
+  question: PATH + 'question-icon.svg',
 };
