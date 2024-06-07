@@ -6,22 +6,14 @@ import PostList from '@/components/homePage/PostList';
 import SearchInput from '@/components/homePage/SearchInput';
 import SideBar from '@/components/homePage/SideBar';
 import PostEmpty from '@/components/posts/PostEmpty';
-import { Post, postDummy } from '@/data/postDummy';
+import { usePosts } from '@/hooks/usePosts';
 import useStore from '@/store/store';
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
 function HomePage() {
+  const { posts, pagination, isEmpty } = usePosts();
   const { setUserInfo } = useStore();
-  const page = useSearchParams()[0].get('page');
-  const [posts, setPosts] = useState<Post[]>([]);
-  const pageNum = page ? +page : 1;
-
-  useEffect(() => {
-    setPosts(postDummy.slice(21 * (pageNum - 1), 21 * pageNum)); // 임시 (서버 연동 부분)
-    window.scroll(0, 0);
-  }, [page]);
 
   useEffect(() => {
     const getUser = async () => {
@@ -38,12 +30,19 @@ function HomePage() {
       <Container>
         <Content>
           <TopBar>
-            <Category width='650px' onCategorySelect={() => {}} />
+            <Category width='650px' mode='filter' />
             <SearchInput />
           </TopBar>
-          <PostList totalPosts={postDummy.length} postData={posts} />
-          <PostEmpty />
-          <Pagination totalPosts={postDummy.length} currentPage={pageNum} />
+          {!isEmpty && (
+            <PostList totalPosts={pagination.totalPosts} posts={posts} />
+          )}
+          {isEmpty && <PostEmpty />}
+          {!isEmpty && (
+            <Pagination
+              totalPosts={pagination.totalPosts}
+              currentPage={pagination.currentPage}
+            />
+          )}
         </Content>
         <SideBar />
       </Container>
@@ -55,7 +54,6 @@ export default HomePage;
 
 const Container = styled.div`
   width: 100%;
-
   display: flex;
   gap: 30px;
   padding: 40px 0 100px;

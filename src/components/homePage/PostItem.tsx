@@ -1,31 +1,34 @@
 import styled from 'styled-components';
 import CommentIcon from '@/assets/icon/comment-icon.svg?react';
 import PersonIcon from '@/assets/icon/person-icon.svg?react';
-import { Post } from '@/data/postDummy';
 import { motion } from 'framer-motion';
+import { Post } from '@/types/api/response';
+import { categories } from '@/data/categories';
+import { formatDate } from '@/utils/format';
 
 interface PostItemProps {
-  postData: Post;
+  posts: Post;
   onClick: () => void;
 }
 
-function PostItem({ postData, onClick }: PostItemProps) {
+function PostItem({ posts, onClick }: PostItemProps) {
+  const category = categories.find((item) => item.id === posts.categoryId);
   return (
     <Container
       onClick={onClick}
       whileHover={{ y: -6 }}
       transition={{ duration: 0.05 }}>
       <TopBar>
-        <Tag>{postData.category}</Tag>
-        <Date>2024.04.28</Date>
+        <Tag>{category?.name}</Tag>
+        <Date>{formatDate(posts.createdAt)}</Date>
       </TopBar>
-      <PostTitle>{postData.title}</PostTitle>
+      <PostTitle>{posts.title}</PostTitle>
       <BottomBar>
         <Comment>
-          <CommentIcon /> {postData.comments}
+          <CommentIcon /> {posts.totalComments}
         </Comment>
         <Writer>
-          <PersonIcon /> {postData.writer}
+          <PersonIcon /> {posts.writer}
         </Writer>
       </BottomBar>
     </Container>

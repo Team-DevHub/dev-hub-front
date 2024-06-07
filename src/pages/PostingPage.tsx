@@ -57,7 +57,11 @@ function PostingPage() {
     <Container>
       <Banner hasBackBtn={true} title={'지식 공유하기'} />
       <FormWrapper>
-        <Category width='100%' onCategorySelect={handleCategorySelect} />
+        <Category
+          width='100%'
+          mode='select'
+          onCategorySelect={handleCategorySelect}
+        />
         <TitleInput
           value={form.title}
           onChange={(e) => handleFormChange('title', e.target.value)}

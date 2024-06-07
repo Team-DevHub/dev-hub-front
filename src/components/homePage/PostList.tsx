@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import PostItem from './PostItem';
 import Filter from './Filter';
-import { Post } from '@/data/postDummy';
 import { useState } from 'react';
 import PostModal from '../modal/PostModal';
 import { AnimatePresence } from 'framer-motion';
+import { Post } from '@/types/api/response';
 
 interface PostListProps {
-  postData: Post[];
+  posts: Post[];
   totalPosts: number;
 }
 
-function PostList({ postData, totalPosts }: PostListProps) {
+function PostList({ posts, totalPosts }: PostListProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handlePostClick = () => {
@@ -38,8 +38,8 @@ function PostList({ postData, totalPosts }: PostListProps) {
         <Filter />
       </TitleBar>
       <Posts>
-        {postData.map((data: Post) => (
-          <PostItem key={data.id} postData={data} onClick={handlePostClick} />
+        {posts.map((data: Post) => (
+          <PostItem key={data.postId} posts={data} onClick={handlePostClick} />
         ))}
       </Posts>
       <AnimatePresence>

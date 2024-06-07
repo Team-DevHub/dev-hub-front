@@ -1,23 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { categories } from '@/data/categories';
 import Tag from './Tag';
+import { useSearchParams } from 'react-router-dom';
 
 interface CategoryProps {
   width?: string;
-  onCategorySelect: (id: number) => void;
+  onCategorySelect?: (id: number) => void;
+  mode: 'filter' | 'select';
 }
 
 const Category: React.FC<CategoryProps> = ({
   width = '650px',
   onCategorySelect,
+  mode,
 }) => {
   const [selected, setSelected] = useState<number>(categories[0].id);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSelect = (id: number) => {
+    if (mode === 'filter') {
+      const newSearchParams = new URLSearchParams(searchParams);
+      if (id === 1) {
+        newSearchParams.delete('category_id');
+        newSearchParams.delete('page');
+        setSelected(id);
+      } else {
+        newSearchParams.set('category_id', id.toString());
+      }
+      setSearchParams(newSearchParams);
+    } else if (mode === 'select' && onCategorySelect) {
+      onCategorySelect(id);
+    }
     setSelected(id);
-    onCategorySelect(id);
   };
+
+  useEffect(() => {
+    const categoryId = searchParams.get('category_id');
+    if (!categoryId) {
+      setSelected(1);
+    }
+  }, [searchParams]);
 
   return (
     <Container width={width}>

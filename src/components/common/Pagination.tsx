@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ArrowRight from '@/assets/icon/arrow-right.svg?react';
 import ArrowLeft from '@/assets/icon/arrow-left.svg?react';
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 interface PaginationProps {
   totalPosts: number;
@@ -13,9 +13,9 @@ const POSTS_PER_PAGE = 21; // 페이지 당 게시글 개수
 const PAGE_COUNT = 5; // 하나의 그룹 내 페이지 개수
 
 function Pagination({ totalPosts, currentPage }: PaginationProps) {
-  const { pathname } = useLocation();
-  const [page, setPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+  const [page, setPage] = useState(currentPage);
 
   const isStart = page - PAGE_COUNT <= 0; // 첫번째 페이지 그룹
   const isEnd =
@@ -28,15 +28,12 @@ function Pagination({ totalPosts, currentPage }: PaginationProps) {
 
   // 페이지 그룹 생성 함수
   const pageArray = (): number[] => {
-    const totalPageArr = Array(totalPages)
-      .fill(0)
-      .map((_, i) => i + 1);
-
-    const pageGroupArr = Array(Math.ceil(totalPages / PAGE_COUNT))
-      .fill('')
-      .map(() => totalPageArr.splice(0, PAGE_COUNT));
-
-    return pageGroupArr[Math.floor((currentPage - 1) / PAGE_COUNT)];
+    const totalPageArr = Array.from({ length: totalPages }, (_, i) => i + 1);
+    const pageGroupArr = [];
+    for (let i = 0; i < Math.ceil(totalPages / PAGE_COUNT); i++) {
+      pageGroupArr.push(totalPageArr.splice(0, PAGE_COUNT));
+    }
+    return pageGroupArr[Math.floor((page - 1) / PAGE_COUNT)] || [];
   };
 
   // 이동할 페이지 번호 계산 함수
@@ -45,27 +42,34 @@ function Pagination({ totalPosts, currentPage }: PaginationProps) {
     return isNext ? current * PAGE_COUNT + 1 : (current - 1) * PAGE_COUNT;
   };
 
+  // 페이지 변경 함수
+  const handlePageChange = (newPage: number) => {
+    searchParams.set('page', newPage.toString());
+    setSearchParams(searchParams);
+    setPage(newPage);
+  };
+
   return (
     <Container>
       <PagingBox>
         <MoveButton
-          to={`${pathname}?page=${getPageNum(false)}`}
-          $disabled={isStart}>
+          disabled={isStart}
+          onClick={() => handlePageChange(getPageNum(false))}>
           <ArrowRight />
         </MoveButton>
         <ButtonWrapper>
           {pageArray().map((num) => (
             <PageButton
               key={num}
-              to={`${pathname}?page=${num}`}
-              $isCurrent={page === num}>
+              isCurrent={page === num}
+              onClick={() => handlePageChange(num)}>
               {num}
             </PageButton>
           ))}
         </ButtonWrapper>
         <MoveButton
-          to={`${pathname}?page=${getPageNum(true)}`}
-          $disabled={isEnd}>
+          disabled={isEnd}
+          onClick={() => handlePageChange(getPageNum(true))}>
           <ArrowLeft />
         </MoveButton>
       </PagingBox>
@@ -91,33 +95,33 @@ const ButtonWrapper = styled.div`
   gap: 4px;
 `;
 
-const MoveButton = styled(Link)<{ $disabled: boolean }>`
+const MoveButton = styled.button<{ disabled: boolean }>`
   display: flex;
   align-items: center;
   font-weight: 600;
-  pointer-events: ${({ $disabled }) => ($disabled ? 'none' : 'all')};
-
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  background: none;
+  border: none;
   & svg {
-    fill: ${({ theme, $disabled }) =>
-      $disabled ? theme.color_bgLightGray : theme.color_key};
+    fill: ${({ theme, disabled }) =>
+      disabled ? theme.color_bgLightGray : theme.color_key};
   }
 `;
 
-const PageButton = styled(Link)<{ $isCurrent: boolean }>`
+const PageButton = styled.button<{ isCurrent: boolean }>`
   width: 30px;
   height: 30px;
   border-radius: 50%;
   font-size: ${({ theme }) => theme.fontSize_base};
   font-weight: 600;
   transition: all 0.2s ease-in-out;
-
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background-color: ${({ theme, $isCurrent }) =>
-    $isCurrent ? theme.color_key : 'none'};
-  color: ${({ theme, $isCurrent }) =>
-    $isCurrent ? theme.color_textWhite : theme.color_textKey};
+  background-color: ${({ theme, isCurrent }) =>
+    isCurrent ? theme.color_key : 'none'};
+  color: ${({ theme, isCurrent }) =>
+    isCurrent ? theme.color_textWhite : theme.color_textKey};
+  border: none;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
 `;

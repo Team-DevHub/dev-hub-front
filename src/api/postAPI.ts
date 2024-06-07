@@ -1,6 +1,7 @@
 import { PostingReq, PostsReq } from '@/types/api/request';
 import { baseInstance, authInstance } from './instance';
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
+import { PostsRes } from '@/types/api/response';
 
 export const postAPI = {
   posting: async (postData: PostingReq) => {
@@ -16,11 +17,28 @@ export const postAPI = {
   },
   posts: async (params: PostsReq) => {
     try {
-      const { data }: AxiosResponse = await baseInstance.get(`/posts`, {
+      const myPage = params.myPage === true; // 쿼리 매개변수를 boolean으로 파싱
+      const instance = myPage ? authInstance : baseInstance;
+
+      const { data }: AxiosResponse = await instance.get<PostsRes>(`/posts`, {
         params: params,
       });
       return data;
     } catch (err) {
+      if (err instanceof AxiosError) {
+        if (err.response && err.response.status === 404) {
+          // 404 오류에 대한 기본 반환 값 설정
+          return {
+            isSuccess: false,
+            message: '데이터를 찾을 수 없습니다.',
+            result: [],
+            pagination: {
+              currentPage: params.page || 1,
+              totalPosts: 0,
+            },
+          };
+        }
+      }
       window.alert('오류가 발생했습니다.');
     }
   },
