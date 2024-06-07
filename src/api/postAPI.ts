@@ -29,8 +29,6 @@ export const postAPI = {
         if (err.response && err.response.status === 404) {
           // 404 오류에 대한 기본 반환 값 설정
           return {
-            isSuccess: false,
-            message: '데이터를 찾을 수 없습니다.',
             result: [],
             pagination: {
               currentPage: params.page || 1,

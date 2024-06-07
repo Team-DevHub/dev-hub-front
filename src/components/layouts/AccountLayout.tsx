@@ -1,15 +1,28 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import MusseukSVG from '@/assets/image/account-musseuk.svg?react';
+import LogoKey from '@/assets/logo/logo-key.svg?react';
+import { Button } from '@/styles/component';
+import { ICONS } from '@/assets/icon/icons';
 
 const AccountLayout = () => {
+  const navigate = useNavigate();
   return (
     <Root>
       <DescriptionContainer>
-        <span className='title'>{'DevHub'}</span>
-        <p className='description'>
-          {`DevHub는 데브코스 수강생들이 서로 지식을 공유하고,\n함께 성장하는 공간입니다!`}
-        </p>
+        <TextContainer>
+          <Logo>
+            <LogoKey width={50} height={50} />
+            <h1>DevHub</h1>
+          </Logo>
+          <p className='description'>
+            {`DevHub는 데브코스 수강생들이 서로 지식을 공유하고,\n함께 성장하는 공간입니다!`}
+          </p>
+          <Button type='button' onClick={() => navigate('/')}>
+            둘러보기
+            <img src={ICONS.arrow.go} alt='go' />
+          </Button>
+        </TextContainer>
         <MusseukSVG />
       </DescriptionContainer>
       <CardContainer>
@@ -22,27 +35,42 @@ export default AccountLayout;
 
 const Root = styled.div`
   width: 100%;
-  height: 100%;
+  max-width: 1200px;
+  height: 100vh;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: ${({ theme }) => theme.color_keyWhite};
 `;
 
-const DescriptionContainer = styled.div`
-  .title {
-    display: inline-block;
+const Logo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  h1 {
     color: ${({ theme }) => theme.color_key};
     font-weight: 900;
-    font-size: 42px;
-    margin-bottom: 24px;
+    font-size: 36px;
   }
+`;
+
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`;
+
+const DescriptionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
 
   .description {
     color: ${({ theme }) => theme.color_textBlack};
     font-weight: 400;
-    font-size: 24px;
-    margin-bottom: 66px;
+    font-size: 22px;
     white-space: pre-line;
     line-height: 35px;
   }

@@ -10,28 +10,31 @@ function Profile() {
   const { userLevel } = useLevel();
   const navigate = useNavigate();
 
+  if (!user) return null;
+
   return (
     <Wrapper>
       <h4>내 프로필</h4>
       <Container>
         <img src={userLevel.icon} alt='level icon' width={80} height={80} />
         <UserInfo>
-          <h3>{user!.nickname}</h3>
+          <h3>{user.nickname}</h3>
           <span>{`${userLevel.level} ${userLevel.name}`}</span>
         </UserInfo>
         <ActivityInfo>
           <Activity>
-            <h4>{user!.totalPosts}개</h4>
+            <h4>{user.totalPosts}개</h4>
             <span>공유한 지식</span>
           </Activity>
           <Activity>
-            <h4>{user!.totalPoints}점</h4>
+            <h4>{user.totalPoints}점</h4>
             <span>보유 포인트</span>
           </Activity>
         </ActivityInfo>
         <Button
           size='small'
           text='마이페이지'
+          bgColor='color_keyBlue'
           onClick={() => navigate('/my-page')}
           icon={ICONS.house}
         />

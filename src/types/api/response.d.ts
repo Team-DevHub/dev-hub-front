@@ -15,6 +15,8 @@ export interface EmailCheckRes extends CommonRes {
 export interface UserInfoRes extends CommonRes {
   result: {
     userId: string;
+    email: string;
+    joinDate: string;
     nickname: string;
     level: number;
     totalPosts: number;

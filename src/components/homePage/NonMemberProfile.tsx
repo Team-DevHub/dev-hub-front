@@ -21,6 +21,7 @@ function NonMemberProfile() {
         <Button
           size='small'
           text='로그인'
+          bgColor='color_keyBlue'
           onClick={() => navigate(LOGIN_ROUTER_PATH.login)}
           icon={ICONS.user}
         />

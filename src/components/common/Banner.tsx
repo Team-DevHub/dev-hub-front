@@ -60,9 +60,13 @@ const TitleWrapper = styled.div`
 const BackButton = styled.button`
   display: flex;
   gap: 8px;
-  color: ${({ theme }) => theme.color_textGray};
+  color: ${({ theme }) => theme.color_keyBlue};
   font-size: ${({ theme }) => theme.fontSize_base};
   font-weight: 500;
+
+  svg {
+    fill: ${({ theme }) => theme.color_keyBlue};
+  }
 `;
 
 const Title = styled.h2`

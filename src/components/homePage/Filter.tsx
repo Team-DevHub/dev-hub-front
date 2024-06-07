@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 import FilterIcon from '@/assets/icon/filter-arrow.svg?react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import useClickOutside from '@/hooks/useClickOutside';
 
 function Filter() {
+  const ref = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>('최신 순');
+
+  useClickOutside(ref, () => setIsOpen(false));
 
   return (
     <CustomSelect $isOpen={isOpen} onClick={() => setIsOpen((prev) => !prev)}>
@@ -15,6 +19,7 @@ function Filter() {
       <AnimatePresence>
         {isOpen && (
           <OptionBox
+            ref={ref}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}>

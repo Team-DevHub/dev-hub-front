@@ -1,4 +1,4 @@
-import AccountLayout from '@/components/account/AccountLayout';
+import AccountLayout from '@/components/layouts/AccountLayout';
 
 const AccountPage = () => {
   return <AccountLayout />;

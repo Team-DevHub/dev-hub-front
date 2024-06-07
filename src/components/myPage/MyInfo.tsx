@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import LogoutIcon from '@/assets/icon/logout-icon.svg?react';
-import DeleteAccountIcon from '@/assets/icon/delete-account-icon.svg?react';
 import { useState } from 'react';
 import DeleteAccountPopUp from '../popup/DeleteAccountPopUp';
 import { AnimatePresence } from 'framer-motion';
@@ -8,8 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import useStore from '@/store/store';
 import { TokenKey } from '@/constants/storage';
+import { ICONS } from '@/assets/icon/icons';
+import { useProfile } from '@/hooks/useProfile';
 
 function MyInfo() {
+  useProfile();
   const navigate = useNavigate();
   const { logOut, user } = useStore();
   const clearStorage = useStore.persist.clearStorage;
@@ -29,6 +30,8 @@ function MyInfo() {
     navigate(LOGIN_ROUTER_PATH.login);
   };
 
+  if (!user) return null;
+
   return (
     <Wrapper>
       <h2>나의 정보</h2>
@@ -36,20 +39,26 @@ function MyInfo() {
         <Content>
           <Info>
             <h4>이름</h4>
-            <span>{user!.nickname}</span>
+            <span>{user.nickname}</span>
           </Info>
           <Info>
-            <h4>ID</h4>
-            <span>dusgkdud7@gmail.com</span>
+            <h4>이메일</h4>
+            <span>{user.email}</span>
           </Info>
           <Info>
-            <h4>PW</h4>
-            <span>********</span>
+            <h4>가입일</h4>
+            <span>{user.joinDate}</span>
           </Info>
         </Content>
         <IconContainer>
-          <LogOutButton onClick={handleLogOut} />
-          <DeleteButton onClick={() => setOpen(true)} />
+          <CircleButton onClick={handleLogOut}>
+            <img src={ICONS.logout} alt='logout' />
+            <span>로그아웃</span>
+          </CircleButton>
+          <CircleButton onClick={() => setOpen(true)}>
+            <img src={ICONS.deleteAccount} alt='deleteAccount' />
+            <span>회원탈퇴</span>
+          </CircleButton>
         </IconContainer>
       </Container>
       <AnimatePresence>
@@ -73,10 +82,10 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.color_bgWhite};
   border: 1px solid ${({ theme }) => theme.color_borderGray};
   border-radius: 12px;
-  padding: 16px;
+  padding: 16px 36px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
 const Content = styled.div`
@@ -86,15 +95,17 @@ const Content = styled.div`
 
 const Info = styled.div`
   font-size: ${({ theme }) => theme.fontSize_md};
-  padding: 12px;
+  padding: 12px 0;
   display: flex;
+  gap: 6px;
 
   & h4 {
     width: 50px;
   }
 
   & span {
-    font-weight: 500;
+    font-size: ${({ theme }) => theme.fontSize_base};
+    font-weight: 400;
   }
 `;
 
@@ -103,10 +114,22 @@ const IconContainer = styled.div`
   gap: 15px;
 `;
 
-const LogOutButton = styled(LogoutIcon)`
-  cursor: pointer;
-`;
+const CircleButton = styled.button`
+  background-color: rgba(225, 225, 225, 0.35);
+  border: 1px solid #dfdfdf;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  color: ${({ theme }) => theme.color_textBlack};
+  font-size: ${({ theme }) => theme.fontSize_xs};
+  font-weight: 500;
 
-const DeleteButton = styled(DeleteAccountIcon)`
-  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
 `;

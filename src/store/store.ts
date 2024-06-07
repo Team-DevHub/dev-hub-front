@@ -5,6 +5,8 @@ import { persist } from 'zustand/middleware';
 interface User {
   userId: string;
   nickname: string;
+  email: string;
+  joinDate: string;
   level: number;
   totalPosts: number;
   totalPoints: number;
@@ -27,6 +29,8 @@ const useStore = create(
             user: {
               userId: id,
               nickname: '',
+              email: '',
+              joinDate: '',
               level: 1,
               totalPoints: 0,
               totalPosts: 0,

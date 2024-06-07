@@ -36,6 +36,17 @@ export const userAPI = {
       window.alert('오류가 발생했습니다.');
     }
   },
+  nameCheck: async (nickname: string) => {
+    try {
+      const { data }: AxiosResponse<EmailCheckRes> = await baseInstance.post(
+        `/users/check-nickname`,
+        { nickname },
+      );
+      return data;
+    } catch (err) {
+      window.alert('오류가 발생했습니다.');
+    }
+  },
   join: async (formData: JoinReq) => {
     try {
       const { data }: AxiosResponse<CommonRes> = await baseInstance.post(

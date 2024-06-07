@@ -5,9 +5,10 @@ import TitleInput from '@/components/posting/TitleInput';
 import LinkInput from '@/components/posting/LinkInput';
 import ContentInput from '@/components/posting/ContentInput';
 import Banner from '@/components/common/Banner';
-import FormButton from '@/components/common/FormInput/FormButton';
 import { postAPI } from '@/api/postAPI';
 import { useNavigate } from 'react-router-dom';
+import Button from '@/components/common/Button';
+import { ICONS } from '@/assets/icon/icons';
 
 interface PostingForm {
   category_id: number;
@@ -75,10 +76,11 @@ function PostingPage() {
           onLinksChange={(links) => handleFormChange('links', links)}
         />
         <ButtonWrapper>
-          <FormButton
+          <Button
             text='공유하기'
-            fontSize='14px'
-            disabled={form.title === '' || form.content === ''}
+            size='medium'
+            bgColor='color_keyBlue'
+            icon={ICONS.share}
             onClick={handleSubmit}
           />
         </ButtonWrapper>
@@ -105,5 +107,6 @@ const FormWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+  align-self: end;
+  width: 300px;
 `;
