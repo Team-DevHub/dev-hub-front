@@ -8,7 +8,8 @@ export const ICONS = {
   arrow: {
     left: PATH + 'arrow-left.svg',
     right: PATH + 'arrow-right.svg',
-    home: PATH + 'arrow-home.svg',
+    go: PATH + 'arrow-go.svg',
+    back: PATH + 'arrow-back.svg',
   },
   delete: {
     red: PATH + 'delete-red-icon.svg',
@@ -34,4 +35,6 @@ export const ICONS = {
   logout: PATH + 'logout-icon.svg',
   deleteAccount: PATH + 'delete-account-icon.svg',
   warning404: PATH + 'warning.svg',
+  notion: PATH + 'notion.svg',
+  github: PATH + 'github.svg',
 };

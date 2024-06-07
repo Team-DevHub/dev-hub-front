@@ -62,7 +62,7 @@ const Activity = styled.div`
   }
 
   & span {
-    font-weight: 300;
+    font-weight: 400;
     font-size: ${({ theme }) => theme.fontSize_base};
     color: ${({ theme }) => theme.color_textGray};
   }

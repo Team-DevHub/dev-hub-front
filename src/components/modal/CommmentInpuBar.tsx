@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { ChangeEvent, useState } from 'react';
 import { ICONS } from '@/assets/icon/icons';
 import useStore from '@/store/store';
+import { Input } from '@/styles/component';
 
 function CommentInputBar() {
   const { user } = useStore();
@@ -37,21 +38,8 @@ const Container = styled.div`
   gap: 10px;
 `;
 
-const StyledInput = styled.input<{ $isLoggedIn: boolean }>`
-  width: 100%;
-  padding: 10px;
+const StyledInput = styled(Input)<{ $isLoggedIn: boolean }>`
   flex: 1;
-
-  font-size: ${({ theme }) => theme.fontSize_base};
-  color: ${({ theme }) => theme.color_textBlack};
-  background-color: ${({ theme }) => theme.color_bgWhite};
-  border: 1px solid ${({ theme }) => theme.color_borderGray};
-  border-radius: 8px;
-  transition: all 0.2s ease-in-out;
-
-  &:focus {
-    border: 1px solid ${({ theme }) => theme.color_key};
-  }
 
   &::placeholder {
     color: ${({ theme, $isLoggedIn }) =>

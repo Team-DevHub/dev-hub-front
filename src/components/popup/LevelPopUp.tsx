@@ -1,5 +1,5 @@
 import { ICONS } from '@/assets/icon/icons';
-import PopUpLayout from './PopUpLayout';
+import PopUpLayout from '../layouts/PopUpLayout';
 import LevelItem from './item/LevelItem';
 import styled from 'styled-components';
 import { levelData } from '@/data/levelData';

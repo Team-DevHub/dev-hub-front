@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { ICONS } from '@/assets/icon/icons';
+import { Input } from '@/styles/component';
 
 function SearchInput() {
   const [value, setValue] = useState<string>('');
@@ -8,10 +9,11 @@ function SearchInput() {
     <Container>
       <h2>검색</h2>
       <Wrapper>
-        <StyledInput
+        <Input
           type='text'
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          style={{ paddingRight: '40px' }}
         />
         <SearchIcon src={ICONS.search} alt='search' />
       </Wrapper>
@@ -31,23 +33,6 @@ const Container = styled.div`
 const Wrapper = styled.div`
   width: 100%;
   position: relative;
-`;
-
-const StyledInput = styled.input`
-  width: 100%;
-  padding: 10px 14px;
-  padding-right: 40px;
-
-  color: ${({ theme }) => theme.color_textBlack};
-  font-size: ${({ theme }) => theme.fontSize_base};
-  background-color: ${({ theme }) => theme.color_bgWhite};
-  border: 1px solid ${({ theme }) => theme.color_borderGray};
-  border-radius: 8px;
-  transition: all 0.2s ease-in-out;
-
-  &:focus {
-    box-shadow: ${({ theme }) => theme.shadow};
-  }
 `;
 
 const SearchIcon = styled.img`

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Musseuk from '@/assets/image/musseuk_404.svg?react';
 import { ICONS } from '@/assets/icon/icons';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@/styles/component';
 
 function NotFoundPage() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ function NotFoundPage() {
           <p>여기엔 아무것도 없어요...</p>
         </Wrapper>
         <Button type='button' onClick={() => navigate('/')}>
-          홈으로 돌아가기 <img src={ICONS.arrow.home} alt='arrow' />
+          <img src={ICONS.arrow.back} alt='arrow' /> 홈으로 돌아가기
         </Button>
         <Musseuki />
       </Container>
@@ -87,27 +88,4 @@ const Musseuki = styled(Musseuk)`
   position: absolute;
   bottom: 0;
   left: 0;
-`;
-
-const Button = styled.button`
-  background-color: ${({ theme }) => theme.color_keyBlue};
-  border: none;
-  border-radius: 12px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: fit-content;
-  padding: 10px 50px;
-  font-size: ${({ theme }) => theme.fontSize_md};
-  color: ${({ theme }) => theme.color_textWhite};
-
-  &:hover:not(:disabled) {
-    opacity: 0.95;
-  }
-
-  & img {
-    margin-bottom: 2px;
-  }
 `;

@@ -11,17 +11,17 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     width: 100vw;
-    height: 100vh;
+    height: fit-content;
+    min-height: 100vh;
     background-color: #F9FAFB;
     position: relative;
+
+    display: flex;
+    flex-direction: column;
   }
 
-  #root {
-    width: 100%;
-    max-width: 1200px;
-    height: 100%;
-    min-height: 100%;
-    margin: 0 auto;
+  a {
+    text-decoration: none;
   }
 
   * {

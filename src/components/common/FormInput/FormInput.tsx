@@ -1,52 +1,56 @@
-import { ChangeEventHandler } from 'react';
-import styled, { CSSProperties } from 'styled-components';
+import { ChangeEventHandler, ForwardedRef, forwardRef } from 'react';
+import styled from 'styled-components';
 
-interface Props {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label: string;
-  value: string;
-  regex?: RegExp;
+  value?: string;
   errorMessage?: string;
   placeholder?: string;
   type?: 'text' | 'password';
-  style?: CSSProperties;
-  onChange: ChangeEventHandler<HTMLInputElement>;
-  isError?: boolean;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
-const FormInput = ({
-  id,
-  label,
-  value,
-  regex,
-  errorMessage,
-  placeholder,
-  type = 'text',
-  style,
-  onChange,
-  isError = regex ? value.length > 0 && !regex.test(value) : false,
-}: Props) => {
-  return (
-    <FormInputRoot style={style}>
-      <LabelContainer $isError={isError}>
-        <label htmlFor={id} className='label'>
-          {label}
-        </label>
-        <span className='error-message'>{isError && errorMessage}</span>
-      </LabelContainer>
-      <InputContainer $isError={isError}>
-        <input
-          className='input'
-          id={id}
-          type={type}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-        />
-      </InputContainer>
-    </FormInputRoot>
-  );
-};
+const FormInput = forwardRef<HTMLInputElement, Props>(
+  (
+    {
+      id,
+      label,
+      value,
+      errorMessage,
+      placeholder,
+      type = 'text',
+      style,
+      onChange,
+      ...props
+    }: Props,
+    ref: ForwardedRef<HTMLInputElement>,
+  ) => {
+    return (
+      <FormInputRoot style={style}>
+        <LabelContainer $isError={Boolean(errorMessage)}>
+          <label htmlFor={id} className='label'>
+            {label}
+          </label>
+          <span className='error-message'>{errorMessage}</span>
+        </LabelContainer>
+        <InputContainer $isError={Boolean(errorMessage)}>
+          <input
+            className='input'
+            ref={ref}
+            id={id}
+            type={type}
+            value={value}
+            onChange={onChange}
+            placeholder={placeholder}
+            {...props}
+          />
+        </InputContainer>
+      </FormInputRoot>
+    );
+  },
+);
+
 export default FormInput;
 
 const FormInputRoot = styled.div`

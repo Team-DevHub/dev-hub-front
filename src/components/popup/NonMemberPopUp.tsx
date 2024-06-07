@@ -1,4 +1,4 @@
-import PopUpLayout from './PopUpLayout';
+import PopUpLayout from '../layouts/PopUpLayout';
 import { ICONS } from '@/assets/icon/icons';
 import FormButton from '../common/FormInput/FormButton';
 import { useNavigate } from 'react-router-dom';

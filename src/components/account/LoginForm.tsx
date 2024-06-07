@@ -5,9 +5,9 @@ import {
   GotoPage,
   InputContainer,
   SubmitContainer,
-} from './AccountLayout';
+} from '../layouts/AccountLayout';
 import FormInput from '../common/FormInput/FormInput';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Checkbox from '../common/FormInput/Checkbox';
 import FormButton from '../common/FormInput/FormButton';
 import { Link, useNavigate } from 'react-router-dom';
@@ -16,6 +16,7 @@ import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { TokenKey, UserEmailKey, UserPasswordKey } from '@/constants/storage';
 import { userAPI } from '@/api/userAPI';
 import useStore from '@/store/store';
+import { useForm } from 'react-hook-form';
 
 interface LoginForm {
   email: string;
@@ -26,79 +27,53 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const { setUserId } = useStore();
   const [error, setError] = useState<string>('');
-  const [form, setForm] = useState<LoginForm>({
-    email: '',
-    password: '',
-  });
-
   const [isChecked, setIsChecked] = useState(false);
 
-  useEffect(() => {
-    if (localStorage.getItem(UserEmailKey)) {
-      setIsChecked(true);
-      setForm({
-        email: localStorage.getItem(UserEmailKey)!,
-        password: localStorage.getItem(UserPasswordKey)!,
-      });
-    }
-  }, []);
+  const { register, watch, handleSubmit } = useForm<LoginForm>({
+    defaultValues: {
+      email: localStorage.getItem(UserEmailKey) || '',
+      password: localStorage.getItem(UserPasswordKey) || '',
+    },
+  });
 
-  useEffect(() => {
-    setError('');
-  }, [form]);
+  const handleSubmitForm = async (formData: LoginForm) => {
+    await userAPI.login(formData).then((data) => {
+      if (data.isSuccess) {
+        setUserId(data.userId!);
+        localStorage.setItem(TokenKey, data.accessToken!);
 
-  const handleFormChange = <T extends keyof LoginForm>(
-    key: T,
-    value: LoginForm[T],
-  ) => {
-    setForm((prev) => {
-      const clone = { ...prev, [key]: value };
-      return clone;
+        // 로그인 정보 저장
+        if (isChecked) {
+          localStorage.setItem(UserEmailKey, formData.email);
+          localStorage.setItem(UserPasswordKey, formData.password);
+        } else {
+          localStorage.removeItem(UserEmailKey);
+          localStorage.removeItem(UserPasswordKey);
+        }
+
+        navigate('/', { replace: true });
+      } else {
+        setError('이메일 또는 비밀번호가 틀렸습니다');
+      }
     });
   };
 
-  const handleSubmitForm = async () => {
-    await userAPI
-      .login({ email: form.email, password: form.password })
-      .then((data) => {
-        if (data.isSuccess) {
-          setUserId(data.userId!);
-          localStorage.setItem(TokenKey, data.accessToken!);
-
-          // 로그인 정보 저장
-          if (isChecked) {
-            localStorage.setItem(UserEmailKey, form.email);
-            localStorage.setItem(UserPasswordKey, form.password);
-          }
-
-          navigate('/', { replace: true });
-        } else {
-          setError('이메일 또는 비밀번호가 틀렸습니다');
-        }
-      });
-  };
-
   return (
-    <FormRoot
-      onSubmit={() => {
-        handleSubmitForm();
-      }}>
+    <FormRoot onSubmit={handleSubmit(handleSubmitForm)}>
       <AccountCardTitle>{'로그인'}</AccountCardTitle>
       <InputContainer>
         <FormInput
           id={'email-input'}
           label={'Email'}
-          value={form.email}
-          onChange={(e) => handleFormChange('email', e.target.value)}
           placeholder='이메일을 입력해주세요'
+          {...register('email')}
         />
         <FormInput
           id={'password-input'}
           label={'Password'}
           type='password'
-          value={form.password}
-          onChange={(e) => handleFormChange('password', e.target.value)}
           placeholder='비밀번호를 입력해주세요'
+          {...register('password')}
         />
       </InputContainer>
       <SubmitContainer>
@@ -111,9 +86,9 @@ const LoginForm = () => {
         <ButtonWrapper>
           <ErrorMessage>{error}</ErrorMessage>
           <FormButton
+            type='submit'
             text={'로그인'}
-            disabled={!form.email || !form.password}
-            onClick={handleSubmitForm}
+            disabled={!watch('email') || !watch('password')}
           />
         </ButtonWrapper>
         <GotoFindPassword>
