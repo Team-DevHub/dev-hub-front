@@ -20,23 +20,30 @@ import useStore from './store/store';
 import NotFoundPage from './pages/NotFoundPage';
 import MainLayout from './components/layouts/MainLayout';
 import Footer from './components/common/Footer/Footer';
+import ScrollToTop from './components/layouts/ScrollToTop';
 
 const ProtectedRoute = ({ redirectPath = '/' }) => {
   const { user } = useStore();
-  return user ? <Navigate to={redirectPath} /> : <AccountLayout />;
+  return user ? (
+    <Navigate to={redirectPath} />
+  ) : (
+    <ScrollToTop>
+      <AccountLayout />
+    </ScrollToTop>
+  );
 };
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: (
-      <>
+      <ScrollToTop>
         <Header />
         <MainLayout>
           <Outlet />
         </MainLayout>
         <Footer />
-      </>
+      </ScrollToTop>
     ),
     children: [
       {
