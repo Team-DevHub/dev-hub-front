@@ -17,7 +17,7 @@ function LevelPopUp({ closePopup }: Props) {
   return (
     <PopUpLayout
       title='레벨'
-      desc='지식을 공유하고 레벨을 올려보세요!'
+      desc='지식을 공유할 때마다 8포인트를 얻을 수 있어요!'
       icon={ICONS.level}
       closePopup={closePopup}>
       <Container>
