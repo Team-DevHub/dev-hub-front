@@ -4,9 +4,7 @@ import Pagination from '@/components/common/Pagination';
 import PostList from '@/components/homePage/PostList';
 import SearchInput from '@/components/homePage/SearchInput';
 import SideBar from '@/components/homePage/SideBar';
-
 import { useProfile } from '@/hooks/useProfile';
-
 import PostEmpty from '@/components/posts/PostEmpty';
 import { usePosts } from '@/hooks/usePosts';
 

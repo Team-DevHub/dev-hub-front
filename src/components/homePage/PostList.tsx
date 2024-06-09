@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import PostItem from './PostItem';
 import Filter from './Filter';
+
 import PostModal from '../modal/PostModal';
 import { AnimatePresence } from 'framer-motion';
 import { PostSummary } from '@/types/api/response';
