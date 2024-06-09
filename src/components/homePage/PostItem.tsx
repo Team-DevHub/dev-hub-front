@@ -3,8 +3,8 @@ import CommentIcon from '@/assets/icon/comment-icon.svg?react';
 import PersonIcon from '@/assets/icon/person-icon.svg?react';
 import { motion } from 'framer-motion';
 import { PostSummary } from '@/types/api/response';
-import { categories } from '@/data/categories';
 import { formatDate } from '@/utils/format';
+import { getCategoryName } from '@/utils/getCategoryName';
 
 interface PostItemProps {
   post: PostSummary;
@@ -12,8 +12,6 @@ interface PostItemProps {
 }
 
 function PostItem({ post, onClick }: PostItemProps) {
-  const category = categories.find((item) => item.id === post.categoryId);
-
   const handleClick = () => {
     onClick(post.postId);
   };
@@ -24,7 +22,7 @@ function PostItem({ post, onClick }: PostItemProps) {
       whileHover={{ y: -6 }}
       transition={{ duration: 0.05 }}>
       <TopBar>
-        <Tag>{category?.name}</Tag>
+        <Tag>{getCategoryName(post.categoryId)}</Tag>
         <Date>{formatDate(post.createdAt)}</Date>
       </TopBar>
       <PostTitle>{post.title}</PostTitle>

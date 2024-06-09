@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 import PostItem from './PostItem';
 import Filter from './Filter';
-import { useState } from 'react';
 import PostModal from '../modal/PostModal';
 import { AnimatePresence } from 'framer-motion';
 import { PostSummary } from '@/types/api/response';
-import useStore from '@/store/store';
-import { postAPI } from '@/api/postAPI';
+import { useModal } from '@/hooks/useModal';
 
 interface PostListProps {
   posts: PostSummary[];
@@ -14,26 +12,7 @@ interface PostListProps {
 }
 
 function PostList({ posts, totalPosts }: PostListProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { setSelectedPost } = useStore();
-
-  const handlePostClick = async (postId: number) => {
-    const postRes = await postAPI.post(postId);
-    setSelectedPost(postRes.result);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setSelectedPost(null);
-    setIsModalOpen(false);
-  };
-
-  // 팝업 등장 시 뒷배경 스크롤 방지
-  if (isModalOpen) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = 'auto';
-  }
+  const { isModalOpen, handleClick, closeModal } = useModal();
 
   return (
     <Container>
@@ -49,7 +28,7 @@ function PostList({ posts, totalPosts }: PostListProps) {
           <PostItem
             key={post.postId}
             post={post}
-            onClick={() => handlePostClick(post.postId)}
+            onClick={() => handleClick(post.postId)}
           />
         ))}
       </Posts>

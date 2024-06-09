@@ -1,15 +1,26 @@
 import styled, { css } from 'styled-components';
-import { myPostDummy } from '@/data/myPostDummy';
 import DeleteIcon from '@/assets/icon/delete-red-icon.svg?react';
-
-interface Post {
-  id: number;
-  category: string;
-  title: string;
-  createAt: string;
-}
+import { useEffect, useState } from 'react';
+import { PostSummary } from '@/types/api/response';
+import { postAPI } from '@/api/postAPI';
+import { getCategoryName } from '@/utils/getCategoryName';
+import { formatDate } from '@/utils/format';
+import PostModal from '../modal/PostModal';
+import { useModal } from '@/hooks/useModal';
 
 function MyPostList() {
+  const [myPosts, setMyPosts] = useState<PostSummary[] | null>(null);
+  const { isModalOpen, handleClick, closeModal } = useModal();
+
+  useEffect(() => {
+    const fetchMyPosts = async () => {
+      const params = { myPage: true, page: 1, limit: 100 }; // api 수정 전 임시
+      const response = await postAPI.posts(params);
+      setMyPosts(response.result);
+    };
+    fetchMyPosts();
+  }, []);
+
   return (
     <Wrapper>
       <Title>
@@ -31,13 +42,15 @@ function MyPostList() {
           <TBodyWrapper>
             <Table>
               <tbody>
-                {myPostDummy.map((post: Post) => (
-                  <tr key={post.id}>
+                {myPosts?.map((post: PostSummary) => (
+                  <tr
+                    key={post.postId}
+                    onClick={() => handleClick(post.postId)}>
                     <Td className='category'>
-                      <Tag>{post.category}</Tag>
+                      <Tag>{getCategoryName(post.categoryId)}</Tag>
                     </Td>
                     <Td className='title'>{post.title}</Td>
-                    <Td className='createAt'>{post.createAt}</Td>
+                    <Td className='createAt'>{formatDate(post.createdAt)}</Td>
                     <Td className='delete'>
                       <DeleteButton />
                     </Td>
@@ -47,6 +60,7 @@ function MyPostList() {
             </Table>
           </TBodyWrapper>
         </TableWrapper>
+        {isModalOpen && <PostModal closeModal={closeModal} />}
       </Container>
     </Wrapper>
   );
@@ -83,21 +97,21 @@ const TableWrapper = styled.div`
 `;
 
 const TBodyWrapper = styled.div`
-  max-height: 400px; 
-  overflow-y: auto;  
-  cursor: pointer;
+  max-height: 400px;
+  overflow-y: auto;
 
-   &::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     width: 5px;
-    }
-    
-  &::-webkit-scrollbar-track {
-  background: ${({ theme }) => theme.color_bgLightGray};
   }
-  
+
+  &::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.color_bgLightGray};
+  }
+
   &::-webkit-scrollbar-thumb {
-  background:  ${({ theme }) => theme.color_key};
-  border-radius: 10px;
+    background: ${({ theme }) => theme.color_key};
+    border-radius: 10px;
+  }
 `;
 
 const Table = styled.table`
@@ -137,6 +151,7 @@ const Td = styled.td`
 
   font-weight: 400;
   vertical-align: middle;
+  cursor: pointer;
 
   &.title {
     font-weight: 500;

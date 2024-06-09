@@ -10,12 +10,23 @@ function Link() {
     return null;
   }
 
+  const addHttps = (link: string) => {
+    // 절대 경로 변경
+    if (!link.startsWith('http://') && !link.startsWith('https://')) {
+      return 'https://' + link;
+    }
+    return link;
+  };
+
   return (
     <>
       {links.map((link, index) => (
         <LinkContainer key={index}>
           <StyledLinkIcon />
-          <LinkContent href={link} target='_blank' rel='noopener noreferrer'>
+          <LinkContent
+            href={addHttps(link)}
+            target='_blank'
+            rel='noopener noreferrer'>
             {link}
           </LinkContent>
         </LinkContainer>

@@ -7,9 +7,9 @@ import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
 import Prism from 'prismjs';
 import useStore from '@/store/store';
-import { categories } from '@/data/categories';
 import { LEVEL } from '@/constants/level';
 import { formatDate } from '@/utils/format';
+import { getCategoryName } from '@/utils/getCategoryName';
 
 function PostDetail() {
   const { selectedPost } = useStore();
@@ -19,14 +19,12 @@ function PostDetail() {
   }
 
   const levelIcon = LEVEL[selectedPost.writer.level]?.icon ?? '';
-  const category = categories.find(
-    (item) => item.id === selectedPost.categoryId,
-  );
+
   return (
     <>
       <Container>
         <TopBar>
-          <Tag>{category?.name}</Tag>
+          <Tag>{getCategoryName(selectedPost.categoryId)}</Tag>
           <UserInfo>
             <span>Lv.{selectedPost.writer.level}</span>
             <h6>{selectedPost.writer.name}</h6>
