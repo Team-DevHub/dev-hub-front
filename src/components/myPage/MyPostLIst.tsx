@@ -84,7 +84,6 @@ export default MyPostList;
 
 const Wrapper = styled.div`
   width: 100%;
-  padding-bottom: 50px;
 `;
 
 const Title = styled.div`

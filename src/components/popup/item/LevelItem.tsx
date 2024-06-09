@@ -3,11 +3,12 @@ import styled from 'styled-components';
 
 interface Props {
   levelData: Level;
+  isCurrentLevel: boolean;
 }
 
-function LevelItem({ levelData }: Props) {
+function LevelItem({ levelData, isCurrentLevel }: Props) {
   return (
-    <Container>
+    <Container $isCurrentLevel={isCurrentLevel}>
       <img src={levelData.icon} alt='icon' />
       <LevelInfo>
         <h5>{levelData.level}</h5>
@@ -20,11 +21,13 @@ function LevelItem({ levelData }: Props) {
 
 export default LevelItem;
 
-const Container = styled.div`
+const Container = styled.div<{ $isCurrentLevel: boolean }>`
   width: 300px;
   height: 70px;
   border-radius: 12px;
-  border: 1px solid ${({ theme }) => theme.color_borderGray};
+  border: 1px solid
+    ${({ theme, $isCurrentLevel }) =>
+      $isCurrentLevel ? theme.color_key : theme.color_borderGray};
 
   display: flex;
   align-items: center;

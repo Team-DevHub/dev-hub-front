@@ -8,6 +8,7 @@ import {
   TopFiveRes,
   UserInfoRes,
 } from '@/types/api/response';
+import { API_ERROR_MSG } from '@/constants/message';
 
 export const userAPI = {
   login: async (user: LoginReq) => {
@@ -21,7 +22,7 @@ export const userAPI = {
       if (err.response.status === 401) {
         return err.response.data;
       } else {
-        window.alert('오류가 발생했습니다.');
+        window.alert(API_ERROR_MSG);
       }
     }
   },
@@ -33,7 +34,7 @@ export const userAPI = {
       );
       return data;
     } catch (err) {
-      window.alert('오류가 발생했습니다.');
+      window.alert(API_ERROR_MSG);
     }
   },
   nameCheck: async (nickname: string) => {
@@ -44,7 +45,7 @@ export const userAPI = {
       );
       return data;
     } catch (err) {
-      window.alert('오류가 발생했습니다.');
+      window.alert(API_ERROR_MSG);
     }
   },
   join: async (formData: JoinReq) => {
@@ -55,7 +56,7 @@ export const userAPI = {
       );
       return data;
     } catch (err) {
-      window.alert('오류가 발생했습니다.');
+      window.alert(API_ERROR_MSG);
     }
   },
   requestReset: async (userData: RequestResetReq) => {
@@ -69,7 +70,7 @@ export const userAPI = {
       if (err.response.status === 403) {
         return err.response.data;
       } else {
-        window.alert('오류가 발생했습니다.');
+        window.alert(API_ERROR_MSG);
       }
     }
   },
@@ -84,7 +85,7 @@ export const userAPI = {
       if (err.response.status === 403) {
         return err.response.data;
       } else {
-        window.alert('오류가 발생했습니다.');
+        window.alert(API_ERROR_MSG);
       }
     }
   },
@@ -95,7 +96,7 @@ export const userAPI = {
       );
       return data;
     } catch (err) {
-      window.alert('오류가 발생했습니다.');
+      window.alert(API_ERROR_MSG);
     }
   },
   deleteAccount: async () => {
@@ -105,7 +106,7 @@ export const userAPI = {
       );
       return data;
     } catch (err) {
-      window.alert('오류가 발생했습니다.');
+      window.alert(API_ERROR_MSG);
     }
   },
   getTopFive: async () => {
@@ -115,7 +116,7 @@ export const userAPI = {
       );
       return data;
     } catch (err) {
-      window.alert('오류가 발생했습니다.');
+      window.alert(API_ERROR_MSG);
     }
   },
 };

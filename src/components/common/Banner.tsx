@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import BannerMusseuk from '@/assets/image/banner-musseuk.svg?react';
 import BackIcon from '@/assets/icon/back-icon.svg?react';
 import { useNavigate } from 'react-router-dom';
+import useStore from '@/store/store';
 
 interface BannerProps {
   hasBackBtn: boolean; // back 버튼 여부
@@ -10,6 +11,8 @@ interface BannerProps {
 
 function Banner({ hasBackBtn, title }: BannerProps) {
   const navigate = useNavigate();
+  const { user } = useStore();
+
   return (
     <Container>
       <TitleWrapper>
@@ -24,7 +27,8 @@ function Banner({ hasBackBtn, title }: BannerProps) {
             <strong>{title}</strong>
           ) : (
             <>
-              <strong>지민님,</strong> 오늘도 열코딩!
+              <strong>{user ? user.nickname + '님, ' : '여러분,'}</strong>{' '}
+              오늘도 열코딩!
             </>
           )}
         </Title>
