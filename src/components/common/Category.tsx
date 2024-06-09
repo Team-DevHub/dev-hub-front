@@ -15,13 +15,13 @@ const Category: React.FC<CategoryProps> = ({
   onCategorySelect,
   mode,
 }) => {
-  const [selected, setSelected] = useState<number>(categories[0].id);
+  const [selected, setSelected] = useState<number>(0);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSelect = (id: number) => {
     if (mode === 'filter') {
       const newSearchParams = new URLSearchParams(searchParams);
-      if (id === 1) {
+      if (id === 0) {
         newSearchParams.delete('category_id');
         newSearchParams.delete('page');
         setSelected(id);
@@ -38,15 +38,19 @@ const Category: React.FC<CategoryProps> = ({
   useEffect(() => {
     const categoryId = searchParams.get('category_id');
     if (!categoryId) {
-      setSelected(1);
+      setSelected(0);
     }
   }, [searchParams]);
+
+  // filter mode에서만 전체 카테고리 추가
+  const categoriesWithAll =
+    mode === 'filter' ? [{ id: 0, name: '전체' }, ...categories] : categories;
 
   return (
     <Container width={width}>
       <h2>카테고리</h2>
       <TagContainer>
-        {categories.map((data) => (
+        {categoriesWithAll.map((data) => (
           <Tag
             key={data.id}
             content={data.name}
