@@ -2,6 +2,7 @@ import { CommentReq, PostingReq, PostsReq } from '@/types/api/request';
 import { baseInstance, authInstance } from './instance';
 import { AxiosError, AxiosResponse } from 'axios';
 import { CommonRes, PostRes, PostsRes } from '@/types/api/response';
+import { API_ERROR_MSG } from '@/constants/message';
 
 export const postAPI = {
   posting: async (postData: PostingReq) => {
@@ -12,7 +13,7 @@ export const postAPI = {
       );
       return data;
     } catch (err) {
-      window.alert('오류가 발생했습니다.');
+      window.alert(API_ERROR_MSG);
     }
   },
   posts: async (params: PostsReq) => {
@@ -36,7 +37,7 @@ export const postAPI = {
           };
         }
       }
-      window.alert('오류가 발생했습니다.');
+      window.alert(API_ERROR_MSG);
     }
   },
   post: async (postId: number) => {
@@ -46,7 +47,7 @@ export const postAPI = {
       );
       return data;
     } catch (err) {
-      window.alert('오류가 발생했습니다.');
+      window.alert(API_ERROR_MSG);
     }
   },
   deletePost: async (postId: number) => {
@@ -56,7 +57,7 @@ export const postAPI = {
       );
       return data;
     } catch (err) {
-      window.alert('오류가 발생했습니다.');
+      window.alert(API_ERROR_MSG);
     }
   },
   comments: async (commentsData: CommentReq) => {
@@ -67,7 +68,7 @@ export const postAPI = {
       );
       return data;
     } catch (err) {
-      window.alert('오류가 발생했습니다.');
+      window.alert(API_ERROR_MSG);
     }
   },
   deleteComment: async (commentId: number) => {
@@ -80,7 +81,7 @@ export const postAPI = {
       );
       return data;
     } catch (err) {
-      window.alert('오류가 발생했습니다.');
+      window.alert(API_ERROR_MSG);
     }
   },
 };
