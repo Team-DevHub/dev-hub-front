@@ -1,15 +1,32 @@
 import styled from 'styled-components';
-import DeleteIcon from '@/assets/icon/delete-black-icon.svg?react';
+import { postAPI } from '@/api/postAPI';
 import { Comment as IComment } from '@/types/api/response';
 import { formatDate } from '@/utils/format';
 import { LEVEL } from '@/constants/level';
+import { ICONS } from '@/assets/icon/icons';
+import useStore from '@/store/store';
 
 interface CommentItemProps {
   comment: IComment;
 }
 
 function CommentItem({ comment }: CommentItemProps) {
+  const { user, selectedPost, setSelectedPost } = useStore();
+
   const levelIcon = LEVEL[comment.writer.level]?.icon ?? '';
+  const isCommentWriter = user?.userId === comment.writer.id;
+
+  const handleDeleteClick = async () => {
+    if (isCommentWriter) {
+      const response = await postAPI.deleteComment(comment.commnetId);
+
+      if (response?.isSuccess) {
+        const updatedPost = await postAPI.post(selectedPost!.postId);
+        setSelectedPost(updatedPost.result);
+        alert('댓글이 삭제되었습니다.');
+      }
+    }
+  };
 
   return (
     <Container>
@@ -23,10 +40,14 @@ function CommentItem({ comment }: CommentItemProps) {
           <h5>{comment.writer.name}</h5>
           <span>{formatDate(comment.createdAt)}</span>
         </Writer>
-
         <Comment>{comment.content}</Comment>
       </Content>
-      <DeleteButton />
+      <DeleteButton
+        src={isCommentWriter ? ICONS.delete.red : ICONS.delete.black}
+        alt='delete'
+        $isCommentWriter={isCommentWriter}
+        onClick={handleDeleteClick}
+      />
     </Container>
   );
 }
@@ -65,6 +86,10 @@ const Comment = styled.span`
   line-height: 140%;
 `;
 
-const DeleteButton = styled(DeleteIcon)`
-  cursor: pointer;
+const DeleteButton = styled.img<{ $isCommentWriter: boolean }>`
+  cursor: ${({ $isCommentWriter }) =>
+    $isCommentWriter ? 'pointer' : 'default'};
+  &:hover {
+    opacity: ${({ $isCommentWriter }) => ($isCommentWriter ? 0.8 : 1)};
+  }
 `;

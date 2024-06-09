@@ -53,7 +53,7 @@ export interface Post {
 }
 
 export interface Comment {
-  commentId: number;
+  commnetId: number; // 서버 오타
   content: string;
   createdAt: string;
   writer: Writer;

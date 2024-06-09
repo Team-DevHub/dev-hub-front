@@ -70,4 +70,17 @@ export const postAPI = {
       window.alert('오류가 발생했습니다.');
     }
   },
+  deleteComment: async (commentId: number) => {
+    try {
+      const { data }: AxiosResponse<CommonRes> = await authInstance.delete(
+        `/comments`,
+        {
+          data: { commentId },
+        },
+      );
+      return data;
+    } catch (err) {
+      window.alert('오류가 발생했습니다.');
+    }
+  },
 };
