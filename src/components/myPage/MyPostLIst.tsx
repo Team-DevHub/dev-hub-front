@@ -56,7 +56,6 @@ export default MyPostList;
 
 const Wrapper = styled.div`
   width: 100%;
-  padding-bottom: 50px;
 `;
 
 const Title = styled.div`
@@ -83,21 +82,22 @@ const TableWrapper = styled.div`
 `;
 
 const TBodyWrapper = styled.div`
-  max-height: 400px; 
-  overflow-y: auto;  
+  max-height: 400px;
+  overflow-y: auto;
   cursor: pointer;
 
-   &::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     width: 5px;
-    }
-    
-  &::-webkit-scrollbar-track {
-  background: ${({ theme }) => theme.color_bgLightGray};
   }
-  
+
+  &::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.color_bgLightGray};
+  }
+
   &::-webkit-scrollbar-thumb {
-  background:  ${({ theme }) => theme.color_key};
-  border-radius: 10px;
+    background: ${({ theme }) => theme.color_key};
+    border-radius: 10px;
+  }
 `;
 
 const Table = styled.table`

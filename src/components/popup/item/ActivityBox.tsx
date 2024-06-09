@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 import DeleteMusseuk from '@/assets/image/delete-musseuk.svg?react';
+import useStore from '@/store/store';
 
 function ActivityBox() {
+  const { user } = useStore();
+
+  if (!user) return null;
+
   return (
     <Container>
-      <h5>하영님의 활동 기록</h5>
+      <h5>{user.nickname}님의 활동 기록</h5>
       <Musseuk />
       <Box>
         <Acivity>
