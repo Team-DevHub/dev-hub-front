@@ -42,7 +42,7 @@ function PostingPage() {
         links: form.links,
       })
       .then((data) => {
-        if (data.isSuccess) {
+        if (data?.isSuccess) {
           window.alert('게시글이 작성되었습니다.');
           navigate('/');
         }

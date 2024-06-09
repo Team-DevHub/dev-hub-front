@@ -1,12 +1,12 @@
 import { PostingReq, PostsReq } from '@/types/api/request';
 import { baseInstance, authInstance } from './instance';
 import { AxiosError, AxiosResponse } from 'axios';
-import { PostRes, PostsRes } from '@/types/api/response';
+import { CommonRes, PostRes, PostsRes } from '@/types/api/response';
 
 export const postAPI = {
   posting: async (postData: PostingReq) => {
     try {
-      const { data }: AxiosResponse = await authInstance.post(
+      const { data }: AxiosResponse<CommonRes> = await authInstance.post(
         `/posts`,
         postData,
       );
@@ -26,8 +26,7 @@ export const postAPI = {
       return data;
     } catch (err) {
       if (err instanceof AxiosError) {
-        if (err.response && err.response.status === 404) {
-          // 404 오류에 대한 기본 반환 값 설정
+        if (err.response?.status === 404) {
           return {
             result: [],
             pagination: {
@@ -43,6 +42,16 @@ export const postAPI = {
   post: async (postId: number) => {
     try {
       const { data }: AxiosResponse = await baseInstance.get<PostRes>(
+        `/posts/${postId}`,
+      );
+      return data;
+    } catch (err) {
+      window.alert('오류가 발생했습니다.');
+    }
+  },
+  deletePost: async (postId: number) => {
+    try {
+      const { data }: AxiosResponse<CommonRes> = await authInstance.delete(
         `/posts/${postId}`,
       );
       return data;

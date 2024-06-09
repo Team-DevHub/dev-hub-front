@@ -21,6 +21,18 @@ function MyPostList() {
     fetchMyPosts();
   }, []);
 
+  const handleDelete = async (postId: number) => {
+    if (window.confirm('삭제하시겠습니까?')) {
+      const response = await postAPI.deletePost(postId);
+      if (response?.isSuccess) {
+        setMyPosts(
+          (prev) => prev?.filter((post) => post.postId !== postId) ?? null,
+        );
+        window.alert('게시글이 삭제되었습니다.');
+      }
+    }
+  };
+
   return (
     <Wrapper>
       <Title>
@@ -43,16 +55,18 @@ function MyPostList() {
             <Table>
               <tbody>
                 {myPosts?.map((post: PostSummary) => (
-                  <tr
-                    key={post.postId}
-                    onClick={() => handleClick(post.postId)}>
+                  <tr key={post.postId}>
                     <Td className='category'>
                       <Tag>{getCategoryName(post.categoryId)}</Tag>
                     </Td>
-                    <Td className='title'>{post.title}</Td>
+                    <Td
+                      className='title'
+                      onClick={() => handleClick(post.postId)}>
+                      {post.title}
+                    </Td>
                     <Td className='createAt'>{formatDate(post.createdAt)}</Td>
                     <Td className='delete'>
-                      <DeleteButton />
+                      <DeleteButton onClick={() => handleDelete(post.postId)} />
                     </Td>
                   </tr>
                 ))}
@@ -151,10 +165,10 @@ const Td = styled.td`
 
   font-weight: 400;
   vertical-align: middle;
-  cursor: pointer;
 
   &.title {
     font-weight: 500;
+    cursor: pointer;
   }
 
   &.createAt {
