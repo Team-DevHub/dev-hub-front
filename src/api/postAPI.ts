@@ -1,4 +1,4 @@
-import { PostingReq, PostsReq } from '@/types/api/request';
+import { CommentReq, PostingReq, PostsReq } from '@/types/api/request';
 import { baseInstance, authInstance } from './instance';
 import { AxiosError, AxiosResponse } from 'axios';
 import { CommonRes, PostRes, PostsRes } from '@/types/api/response';
@@ -53,6 +53,17 @@ export const postAPI = {
     try {
       const { data }: AxiosResponse<CommonRes> = await authInstance.delete(
         `/posts/${postId}`,
+      );
+      return data;
+    } catch (err) {
+      window.alert('오류가 발생했습니다.');
+    }
+  },
+  comments: async (commentsData: CommentReq) => {
+    try {
+      const { data }: AxiosResponse<CommonRes> = await authInstance.post(
+        `/comments`,
+        commentsData,
       );
       return data;
     } catch (err) {
