@@ -4,21 +4,27 @@ import Filter from './Filter';
 import { useState } from 'react';
 import PostModal from '../modal/PostModal';
 import { AnimatePresence } from 'framer-motion';
-import { Post } from '@/types/api/response';
+import { PostSummary } from '@/types/api/response';
+import useStore from '@/store/store';
+import { postAPI } from '@/api/postAPI';
 
 interface PostListProps {
-  posts: Post[];
+  posts: PostSummary[];
   totalPosts: number;
 }
 
 function PostList({ posts, totalPosts }: PostListProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { setSelectedPost } = useStore();
 
-  const handlePostClick = () => {
+  const handlePostClick = async (postId: number) => {
+    const postRes = await postAPI.post(postId);
+    setSelectedPost(postRes.result);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
+    setSelectedPost(null);
     setIsModalOpen(false);
   };
 
@@ -28,6 +34,7 @@ function PostList({ posts, totalPosts }: PostListProps) {
   } else {
     document.body.style.overflow = 'auto';
   }
+
   return (
     <Container>
       <TitleBar>
@@ -38,8 +45,12 @@ function PostList({ posts, totalPosts }: PostListProps) {
         <Filter />
       </TitleBar>
       <Posts>
-        {posts.map((data: Post) => (
-          <PostItem key={data.postId} posts={data} onClick={handlePostClick} />
+        {posts.map((post: PostSummary) => (
+          <PostItem
+            key={post.postId}
+            post={post}
+            onClick={() => handlePostClick(post.postId)}
+          />
         ))}
       </Posts>
       <AnimatePresence>

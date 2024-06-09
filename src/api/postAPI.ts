@@ -1,7 +1,7 @@
 import { PostingReq, PostsReq } from '@/types/api/request';
 import { baseInstance, authInstance } from './instance';
 import { AxiosError, AxiosResponse } from 'axios';
-import { PostsRes } from '@/types/api/response';
+import { PostRes, PostsRes } from '@/types/api/response';
 
 export const postAPI = {
   posting: async (postData: PostingReq) => {
@@ -17,7 +17,7 @@ export const postAPI = {
   },
   posts: async (params: PostsReq) => {
     try {
-      const myPage = params.myPage === true; // 쿼리 매개변수를 boolean으로 파싱
+      const myPage = params.myPage === true;
       const instance = myPage ? authInstance : baseInstance;
 
       const { data }: AxiosResponse = await instance.get<PostsRes>(`/posts`, {
@@ -37,6 +37,16 @@ export const postAPI = {
           };
         }
       }
+      window.alert('오류가 발생했습니다.');
+    }
+  },
+  post: async (postId: number) => {
+    try {
+      const { data }: AxiosResponse = await baseInstance.get<PostRes>(
+        `/posts/${postId}`,
+      );
+      return data;
+    } catch (err) {
       window.alert('오류가 발생했습니다.');
     }
   },

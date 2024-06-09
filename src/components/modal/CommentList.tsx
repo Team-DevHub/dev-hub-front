@@ -1,16 +1,14 @@
 import styled from 'styled-components';
 import CommentItem from './CommentItem';
-import { IComment } from '@/data/commentDummy';
+import useStore from '@/store/store';
 
-interface CommentListProps {
-  commentData: IComment[];
-}
+function CommentList() {
+  const { selectedPost } = useStore();
 
-function CommentList({ commentData }: CommentListProps) {
   return (
     <Container>
-      {commentData.map((item: IComment) => (
-        <CommentItem key={item.id} commentData={item} />
+      {selectedPost?.comments.map((comment) => (
+        <CommentItem key={comment.commentId} comment={comment} />
       ))}
     </Container>
   );

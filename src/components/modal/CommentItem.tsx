@@ -1,19 +1,30 @@
 import styled from 'styled-components';
-import Musseuk from '@/assets/image/comment-musseuk.svg?react';
 import DeleteIcon from '@/assets/icon/delete-black-icon.svg?react';
-import { IComment } from '@/data/commentDummy';
+import { Comment as IComment } from '@/types/api/response';
+import { formatDate } from '@/utils/format';
+import { LEVEL } from '@/constants/level';
 
-function CommentItem({ commentData }: { commentData: IComment }) {
+interface CommentItemProps {
+  comment: IComment;
+}
+
+function CommentItem({ comment }: CommentItemProps) {
+  const levelIcon = LEVEL[comment.writer.level]?.icon ?? '';
+
   return (
     <Container>
-      <Musseuk />
+      <img
+        src={levelIcon}
+        alt={`Level ${comment.writer.level} icon`}
+        width={35}
+      />
       <Content>
         <Writer>
-          <h5>{commentData.writer}</h5>
-          <span>{commentData.createdAt}</span>
+          <h5>{comment.writer.name}</h5>
+          <span>{formatDate(comment.createdAt)}</span>
         </Writer>
 
-        <Comment>{commentData.comment}</Comment>
+        <Comment>{comment.content}</Comment>
       </Content>
       <DeleteButton />
     </Container>
@@ -27,14 +38,14 @@ const Container = styled.div`
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
-  gap: 12px;
+  gap: 15px;
 `;
 
 const Content = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 5px;
 `;
 
 const Writer = styled.div`

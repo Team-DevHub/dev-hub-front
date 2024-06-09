@@ -2,33 +2,38 @@ import styled from 'styled-components';
 import CommentIcon from '@/assets/icon/comment-icon.svg?react';
 import PersonIcon from '@/assets/icon/person-icon.svg?react';
 import { motion } from 'framer-motion';
-import { Post } from '@/types/api/response';
+import { PostSummary } from '@/types/api/response';
 import { categories } from '@/data/categories';
 import { formatDate } from '@/utils/format';
 
 interface PostItemProps {
-  posts: Post;
-  onClick: () => void;
+  post: PostSummary;
+  onClick: (postId: number) => void;
 }
 
-function PostItem({ posts, onClick }: PostItemProps) {
-  const category = categories.find((item) => item.id === posts.categoryId);
+function PostItem({ post, onClick }: PostItemProps) {
+  const category = categories.find((item) => item.id === post.categoryId);
+
+  const handleClick = () => {
+    onClick(post.postId);
+  };
+
   return (
     <Container
-      onClick={onClick}
+      onClick={handleClick}
       whileHover={{ y: -6 }}
       transition={{ duration: 0.05 }}>
       <TopBar>
         <Tag>{category?.name}</Tag>
-        <Date>{formatDate(posts.createdAt)}</Date>
+        <Date>{formatDate(post.createdAt)}</Date>
       </TopBar>
-      <PostTitle>{posts.title}</PostTitle>
+      <PostTitle>{post.title}</PostTitle>
       <BottomBar>
         <Comment>
-          <CommentIcon /> {posts.totalComments}
+          <CommentIcon /> {post.totalComments}
         </Comment>
         <Writer>
-          <PersonIcon /> {posts.writer}
+          <PersonIcon /> {post.writer}
         </Writer>
       </BottomBar>
     </Container>

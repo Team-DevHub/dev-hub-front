@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { postAPI } from '@/api/postAPI';
-import { Post, Pagination as PaginationType } from '@/types/api/response';
+import {
+  Pagination as PaginationType,
+  PostSummary,
+} from '@/types/api/response';
 
 export const usePosts = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<PostSummary[]>([]);
   const [pagination, setPagination] = useState<PaginationType>({
     currentPage: 1,
     totalPosts: 0,

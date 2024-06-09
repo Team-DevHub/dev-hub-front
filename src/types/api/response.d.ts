@@ -31,6 +31,15 @@ export interface TopFiveRes extends CommonRes {
   points: number;
 }
 
+export interface PostSummary {
+  postId: number;
+  title: string;
+  categoryId: number;
+  totalComments: number;
+  writer: string;
+  createdAt: string;
+}
+
 export interface Post {
   postId: number;
   title: string;
@@ -38,9 +47,9 @@ export interface Post {
   links: string[];
   categoryId: number;
   totalComments: number;
-  writer: string;
+  writer: Writer;
   createdAt: string;
-  comment: Comment[];
+  comments: Comment[];
 }
 
 export interface Comment {
@@ -51,8 +60,8 @@ export interface Comment {
 }
 
 export interface Writer {
-  userId: string;
-  nickname: string;
+  id: string;
+  name: string;
   level: number;
 }
 export interface Pagination {
@@ -60,6 +69,10 @@ export interface Pagination {
   totalPosts: number;
 }
 export interface PostsRes extends CommonRes {
-  result: Post[];
+  result: PostSummary[];
   paginations: Pagination;
+}
+
+export interface PostRes extends CommonRes {
+  result: Post;
 }

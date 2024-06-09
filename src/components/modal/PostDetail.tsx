@@ -1,89 +1,54 @@
 import styled from 'styled-components';
-import Lv5 from '@/assets/image/lv5.svg?react';
 import Link from './Link';
 import { Viewer } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
-
 import 'prismjs/themes/prism.css';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
 import Prism from 'prismjs';
-
-const markdownText = `
-** editor test**
-* editor test*
-~~ editor test~~
-
-
-
-> editor test
-
-*  editor test
-*  editor test
- 
- ***
-
-모달 바깥 클릭 시 닫히도록 하는 React 커스텀 hook 만들었는데 필요하신 분들은 이거 사용해보세요~~~!
-\`\`\`js
-import { useEffect } from 'react';
-
-/* ----- 모달 바깥 클릭 시 모달이 닫히도록 하는 hook -----
-
-- ref: 모달에 해당하는 ref 객체
-- handler: 바깥 클릭 시 실행할 함수
-
-  ** 예시 **
-  const ref = useRef<HTMLDivElement | null>(null);
-  useClickOutside(ref, () => setOpen(false));
-*/
-
-function useClickOutside(
-  ref: React.RefObject<HTMLElement>,
-  handler: () => void,
-) {
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        handler();
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [ref, handler]);
-}
-
-export default useClickOutside;
-\`\`\`
-`;
+import useStore from '@/store/store';
+import { categories } from '@/data/categories';
+import { LEVEL } from '@/constants/level';
+import { formatDate } from '@/utils/format';
 
 function PostDetail() {
+  const { selectedPost } = useStore();
+
+  if (!selectedPost) {
+    return;
+  }
+
+  const levelIcon = LEVEL[selectedPost.writer.level]?.icon ?? '';
+  const category = categories.find(
+    (item) => item.id === selectedPost.categoryId,
+  );
   return (
     <>
       <Container>
         <TopBar>
-          <Tag>React</Tag>
+          <Tag>{category?.name}</Tag>
           <UserInfo>
-            <span>Lv.5</span>
-            <h6>류지민</h6>
+            <span>Lv.{selectedPost.writer.level}</span>
+            <h6>{selectedPost.writer.name}</h6>
           </UserInfo>
-          <Lv5 width={30} height={30} />
+          <img
+            src={levelIcon}
+            alt={`Level ${selectedPost.writer.level} icon`}
+            width={30}
+          />
         </TopBar>
         <Post>
-          <h2>모달 바깥 클릭 시 닫히도록 하는 React 커스텀 hook 코드 공유</h2>
+          <h2>{selectedPost.title}</h2>
 
           <Viewer
             width='100%'
             plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
-            initialValue={markdownText}
+            initialValue={selectedPost.content}
             theme='dark'
           />
         </Post>
         <Link />
-        <Date>2024.04.28</Date>
+        <Date>{formatDate(selectedPost.createdAt)}</Date>
       </Container>
     </>
   );
