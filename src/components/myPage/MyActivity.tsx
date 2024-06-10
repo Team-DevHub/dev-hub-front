@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import BookIcon from '@/assets/icon/book-icon.svg?react';
-import PointIcon from '@/assets/icon/point-icon.svg?react';
 import useStore from '@/store/store';
+import { ICONS } from '@/constants/icons';
 
 function MyActivity() {
   const { user } = useStore();
@@ -10,14 +9,14 @@ function MyActivity() {
       <h2>나의 활동</h2>
       <Container>
         <ActivityInfo>
-          <BookIcon />
+          <img src={ICONS.book} alt='book' />
           <Activity>
             <span>내가 공유한 지식</span>
             <h4>{user!.totalPosts}개</h4>
           </Activity>
         </ActivityInfo>
         <ActivityInfo>
-          <PointIcon />
+          <img src={ICONS.point} />
           <Activity>
             <span>보유 포인트</span>
             <h4>{user!.totalPoints}점</h4>

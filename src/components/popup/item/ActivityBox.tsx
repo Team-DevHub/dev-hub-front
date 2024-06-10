@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import DeleteMusseuk from '@/assets/image/delete-musseuk.svg?react';
 import useStore from '@/store/store';
+import { IMAGES } from '@/constants/icons';
 
 function ActivityBox() {
   const { user } = useStore();
@@ -10,7 +10,7 @@ function ActivityBox() {
   return (
     <Container>
       <h5>{user.nickname}님의 활동 기록</h5>
-      <Musseuk />
+      <Musseuk src={IMAGES.musseuk.delete} alt='delete' />
       <Box>
         <Acivity>
           <span>공유한 지식</span>
@@ -36,7 +36,7 @@ const Container = styled.div`
   padding: 24px 0;
 `;
 
-const Musseuk = styled(DeleteMusseuk)`
+const Musseuk = styled.img`
   position: absolute;
   top: -30px;
   right: 20px;

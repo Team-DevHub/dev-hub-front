@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import DeleteIcon from '@/assets/icon/delete-red-icon.svg?react';
 import { useEffect, useState } from 'react';
 import { PostSummary } from '@/types/api/response';
 import { postAPI } from '@/api/postAPI';
@@ -9,6 +8,7 @@ import PostModal from '../modal/PostModal';
 import { useModal } from '@/hooks/useModal';
 import useStore from '@/store/store';
 import MyPostEmpty from './MyPostEmpty';
+import { ICONS } from '@/constants/icons';
 
 function MyPostList() {
   const { user } = useStore();
@@ -69,7 +69,10 @@ function MyPostList() {
                       </Td>
                       <Td className='createAt'>{formatDate(post.createdAt)}</Td>
                       <Td className='delete'>
-                        <DeleteButton
+                        <img
+                          src={ICONS.delete.red}
+                          alt='delete'
+                          style={{ cursor: 'pointer' }}
                           onClick={() => handleDelete(post.postId)}
                         />
                       </Td>
@@ -192,8 +195,4 @@ const Tag = styled.span`
   padding: 5px 14px;
   border-radius: 10px;
   font-weight: 500;
-`;
-
-const DeleteButton = styled(DeleteIcon)`
-  cursor: pointer;
 `;

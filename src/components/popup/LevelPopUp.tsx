@@ -1,4 +1,4 @@
-import { ICONS } from '@/assets/icon/icons';
+import { ICONS } from '../../constants/icons';
 import PopUpLayout from '../layouts/PopUpLayout';
 import LevelItem from './item/LevelItem';
 import styled from 'styled-components';

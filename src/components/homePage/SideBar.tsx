@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Profile from './Profile';
 import Button from '../common/Button';
 import Top5 from './Top5';
-import { ICONS } from '@/assets/icon/icons';
+import { ICONS } from '../../constants/icons';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NonMemberPopUp from '../popup/NonMemberPopUp';

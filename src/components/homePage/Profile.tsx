@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Button from '../common/Button';
-import { ICONS } from '@/assets/icon/icons';
+import { ICONS } from '../../constants/icons';
 import { useNavigate } from 'react-router-dom';
 import { useLevel } from '@/hooks/useLevel';
 import useStore from '@/store/store';

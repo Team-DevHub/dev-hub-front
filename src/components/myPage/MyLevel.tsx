@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import InfoIcon from '@/assets/icon/info-icon.svg?react';
 import { useState } from 'react';
 import LevelPopUp from '../popup/LevelPopUp';
 import { AnimatePresence } from 'framer-motion';
 import { useLevel } from '@/hooks/useLevel';
+import { ICONS } from '@/constants/icons';
 
 function MyLevel() {
   const [open, setOpen] = useState<boolean>(false);
@@ -21,7 +21,7 @@ function MyLevel() {
       <h2>나의 레벨</h2>
       <Container>
         <InfoIconWrapper onClick={() => setOpen(true)}>
-          <InfoIcon />
+          <img src={ICONS.info} />
         </InfoIconWrapper>
         <Content>
           <img src={userLevel.icon} alt='level' width={80} height={80} />

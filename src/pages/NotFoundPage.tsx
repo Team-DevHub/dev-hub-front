@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import Musseuk from '@/assets/image/musseuk_404.svg?react';
-import { ICONS } from '@/assets/icon/icons';
+import { ICONS, IMAGES } from '../constants/icons';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/styles/component';
 
@@ -20,7 +19,7 @@ function NotFoundPage() {
         <Button type='button' onClick={() => navigate('/')}>
           <img src={ICONS.arrow.back} alt='arrow' /> 홈으로 돌아가기
         </Button>
-        <Musseuki />
+        <Musseuki src={IMAGES.musseuk.notFound} />
       </Container>
     </Background>
   );
@@ -84,7 +83,7 @@ const Title = styled.div`
   }
 `;
 
-const Musseuki = styled(Musseuk)`
+const Musseuki = styled.img`
   position: absolute;
   bottom: 0;
   left: 0;

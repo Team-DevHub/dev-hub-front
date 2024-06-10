@@ -7,7 +7,7 @@ import Banner from '@/components/common/Banner';
 import { postAPI } from '@/api/postAPI';
 import { useNavigate } from 'react-router-dom';
 import Button from '@/components/common/Button';
-import { ICONS } from '@/assets/icon/icons';
+import { ICONS } from '../constants/icons';
 import { useForm, Controller } from 'react-hook-form';
 
 interface PostingForm {

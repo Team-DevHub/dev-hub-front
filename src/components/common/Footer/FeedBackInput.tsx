@@ -1,4 +1,4 @@
-import { ICONS } from '@/assets/icon/icons';
+import { ICONS } from '../../../constants/icons';
 import { Input } from '@/styles/component';
 import { useState } from 'react';
 import styled from 'styled-components';

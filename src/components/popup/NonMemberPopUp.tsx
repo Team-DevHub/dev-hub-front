@@ -1,8 +1,7 @@
 import PopUpLayout from '../layouts/PopUpLayout';
-import { ICONS } from '@/assets/icon/icons';
+import { ICONS, IMAGES } from '@/constants/icons';
 import FormButton from '../common/FormInput/FormButton';
 import { useNavigate } from 'react-router-dom';
-import Musseuk from '@/assets/image/warning-musseuk.svg?react';
 import styled from 'styled-components';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 
@@ -15,7 +14,7 @@ function NonMemberPopUp({ closePopUp }: { closePopUp: () => void }) {
       desc='로그인하고 지식 공유에 참여해보세요!'
       closePopup={closePopUp}>
       <Container>
-        <Musseuki />
+        <Musseuki src={IMAGES.musseuk.warning} alt='warning' />
         <FormButton
           text='로그인하러 가기'
           fontSize='14px'
@@ -35,6 +34,6 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const Musseuki = styled(Musseuk)`
+const Musseuki = styled.img`
   margin-left: 30px;
 `;

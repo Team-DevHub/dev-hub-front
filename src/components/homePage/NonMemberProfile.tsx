@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import NonMember from '@/assets/image/non-member-profile.svg?react';
 import Button from '../common/Button';
-import { ICONS } from '@/assets/icon/icons';
+import { ICONS, IMAGES } from '@/constants/icons';
 import { useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 
@@ -12,7 +11,7 @@ function NonMemberProfile() {
       <h4>내 프로필</h4>
       <Container>
         <ContentWrapper>
-          <NonMember />
+          <img src={IMAGES.nonMember} />
           <UserInfo>
             <h3>비회원</h3>
             <span>로그인하고 지식을 공유해보세요!</span>

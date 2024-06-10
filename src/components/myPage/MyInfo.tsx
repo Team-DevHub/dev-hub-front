@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import useStore from '@/store/store';
 import { TokenKey } from '@/constants/storage';
-import { ICONS } from '@/assets/icon/icons';
+import { ICONS } from '../../constants/icons';
 import { useProfile } from '@/hooks/useProfile';
 
 function MyInfo() {

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import LinkIcon from '@/assets/icon/link-icon.svg?react';
 import useStore from '@/store/store';
+import { ICONS } from '@/constants/icons';
 
 function Link() {
   const { selectedPost } = useStore();
@@ -22,7 +22,7 @@ function Link() {
     <>
       {links.map((link, index) => (
         <LinkContainer key={index}>
-          <StyledLinkIcon />
+          <img src={ICONS.link} alt='link' width={20} height={20} />
           <LinkContent
             href={addHttps(link)}
             target='_blank'
@@ -48,11 +48,6 @@ const LinkContainer = styled.div`
   background-color: ${({ theme }) => theme.color_keyWhite};
   border: 1px solid ${({ theme }) => theme.color_borderGray};
   margin-bottom: 15px;
-`;
-
-const StyledLinkIcon = styled(LinkIcon)`
-  width: 20px;
-  height: 20px;
 `;
 
 const LinkContent = styled.a`

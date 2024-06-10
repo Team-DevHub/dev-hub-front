@@ -11,7 +11,7 @@ import { useState } from 'react';
 import Checkbox from '../common/FormInput/Checkbox';
 import FormButton from '../common/FormInput/FormButton';
 import { Link, useNavigate } from 'react-router-dom';
-import { ICONS } from '@/assets/icon/icons';
+import { ICONS } from '../../constants/icons';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { TokenKey, UserEmailKey, UserPasswordKey } from '@/constants/storage';
 import { userAPI } from '@/api/userAPI';
