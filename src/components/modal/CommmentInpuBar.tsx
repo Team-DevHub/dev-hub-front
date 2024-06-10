@@ -1,15 +1,49 @@
 import styled from 'styled-components';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, KeyboardEvent } from 'react';
 import { ICONS } from '@/assets/icon/icons';
 import useStore from '@/store/store';
 import { Input } from '@/styles/component';
+import { postAPI } from '@/api/postAPI';
+
+interface CommentsForm {
+  postId: number;
+  content: string;
+}
 
 function CommentInputBar() {
-  const { user } = useStore();
-  const [inputText, setInputText] = useState<string>('');
+  const { user, selectedPost, setSelectedPost } = useStore();
+  const [form, setForm] = useState<CommentsForm>({
+    postId: selectedPost?.postId || 0,
+    content: '',
+  });
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputText(event.target.value);
+  const handleFormChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setForm((prevForm) => ({ ...prevForm, content: e.target.value }));
+  };
+
+  const handleSubmit = async () => {
+    if (!form.content.trim()) {
+      return;
+    }
+    const response = await postAPI.comments({
+      postId: selectedPost!.postId,
+      content: form.content,
+    });
+
+    if (response?.isSuccess) {
+      const updatedPost = await postAPI.post(selectedPost!.postId);
+
+      if (updatedPost?.isSuccess) {
+        setSelectedPost(updatedPost.result);
+        setForm({ ...form, content: '' });
+      }
+    }
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
   };
 
   return (
@@ -18,13 +52,14 @@ function CommentInputBar() {
         placeholder={
           user === null ? '로그인 후 댓글을 작성할 수 있습니다' : '댓글 달기'
         }
-        value={inputText}
-        onChange={handleInputChange}
+        value={form.content}
+        onChange={handleFormChange}
+        onKeyDown={handleKeyDown}
         $isLoggedIn={user !== null}
         disabled={user === null}
       />
       <SubmitButton disabled={user === null}>
-        <img src={ICONS.send} alt='send' />
+        <img src={ICONS.send} alt='send' onClick={handleSubmit} />
       </SubmitButton>
     </Container>
   );

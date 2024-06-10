@@ -1,16 +1,14 @@
 import styled from 'styled-components';
 import CommentItem from './CommentItem';
-import { IComment } from '@/data/commentDummy';
+import useStore from '@/store/store';
 
-interface CommentListProps {
-  commentData: IComment[];
-}
+function CommentList() {
+  const { selectedPost } = useStore();
 
-function CommentList({ commentData }: CommentListProps) {
   return (
     <Container>
-      {commentData.map((item: IComment) => (
-        <CommentItem key={item.id} commentData={item} />
+      {selectedPost?.comments.map((comment) => (
+        <CommentItem key={comment.commentId} comment={comment} />
       ))}
     </Container>
   );
@@ -26,7 +24,7 @@ const Container = styled.div`
   overflow: auto;
   margin: 10px 0;
   padding: 20px;
-  gap: 15px;
+  gap: 20px;
 
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.color_borderGray};

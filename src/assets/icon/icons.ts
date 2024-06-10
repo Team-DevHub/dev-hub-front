@@ -37,4 +37,5 @@ export const ICONS = {
   warning404: PATH + 'warning.svg',
   notion: PATH + 'notion.svg',
   github: PATH + 'github.svg',
+  question: PATH + 'question-icon.svg',
 };

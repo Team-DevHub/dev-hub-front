@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-function TitleInput() {
-  const [value, setValue] = useState<string>('');
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+  value: string;
+}
+
+function TitleInput({ value, onChange }: Props) {
   return (
     <Container>
       <h2>제목</h2>
@@ -10,7 +13,7 @@ function TitleInput() {
         type='text'
         value={value}
         placeholder='제목을 입력하세요.'
-        onChange={(e) => setValue(e.target.value)}
+        onChange={onChange}
       />
     </Container>
   );

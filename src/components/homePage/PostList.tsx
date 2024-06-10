@@ -1,33 +1,20 @@
 import styled from 'styled-components';
 import PostItem from './PostItem';
 import Filter from './Filter';
-import { Post } from '@/data/postDummy';
-import { useState } from 'react';
+
 import PostModal from '../modal/PostModal';
 import { AnimatePresence } from 'framer-motion';
+import { PostSummary } from '@/types/api/response';
+import { useModal } from '@/hooks/useModal';
 
 interface PostListProps {
-  postData: Post[];
+  posts: PostSummary[];
   totalPosts: number;
 }
 
-function PostList({ postData, totalPosts }: PostListProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+function PostList({ posts, totalPosts }: PostListProps) {
+  const { isModalOpen, handleClick, closeModal } = useModal();
 
-  const handlePostClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  // 팝업 등장 시 뒷배경 스크롤 방지
-  if (isModalOpen) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = 'auto';
-  }
   return (
     <Container>
       <TitleBar>
@@ -38,8 +25,12 @@ function PostList({ postData, totalPosts }: PostListProps) {
         <Filter />
       </TitleBar>
       <Posts>
-        {postData.map((data: Post) => (
-          <PostItem key={data.id} postData={data} onClick={handlePostClick} />
+        {posts.map((post: PostSummary) => (
+          <PostItem
+            key={post.postId}
+            post={post}
+            onClick={() => handleClick(post.postId)}
+          />
         ))}
       </Posts>
       <AnimatePresence>

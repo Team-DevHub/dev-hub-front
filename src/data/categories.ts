@@ -4,14 +4,13 @@ export interface Category {
 }
 
 export const categories: Category[] = [
-  { id: 1, name: "전체" },
-  { id: 2, name: "JavaScript" },
-  { id: 3, name: "TypeScript" },
-  { id: 4, name: "React" },
-  { id: 5, name: "HTML & CSS" },
-  { id: 6, name: "Node.js" },
-  { id: 7, name: "Database" },
-  { id: 8, name: "Git" },
-  { id: 9, name: "Computer Science" },
-  { id: 10, name: "기타" },
+  { id: 1, name: 'JavaScript' },
+  { id: 2, name: 'TypeScript' },
+  { id: 3, name: 'React' },
+  { id: 4, name: 'HTML & CSS' },
+  { id: 5, name: 'Node.js' },
+  { id: 6, name: 'Database' },
+  { id: 7, name: 'Git' },
+  { id: 8, name: 'Computer Science' },
+  { id: 9, name: '기타' },
 ];

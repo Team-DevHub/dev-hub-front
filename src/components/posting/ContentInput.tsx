@@ -1,4 +1,4 @@
-// import { useState } from 'react';
+import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { Editor } from '@toast-ui/react-editor';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
@@ -7,7 +7,11 @@ import prism from 'prismjs';
 import 'prismjs/themes/prism.css';
 import '@toast-ui/editor/toastui-editor.css';
 import '@toast-ui/editor/dist/i18n/ko-kr';
-import { useRef } from 'react';
+
+interface ContentInputProps {
+  value: string;
+  onChange: (value: string) => void;
+}
 
 const toolbar = [
   ['bold', 'italic', 'strike'],
@@ -15,28 +19,34 @@ const toolbar = [
   ['codeblock'],
 ];
 
-function ContentInput() {
+function ContentInput({ value, onChange }: ContentInputProps) {
   const editorRef = useRef<Editor>(null);
 
-  const handleOnChange = () => {
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.getInstance().setMarkdown(value);
+    }
+  }, [value]);
+
+  const handleChange = () => {
     const data = editorRef.current?.getInstance().getMarkdown() || '';
-    console.log(data);
+    onChange(data);
   };
 
   return (
     <Container>
       <h2>공유할 내용</h2>
-
       <EditorContainer
         toolbarItems={toolbar}
         initialEditType='markdown'
         initialValue={' '}
+        placeholder={'내용을 입력하세요.'}
         hideModeSwitch={true}
         minHeight='400px'
         height='auto'
         language='ko-KR'
         ref={editorRef}
-        onChange={handleOnChange}
+        onChange={handleChange}
         plugins={[[codeSyntaxHighlight, { highlighter: prism }]]}
       />
     </Container>

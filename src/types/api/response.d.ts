@@ -30,3 +30,49 @@ export interface TopFiveRes extends CommonRes {
   level: number;
   points: number;
 }
+
+export interface PostSummary {
+  postId: number;
+  title: string;
+  categoryId: number;
+  totalComments: number;
+  writer: string;
+  createdAt: string;
+}
+
+export interface Post {
+  postId: number;
+  title: string;
+  content: string;
+  links: string[];
+  categoryId: number;
+  totalComments: number;
+  writer: Writer;
+  createdAt: string;
+  comments: Comment[];
+}
+
+export interface Comment {
+  commentId: number;
+  content: string;
+  createdAt: string;
+  writer: Writer;
+}
+
+export interface Writer {
+  userId: string;
+  nickname: string;
+  level: number;
+}
+export interface Pagination {
+  currentPage: number;
+  totalPosts: number;
+}
+export interface PostsRes extends CommonRes {
+  result: PostSummary[];
+  paginations: Pagination;
+}
+
+export interface PostRes extends CommonRes {
+  result: Post;
+}

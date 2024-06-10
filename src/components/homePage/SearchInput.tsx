@@ -1,10 +1,37 @@
+import { useState, ChangeEvent, KeyboardEvent } from 'react';
 import styled from 'styled-components';
-import { useState } from 'react';
 import { ICONS } from '@/assets/icon/icons';
+import { useSearchParams } from 'react-router-dom';
 import { Input } from '@/styles/component';
 
-function SearchInput() {
-  const [value, setValue] = useState<string>('');
+interface SearchInputProps {
+  onSearch?: (value: string) => void;
+}
+
+function SearchInput({ onSearch }: SearchInputProps) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [value, setValue] = useState<string>(searchParams.get('search') || '');
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
+  const handleSearch = () => {
+    searchParams.set('search', value);
+    searchParams.delete('page');
+    searchParams.delete('category_id');
+    setSearchParams(searchParams);
+    if (onSearch) {
+      onSearch(value);
+    }
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <Container>
       <h2>검색</h2>
@@ -12,10 +39,11 @@ function SearchInput() {
         <Input
           type='text'
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           style={{ paddingRight: '40px' }}
         />
-        <SearchIcon src={ICONS.search} alt='search' />
+        <SearchIcon src={ICONS.search} alt='search' onClick={handleSearch} />
       </Wrapper>
     </Container>
   );
@@ -40,4 +68,5 @@ const SearchIcon = styled.img`
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
+  cursor: pointer;
 `;

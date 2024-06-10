@@ -6,6 +6,7 @@ interface ButtonProps {
   onClick: () => void;
   icon: string;
   bgColor?: string;
+  disabled?: boolean;
 }
 
 function Button({
@@ -14,13 +15,15 @@ function Button({
   onClick,
   icon,
   bgColor = 'color_key',
+  disabled = false,
 }: ButtonProps) {
   return (
     <StyledButton
       type='button'
       $size={size}
       onClick={onClick}
-      $bgColor={bgColor}>
+      $bgColor={bgColor}
+      disabled={disabled}>
       <img src={icon} alt='icon' />
       {text}
     </StyledButton>
@@ -57,5 +60,9 @@ const StyledButton = styled.button<{ $size: string; $bgColor: string }>`
 
   &:hover:not(:disabled) {
     opacity: 0.95;
+  }
+  &:disabled {
+    background-color: #cfd3d8;
+    cursor: default;
   }
 `;

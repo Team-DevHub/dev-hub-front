@@ -1,21 +1,23 @@
-import { useState, useEffect, useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import LinkIcon from '@/assets/icon/link-icon.svg?react';
 
-function LinkInput() {
-  const [links, setLinks] = useState<string[]>(['']);
+interface LinkInputProps {
+  links: string[];
+  onLinksChange: (links: string[]) => void;
+}
+
+function LinkInput({ links, onLinksChange }: LinkInputProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleInputChange = (index: number, newValue: string) => {
     const updatedLinks = [...links];
     updatedLinks[index] = newValue;
-    setLinks(updatedLinks);
+    onLinksChange(updatedLinks);
 
     if (newValue.trim() !== '' && index === links.length - 1) {
-      setLinks([...updatedLinks, '']);
+      onLinksChange([...updatedLinks, '']);
     }
-
-    console.log(updatedLinks);
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -23,8 +25,9 @@ function LinkInput() {
       containerRef.current &&
       !containerRef.current.contains(event.target as Node)
     ) {
-      // 비어있지 않은 입력란만 유지하고, 첫 번째 입력란은 항상 남겨둠
-      setLinks(links.filter((_, idx) => idx === 0 || links[idx].trim() !== ''));
+      onLinksChange(
+        links.filter((_, idx) => idx === 0 || links[idx].trim() !== ''),
+      );
     }
   };
 

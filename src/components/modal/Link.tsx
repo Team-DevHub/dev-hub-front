@@ -1,18 +1,32 @@
 import styled from 'styled-components';
 import LinkIcon from '@/assets/icon/link-icon.svg?react';
-
-const links = [
-  'https://www.notion.so/jimin1020/DevHub-17544f3f7c654e18a29aa4a2d7cc4d16',
-  'https://www.naver.com/',
-];
+import useStore from '@/store/store';
 
 function Link() {
+  const { selectedPost } = useStore();
+  const links = selectedPost?.links.filter((link) => link.trim() !== '');
+
+  if (!links || links.length === 0) {
+    return null;
+  }
+
+  const addHttps = (link: string) => {
+    // 절대 경로 변경
+    if (!link.startsWith('http://') && !link.startsWith('https://')) {
+      return 'https://' + link;
+    }
+    return link;
+  };
+
   return (
     <>
       {links.map((link, index) => (
         <LinkContainer key={index}>
           <StyledLinkIcon />
-          <LinkContent href={link} target='_blank' rel='noopener noreferrer'>
+          <LinkContent
+            href={addHttps(link)}
+            target='_blank'
+            rel='noopener noreferrer'>
             {link}
           </LinkContent>
         </LinkContainer>

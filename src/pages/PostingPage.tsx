@@ -4,26 +4,92 @@ import TitleInput from '@/components/posting/TitleInput';
 import LinkInput from '@/components/posting/LinkInput';
 import ContentInput from '@/components/posting/ContentInput';
 import Banner from '@/components/common/Banner';
-// import FormButton from '@/components/common/FormInput/FormButton';
+import { postAPI } from '@/api/postAPI';
+import { useNavigate } from 'react-router-dom';
 import Button from '@/components/common/Button';
 import { ICONS } from '@/assets/icon/icons';
+import { useForm, Controller } from 'react-hook-form';
+
+interface PostingForm {
+  category_id: number;
+  title: string;
+  content: string;
+  links: string[];
+}
 
 function PostingPage() {
+  const navigate = useNavigate();
+  const { handleSubmit, control, setValue, watch } = useForm<PostingForm>({
+    defaultValues: {
+      category_id: 0,
+      title: '',
+      content: '',
+      links: [''],
+    },
+  });
+
+  const formValues = watch();
+
+  const onSubmit = async (data: PostingForm) => {
+    const response = await postAPI.posting({
+      categoryId: data.category_id,
+      title: data.title,
+      content: data.content,
+      links: data.links,
+    });
+    if (response?.isSuccess) {
+      window.alert('게시글이 작성되었습니다.');
+      navigate('/');
+    }
+  };
+
+  const handleCategorySelect = (category_id: number) => {
+    setValue('category_id', category_id);
+  };
+  const isFormFilled =
+    formValues.category_id > 0 &&
+    formValues.title.trim() !== '' &&
+    formValues.content.trim() !== '';
+
   return (
     <Container>
       <Banner hasBackBtn={true} title={'지식 공유하기'} />
-      <FormWrapper>
-        <Category width='100%' />
-        <TitleInput />
-        <ContentInput />
-        <LinkInput />
+      <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+        <Category
+          width='100%'
+          mode='select'
+          onCategorySelect={handleCategorySelect}
+        />
+        <Controller
+          name='title'
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => <TitleInput {...field} />}
+        />
+        <Controller
+          name='content'
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => <ContentInput {...field} />}
+        />
+        <Controller
+          name='links'
+          control={control}
+          render={({ field }) => (
+            <LinkInput
+              links={field.value ?? ['']}
+              onLinksChange={(links) => field.onChange(links)}
+            />
+          )}
+        />
         <ButtonWrapper>
           <Button
             text='공유하기'
             size='medium'
             bgColor='color_keyBlue'
             icon={ICONS.share}
-            onClick={() => {}}
+            onClick={handleSubmit(onSubmit)}
+            disabled={!isFormFilled}
           />
         </ButtonWrapper>
       </FormWrapper>
@@ -35,7 +101,6 @@ export default PostingPage;
 
 const Container = styled.div`
   width: 100%;
-
   display: flex;
   flex-direction: column;
   gap: 10px;

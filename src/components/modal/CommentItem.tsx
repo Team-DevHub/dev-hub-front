@@ -1,21 +1,53 @@
 import styled from 'styled-components';
-import Musseuk from '@/assets/image/comment-musseuk.svg?react';
-import DeleteIcon from '@/assets/icon/delete-black-icon.svg?react';
-import { IComment } from '@/data/commentDummy';
+import { postAPI } from '@/api/postAPI';
+import { Comment as IComment } from '@/types/api/response';
+import { formatDate } from '@/utils/format';
+import { LEVEL } from '@/constants/level';
+import { ICONS } from '@/assets/icon/icons';
+import useStore from '@/store/store';
 
-function CommentItem({ commentData }: { commentData: IComment }) {
+interface CommentItemProps {
+  comment: IComment;
+}
+
+function CommentItem({ comment }: CommentItemProps) {
+  const { user, selectedPost, setSelectedPost } = useStore();
+
+  const levelIcon = LEVEL[comment.writer.level]?.icon ?? '';
+  const isCommentWriter = user?.userId === comment.writer.userId;
+
+  const handleDeleteClick = async () => {
+    if (isCommentWriter) {
+      const response = await postAPI.deleteComment(comment.commentId);
+
+      if (response?.isSuccess) {
+        const updatedPost = await postAPI.post(selectedPost!.postId);
+        setSelectedPost(updatedPost.result);
+        alert('댓글이 삭제되었습니다.');
+      }
+    }
+  };
+
   return (
     <Container>
-      <Musseuk />
+      <img
+        src={levelIcon}
+        alt={`Level ${comment.writer.level} icon`}
+        width={35}
+      />
       <Content>
         <Writer>
-          <h5>{commentData.writer}</h5>
-          <span>{commentData.createdAt}</span>
+          <h5>{comment.writer.nickname}</h5>
+          <span>{formatDate(comment.createdAt)}</span>
         </Writer>
-
-        <Comment>{commentData.comment}</Comment>
+        <Comment>{comment.content}</Comment>
       </Content>
-      <DeleteButton />
+      <DeleteButton
+        src={isCommentWriter ? ICONS.delete.red : ICONS.delete.black}
+        alt='delete'
+        $isCommentWriter={isCommentWriter}
+        onClick={handleDeleteClick}
+      />
     </Container>
   );
 }
@@ -27,14 +59,14 @@ const Container = styled.div`
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
-  gap: 12px;
+  gap: 15px;
 `;
 
 const Content = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 5px;
 `;
 
 const Writer = styled.div`
@@ -54,6 +86,10 @@ const Comment = styled.span`
   line-height: 140%;
 `;
 
-const DeleteButton = styled(DeleteIcon)`
-  cursor: pointer;
+const DeleteButton = styled.img<{ $isCommentWriter: boolean }>`
+  cursor: ${({ $isCommentWriter }) =>
+    $isCommentWriter ? 'pointer' : 'default'};
+  &:hover {
+    opacity: ${({ $isCommentWriter }) => ($isCommentWriter ? 0.8 : 1)};
+  }
 `;

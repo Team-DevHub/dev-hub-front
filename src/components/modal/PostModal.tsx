@@ -5,14 +5,15 @@ import styled from 'styled-components';
 import PostDetail from './PostDetail';
 import PostComment from './CommentList';
 import CommentInputBar from './CommmentInpuBar';
-import { commentDummy } from '@/data/commentDummy';
 import { motion } from 'framer-motion';
+import useStore from '@/store/store';
 
 interface Props {
   closeModal: () => void;
 }
 
 function PostModal({ closeModal }: Props) {
+  const { selectedPost } = useStore();
   const ref = useRef<HTMLDivElement | null>(null);
 
   useClickOutside(ref, () => closeModal());
@@ -33,9 +34,9 @@ function PostModal({ closeModal }: Props) {
           <Comment>
             <Title>
               <h4>댓글</h4>
-              <span>{commentDummy.length}</span>
+              <span>{selectedPost?.totalComments}</span>
             </Title>
-            <PostComment commentData={commentDummy} />
+            <PostComment />
             <CommentInputBar />
           </Comment>
         </Container>

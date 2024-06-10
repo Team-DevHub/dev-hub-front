@@ -1,3 +1,4 @@
+import { Post } from '@/types/api/response';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { persist } from 'zustand/middleware';
@@ -17,6 +18,9 @@ interface Store {
   setUserId: (id: string) => void;
   setUserInfo: (data: User) => void;
   logOut: () => void;
+
+  selectedPost: Post | null;
+  setSelectedPost: (post: Post | null) => void;
 }
 
 const useStore = create(
@@ -36,12 +40,18 @@ const useStore = create(
               totalPosts: 0,
             },
           })),
+        selectedPost: null,
         setUserInfo: (userData: User) => {
           set(() => ({
             user: userData,
           }));
         },
         logOut: () => set(() => ({ user: null })),
+        setSelectedPost: (post: Post | null) => {
+          set(() => ({
+            selectedPost: post,
+          }));
+        },
       }),
       {
         name: 'store',
