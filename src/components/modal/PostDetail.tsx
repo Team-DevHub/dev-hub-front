@@ -27,7 +27,7 @@ function PostDetail() {
           <Tag>{getCategoryName(selectedPost.categoryId)}</Tag>
           <UserInfo>
             <span>Lv.{selectedPost.writer.level}</span>
-            <h6>{selectedPost.writer.name}</h6>
+            <h6>{selectedPost.writer.nickname}</h6>
           </UserInfo>
           <img
             src={levelIcon}

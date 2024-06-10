@@ -99,12 +99,12 @@ const MoveButton = styled.button<{ disabled: boolean }>`
   display: flex;
   align-items: center;
   font-weight: 600;
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
   background: none;
   border: none;
   & svg {
     fill: ${({ theme, disabled }) =>
-      disabled ? theme.color_bgLightGray : theme.color_key};
+      disabled ? theme.color_borderGray : theme.color_key};
   }
 `;
 

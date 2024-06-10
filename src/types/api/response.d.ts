@@ -60,8 +60,8 @@ export interface Comment {
 }
 
 export interface Writer {
-  id: string;
-  name: string;
+  userId: string;
+  nickname: string;
   level: number;
 }
 export interface Pagination {

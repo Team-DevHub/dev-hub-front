@@ -14,7 +14,7 @@ function CommentItem({ comment }: CommentItemProps) {
   const { user, selectedPost, setSelectedPost } = useStore();
 
   const levelIcon = LEVEL[comment.writer.level]?.icon ?? '';
-  const isCommentWriter = user?.userId === comment.writer.id;
+  const isCommentWriter = user?.userId === comment.writer.userId;
 
   const handleDeleteClick = async () => {
     if (isCommentWriter) {
@@ -37,7 +37,7 @@ function CommentItem({ comment }: CommentItemProps) {
       />
       <Content>
         <Writer>
-          <h5>{comment.writer.name}</h5>
+          <h5>{comment.writer.nickname}</h5>
           <span>{formatDate(comment.createdAt)}</span>
         </Writer>
         <Comment>{comment.content}</Comment>

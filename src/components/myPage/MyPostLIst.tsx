@@ -7,8 +7,11 @@ import { getCategoryName } from '@/utils/getCategoryName';
 import { formatDate } from '@/utils/format';
 import PostModal from '../modal/PostModal';
 import { useModal } from '@/hooks/useModal';
+import useStore from '@/store/store';
+import MyPostEmpty from './MyPostEmpty';
 
 function MyPostList() {
+  const { user } = useStore();
   const [myPosts, setMyPosts] = useState<PostSummary[] | null>(null);
   const { isModalOpen, handleClick, closeModal } = useModal();
 
@@ -37,45 +40,53 @@ function MyPostList() {
     <Wrapper>
       <Title>
         <h2>내가 공유한 지식</h2>
-        <span>12개</span>
+        <span>{user!.totalPosts}개</span>
       </Title>
+
       <Container>
-        <TableWrapper>
-          <Table>
-            <thead>
-              <tr>
-                <Th className='category'>카테고리</Th>
-                <Th className='title'>제목</Th>
-                <Th className='createAt'>작성 일자</Th>
-                <Th className='delete'>삭제</Th>
-              </tr>
-            </thead>
-          </Table>
-          <TBodyWrapper>
+        {user!.totalPosts > 0 ? (
+          <TableWrapper>
             <Table>
-              <tbody>
-                {myPosts?.map((post: PostSummary) => (
-                  <tr key={post.postId}>
-                    <Td className='category'>
-                      <Tag>{getCategoryName(post.categoryId)}</Tag>
-                    </Td>
-                    <Td
-                      className='title'
-                      onClick={() => handleClick(post.postId)}>
-                      {post.title}
-                    </Td>
-                    <Td className='createAt'>{formatDate(post.createdAt)}</Td>
-                    <Td className='delete'>
-                      <DeleteButton onClick={() => handleDelete(post.postId)} />
-                    </Td>
-                  </tr>
-                ))}
-              </tbody>
+              <thead>
+                <tr>
+                  <Th className='category'>카테고리</Th>
+                  <Th className='title'>제목</Th>
+                  <Th className='createAt'>작성 일자</Th>
+                  <Th className='delete'>삭제</Th>
+                </tr>
+              </thead>
             </Table>
-          </TBodyWrapper>
-        </TableWrapper>
-        {isModalOpen && <PostModal closeModal={closeModal} />}
+            <TBodyWrapper>
+              <Table>
+                <tbody>
+                  {myPosts?.map((post) => (
+                    <tr key={post.postId}>
+                      <Td className='category'>
+                        <Tag>{getCategoryName(post.categoryId)}</Tag>
+                      </Td>
+                      <Td
+                        className='title'
+                        onClick={() => handleClick(post.postId)}>
+                        {post.title}
+                      </Td>
+                      <Td className='createAt'>{formatDate(post.createdAt)}</Td>
+                      <Td className='delete'>
+                        <DeleteButton
+                          onClick={() => handleDelete(post.postId)}
+                        />
+                      </Td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </TBodyWrapper>
+          </TableWrapper>
+        ) : (
+          <MyPostEmpty />
+        )}
       </Container>
+
+      {isModalOpen && <PostModal closeModal={closeModal} />}
     </Wrapper>
   );
 }
@@ -110,6 +121,7 @@ const TableWrapper = styled.div`
 `;
 
 const TBodyWrapper = styled.div`
+  min-height: 200px;
   max-height: 400px;
   overflow-y: auto;
 
