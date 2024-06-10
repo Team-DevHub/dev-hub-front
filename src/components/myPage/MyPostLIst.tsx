@@ -28,10 +28,8 @@ function MyPostList() {
     if (window.confirm('삭제하시겠습니까?')) {
       const response = await postAPI.deletePost(postId);
       if (response?.isSuccess) {
-        setMyPosts(
-          (prev) => prev?.filter((post) => post.postId !== postId) ?? null,
-        );
         window.alert('게시글이 삭제되었습니다.');
+        location.reload();
       }
     }
   };
