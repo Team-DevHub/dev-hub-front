@@ -8,7 +8,7 @@ function CommentList() {
   return (
     <Container>
       {selectedPost?.comments.map((comment) => (
-        <CommentItem key={comment.commnetId} comment={comment} />
+        <CommentItem key={comment.commentId} comment={comment} />
       ))}
     </Container>
   );

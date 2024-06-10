@@ -18,7 +18,7 @@ function CommentItem({ comment }: CommentItemProps) {
 
   const handleDeleteClick = async () => {
     if (isCommentWriter) {
-      const response = await postAPI.deleteComment(comment.commnetId);
+      const response = await postAPI.deleteComment(comment.commentId);
 
       if (response?.isSuccess) {
         const updatedPost = await postAPI.post(selectedPost!.postId);

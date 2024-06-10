@@ -27,6 +27,7 @@ const Category: React.FC<CategoryProps> = ({
         setSelected(id);
       } else {
         newSearchParams.set('category_id', id.toString());
+        newSearchParams.delete('page');
       }
       setSearchParams(newSearchParams);
     } else if (mode === 'select' && onCategorySelect) {

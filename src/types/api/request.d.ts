@@ -22,8 +22,8 @@ export interface PostingReq {
 }
 
 export interface PostsReq {
-  limit: number;
-  page: number;
+  limit?: number;
+  page?: number;
   myPage?: boolean;
   search?: string;
   categoryId?: number;

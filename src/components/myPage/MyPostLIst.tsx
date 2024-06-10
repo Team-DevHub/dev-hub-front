@@ -14,7 +14,7 @@ function MyPostList() {
 
   useEffect(() => {
     const fetchMyPosts = async () => {
-      const params = { myPage: true, page: 1, limit: 100 }; // api 수정 전 임시
+      const params = { myPage: true };
       const response = await postAPI.posts(params);
       setMyPosts(response.result);
     };

@@ -32,7 +32,7 @@ function PostDetail() {
           <img
             src={levelIcon}
             alt={`Level ${selectedPost.writer.level} icon`}
-            width={30}
+            width={35}
           />
         </TopBar>
         <Post>
@@ -93,12 +93,12 @@ const UserInfo = styled.div`
   text-align: right;
 
   & span {
-    font-size: ${({ theme }) => theme.fontSize_xs};
+    font-size: ${({ theme }) => theme.fontSize_sm};
     color: ${({ theme }) => theme.color_textGray};
   }
 
   & h6 {
-    font-size: ${({ theme }) => theme.fontSize_sm};
+    font-size: ${({ theme }) => theme.fontSize_base};
     font-weight: 500;
   }
 `;
