@@ -35,5 +35,6 @@ const Container = styled.div`
 `;
 
 const Musseuki = styled.img`
+  width: 150px;
   margin-left: 30px;
 `;
