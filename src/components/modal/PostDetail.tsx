@@ -27,12 +27,12 @@ function PostDetail() {
           <Tag>{getCategoryName(selectedPost.categoryId)}</Tag>
           <UserInfo>
             <span>Lv.{selectedPost.writer.level}</span>
-            <h6>{selectedPost.writer.nickname}</h6>
+            <h4>{selectedPost.writer.nickname}</h4>
           </UserInfo>
           <img
             src={levelIcon}
             alt={`Level ${selectedPost.writer.level} icon`}
-            width={35}
+            width={40}
           />
         </TopBar>
         <Post>
@@ -77,8 +77,8 @@ const TopBar = styled.div`
 const Tag = styled.span`
   color: ${({ theme }) => theme.color_textWhite};
   background-color: ${({ theme }) => theme.color_key};
-  font-size: ${({ theme }) => theme.fontSize_sm};
-  padding: 5px 14px;
+  font-size: ${({ theme }) => theme.fontSize_base};
+  padding: 7px 17px;
   border-radius: 10px;
   font-weight: 500;
 `;
@@ -93,13 +93,8 @@ const UserInfo = styled.div`
   text-align: right;
 
   & span {
-    font-size: ${({ theme }) => theme.fontSize_sm};
-    color: ${({ theme }) => theme.color_textGray};
-  }
-
-  & h6 {
     font-size: ${({ theme }) => theme.fontSize_base};
-    font-weight: 500;
+    color: ${({ theme }) => theme.color_textGray};
   }
 `;
 

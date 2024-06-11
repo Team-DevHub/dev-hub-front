@@ -42,6 +42,7 @@ export const ICONS = {
   question: PATH + 'question-icon.svg',
   link: PATH + 'link-icon.svg',
   check: PATH + 'check.svg',
+  x: PATH + 'x-icon.svg',
 };
 
 export const IMAGES = {

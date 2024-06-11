@@ -11,7 +11,7 @@ function MyPostEmpty() {
 
   return (
     <Container>
-      <p>아직 공유한 지식이 없습니다.</p>
+      <p>아직 공유한 지식이 없어요</p>
       <Content onClick={handleNavigate}>
         <span>지식 공유하러 가기</span>
         <ArrowIcon src={ICONS.back} alt='' />
