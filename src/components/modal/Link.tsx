@@ -42,9 +42,8 @@ const LinkContainer = styled.div`
   height: 55px;
   display: flex;
   align-items: center;
-  padding: 23px 20px;
+  padding: 10px 20px;
   border-radius: 12px;
-  overflow: hidden;
 
   background-color: ${({ theme }) => theme.color_keyWhite};
   border: 1px solid ${({ theme }) => theme.color_borderGray};
@@ -52,10 +51,12 @@ const LinkContainer = styled.div`
 `;
 
 const LinkContent = styled.a`
+  padding: 10px;
   margin-left: 8px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
   cursor: pointer;
 
   font-size: ${({ theme }) => theme.fontSize_base};
