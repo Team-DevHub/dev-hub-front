@@ -50,7 +50,7 @@ function MyInfo() {
             <span>{user.joinDate}</span>
           </Info>
         </Content>
-        <IconContainer>
+        <ButtonContainer>
           <CircleButton onClick={handleLogOut}>
             <img src={ICONS.logout} alt='logout' />
             <span>로그아웃</span>
@@ -59,7 +59,7 @@ function MyInfo() {
             <img src={ICONS.deleteAccount} alt='deleteAccount' />
             <span>회원탈퇴</span>
           </CircleButton>
-        </IconContainer>
+        </ButtonContainer>
       </Container>
       <AnimatePresence>
         {open && <DeleteAccountPopUp closePopup={() => setOpen(false)} />}
@@ -109,27 +109,26 @@ const Info = styled.div`
   }
 `;
 
-const IconContainer = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
+  flex-direction: column;
   gap: 15px;
 `;
 
 const CircleButton = styled.button`
-  background-color: rgba(225, 225, 225, 0.35);
-  border: 1px solid #dfdfdf;
+  background-color: ${({ theme }) => theme.color_bgLightGray};
+  border: 1px solid ${({ theme }) => theme.color_borderGray};
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 6px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+  border-radius: 10px;
+  padding: 10px 20px;
   color: ${({ theme }) => theme.color_textBlack};
-  font-size: ${({ theme }) => theme.fontSize_xs};
+  font-size: ${({ theme }) => theme.fontSize_sm};
   font-weight: 500;
 
   &:hover {
-    opacity: 0.8;
+    opacity: 0.9;
   }
 `;
