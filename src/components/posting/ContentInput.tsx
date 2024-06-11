@@ -24,7 +24,10 @@ function ContentInput({ value, onChange }: ContentInputProps) {
 
   useEffect(() => {
     if (editorRef.current) {
-      editorRef.current.getInstance().setMarkdown(value);
+      const editorInstance = editorRef.current.getInstance();
+      if (editorInstance.getMarkdown() !== value) {
+        editorInstance.setMarkdown(value);
+      }
     }
   }, [value]);
 
