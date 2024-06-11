@@ -8,7 +8,7 @@ interface PaginationProps {
   currentPage: number;
 }
 
-const POSTS_PER_PAGE = 21; // 페이지 당 게시글 개수
+const POSTS_PER_PAGE = 18; // 페이지 당 게시글 개수
 const PAGE_COUNT = 5; // 하나의 그룹 내 페이지 개수
 
 function Pagination({ totalPosts, currentPage }: PaginationProps) {
