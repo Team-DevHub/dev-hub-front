@@ -25,7 +25,7 @@ export const usePosts = () => {
         : undefined;
 
       const data = await postAPI.posts({
-        limit: 21,
+        limit: 18,
         page,
         search,
         categoryId,
