@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ICONS, IMAGES } from '../constants/icons';
+import { ICONS, IMAGES } from '../constants/assets';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/styles/component';
 

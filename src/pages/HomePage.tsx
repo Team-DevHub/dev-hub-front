@@ -1,4 +1,3 @@
-import Banner from '@/components/common/Banner';
 import Category from '@/components/common/Category';
 import Pagination from '@/components/common/Pagination';
 import PostList from '@/components/homePage/PostList';
@@ -7,8 +6,8 @@ import SideBar from '@/components/homePage/SideBar';
 import { useProfile } from '@/hooks/useProfile';
 import PostEmpty from '@/components/posts/PostEmpty';
 import { usePosts } from '@/hooks/usePosts';
-
 import styled from 'styled-components';
+import BannerSlider from '@/components/common/Banner/BannerSlider';
 
 function HomePage() {
   const { posts, pagination, isEmpty } = usePosts();
@@ -17,17 +16,19 @@ function HomePage() {
 
   return (
     <>
-      <Banner hasBackBtn={false} />
+      <BannerSlider />
       <Container>
         <Content>
-          <TopBar>
-            <Category width='650px' mode='filter' />
-            <SearchInput />
-          </TopBar>
-          {!isEmpty && (
-            <PostList totalPosts={pagination.totalPosts} posts={posts} />
-          )}
-          {isEmpty && <PostEmpty />}
+          <Wrapper>
+            <TopBar>
+              <Category width='650px' mode='filter' />
+              <SearchInput />
+            </TopBar>
+            {!isEmpty && (
+              <PostList totalPosts={pagination.totalPosts} posts={posts} />
+            )}
+            {isEmpty && <PostEmpty />}
+          </Wrapper>
           {!isEmpty && (
             <Pagination
               totalPosts={pagination.totalPosts}
@@ -50,10 +51,17 @@ const Container = styled.div`
   padding: 40px 0 100px;
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+`;
+
 const Content = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 50px;
 `;
 

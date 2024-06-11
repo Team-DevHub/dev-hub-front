@@ -1,5 +1,5 @@
 import PopUpLayout from '../layouts/PopUpLayout';
-import { ICONS, IMAGES } from '@/constants/icons';
+import { ICONS, IMAGES } from '@/constants/assets';
 import FormButton from '../common/FormInput/FormButton';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';

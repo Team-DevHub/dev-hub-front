@@ -8,7 +8,7 @@ import {
 import FormInput from '../common/FormInput/FormInput';
 import FormButton from '../common/FormInput/FormButton';
 import { Link, useNavigate } from 'react-router-dom';
-import { ICONS } from '../../constants/icons';
+import { ICONS } from '../../constants/assets';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { userAPI } from '@/api/userAPI';
 import { useForm } from 'react-hook-form';

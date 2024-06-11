@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Button from '../common/Button';
-import { ICONS, IMAGES } from '@/constants/icons';
+import { ICONS, IMAGES } from '@/constants/assets';
 import { useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 

@@ -8,7 +8,7 @@ import PostModal from '../modal/PostModal';
 import { useModal } from '@/hooks/useModal';
 import useStore from '@/store/store';
 import MyPostEmpty from './MyPostEmpty';
-import { ICONS } from '@/constants/icons';
+import { ICONS } from '@/constants/assets';
 
 function MyPostList() {
   const { user } = useStore();

@@ -3,7 +3,7 @@ import { postAPI } from '@/api/postAPI';
 import { Comment as IComment } from '@/types/api/response';
 import { formatDate } from '@/utils/format';
 import { LEVEL } from '@/constants/level';
-import { ICONS } from '../../constants/icons';
+import { ICONS } from '../../constants/assets';
 import useStore from '@/store/store';
 
 interface CommentItemProps {

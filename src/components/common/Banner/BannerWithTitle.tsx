@@ -1,35 +1,19 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import useStore from '@/store/store';
-import { ICONS, IMAGES } from '@/constants/icons';
+import { ICONS, IMAGES } from '@/constants/assets';
 
-interface BannerProps {
-  hasBackBtn: boolean; // back 버튼 여부
-  title?: string; // 배너 타이틀 -> 없는 경우 home
-}
-
-function Banner({ hasBackBtn, title }: BannerProps) {
+function BannerWithTitle({ title }: { title: string }) {
   const navigate = useNavigate();
-  const { user } = useStore();
 
   return (
     <Container>
       <TitleWrapper>
-        {hasBackBtn && (
-          <BackButton onClick={() => navigate(-1)}>
-            <img src={ICONS.back} />
-            뒤로 가기
-          </BackButton>
-        )}
+        <BackButton onClick={() => navigate(-1)}>
+          <img src={ICONS.back} />
+          뒤로 가기
+        </BackButton>
         <Title>
-          {title ? (
-            <strong>{title}</strong>
-          ) : (
-            <>
-              <strong>{user ? user.nickname + '님, ' : '여러분,'}</strong>{' '}
-              오늘도 열코딩!
-            </>
-          )}
+          <strong>{title}</strong>
         </Title>
       </TitleWrapper>
       <Musseuk src={IMAGES.musseuk.banner} alt='banner' />
@@ -37,7 +21,7 @@ function Banner({ hasBackBtn, title }: BannerProps) {
   );
 }
 
-export default Banner;
+export default BannerWithTitle;
 
 const Container = styled.div`
   width: 100%;
@@ -50,7 +34,6 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 60px;
   margin: 20px 0;
 `;
 
@@ -58,6 +41,7 @@ const TitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 14px;
+  padding: 0 60px;
 `;
 
 const BackButton = styled.button`
@@ -83,5 +67,5 @@ const Title = styled.h2`
 
 const Musseuk = styled.img`
   align-self: flex-end;
-  margin-right: 40px;
+  margin-right: 100px;
 `;

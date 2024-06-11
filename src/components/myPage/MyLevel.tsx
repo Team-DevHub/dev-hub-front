@@ -3,7 +3,7 @@ import { useState } from 'react';
 import LevelPopUp from '../popup/LevelPopUp';
 import { AnimatePresence } from 'framer-motion';
 import { useLevel } from '@/hooks/useLevel';
-import { ICONS } from '@/constants/icons';
+import { ICONS } from '@/constants/assets';
 
 function MyLevel() {
   const [open, setOpen] = useState<boolean>(false);

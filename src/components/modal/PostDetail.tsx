@@ -102,6 +102,8 @@ const Post = styled.div`
   margin: 30px 0;
   & h2 {
     margin-bottom: 20px;
+    line-height: 160%;
+    letter-spacing: 1px;
   }
 `;
 

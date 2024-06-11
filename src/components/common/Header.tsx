@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { LOGOS } from '@/constants/icons';
+import { LOGOS } from '@/constants/assets';
 
 function Header() {
   const navigate = useNavigate();

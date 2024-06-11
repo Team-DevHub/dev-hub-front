@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { PostSummary } from '@/types/api/response';
 import { formatDate } from '@/utils/format';
 import { getCategoryName } from '@/utils/getCategoryName';
-import { ICONS } from '@/constants/icons';
+import { ICONS } from '@/constants/assets';
 
 interface PostItemProps {
   post: PostSummary;
@@ -41,7 +41,7 @@ export default PostItem;
 
 const Container = styled(motion.div)`
   width: 300px;
-  height: 130px;
+  height: 150px;
   background-color: ${({ theme }) => theme.color_bgWhite};
   border: 1px solid ${({ theme }) => theme.color_borderGray};
   border-radius: 12px;
@@ -83,7 +83,7 @@ const Date = styled.span`
 const PostTitle = styled.h3`
   font-size: ${({ theme }) => theme.fontSize_base};
   font-weight: 500;
-  line-height: 140%;
+  line-height: 160%;
 
   // 2줄 이상인 경우 말줄임표
   display: -webkit-box;

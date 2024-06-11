@@ -1,5 +1,5 @@
 import PopUpLayout from '../layouts/PopUpLayout';
-import { ICONS } from '../../constants/icons';
+import { ICONS } from '../../constants/assets';
 import ActivityBox from './item/ActivityBox';
 import styled from 'styled-components';
 import FormButton from '../common/FormInput/FormButton';
