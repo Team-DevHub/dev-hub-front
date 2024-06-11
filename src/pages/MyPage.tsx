@@ -1,14 +1,14 @@
 import styled from 'styled-components';
-import Banner from '@/components/common/Banner/Banner';
 import MyInfo from '@/components/myPage/MyInfo';
 import MyLevel from '@/components/myPage/MyLevel';
 import MyActivity from '@/components/myPage/MyActivity';
 import MyPostList from '@/components/myPage/MyPostLIst';
+import BannerWithTitle from '@/components/common/Banner/BannerWithTitle';
 
 function MyPage() {
   return (
     <Container>
-      <Banner hasBackBtn={true} title={'마이페이지'} />
+      <BannerWithTitle title={'마이페이지'} />
       <Content>
         <MyInfo />
         <MyLevel />

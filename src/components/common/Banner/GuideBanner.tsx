@@ -35,15 +35,9 @@ export default GuideBanner;
 const Container = styled.div`
   width: 100%;
   height: 180px;
-  border-radius: 12px;
-  background-color: ${({ theme }) => theme.color_bgWhite};
-  border: 1px solid ${({ theme }) => theme.color_borderGray};
-  color: ${({ theme }) => theme.color_textBlack};
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px 0;
 `;
 
 const TitleWrapper = styled.div`

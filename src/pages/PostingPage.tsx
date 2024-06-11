@@ -3,12 +3,12 @@ import Category from '@/components/common/Category';
 import TitleInput from '@/components/posting/TitleInput';
 import LinkInput from '@/components/posting/LinkInput';
 import ContentInput from '@/components/posting/ContentInput';
-import Banner from '@/components/common/Banner/Banner';
 import { postAPI } from '@/api/postAPI';
 import { useNavigate } from 'react-router-dom';
 import Button from '@/components/common/Button';
 import { ICONS } from '../constants/assets';
 import { useForm, Controller } from 'react-hook-form';
+import BannerWithTitle from '@/components/common/Banner/BannerWithTitle';
 
 interface PostingForm {
   category_id: number;
@@ -53,7 +53,7 @@ function PostingPage() {
 
   return (
     <Container>
-      <Banner hasBackBtn={true} title={'지식 공유하기'} />
+      <BannerWithTitle title={'지식 공유하기'} />
       <FormWrapper onSubmit={handleSubmit(onSubmit)}>
         <Category
           width='100%'
