@@ -113,7 +113,7 @@ const JoinForm = () => {
               style={{ flex: 1 }}
               id={'name-input'}
               label={'Name'}
-              placeholder='닉네임을 입력해주세요 (2~10자)'
+              placeholder='닉네임을 입력해주세요 (2~6자)'
               errorMessage={errors.nickname?.message}
               {...register('nickname', {
                 onChange: () => {
@@ -124,11 +124,11 @@ const JoinForm = () => {
                 },
                 minLength: {
                   value: 2,
-                  message: '닉네임은 2~10자 이내로 만들어주세요',
+                  message: '닉네임은 2~6자 이내로 만들어주세요',
                 },
                 maxLength: {
-                  value: 10,
-                  message: '닉네임은 2~10자 이내로 만들어주세요',
+                  value: 6,
+                  message: '닉네임은 2~6자 이내로 만들어주세요',
                 },
               })}
             />
