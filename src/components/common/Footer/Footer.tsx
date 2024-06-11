@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import LogoGray from '../../../../public/assets/logo/logo-gray.svg?react';
+import LogoGray from '@public/assets/logo/logo-gray.svg?react';
 import { ICONS } from '@/constants/icons';
 import FeedBackInput from './FeedBackInput';
 

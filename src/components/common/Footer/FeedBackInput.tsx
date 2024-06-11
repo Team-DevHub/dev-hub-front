@@ -3,13 +3,17 @@ import { Input } from '@/styles/component';
 import { useState } from 'react';
 import styled from 'styled-components';
 import emailjs from '@emailjs/browser';
+import { motion } from 'framer-motion';
 
 function FeedBackInput() {
   const [disabled, setDisabled] = useState(false);
   const [feedback, setFeedback] = useState<string>('');
 
   const handleSend = () => {
+    if (feedback.trim() === '') return;
+
     setDisabled(true);
+    setFeedback('');
     emailjs
       .send(
         import.meta.env.VITE_EMAIL_SERVICE_ID!,
@@ -21,7 +25,7 @@ function FeedBackInput() {
         window.alert('피드백이 전달되었습니다.');
         setDisabled(false);
       })
-      .catch((err) => console.log(err));
+      .catch(() => window.alert('다시 시도해주세요.'));
   };
 
   return (
@@ -33,7 +37,12 @@ function FeedBackInput() {
           value={feedback}
           onChange={(e) => setFeedback(e.target.value)}
         />
-        <SendIcon type='button' onClick={handleSend} disabled={disabled}>
+        <SendIcon
+          type='button'
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0 }}
+          onClick={handleSend}
+          disabled={disabled}>
           <img src={ICONS.share} alt='send' />
         </SendIcon>
       </div>
@@ -67,7 +76,7 @@ const FeedBack = styled.div`
   }
 `;
 
-const SendIcon = styled.button`
+const SendIcon = styled(motion.button)`
   width: 36px;
   height: 36px;
   display: flex;
@@ -89,6 +98,10 @@ const SendIcon = styled.button`
   }
 
   &:disabled {
+    pointer-events: none;
     background-color: ${({ theme }) => theme.color_textGray};
+    &:hover {
+      opacity: 0.7;
+    }
   }
 `;
