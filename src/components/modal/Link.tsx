@@ -39,6 +39,7 @@ export default Link;
 
 const LinkContainer = styled.div`
   width: 100%;
+  height: 55px;
   display: flex;
   align-items: center;
   padding: 23px 20px;

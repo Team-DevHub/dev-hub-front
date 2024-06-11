@@ -16,7 +16,7 @@ function BannerWithTitle({ title }: { title: string }) {
           <strong>{title}</strong>
         </Title>
       </TitleWrapper>
-      <Musseuk src={IMAGES.musseuk.banner} alt='banner' />
+      <Musseuk src={IMAGES.musseuk.max} alt='banner' />
     </Container>
   );
 }
@@ -67,5 +67,4 @@ const Title = styled.h2`
 
 const Musseuk = styled.img`
   align-self: flex-end;
-  margin-right: 100px;
 `;

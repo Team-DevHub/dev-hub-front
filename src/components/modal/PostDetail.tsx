@@ -103,7 +103,6 @@ const Post = styled.div`
   & h2 {
     margin-bottom: 20px;
     line-height: 160%;
-    letter-spacing: 1px;
   }
 `;
 

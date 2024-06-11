@@ -96,6 +96,7 @@ export default MyPostList;
 
 const Wrapper = styled.div`
   width: 100%;
+  overflow: hidden;
 `;
 
 const Title = styled.div`
@@ -115,6 +116,7 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.color_bgWhite};
   border: 1px solid ${({ theme }) => theme.color_borderGray};
   border-radius: 12px;
+  overflow: hidden;
 `;
 
 const TableWrapper = styled.div`
@@ -122,6 +124,7 @@ const TableWrapper = styled.div`
 `;
 
 const TBodyWrapper = styled.div`
+  min-height: 260px;
   max-height: 400px;
   overflow-y: auto;
 
@@ -142,9 +145,6 @@ const TBodyWrapper = styled.div`
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
-  tr:last-child td {
-    border-bottom: none;
-  }
 `;
 
 const columnStyles = css`

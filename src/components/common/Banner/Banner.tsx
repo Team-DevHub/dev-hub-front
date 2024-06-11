@@ -13,7 +13,7 @@ function Banner() {
           한단계 더 성장해볼까요?
         </Title>
       </TitleWrapper>
-      <img src={IMAGES.musseuk.max} alt='max' style={{ alignSelf: 'end' }} />
+      <img src={IMAGES.musseuk.banner} alt='max' style={{ alignSelf: 'end' }} />
     </Container>
   );
 }
@@ -26,6 +26,10 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  img {
+    margin-right: 100px;
+  }
 `;
 
 const TitleWrapper = styled.div`
