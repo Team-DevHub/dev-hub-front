@@ -24,7 +24,7 @@ const Container = styled.div`
   overflow: auto;
   margin: 10px 0;
   padding: 20px;
-  gap: 20px;
+  gap: 25px;
 
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.color_borderGray};

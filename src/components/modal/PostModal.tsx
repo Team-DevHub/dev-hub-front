@@ -33,7 +33,7 @@ function PostModal({ closeModal }: Props) {
           <PostDetail />
           <Comment>
             <Title>
-              <h4>댓글</h4>
+              <h3>댓글</h3>
               <span>{selectedPost?.totalComments}</span>
             </Title>
             <PostComment />
