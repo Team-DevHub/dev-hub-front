@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ICONS } from '@/constants/assets';
+import LeftArrow from '@public/assets/icon/arrow-left.svg?react';
+import RightArrow from '@public/assets/icon/arrow-right.svg?react';
 
 interface PaginationProps {
   totalPosts: number;
@@ -52,9 +53,9 @@ function Pagination({ totalPosts, currentPage }: PaginationProps) {
     <Container>
       <PagingBox>
         <MoveButton
-          disabled={isStart}
-          onClick={() => handlePageChange(getPageNum(false))}>
-          <img src={ICONS.arrow.left} alt='arrow' />
+          onClick={() => handlePageChange(getPageNum(false))}
+          disabled={isStart}>
+          <LeftArrow />
         </MoveButton>
         <ButtonWrapper>
           {pageArray().map((num) => (
@@ -69,7 +70,7 @@ function Pagination({ totalPosts, currentPage }: PaginationProps) {
         <MoveButton
           disabled={isEnd}
           onClick={() => handlePageChange(getPageNum(true))}>
-          <img src={ICONS.arrow.right} alt='arrow' />
+          <RightArrow />
         </MoveButton>
       </PagingBox>
     </Container>
@@ -103,7 +104,7 @@ const MoveButton = styled.button<{ disabled: boolean }>`
   border: none;
   & svg {
     fill: ${({ theme, disabled }) =>
-      disabled ? theme.color_borderGray : theme.color_key};
+      disabled ? theme.color_bgLightGray : theme.color_key};
   }
 `;
 
