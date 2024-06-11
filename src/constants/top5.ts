@@ -1,4 +1,4 @@
-const PATH = '/src/assets/top5/';
+const PATH = '/assets/top5/';
 
 export const top5Icon: {
   [key: number]: string;

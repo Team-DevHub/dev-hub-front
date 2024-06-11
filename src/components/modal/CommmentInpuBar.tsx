@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ChangeEvent, useState, KeyboardEvent } from 'react';
-import { ICONS } from '@/assets/icon/icons';
+import { ICONS } from '../../constants/icons';
 import useStore from '@/store/store';
 import { Input } from '@/styles/component';
 import { postAPI } from '@/api/postAPI';

@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import ArrowRight from '@/assets/icon/arrow-right.svg?react';
-import ArrowLeft from '@/assets/icon/arrow-left.svg?react';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { ICONS } from '@/constants/icons';
 
 interface PaginationProps {
   totalPosts: number;
@@ -55,7 +54,7 @@ function Pagination({ totalPosts, currentPage }: PaginationProps) {
         <MoveButton
           disabled={isStart}
           onClick={() => handlePageChange(getPageNum(false))}>
-          <ArrowRight />
+          <img src={ICONS.arrow.right} alt='arrow' />
         </MoveButton>
         <ButtonWrapper>
           {pageArray().map((num) => (
@@ -70,7 +69,7 @@ function Pagination({ totalPosts, currentPage }: PaginationProps) {
         <MoveButton
           disabled={isEnd}
           onClick={() => handlePageChange(getPageNum(true))}>
-          <ArrowLeft />
+          <img src={ICONS.arrow.left} alt='arrow' />
         </MoveButton>
       </PagingBox>
     </Container>

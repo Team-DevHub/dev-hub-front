@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import FilterIcon from '@/assets/icon/filter-arrow.svg?react';
 import { useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import useClickOutside from '@/hooks/useClickOutside';
+import { ICONS } from '@/constants/icons';
 
 function Filter() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -14,7 +14,7 @@ function Filter() {
   return (
     <CustomSelect $isOpen={isOpen} onClick={() => setIsOpen((prev) => !prev)}>
       <Content>{selected}</Content>
-      <FilterIcon />
+      <img src={ICONS.filter} />
 
       <AnimatePresence>
         {isOpen && (

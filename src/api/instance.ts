@@ -1,7 +1,6 @@
 import { TokenKey } from '@/constants/storage';
 import axios from 'axios';
-// const baseUrl = 'http://localhost:8888';
-const baseUrl = 'http://dev-hub.ap-northeast-2.elasticbeanstalk.com';
+const baseUrl = 'https://api.devhub-server.site';
 
 // token 인증이 필요 없는 요청
 export const baseInstance = axios.create({

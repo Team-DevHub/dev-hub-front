@@ -1,4 +1,6 @@
-const PATH = '/src/assets/icon/';
+const PATH = '/assets/icon/';
+const IMG_PATH = '/assets/image/';
+const LOGO_PATH = '/assets/logo/';
 
 export const ICONS = {
   checkbox: {
@@ -38,4 +40,21 @@ export const ICONS = {
   notion: PATH + 'notion.svg',
   github: PATH + 'github.svg',
   question: PATH + 'question-icon.svg',
+  link: PATH + 'link-icon.svg',
+};
+
+export const IMAGES = {
+  musseuk: {
+    banner: IMG_PATH + 'banner-musseuk.svg',
+    account: IMG_PATH + 'account-musseuk.svg',
+    warning: IMG_PATH + 'warning-musseuk.svg',
+    delete: IMG_PATH + 'delete-musseuk.svg',
+    notFound: IMG_PATH + 'musseuk_404.svg',
+  },
+  nonMember: IMG_PATH + 'non-member-profile.svg',
+};
+
+export const LOGOS = {
+  logo_no_bg: LOGO_PATH + 'logo-no-bg.svg',
+  logo_key: LOGO_PATH + 'logo-key.svg',
 };

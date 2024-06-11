@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import LogoWhite from '@/assets/logo/logo-no-bg.svg?react';
 import { useNavigate } from 'react-router-dom';
+import { LOGOS } from '@/constants/icons';
 
 function Header() {
   const navigate = useNavigate();
   return (
     <HeaderContainer>
       <Logo onClick={() => navigate('/')}>
-        <LogoWhite width={32} height={32} />
+        <img src={LOGOS.logo_no_bg} width={32} height={32} />
         <h1>DevHub</h1>
       </Logo>
 

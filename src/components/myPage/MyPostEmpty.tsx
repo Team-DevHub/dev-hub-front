@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ICONS } from '@/assets/icon/icons';
+import { ICONS } from '../../constants/icons';
 import { useNavigate } from 'react-router-dom';
 
 function MyPostEmpty() {

@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, KeyboardEvent } from 'react';
 import styled from 'styled-components';
-import { ICONS } from '@/assets/icon/icons';
+import { ICONS } from '../../constants/icons';
 import { useSearchParams } from 'react-router-dom';
 import { Input } from '@/styles/component';
 

@@ -1,9 +1,7 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import MusseukSVG from '@/assets/image/account-musseuk.svg?react';
-import LogoKey from '@/assets/logo/logo-key.svg?react';
 import { Button } from '@/styles/component';
-import { ICONS } from '@/assets/icon/icons';
+import { ICONS, IMAGES, LOGOS } from '@/constants/icons';
 
 const AccountLayout = () => {
   const navigate = useNavigate();
@@ -12,7 +10,7 @@ const AccountLayout = () => {
       <DescriptionContainer>
         <TextContainer>
           <Logo>
-            <LogoKey width={50} height={50} />
+            <img src={LOGOS.logo_key} alt='logo' width={50} height={50} />
             <h1>DevHub</h1>
           </Logo>
           <p className='description'>
@@ -23,7 +21,7 @@ const AccountLayout = () => {
             <img src={ICONS.arrow.go} alt='go' />
           </Button>
         </TextContainer>
-        <MusseukSVG />
+        <img src={IMAGES.musseuk.account} alt='musseuk' />
       </DescriptionContainer>
       <CardContainer>
         <Outlet />

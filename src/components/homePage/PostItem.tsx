@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import CommentIcon from '@/assets/icon/comment-icon.svg?react';
-import PersonIcon from '@/assets/icon/person-icon.svg?react';
 import { motion } from 'framer-motion';
 import { PostSummary } from '@/types/api/response';
 import { formatDate } from '@/utils/format';
 import { getCategoryName } from '@/utils/getCategoryName';
+import { ICONS } from '@/constants/icons';
 
 interface PostItemProps {
   post: PostSummary;
@@ -28,10 +27,10 @@ function PostItem({ post, onClick }: PostItemProps) {
       <PostTitle>{post.title}</PostTitle>
       <BottomBar>
         <Comment>
-          <CommentIcon /> {post.totalComments}
+          <img src={ICONS.comment} alt='icon' /> {post.totalComments}
         </Comment>
         <Writer>
-          <PersonIcon /> {post.writer}
+          <img src={ICONS.person} alt='person' /> {post.writer}
         </Writer>
       </BottomBar>
     </Container>

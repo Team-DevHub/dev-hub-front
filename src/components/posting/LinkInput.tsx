@@ -1,6 +1,6 @@
+import { ICONS } from '@/constants/icons';
 import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import LinkIcon from '@/assets/icon/link-icon.svg?react';
 
 interface LinkInputProps {
   links: string[];
@@ -44,7 +44,7 @@ function LinkInput({ links, onLinksChange }: LinkInputProps) {
       <h2>링크</h2>
       {links.map((link, index) => (
         <Wrapper key={index}>
-          <StyledLinkIcon />
+          <StyledLinkIcon src={ICONS.link} />
           <StyledInput
             type='text'
             value={link}
@@ -76,7 +76,7 @@ const StyledInput = styled.input`
   border: 1px solid ${({ theme }) => theme.color_borderGray};
 `;
 
-const StyledLinkIcon = styled(LinkIcon)`
+const StyledLinkIcon = styled.img`
   width: 20px;
   height: 20px;
   position: absolute;

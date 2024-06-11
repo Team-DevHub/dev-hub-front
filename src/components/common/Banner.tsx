@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import BannerMusseuk from '@/assets/image/banner-musseuk.svg?react';
-import BackIcon from '@/assets/icon/back-icon.svg?react';
 import { useNavigate } from 'react-router-dom';
 import useStore from '@/store/store';
+import { ICONS, IMAGES } from '@/constants/icons';
 
 interface BannerProps {
   hasBackBtn: boolean; // back 버튼 여부
@@ -18,7 +17,7 @@ function Banner({ hasBackBtn, title }: BannerProps) {
       <TitleWrapper>
         {hasBackBtn && (
           <BackButton onClick={() => navigate(-1)}>
-            <BackIcon />
+            <img src={ICONS.back} />
             뒤로 가기
           </BackButton>
         )}
@@ -33,7 +32,7 @@ function Banner({ hasBackBtn, title }: BannerProps) {
           )}
         </Title>
       </TitleWrapper>
-      <Musseuk />
+      <Musseuk src={IMAGES.musseuk.banner} alt='banner' />
     </Container>
   );
 }
@@ -82,7 +81,7 @@ const Title = styled.h2`
   }
 `;
 
-const Musseuk = styled(BannerMusseuk)`
+const Musseuk = styled.img`
   align-self: flex-end;
   margin-right: 40px;
 `;

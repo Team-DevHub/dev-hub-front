@@ -22,8 +22,11 @@
     "noFallthroughCasesInSwitch": true,
 
     "baseUrl": "./src",
-    "paths": { "@/*": ["*"] }
+    "paths": {
+      "@/*": ["*"],
+      "@public/*": ["../public/*"]
+    }
   },
-  "include": ["src", "svg.d.ts"],
+  "include": ["src", "svg.d.ts", "public/assets"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

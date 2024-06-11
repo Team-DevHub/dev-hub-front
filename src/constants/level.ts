@@ -1,4 +1,4 @@
-const PATH = '/src/assets/level/';
+const PATH = '/assets/level/';
 
 export interface LevelType {
   level: string;
