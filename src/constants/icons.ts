@@ -41,6 +41,7 @@ export const ICONS = {
   github: PATH + 'github.svg',
   question: PATH + 'question-icon.svg',
   link: PATH + 'link-icon.svg',
+  x: PATH + 'x-icon.svg',
 };
 
 export const IMAGES = {

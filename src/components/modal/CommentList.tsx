@@ -7,6 +7,9 @@ function CommentList() {
 
   return (
     <Container>
+      {selectedPost?.totalComments === 0 && (
+        <CommentEmpty>아직 댓글이 없어요</CommentEmpty>
+      )}
       {selectedPost?.comments.map((comment) => (
         <CommentItem key={comment.commentId} comment={comment} />
       ))}
@@ -21,10 +24,11 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   overflow: auto;
   margin: 10px 0;
   padding: 20px;
-  gap: 20px;
+  gap: 25px;
 
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.color_borderGray};
@@ -35,4 +39,10 @@ const Container = styled.div`
   }
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+`;
+
+const CommentEmpty = styled.div`
+  padding: 240px 0;
+  color: ${({ theme }) => theme.color_textGray};
+  font-size: ${({ theme }) => theme.fontSize_md};
 `;

@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, KeyboardEvent } from 'react';
+import { useState, ChangeEvent, KeyboardEvent, useEffect } from 'react';
 import styled from 'styled-components';
 import { ICONS } from '../../constants/icons';
 import { useSearchParams } from 'react-router-dom';
@@ -11,6 +11,11 @@ interface SearchInputProps {
 function SearchInput({ onSearch }: SearchInputProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [value, setValue] = useState<string>(searchParams.get('search') || '');
+
+  useEffect(() => {
+    const currentSearch = searchParams.get('search') || '';
+    setValue(currentSearch);
+  }, [searchParams]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);

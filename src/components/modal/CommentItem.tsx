@@ -42,17 +42,19 @@ function CommentItem({ comment }: CommentItemProps) {
         </Writer>
         <Comment>{comment.content}</Comment>
       </Content>
-      <DeleteButton
-        src={isCommentWriter ? ICONS.delete.red : ICONS.delete.black}
-        alt='delete'
-        $isCommentWriter={isCommentWriter}
-        onClick={handleDeleteClick}
-      />
+      {isCommentWriter && (
+        <DeleteButton src={ICONS.x} alt='delete' onClick={handleDeleteClick} />
+      )}
     </Container>
   );
 }
 
 export default CommentItem;
+
+const DeleteButton = styled.img`
+  opacity: 0;
+  transition: opacity 0.3s;
+`;
 
 const Container = styled.div`
   width: 100%;
@@ -60,6 +62,10 @@ const Container = styled.div`
   flex-wrap: nowrap;
   justify-content: space-between;
   gap: 15px;
+
+  &:hover ${DeleteButton} {
+    opacity: 1;
+  }
 `;
 
 const Content = styled.div`
@@ -71,7 +77,7 @@ const Content = styled.div`
 
 const Writer = styled.div`
   display: flex;
-  gap: 5px;
+  gap: 12px;
 
   & span {
     color: ${({ theme }) => theme.color_textGray};
@@ -84,12 +90,4 @@ const Comment = styled.span`
   font-size: ${({ theme }) => theme.fontSize_base};
   color: ${({ theme }) => theme.color_textBlack};
   line-height: 140%;
-`;
-
-const DeleteButton = styled.img<{ $isCommentWriter: boolean }>`
-  cursor: ${({ $isCommentWriter }) =>
-    $isCommentWriter ? 'pointer' : 'default'};
-  &:hover {
-    opacity: ${({ $isCommentWriter }) => ($isCommentWriter ? 0.8 : 1)};
-  }
 `;
