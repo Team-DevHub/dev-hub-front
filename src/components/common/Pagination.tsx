@@ -54,7 +54,7 @@ function Pagination({ totalPosts, currentPage }: PaginationProps) {
         <MoveButton
           disabled={isStart}
           onClick={() => handlePageChange(getPageNum(false))}>
-          <img src={ICONS.arrow.right} alt='arrow' />
+          <img src={ICONS.arrow.left} alt='arrow' />
         </MoveButton>
         <ButtonWrapper>
           {pageArray().map((num) => (
@@ -69,7 +69,7 @@ function Pagination({ totalPosts, currentPage }: PaginationProps) {
         <MoveButton
           disabled={isEnd}
           onClick={() => handlePageChange(getPageNum(true))}>
-          <img src={ICONS.arrow.left} alt='arrow' />
+          <img src={ICONS.arrow.right} alt='arrow' />
         </MoveButton>
       </PagingBox>
     </Container>
