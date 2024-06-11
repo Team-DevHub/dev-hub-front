@@ -1,4 +1,4 @@
-import Banner from '@/components/common/Banner/Banner';
+// import Banner from '@/components/common/Banner/Banner';
 import Category from '@/components/common/Category';
 import Pagination from '@/components/common/Pagination';
 import PostList from '@/components/homePage/PostList';
@@ -7,8 +7,8 @@ import SideBar from '@/components/homePage/SideBar';
 import { useProfile } from '@/hooks/useProfile';
 import PostEmpty from '@/components/posts/PostEmpty';
 import { usePosts } from '@/hooks/usePosts';
-
 import styled from 'styled-components';
+import GuideBanner from '@/components/common/Banner/GuideBanner';
 
 function HomePage() {
   const { posts, pagination, isEmpty } = usePosts();
@@ -17,7 +17,8 @@ function HomePage() {
 
   return (
     <>
-      <Banner hasBackBtn={false} />
+      {/* <Banner hasBackBtn={false} /> */}
+      <GuideBanner />
       <Container>
         <Content>
           <TopBar>

@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import '@public/assets/font/font.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import reset from 'styled-reset';
 
 export const GlobalStyle = createGlobalStyle`

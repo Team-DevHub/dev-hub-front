@@ -41,6 +41,7 @@ export const ICONS = {
   github: PATH + 'github.svg',
   question: PATH + 'question-icon.svg',
   link: PATH + 'link-icon.svg',
+  check: PATH + 'check.svg',
 };
 
 export const IMAGES = {
@@ -52,6 +53,7 @@ export const IMAGES = {
     notFound: IMG_PATH + 'musseuk_404.svg',
     max: IMG_PATH + 'max-musseuk.svg',
   },
+  people: IMG_PATH + 'people.svg',
   nonMember: IMG_PATH + 'non-member-profile.svg',
 };
 
