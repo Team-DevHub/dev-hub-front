@@ -70,7 +70,7 @@ function MyPostList() {
                       <Td className='createAt'>{formatDate(post.createdAt)}</Td>
                       <Td className='delete'>
                         <img
-                          src={ICONS.delete.red}
+                          src={ICONS.delete.black}
                           alt='delete'
                           style={{ cursor: 'pointer' }}
                           onClick={() => handleDelete(post.postId)}
@@ -122,7 +122,6 @@ const TableWrapper = styled.div`
 `;
 
 const TBodyWrapper = styled.div`
-  min-height: 200px;
   max-height: 400px;
   overflow-y: auto;
 
