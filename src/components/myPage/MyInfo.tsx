@@ -126,7 +126,7 @@ const CircleButton = styled.button`
   padding: 10px 20px;
   color: ${({ theme }) => theme.color_textBlack};
   font-size: ${({ theme }) => theme.fontSize_sm};
-  font-weight: 500;
+  font-weight: 800;
 
   &:hover {
     opacity: 0.9;
