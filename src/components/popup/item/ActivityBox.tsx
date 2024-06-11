@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import useStore from '@/store/store';
-import { IMAGES } from '@/constants/icons';
+import { IMAGES } from '@/constants/assets';
 
 function ActivityBox() {
   const { user } = useStore();

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ICONS } from '@/constants/icons';
+import { ICONS } from '@/constants/assets';
 
 interface PaginationProps {
   totalPosts: number;

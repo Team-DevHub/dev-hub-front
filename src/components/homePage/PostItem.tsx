@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { PostSummary } from '@/types/api/response';
 import { formatDate } from '@/utils/format';
 import { getCategoryName } from '@/utils/getCategoryName';
-import { ICONS } from '@/constants/icons';
+import { ICONS } from '@/constants/assets';
 
 interface PostItemProps {
   post: PostSummary;

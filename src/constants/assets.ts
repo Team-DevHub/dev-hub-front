@@ -50,6 +50,7 @@ export const IMAGES = {
     warning: IMG_PATH + 'warning-musseuk.svg',
     delete: IMG_PATH + 'delete-musseuk.svg',
     notFound: IMG_PATH + 'musseuk_404.svg',
+    max: IMG_PATH + 'max-musseuk.svg',
   },
   nonMember: IMG_PATH + 'non-member-profile.svg',
 };

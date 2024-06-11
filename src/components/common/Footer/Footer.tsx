@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import LogoGray from '@public/assets/logo/logo-gray.svg?react';
-import { ICONS } from '@/constants/icons';
+import { ICONS } from '@/constants/assets';
 import FeedBackInput from './FeedBackInput';
 
 function Footer() {

@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '@/styles/component';
-import { ICONS, IMAGES, LOGOS } from '@/constants/icons';
+import { ICONS, IMAGES, LOGOS } from '@/constants/assets';
 
 const AccountLayout = () => {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Banner from '@/components/common/Banner';
+import Banner from '@/components/common/Banner/Banner';
 import MyInfo from '@/components/myPage/MyInfo';
 import MyLevel from '@/components/myPage/MyLevel';
 import MyActivity from '@/components/myPage/MyActivity';

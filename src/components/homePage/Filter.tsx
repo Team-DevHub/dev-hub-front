@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import useClickOutside from '@/hooks/useClickOutside';
-import { ICONS } from '@/constants/icons';
+import { ICONS } from '@/constants/assets';
 
 function Filter() {
   const ref = useRef<HTMLDivElement | null>(null);

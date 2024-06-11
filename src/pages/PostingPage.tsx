@@ -3,11 +3,11 @@ import Category from '@/components/common/Category';
 import TitleInput from '@/components/posting/TitleInput';
 import LinkInput from '@/components/posting/LinkInput';
 import ContentInput from '@/components/posting/ContentInput';
-import Banner from '@/components/common/Banner';
+import Banner from '@/components/common/Banner/Banner';
 import { postAPI } from '@/api/postAPI';
 import { useNavigate } from 'react-router-dom';
 import Button from '@/components/common/Button';
-import { ICONS } from '../constants/icons';
+import { ICONS } from '../constants/assets';
 import { useForm, Controller } from 'react-hook-form';
 
 interface PostingForm {

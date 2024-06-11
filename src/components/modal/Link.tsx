@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import useStore from '@/store/store';
-import { ICONS } from '@/constants/icons';
+import { ICONS } from '@/constants/assets';
 
 function Link() {
   const { selectedPost } = useStore();

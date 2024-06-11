@@ -1,4 +1,4 @@
-import { ICONS } from '../../../constants/icons';
+import { ICONS } from '../../../constants/assets';
 import styled from 'styled-components';
 
 interface Props {

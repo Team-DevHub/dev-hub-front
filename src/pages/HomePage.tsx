@@ -1,4 +1,4 @@
-import Banner from '@/components/common/Banner';
+import Banner from '@/components/common/Banner/Banner';
 import Category from '@/components/common/Category';
 import Pagination from '@/components/common/Pagination';
 import PostList from '@/components/homePage/PostList';

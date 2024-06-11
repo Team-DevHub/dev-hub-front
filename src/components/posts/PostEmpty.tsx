@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ICONS } from '../../constants/icons';
+import { ICONS } from '../../constants/assets';
 
 function PostEmpty() {
   return (
