@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import PostItem from './PostItem';
-import Filter from './Filter';
-
 import PostModal from '../modal/PostModal';
 import { AnimatePresence } from 'framer-motion';
 import { PostSummary } from '@/types/api/response';
@@ -17,13 +15,10 @@ function PostList({ posts, totalPosts }: PostListProps) {
 
   return (
     <Container>
-      <TitleBar>
-        <TitleWrapper>
-          <h2>게시글</h2>
-          <span>{totalPosts}개</span>
-        </TitleWrapper>
-        <Filter />
-      </TitleBar>
+      <TitleWrapper>
+        <h2>게시글</h2>
+        <span>{totalPosts}개</span>
+      </TitleWrapper>
       <Posts>
         {posts.map((post: PostSummary) => (
           <PostItem
@@ -46,13 +41,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-`;
-
-const TitleBar = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  gap: 20px;
 `;
 
 const TitleWrapper = styled.div`
