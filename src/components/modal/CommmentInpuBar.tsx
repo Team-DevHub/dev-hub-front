@@ -4,7 +4,7 @@ import { ICONS } from '../../constants/assets';
 import useStore from '@/store/store';
 import { Input } from '@/styles/component';
 import { postAPI } from '@/api/postAPI';
-import { useAuth } from '@/hooks/useAuth';
+import { useUserInfo } from '@/hooks/useUserInfo';
 
 interface CommentsForm {
   postId: number;
@@ -12,7 +12,7 @@ interface CommentsForm {
 }
 
 function CommentInputBar() {
-  const { userData } = useAuth();
+  const { userData } = useUserInfo();
   const { selectedPost, setSelectedPost } = useStore();
   const [form, setForm] = useState<CommentsForm>({
     postId: selectedPost?.postId || 0,

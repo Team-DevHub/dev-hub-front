@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { ICONS } from '@/constants/assets';
-import { useAuth } from '@/hooks/useAuth';
+import { useUserInfo } from '@/hooks/useUserInfo';
 
 function MyActivity() {
-  const { userData } = useAuth();
+  const { userData } = useUserInfo();
   return (
     <Wrapper>
       <h2>나의 활동</h2>

@@ -5,14 +5,14 @@ import { formatDate } from '@/utils/format';
 import { LEVEL } from '@/constants/level';
 import { ICONS } from '../../constants/assets';
 import useStore from '@/store/store';
-import { useAuth } from '@/hooks/useAuth';
+import { useUserInfo } from '@/hooks/useUserInfo';
 
 interface CommentItemProps {
   comment: IComment;
 }
 
 function CommentItem({ comment }: CommentItemProps) {
-  const { userData } = useAuth();
+  const { userData } = useUserInfo();
   const { selectedPost, setSelectedPost } = useStore();
 
   const levelIcon = LEVEL[comment.writer.level]?.icon ?? '';

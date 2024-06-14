@@ -3,14 +3,14 @@ import PopUpLayout from '../layouts/PopUpLayout';
 import LevelItem from './item/LevelItem';
 import styled from 'styled-components';
 import { levelData } from '@/data/levelData';
-import { useAuth } from '@/hooks/useAuth';
+import { useUserInfo } from '@/hooks/useUserInfo';
 
 interface Props {
   closePopup: () => void;
 }
 
 function LevelPopUp({ closePopup }: Props) {
-  const { userData } = useAuth();
+  const { userData } = useUserInfo();
 
   if (!userData) return null;
 

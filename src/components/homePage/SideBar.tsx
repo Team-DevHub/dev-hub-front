@@ -8,12 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import NonMemberPopUp from '../popup/NonMemberPopUp';
 import { AnimatePresence } from 'framer-motion';
 import NonMemberProfile from './NonMemberProfile';
-import { useAuth } from '@/hooks/useAuth';
+import { useUserInfo } from '@/hooks/useUserInfo';
 
 function SideBar() {
   const [open, setOpen] = useState<boolean>(false);
   const navigate = useNavigate();
-  const { userData } = useAuth();
+  const { userData } = useUserInfo();
 
   if (open) {
     document.body.style.overflow = 'hidden';

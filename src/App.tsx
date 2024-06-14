@@ -22,10 +22,10 @@ import Footer from './components/common/Footer/Footer';
 import ScrollToTop from './components/layouts/ScrollToTop';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './api/queryClient';
-import { useAuth } from './hooks/useAuth';
+import useStore from './store/store';
 
 const ProtectedRoute = ({ redirectPath = '/' }) => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useStore();
   return isLoggedIn ? (
     <Navigate to={redirectPath} />
   ) : (

@@ -8,10 +8,10 @@ import PostModal from '../modal/PostModal';
 import { useModal } from '@/hooks/useModal';
 import MyPostEmpty from './MyPostEmpty';
 import { ICONS } from '@/constants/assets';
-import { useAuth } from '@/hooks/useAuth';
+import { useUserInfo } from '@/hooks/useUserInfo';
 
 function MyPostList() {
-  const { userData } = useAuth();
+  const { userData } = useUserInfo();
   const [myPosts, setMyPosts] = useState<PostSummary[] | null>(null);
   const { isModalOpen, handleClick, closeModal } = useModal();
 

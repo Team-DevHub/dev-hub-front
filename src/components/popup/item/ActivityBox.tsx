@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { IMAGES } from '@/constants/assets';
-import { useAuth } from '@/hooks/useAuth';
+import { useUserInfo } from '@/hooks/useUserInfo';
 
 function ActivityBox() {
-  const { userData } = useAuth();
+  const { userData } = useUserInfo();
 
   if (!userData) return null;
 

@@ -4,9 +4,11 @@ import DeleteAccountPopUp from '../popup/DeleteAccountPopUp';
 import { AnimatePresence } from 'framer-motion';
 import { ICONS } from '../../constants/assets';
 import { useAuth } from '@/hooks/useAuth';
+import { useUserInfo } from '@/hooks/useUserInfo';
 
 function MyInfo() {
-  const { userData, logOut } = useAuth();
+  const { logOut } = useAuth();
+  const { userData } = useUserInfo();
   const [open, setOpen] = useState<boolean>(false);
 
   // 팝업 등장 시 뒷배경 스크롤 방지

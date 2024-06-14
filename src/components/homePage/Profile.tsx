@@ -2,12 +2,10 @@ import styled from 'styled-components';
 import Button from '../common/Button';
 import { ICONS } from '../../constants/assets';
 import { useNavigate } from 'react-router-dom';
-import { useLevel } from '@/hooks/useLevel';
-import { useAuth } from '@/hooks/useAuth';
+import { useUserInfo } from '@/hooks/useUserInfo';
 
 function Profile() {
-  const { userData } = useAuth();
-  const { userLevel } = useLevel();
+  const { userData, userLevel } = useUserInfo();
   const navigate = useNavigate();
 
   if (!userData) return null;
