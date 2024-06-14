@@ -8,12 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import NonMemberPopUp from '../popup/NonMemberPopUp';
 import { AnimatePresence } from 'framer-motion';
 import NonMemberProfile from './NonMemberProfile';
-import useStore from '@/store/store';
+import { useAuth } from '@/hooks/useAuth';
 
 function SideBar() {
   const [open, setOpen] = useState<boolean>(false);
   const navigate = useNavigate();
-  const { user } = useStore();
+  const { userData } = useAuth();
 
   if (open) {
     document.body.style.overflow = 'hidden';
@@ -27,10 +27,10 @@ function SideBar() {
         size='medium'
         text='지식 공유하기'
         bgColor='color_keyBlue'
-        onClick={user ? () => navigate('/posting') : () => setOpen(true)}
+        onClick={userData ? () => navigate('/posting') : () => setOpen(true)}
         icon={ICONS.pencil}
       />
-      {user ? <Profile /> : <NonMemberProfile />}
+      {userData ? <Profile /> : <NonMemberProfile />}
       <Top5 />
       <AnimatePresence>
         {open && <NonMemberPopUp closePopUp={() => setOpen(false)} />}

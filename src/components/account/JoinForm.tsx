@@ -10,13 +10,14 @@ import FormInput from '../common/FormInput/FormInput';
 import { useState } from 'react';
 import { FormRegex } from '@/utils/regex';
 import FormButton from '../common/FormInput/FormButton';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ICONS } from '../../constants/assets';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { userAPI } from '@/api/userAPI';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '@/hooks/useAuth';
 
-interface JoinForm {
+export interface JoinForm {
   nickname: string;
   email: string;
   password: string;
@@ -29,7 +30,7 @@ interface Check {
 }
 
 const JoinForm = () => {
-  const navigate = useNavigate();
+  const { join } = useAuth();
   const [nameCheck, setNameCheck] = useState<Check>({
     canUse: null,
     message: '',
@@ -62,18 +63,7 @@ const JoinForm = () => {
 
   const handleSubmitForm = async (data: JoinForm) => {
     if (emailCheck.canUse && nameCheck.canUse) {
-      await userAPI
-        .join({
-          nickname: data.nickname.trim(),
-          email: data.email,
-          password: data.password,
-        })
-        .then((data) => {
-          if (data?.isSuccess) {
-            alert('회원가입 되었습니다.');
-            navigate('/account/login');
-          }
-        });
+      join(data);
     }
   };
 

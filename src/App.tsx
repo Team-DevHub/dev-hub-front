@@ -16,15 +16,17 @@ import ResetPasswordForm from './components/account/ResetPasswordForm';
 import HomePage from './pages/HomePage';
 import MyPage from './pages/MyPage';
 import PostingPage from './pages/PostingPage';
-import useStore from './store/store';
 import NotFoundPage from './pages/NotFoundPage';
 import MainLayout from './components/layouts/MainLayout';
 import Footer from './components/common/Footer/Footer';
 import ScrollToTop from './components/layouts/ScrollToTop';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './api/queryClient';
+import { useAuth } from './hooks/useAuth';
 
 const ProtectedRoute = ({ redirectPath = '/' }) => {
-  const { user } = useStore();
-  return user ? (
+  const { isLoggedIn } = useAuth();
+  return isLoggedIn ? (
     <Navigate to={redirectPath} />
   ) : (
     <ScrollToTop>
@@ -78,10 +80,12 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 

@@ -2,18 +2,11 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import DeleteAccountPopUp from '../popup/DeleteAccountPopUp';
 import { AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import { LOGIN_ROUTER_PATH } from '@/constants/path';
-import useStore from '@/store/store';
-import { TokenKey } from '@/constants/storage';
 import { ICONS } from '../../constants/assets';
-import { useProfile } from '@/hooks/useProfile';
+import { useAuth } from '@/hooks/useAuth';
 
 function MyInfo() {
-  useProfile();
-  const navigate = useNavigate();
-  const { logOut, user } = useStore();
-  const clearStorage = useStore.persist.clearStorage;
+  const { userData, logOut } = useAuth();
   const [open, setOpen] = useState<boolean>(false);
 
   // 팝업 등장 시 뒷배경 스크롤 방지
@@ -23,14 +16,7 @@ function MyInfo() {
     document.body.style.overflow = 'auto';
   }
 
-  const handleLogOut = () => {
-    logOut();
-    localStorage.removeItem(TokenKey);
-    clearStorage();
-    navigate(LOGIN_ROUTER_PATH.login);
-  };
-
-  if (!user) return null;
+  if (!userData) return null;
 
   return (
     <Wrapper>
@@ -39,19 +25,19 @@ function MyInfo() {
         <Content>
           <Info>
             <h4>이름</h4>
-            <span>{user.nickname}</span>
+            <span>{userData.nickname}</span>
           </Info>
           <Info>
             <h4>이메일</h4>
-            <span>{user.email}</span>
+            <span>{userData.email}</span>
           </Info>
           <Info>
             <h4>가입일</h4>
-            <span>{user.joinDate}</span>
+            <span>{userData.joinDate}</span>
           </Info>
         </Content>
         <ButtonContainer>
-          <CircleButton onClick={handleLogOut}>
+          <CircleButton onClick={logOut}>
             <img src={ICONS.logout} alt='logout' />
             <span>로그아웃</span>
           </CircleButton>

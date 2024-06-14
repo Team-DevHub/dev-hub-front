@@ -1,16 +1,16 @@
 import styled from 'styled-components';
-import useStore from '@/store/store';
 import { IMAGES } from '@/constants/assets';
+import { useAuth } from '@/hooks/useAuth';
 
 function Banner() {
-  const { user } = useStore();
+  const { userData } = useAuth();
 
   return (
     <Container>
       <TitleWrapper>
         <Title>
-          <strong>{user ? user.nickname + '님, ' : '여러분,'}</strong> 오늘도
-          한단계 더 성장해볼까요?
+          <strong>{userData ? userData.nickname + '님, ' : '여러분,'}</strong>{' '}
+          오늘도 한단계 더 성장해볼까요?
         </Title>
       </TitleWrapper>
       <img src={IMAGES.musseuk.banner} alt='max' style={{ alignSelf: 'end' }} />

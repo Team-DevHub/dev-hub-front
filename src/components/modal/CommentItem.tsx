@@ -5,16 +5,18 @@ import { formatDate } from '@/utils/format';
 import { LEVEL } from '@/constants/level';
 import { ICONS } from '../../constants/assets';
 import useStore from '@/store/store';
+import { useAuth } from '@/hooks/useAuth';
 
 interface CommentItemProps {
   comment: IComment;
 }
 
 function CommentItem({ comment }: CommentItemProps) {
-  const { user, selectedPost, setSelectedPost } = useStore();
+  const { userData } = useAuth();
+  const { selectedPost, setSelectedPost } = useStore();
 
   const levelIcon = LEVEL[comment.writer.level]?.icon ?? '';
-  const isCommentWriter = user?.userId === comment.writer.userId;
+  const isCommentWriter = userData?.userId === comment.writer.userId;
 
   const handleDeleteClick = async () => {
     if (isCommentWriter) {

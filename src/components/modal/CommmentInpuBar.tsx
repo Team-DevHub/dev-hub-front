@@ -4,6 +4,7 @@ import { ICONS } from '../../constants/assets';
 import useStore from '@/store/store';
 import { Input } from '@/styles/component';
 import { postAPI } from '@/api/postAPI';
+import { useAuth } from '@/hooks/useAuth';
 
 interface CommentsForm {
   postId: number;
@@ -11,7 +12,8 @@ interface CommentsForm {
 }
 
 function CommentInputBar() {
-  const { user, selectedPost, setSelectedPost } = useStore();
+  const { userData } = useAuth();
+  const { selectedPost, setSelectedPost } = useStore();
   const [form, setForm] = useState<CommentsForm>({
     postId: selectedPost?.postId || 0,
     content: '',
@@ -50,15 +52,17 @@ function CommentInputBar() {
     <Container>
       <StyledInput
         placeholder={
-          user === null ? '로그인 후 댓글을 작성할 수 있습니다' : '댓글 달기'
+          userData === null
+            ? '로그인 후 댓글을 작성할 수 있습니다'
+            : '댓글 달기'
         }
         value={form.content}
         onChange={handleFormChange}
         onKeyDown={handleKeyDown}
-        $isLoggedIn={user !== null}
-        disabled={user === null}
+        $isLoggedIn={userData !== null}
+        disabled={userData === null}
       />
-      <SubmitButton disabled={user === null}>
+      <SubmitButton disabled={userData === null}>
         <img src={ICONS.send} alt='send' onClick={handleSubmit} />
       </SubmitButton>
     </Container>
