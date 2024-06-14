@@ -1,4 +1,4 @@
-import { userAPI } from '@/api/userAPI';
+import { userAPI } from '@/api/requests/userAPI';
 import { LEVEL, LevelKeys, LevelType } from '@/constants/level';
 import useStore from '@/store/store';
 import { useQuery } from '@tanstack/react-query';

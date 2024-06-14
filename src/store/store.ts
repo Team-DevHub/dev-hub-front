@@ -1,4 +1,4 @@
-import { Post } from '@/types/api/response';
+import { Post } from '@/models/post.model';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { persist } from 'zustand/middleware';

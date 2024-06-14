@@ -3,7 +3,7 @@ import { ChangeEvent, useState, KeyboardEvent } from 'react';
 import { ICONS } from '../../constants/assets';
 import useStore from '@/store/store';
 import { Input } from '@/styles/component';
-import { postAPI } from '@/api/postAPI';
+import { postAPI } from '@/api/requests/postAPI';
 import { useUserInfo } from '@/hooks/useUserInfo';
 
 interface CommentsForm {

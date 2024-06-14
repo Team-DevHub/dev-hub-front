@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { useEffect, useState } from 'react';
-import { PostSummary } from '@/types/api/response';
-import { postAPI } from '@/api/postAPI';
+import { postAPI } from '@/api/requests/postAPI';
 import { getCategoryName } from '@/utils/getCategoryName';
 import { formatDate } from '@/utils/format';
 import PostModal from '../modal/PostModal';
@@ -9,6 +8,7 @@ import { useModal } from '@/hooks/useModal';
 import MyPostEmpty from './MyPostEmpty';
 import { ICONS } from '@/constants/assets';
 import { useUserInfo } from '@/hooks/useUserInfo';
+import { PostSummary } from '@/models/post.model';
 
 function MyPostList() {
   const { userData } = useUserInfo();

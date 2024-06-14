@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import PostItem from './PostItem';
 import PostModal from '../modal/PostModal';
 import { AnimatePresence } from 'framer-motion';
-import { PostSummary } from '@/types/api/response';
 import { useModal } from '@/hooks/useModal';
+import { PostSummary } from '@/models/post.model';
 
 interface PostListProps {
   posts: PostSummary[];

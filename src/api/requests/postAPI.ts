@@ -1,8 +1,14 @@
-import { CommentReq, PostingReq, PostsReq } from '@/types/api/request';
-import { baseInstance, authInstance } from './instance';
+import { baseInstance, authInstance } from '../instance';
 import { AxiosError, AxiosResponse } from 'axios';
-import { CommonRes, PostRes, PostsRes } from '@/types/api/response';
 import { API_ERROR_MSG } from '@/constants/message';
+import {
+  CommentReq,
+  PostRes,
+  PostingReq,
+  PostsReq,
+  PostsRes,
+} from '@/models/post.model';
+import { CommonRes } from '@/models/common.model';
 
 export const postAPI = {
   posting: async (postData: PostingReq) => {

@@ -1,4 +1,4 @@
-import { userAPI } from '@/api/userAPI';
+import { userAPI } from '@/api/requests/userAPI';
 import { useState } from 'react';
 
 interface Check {

@@ -1,4 +1,4 @@
-import { userAPI } from '@/api/userAPI';
+import { userAPI } from '@/api/requests/userAPI';
 import { FindPasswordForm } from '@/components/account/FindPasswordForm';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { useNavigate } from 'react-router-dom';

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { postAPI } from '@/api/postAPI';
+import { postAPI } from '@/api/requests/postAPI';
 import useStore from '@/store/store';
 
 export const useModal = () => {

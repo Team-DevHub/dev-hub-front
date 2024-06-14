@@ -1,4 +1,4 @@
-import { userAPI } from '@/api/userAPI';
+import { userAPI } from '@/api/requests/userAPI';
 import { JoinForm } from '@/components/account/JoinForm';
 import { LoginForm } from '@/components/account/LoginForm';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';

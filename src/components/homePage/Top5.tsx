@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import TopUser from './TopUser';
-import { userAPI } from '@/api/userAPI';
 import { useQuery } from '@tanstack/react-query';
+import { userAPI } from '@/api/requests/userAPI';
 
 function Top5() {
   const { data, isLoading } = useQuery({

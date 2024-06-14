@@ -1,14 +1,16 @@
-import { JoinReq, LoginReq, RequestResetReq } from '@/types/api/request';
-import { authInstance, baseInstance } from './instance';
+import { authInstance, baseInstance } from '../instance';
 import { AxiosResponse } from 'axios';
+import { API_ERROR_MSG } from '@/constants/message';
 import {
-  CommonRes,
   EmailCheckRes,
+  JoinReq,
+  LoginReq,
   LoginRes,
+  RequestResetReq,
   TopFiveRes,
   UserInfoRes,
-} from '@/types/api/response';
-import { API_ERROR_MSG } from '@/constants/message';
+} from '@/models/user.model';
+import { CommonRes } from '@/models/common.model';
 
 export const userAPI = {
   login: async (user: LoginReq) => {
