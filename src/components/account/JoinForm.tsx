@@ -7,15 +7,14 @@ import {
   SubmitContainer,
 } from '../layouts/AccountLayout';
 import FormInput from '../common/FormInput/FormInput';
-import { useState } from 'react';
 import { FormRegex } from '@/utils/regex';
 import FormButton from '../common/FormInput/FormButton';
 import { Link } from 'react-router-dom';
 import { ICONS } from '../../constants/assets';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
-import { userAPI } from '@/api/userAPI';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '@/hooks/useAuth';
+import { useVerification } from '@/hooks/useVerification';
 
 export interface JoinForm {
   nickname: string;
@@ -24,21 +23,16 @@ export interface JoinForm {
   passwordCheck: string;
 }
 
-interface Check {
-  canUse: boolean | null;
-  message: string;
-}
-
 const JoinForm = () => {
   const { join } = useAuth();
-  const [nameCheck, setNameCheck] = useState<Check>({
-    canUse: null,
-    message: '',
-  });
-  const [emailCheck, setEmailCheck] = useState<Check>({
-    canUse: null,
-    message: '',
-  });
+  const {
+    emailCheck,
+    nameCheck,
+    checkEmail,
+    checkName,
+    resetEmailStatus,
+    resetNameStatus,
+  } = useVerification();
 
   const {
     register,
@@ -67,32 +61,6 @@ const JoinForm = () => {
     }
   };
 
-  const handleCheckEmail = async () => {
-    await userAPI.emailCheck(watch('email')).then((data) => {
-      if (data?.result) {
-        setEmailCheck({ canUse: true, message: '사용 가능한 이메일입니다' });
-      } else {
-        setEmailCheck({
-          canUse: false,
-          message: '이미 사용 중인 이메일입니다',
-        });
-      }
-    });
-  };
-
-  const handleCheckName = async () => {
-    await userAPI.nameCheck(watch('nickname').trim()).then((data) => {
-      if (data?.result) {
-        setNameCheck({ canUse: true, message: '사용 가능한 닉네임입니다' });
-      } else {
-        setNameCheck({
-          canUse: false,
-          message: '이미 사용 중인 닉네임입니다',
-        });
-      }
-    });
-  };
-
   return (
     <FormRoot onSubmit={handleSubmit(handleSubmitForm)}>
       <AccountCardTitle>{'회원가입'}</AccountCardTitle>
@@ -107,10 +75,7 @@ const JoinForm = () => {
               errorMessage={errors.nickname?.message}
               {...register('nickname', {
                 onChange: () => {
-                  setNameCheck({
-                    canUse: null,
-                    message: '',
-                  });
+                  resetNameStatus();
                 },
                 minLength: {
                   value: 2,
@@ -124,7 +89,7 @@ const JoinForm = () => {
             />
             <button
               type='button'
-              onClick={handleCheckName}
+              onClick={() => checkName(watch('nickname'))}
               className='duplicateBtn'>
               {'중복확인'}
             </button>
@@ -141,10 +106,7 @@ const JoinForm = () => {
               errorMessage={errors.email?.message}
               {...register('email', {
                 onChange: () => {
-                  setEmailCheck({
-                    canUse: null,
-                    message: '',
-                  });
+                  resetEmailStatus();
                 },
                 pattern: {
                   value: FormRegex.email,
@@ -154,7 +116,7 @@ const JoinForm = () => {
             />
             <button
               type='button'
-              onClick={handleCheckEmail}
+              onClick={() => checkEmail(watch('email'))}
               className='duplicateBtn'>
               {'중복확인'}
             </button>

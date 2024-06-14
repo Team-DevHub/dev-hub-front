@@ -7,21 +7,20 @@ import {
 } from '../layouts/AccountLayout';
 import FormInput from '../common/FormInput/FormInput';
 import FormButton from '../common/FormInput/FormButton';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ICONS } from '../../constants/assets';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
-import { userAPI } from '@/api/userAPI';
 import { useForm } from 'react-hook-form';
 import { FormRegex } from '@/utils/regex';
+import { usePassword } from '@/hooks/usePassword';
 
-interface FindPasswordForm {
+export interface FindPasswordForm {
   nickname: string;
   email: string;
 }
 
 const FindPasswordForm = () => {
-  const navigate = useNavigate();
-
+  const { resetRequest } = usePassword();
   const {
     register,
     formState: { errors },
@@ -35,16 +34,8 @@ const FindPasswordForm = () => {
     },
   });
 
-  const handleSubmitForm = async (data: FindPasswordForm) => {
-    await userAPI.requestReset(data).then((res) => {
-      if (res?.isSuccess) {
-        navigate(LOGIN_ROUTER_PATH.password.reset, {
-          state: { email: data.email },
-        });
-      } else {
-        window.alert('존재하지 않는 유저입니다.');
-      }
-    });
+  const handleSubmitForm = (data: FindPasswordForm) => {
+    resetRequest(data);
   };
 
   return (
