@@ -57,10 +57,23 @@ export const useAuth = () => {
     navigate(LOGIN_ROUTER_PATH.login);
   };
 
+  const deleteAccount = async () => {
+    await userAPI.deleteAccount().then((res) => {
+      if (res?.isSuccess) {
+        clearStorage();
+        localStorage.removeItem(UserEmailKey);
+        localStorage.removeItem(UserPasswordKey);
+        localStorage.removeItem(TokenKey);
+        logOut();
+      }
+    });
+  };
+
   return {
     join,
     logIn,
     logOut,
     loginError,
+    deleteAccount,
   };
 };
