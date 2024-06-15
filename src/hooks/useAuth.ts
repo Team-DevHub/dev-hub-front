@@ -3,15 +3,17 @@ import { JoinForm } from '@/components/account/JoinForm';
 import { LoginForm } from '@/components/account/LoginForm';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { TokenKey, UserEmailKey, UserPasswordKey } from '@/constants/storage';
-import useStore from '@/store/store';
+import { usePopUpActions } from '@/store/popUpStore';
+import useSessionStore from '@/store/sessionStore';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const useAuth = () => {
-  const { setIsLoggedIn } = useStore();
+  const { setIsLoggedIn } = useSessionStore();
+  const { setIsDoneJoin } = usePopUpActions();
   const [loginError, setLoginError] = useState<string>('');
   const navigate = useNavigate();
-  const clearStorage = useStore.persist.clearStorage;
+  const clearStorage = useSessionStore.persist.clearStorage;
 
   const join = async (data: JoinForm) => {
     await userAPI
@@ -22,8 +24,7 @@ export const useAuth = () => {
       })
       .then((data) => {
         if (data?.isSuccess) {
-          alert('회원가입 되었습니다.');
-          navigate('/account/login');
+          setIsDoneJoin(true);
         }
       });
   };

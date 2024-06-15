@@ -15,7 +15,7 @@ function GuideBanner() {
           <Line>
             <img src={ICONS.check} alt='check' />
             <p>
-              지식 공유 글을 작성하면 <strong>8포인트</strong>를 얻을 수 있어요.
+              지식 공유 글을 작성하면 <strong>8포인트</strong>를 얻을 수 있어요
             </p>
           </Line>
           <Line>

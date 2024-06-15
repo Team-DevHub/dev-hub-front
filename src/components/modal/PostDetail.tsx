@@ -6,13 +6,13 @@ import 'prismjs/themes/prism.css';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
 import Prism from 'prismjs';
-import useStore from '@/store/store';
 import { LEVEL } from '@/constants/level';
 import { formatDate } from '@/utils/format';
 import { getCategoryName } from '@/utils/getCategoryName';
+import usePostStore from '@/store/postStore';
 
 function PostDetail() {
-  const { selectedPost } = useStore();
+  const { selectedPost } = usePostStore();
 
   if (!selectedPost) {
     return;

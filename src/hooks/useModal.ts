@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { postAPI } from '@/api/requests/postAPI';
-import useStore from '@/store/store';
+import usePostStore from '@/store/postStore';
 
 export const useModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { setSelectedPost } = useStore();
+  const { setSelectedPost } = usePostStore();
 
   const handleClick = async (postId: number) => {
     const postRes = await postAPI.post(postId);

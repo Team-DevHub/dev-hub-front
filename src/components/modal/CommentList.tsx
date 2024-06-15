@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import CommentItem from './CommentItem';
-import useStore from '@/store/store';
+import usePostStore from '@/store/postStore';
 
 function CommentList() {
-  const { selectedPost } = useStore();
+  const { selectedPost } = usePostStore();
 
   return (
     <Container>

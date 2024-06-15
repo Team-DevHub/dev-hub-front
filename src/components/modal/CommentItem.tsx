@@ -4,8 +4,8 @@ import { Comment as IComment } from '@/models/post.model';
 import { formatDate } from '@/utils/format';
 import { LEVEL } from '@/constants/level';
 import { ICONS } from '../../constants/assets';
-import useStore from '@/store/store';
 import { useUserInfo } from '@/hooks/useUserInfo';
+import usePostStore from '@/store/postStore';
 
 interface CommentItemProps {
   comment: IComment;
@@ -13,7 +13,7 @@ interface CommentItemProps {
 
 function CommentItem({ comment }: CommentItemProps) {
   const { userData } = useUserInfo();
-  const { selectedPost, setSelectedPost } = useStore();
+  const { selectedPost, setSelectedPost } = usePostStore();
 
   const levelIcon = LEVEL[comment.writer.level]?.icon ?? '';
   const isCommentWriter = userData?.userId === comment.writer.userId;

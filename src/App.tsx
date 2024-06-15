@@ -22,14 +22,16 @@ import Footer from './components/common/Footer/Footer';
 import ScrollToTop from './components/layouts/ScrollToTop';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './api/queryClient';
-import useStore from './store/store';
+import useSessionStore from './store/sessionStore';
+import PopUps from './components/popup/PopUps';
 
 const ProtectedRoute = ({ redirectPath = '/' }) => {
-  const { isLoggedIn } = useStore();
+  const { isLoggedIn } = useSessionStore();
   return isLoggedIn ? (
     <Navigate to={redirectPath} />
   ) : (
     <ScrollToTop>
+      <PopUps />
       <AccountLayout />
     </ScrollToTop>
   );
@@ -40,6 +42,7 @@ const router = createBrowserRouter([
     path: '/',
     element: (
       <ScrollToTop>
+        <PopUps />
         <Header />
         <MainLayout>
           <Outlet />
@@ -83,6 +86,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
+
         <RouterProvider router={router} />
       </ThemeProvider>
     </QueryClientProvider>

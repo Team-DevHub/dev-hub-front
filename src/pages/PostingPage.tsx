@@ -4,11 +4,11 @@ import TitleInput from '@/components/posting/TitleInput';
 import LinkInput from '@/components/posting/LinkInput';
 import ContentInput from '@/components/posting/ContentInput';
 import { postAPI } from '@/api/requests/postAPI';
-import { useNavigate } from 'react-router-dom';
 import Button from '@/components/common/Button';
 import { ICONS } from '../constants/assets';
 import { useForm, Controller } from 'react-hook-form';
 import BannerWithTitle from '@/components/common/Banner/BannerWithTitle';
+import { usePopUpActions } from '@/store/popUpStore';
 
 interface PostingForm {
   category_id: number;
@@ -18,7 +18,7 @@ interface PostingForm {
 }
 
 function PostingPage() {
-  const navigate = useNavigate();
+  const { setIsDonePosting } = usePopUpActions();
   const { handleSubmit, control, setValue, watch } = useForm<PostingForm>({
     defaultValues: {
       category_id: 0,
@@ -27,7 +27,6 @@ function PostingPage() {
       links: [''],
     },
   });
-
   const formValues = watch();
 
   const onSubmit = async (data: PostingForm) => {
@@ -38,8 +37,7 @@ function PostingPage() {
       links: data.links,
     });
     if (response?.isSuccess) {
-      window.alert('게시글이 작성되었습니다.');
-      navigate('/');
+      setIsDonePosting(true);
     }
   };
 
