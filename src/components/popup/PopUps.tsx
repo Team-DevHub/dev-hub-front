@@ -3,16 +3,15 @@ import ConfirmPopUp from './ConfirmPopUp';
 import { useEffect } from 'react';
 import AlertPopUp from './AlertPopUp';
 import { useNavigate } from 'react-router-dom';
-import { LOGIN_ROUTER_PATH } from '@/constants/path';
+import { ALERT_TYPE } from '@/constants/alertType';
+import { AnimatePresence } from 'framer-motion';
 
 function PopUps() {
   const navigate = useNavigate();
-  const { isConfirmOpen, isDoneJoin, isDonePosting, isDoneReset, isDeleted } =
-    usePopUpStore();
-  const { setIsDonePosting, resetConfirm, setIsDoneJoin, setIsDoneReset } =
-    usePopUpActions();
+  const { isConfirmOpen, isOpenAlert, alertType, isDeleted } = usePopUpStore();
+  const { setIsOpenAlert, resetConfirm } = usePopUpActions();
 
-  if (isConfirmOpen || isDoneJoin || isDonePosting || isDoneReset) {
+  if (isConfirmOpen || isOpenAlert) {
     document.body.style.overflow = 'hidden';
   } else {
     document.body.style.overflow = 'auto';
@@ -28,38 +27,20 @@ function PopUps() {
   }, [isDeleted, resetConfirm]);
 
   useEffect(() => {
-    if (isDoneJoin) {
+    if (isOpenAlert) {
       setTimeout(() => {
-        setIsDoneJoin(false);
-        navigate('/account/login');
+        setIsOpenAlert(false, null);
+        alertType !== 'comment' && navigate(ALERT_TYPE[alertType!].route);
       }, 2000);
     }
-  }, [isDoneJoin]);
-
-  useEffect(() => {
-    if (isDonePosting) {
-      setTimeout(() => {
-        setIsDonePosting(false);
-        navigate('/');
-      }, 2000);
-    }
-  }, [isDonePosting, setIsDonePosting]);
-
-  useEffect(() => {
-    if (isDoneReset) {
-      setTimeout(() => {
-        setIsDoneReset(false);
-        navigate(LOGIN_ROUTER_PATH.login);
-      }, 2000);
-    }
-  }, [isDoneReset]);
+  }, [isOpenAlert, alertType]);
 
   return (
     <>
       {isConfirmOpen && <ConfirmPopUp />}
-      {isDonePosting && <AlertPopUp>게시글 작성 완료!</AlertPopUp>}
-      {isDoneJoin && <AlertPopUp>회원가입 완료!</AlertPopUp>}
-      {isDoneReset && <AlertPopUp>비밀번호 재설정 완료!</AlertPopUp>}
+      <AnimatePresence>
+        {isOpenAlert && <AlertPopUp>{ALERT_TYPE[alertType!].title}</AlertPopUp>}
+      </AnimatePresence>
     </>
   );
 }

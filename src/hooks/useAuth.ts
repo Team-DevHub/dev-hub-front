@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const useAuth = () => {
   const { setIsLoggedIn } = useSessionStore();
-  const { setIsDoneJoin } = usePopUpActions();
+  const { setIsOpenAlert } = usePopUpActions();
   const [loginError, setLoginError] = useState<string>('');
   const navigate = useNavigate();
   const clearStorage = useSessionStore.persist.clearStorage;
@@ -24,7 +24,7 @@ export const useAuth = () => {
       })
       .then((data) => {
         if (data?.isSuccess) {
-          setIsDoneJoin(true);
+          setIsOpenAlert(true, 'join');
         }
       });
   };

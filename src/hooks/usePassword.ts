@@ -5,7 +5,7 @@ import { usePopUpActions } from '@/store/popUpStore';
 import { useNavigate } from 'react-router-dom';
 
 export const usePassword = () => {
-  const { setIsDoneReset } = usePopUpActions();
+  const { setIsOpenAlert } = usePopUpActions();
   const navigate = useNavigate();
 
   const resetRequest = async (data: FindPasswordForm) => {
@@ -23,7 +23,7 @@ export const usePassword = () => {
   const resetPassword = async (email: string, password: string) => {
     await userAPI.resetPassword({ email, password }).then((res) => {
       if (res.isSuccess) {
-        setIsDoneReset(true);
+        setIsOpenAlert(true, 'reset');
       }
     });
   };

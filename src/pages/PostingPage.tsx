@@ -18,7 +18,7 @@ interface PostingForm {
 }
 
 function PostingPage() {
-  const { setIsDonePosting } = usePopUpActions();
+  const { setIsOpenAlert } = usePopUpActions();
   const { handleSubmit, control, setValue, watch } = useForm<PostingForm>({
     defaultValues: {
       category_id: 0,
@@ -37,7 +37,7 @@ function PostingPage() {
       links: data.links,
     });
     if (response?.isSuccess) {
-      setIsDonePosting(true);
+      setIsOpenAlert(true, 'posting');
     }
   };
 
