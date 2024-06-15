@@ -10,23 +10,20 @@ import FormInput from '../common/FormInput/FormInput';
 import { useState } from 'react';
 import Checkbox from '../common/FormInput/Checkbox';
 import FormButton from '../common/FormInput/FormButton';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ICONS } from '../../constants/assets';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
-import { TokenKey, UserEmailKey, UserPasswordKey } from '@/constants/storage';
-import { userAPI } from '@/api/userAPI';
-import useStore from '@/store/store';
+import { UserEmailKey, UserPasswordKey } from '@/constants/storage';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '@/hooks/useAuth';
 
-interface LoginForm {
+export interface LoginForm {
   email: string;
   password: string;
 }
 
 const LoginForm = () => {
-  const navigate = useNavigate();
-  const { setUserId } = useStore();
-  const [error, setError] = useState<string>('');
+  const { logIn, loginError } = useAuth();
   const [isChecked, setIsChecked] = useState(false);
 
   const { register, watch, handleSubmit } = useForm<LoginForm>({
@@ -37,25 +34,7 @@ const LoginForm = () => {
   });
 
   const handleSubmitForm = async (formData: LoginForm) => {
-    await userAPI.login(formData).then((data) => {
-      if (data.isSuccess) {
-        setUserId(data.userId!);
-        localStorage.setItem(TokenKey, data.accessToken!);
-
-        // 로그인 정보 저장
-        if (isChecked) {
-          localStorage.setItem(UserEmailKey, formData.email);
-          localStorage.setItem(UserPasswordKey, formData.password);
-        } else {
-          localStorage.removeItem(UserEmailKey);
-          localStorage.removeItem(UserPasswordKey);
-        }
-
-        navigate('/', { replace: true });
-      } else {
-        setError('이메일 또는 비밀번호가 틀렸습니다');
-      }
-    });
+    logIn(formData, isChecked);
   };
 
   return (
@@ -84,7 +63,7 @@ const LoginForm = () => {
           onClick={() => setIsChecked((prev) => !prev)}
         />
         <ButtonWrapper>
-          <ErrorMessage>{error}</ErrorMessage>
+          <ErrorMessage>{loginError}</ErrorMessage>
           <FormButton
             type='submit'
             text={'로그인'}

@@ -3,7 +3,6 @@ import Pagination from '@/components/common/Pagination';
 import PostList from '@/components/homePage/PostList';
 import SearchInput from '@/components/homePage/SearchInput';
 import SideBar from '@/components/homePage/SideBar';
-import { useProfile } from '@/hooks/useProfile';
 import PostEmpty from '@/components/posts/PostEmpty';
 import { usePosts } from '@/hooks/usePosts';
 import styled from 'styled-components';
@@ -11,8 +10,6 @@ import BannerSlider from '@/components/common/Banner/BannerSlider';
 
 function HomePage() {
   const { posts, pagination, isEmpty } = usePosts();
-
-  useProfile();
 
   return (
     <>

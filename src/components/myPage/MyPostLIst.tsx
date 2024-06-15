@@ -1,17 +1,17 @@
 import styled, { css } from 'styled-components';
 import { useEffect, useState } from 'react';
-import { PostSummary } from '@/types/api/response';
-import { postAPI } from '@/api/postAPI';
+import { postAPI } from '@/api/requests/postAPI';
 import { getCategoryName } from '@/utils/getCategoryName';
 import { formatDate } from '@/utils/format';
 import PostModal from '../modal/PostModal';
 import { useModal } from '@/hooks/useModal';
-import useStore from '@/store/store';
 import MyPostEmpty from './MyPostEmpty';
 import { ICONS } from '@/constants/assets';
+import { useUserInfo } from '@/hooks/useUserInfo';
+import { PostSummary } from '@/models/post.model';
 
 function MyPostList() {
-  const { user } = useStore();
+  const { userData } = useUserInfo();
   const [myPosts, setMyPosts] = useState<PostSummary[] | null>(null);
   const { isModalOpen, handleClick, closeModal } = useModal();
 
@@ -38,11 +38,11 @@ function MyPostList() {
     <Wrapper>
       <Title>
         <h2>내가 공유한 지식</h2>
-        <span>{user!.totalPosts}개</span>
+        <span>{userData!.totalPosts}개</span>
       </Title>
 
       <Container>
-        {user!.totalPosts > 0 ? (
+        {userData!.totalPosts > 0 ? (
           <TableWrapper>
             <Table>
               <thead>

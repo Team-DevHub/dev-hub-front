@@ -1,20 +1,22 @@
 import styled from 'styled-components';
-import { postAPI } from '@/api/postAPI';
-import { Comment as IComment } from '@/types/api/response';
+import { postAPI } from '@/api/requests/postAPI';
+import { Comment as IComment } from '@/models/post.model';
 import { formatDate } from '@/utils/format';
 import { LEVEL } from '@/constants/level';
 import { ICONS } from '../../constants/assets';
 import useStore from '@/store/store';
+import { useUserInfo } from '@/hooks/useUserInfo';
 
 interface CommentItemProps {
   comment: IComment;
 }
 
 function CommentItem({ comment }: CommentItemProps) {
-  const { user, selectedPost, setSelectedPost } = useStore();
+  const { userData } = useUserInfo();
+  const { selectedPost, setSelectedPost } = useStore();
 
   const levelIcon = LEVEL[comment.writer.level]?.icon ?? '';
-  const isCommentWriter = user?.userId === comment.writer.userId;
+  const isCommentWriter = userData?.userId === comment.writer.userId;
 
   const handleDeleteClick = async () => {
     if (isCommentWriter) {

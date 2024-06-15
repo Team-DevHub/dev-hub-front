@@ -1,15 +1,15 @@
 import styled from 'styled-components';
-import useStore from '@/store/store';
 import { IMAGES } from '@/constants/assets';
+import { useUserInfo } from '@/hooks/useUserInfo';
 
 function ActivityBox() {
-  const { user } = useStore();
+  const { userData } = useUserInfo();
 
-  if (!user) return null;
+  if (!userData) return null;
 
   return (
     <Container>
-      <h5>{user.nickname}님의 활동 기록</h5>
+      <h5>{userData.nickname}님의 활동 기록</h5>
       <Musseuk src={IMAGES.musseuk.delete} alt='delete' />
       <Box>
         <Acivity>

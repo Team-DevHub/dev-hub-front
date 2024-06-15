@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { postAPI } from '@/api/postAPI';
-import {
-  Pagination as PaginationType,
-  PostSummary,
-} from '@/types/api/response';
+import { postAPI } from '@/api/requests/postAPI';
+import { Pagination as PaginationType, PostSummary } from '@/models/post.model';
 
 export const usePosts = () => {
   const location = useLocation();

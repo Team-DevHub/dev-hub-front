@@ -3,16 +3,16 @@ import PopUpLayout from '../layouts/PopUpLayout';
 import LevelItem from './item/LevelItem';
 import styled from 'styled-components';
 import { levelData } from '@/data/levelData';
-import useStore from '@/store/store';
+import { useUserInfo } from '@/hooks/useUserInfo';
 
 interface Props {
   closePopup: () => void;
 }
 
 function LevelPopUp({ closePopup }: Props) {
-  const { user } = useStore();
+  const { userData } = useUserInfo();
 
-  if (!user) return null;
+  if (!userData) return null;
 
   return (
     <PopUpLayout
@@ -25,7 +25,7 @@ function LevelPopUp({ closePopup }: Props) {
           <LevelItem
             key={data.level}
             levelData={data}
-            isCurrentLevel={data.value === user.level}
+            isCurrentLevel={data.value === userData.level}
           />
         ))}
       </Container>

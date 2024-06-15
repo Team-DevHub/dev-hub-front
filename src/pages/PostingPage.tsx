@@ -3,7 +3,7 @@ import Category from '@/components/common/Category';
 import TitleInput from '@/components/posting/TitleInput';
 import LinkInput from '@/components/posting/LinkInput';
 import ContentInput from '@/components/posting/ContentInput';
-import { postAPI } from '@/api/postAPI';
+import { postAPI } from '@/api/requests/postAPI';
 import { useNavigate } from 'react-router-dom';
 import Button from '@/components/common/Button';
 import { ICONS } from '../constants/assets';

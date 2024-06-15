@@ -1,35 +1,27 @@
 import styled from 'styled-components';
 import TopUser from './TopUser';
-import { useEffect, useState } from 'react';
-import { TopFiveRes } from '@/types/api/response';
-import { userAPI } from '@/api/userAPI';
+import { useQuery } from '@tanstack/react-query';
+import { userAPI } from '@/api/requests/userAPI';
 
 function Top5() {
-  const [topFive, setTopFive] = useState<TopFiveRes[] | null>(null);
-
-  useEffect(() => {
-    const getTopFiveUser = async () => {
-      await userAPI.getTopFive().then((res) => {
-        if (res) {
-          setTopFive(res);
-        }
-      });
-    };
-    getTopFiveUser();
-  }, []);
+  const { data, isLoading } = useQuery({
+    queryKey: ['top5'],
+    queryFn: async () => await userAPI.getTopFive(),
+  });
 
   return (
     <Wrapper>
       <h4>지식 공유 Top5 수강생! 🔥</h4>
       <Container>
-        {topFive?.map((user, i) => (
-          <TopUser
-            key={user.id}
-            rank={i + 1}
-            userName={user.name}
-            points={user.points}
-          />
-        ))}
+        {!isLoading &&
+          data!.map((user, i) => (
+            <TopUser
+              key={user.id}
+              rank={i + 1}
+              userName={user.name}
+              points={user.points}
+            />
+          ))}
       </Container>
     </Wrapper>
   );

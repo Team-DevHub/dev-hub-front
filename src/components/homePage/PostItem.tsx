@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { PostSummary } from '@/types/api/response';
 import { formatDate } from '@/utils/format';
 import { getCategoryName } from '@/utils/getCategoryName';
 import { ICONS } from '@/constants/assets';
+import { PostSummary } from '@/models/post.model';
 
 interface PostItemProps {
   post: PostSummary;

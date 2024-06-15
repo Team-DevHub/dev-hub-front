@@ -6,11 +6,13 @@ export default function ScrollToTop({
 }: {
   children: React.ReactNode;
 }) {
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const page = params.get('page');
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [page]);
 
   return <>{children}</>;
 }

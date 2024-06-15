@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import LevelPopUp from '../popup/LevelPopUp';
 import { AnimatePresence } from 'framer-motion';
-import { useLevel } from '@/hooks/useLevel';
 import { ICONS } from '@/constants/assets';
+import { useUserInfo } from '@/hooks/useUserInfo';
 
 function MyLevel() {
   const [open, setOpen] = useState<boolean>(false);
-  const { userLevel } = useLevel();
+  const { userLevel } = useUserInfo();
 
   // 팝업 등장 시 뒷배경 스크롤 방지
   if (open) {

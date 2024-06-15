@@ -7,37 +7,32 @@ import {
   SubmitContainer,
 } from '../layouts/AccountLayout';
 import FormInput from '../common/FormInput/FormInput';
-import { useState } from 'react';
 import { FormRegex } from '@/utils/regex';
 import FormButton from '../common/FormInput/FormButton';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ICONS } from '../../constants/assets';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
-import { userAPI } from '@/api/userAPI';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '@/hooks/useAuth';
+import { useVerification } from '@/hooks/useVerification';
 
-interface JoinForm {
+export interface JoinForm {
   nickname: string;
   email: string;
   password: string;
   passwordCheck: string;
 }
 
-interface Check {
-  canUse: boolean | null;
-  message: string;
-}
-
 const JoinForm = () => {
-  const navigate = useNavigate();
-  const [nameCheck, setNameCheck] = useState<Check>({
-    canUse: null,
-    message: '',
-  });
-  const [emailCheck, setEmailCheck] = useState<Check>({
-    canUse: null,
-    message: '',
-  });
+  const { join } = useAuth();
+  const {
+    emailCheck,
+    nameCheck,
+    checkEmail,
+    checkName,
+    resetEmailStatus,
+    resetNameStatus,
+  } = useVerification();
 
   const {
     register,
@@ -62,45 +57,8 @@ const JoinForm = () => {
 
   const handleSubmitForm = async (data: JoinForm) => {
     if (emailCheck.canUse && nameCheck.canUse) {
-      await userAPI
-        .join({
-          nickname: data.nickname.trim(),
-          email: data.email,
-          password: data.password,
-        })
-        .then((data) => {
-          if (data?.isSuccess) {
-            alert('회원가입 되었습니다.');
-            navigate('/account/login');
-          }
-        });
+      join(data);
     }
-  };
-
-  const handleCheckEmail = async () => {
-    await userAPI.emailCheck(watch('email')).then((data) => {
-      if (data?.result) {
-        setEmailCheck({ canUse: true, message: '사용 가능한 이메일입니다' });
-      } else {
-        setEmailCheck({
-          canUse: false,
-          message: '이미 사용 중인 이메일입니다',
-        });
-      }
-    });
-  };
-
-  const handleCheckName = async () => {
-    await userAPI.nameCheck(watch('nickname').trim()).then((data) => {
-      if (data?.result) {
-        setNameCheck({ canUse: true, message: '사용 가능한 닉네임입니다' });
-      } else {
-        setNameCheck({
-          canUse: false,
-          message: '이미 사용 중인 닉네임입니다',
-        });
-      }
-    });
   };
 
   return (
@@ -117,10 +75,7 @@ const JoinForm = () => {
               errorMessage={errors.nickname?.message}
               {...register('nickname', {
                 onChange: () => {
-                  setNameCheck({
-                    canUse: null,
-                    message: '',
-                  });
+                  resetNameStatus();
                 },
                 minLength: {
                   value: 2,
@@ -134,7 +89,7 @@ const JoinForm = () => {
             />
             <button
               type='button'
-              onClick={handleCheckName}
+              onClick={() => checkName(watch('nickname'))}
               className='duplicateBtn'>
               {'중복확인'}
             </button>
@@ -151,10 +106,7 @@ const JoinForm = () => {
               errorMessage={errors.email?.message}
               {...register('email', {
                 onChange: () => {
-                  setEmailCheck({
-                    canUse: null,
-                    message: '',
-                  });
+                  resetEmailStatus();
                 },
                 pattern: {
                   value: FormRegex.email,
@@ -164,7 +116,7 @@ const JoinForm = () => {
             />
             <button
               type='button'
-              onClick={handleCheckEmail}
+              onClick={() => checkEmail(watch('email'))}
               className='duplicateBtn'>
               {'중복확인'}
             </button>

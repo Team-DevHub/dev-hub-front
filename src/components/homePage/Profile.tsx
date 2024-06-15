@@ -2,15 +2,13 @@ import styled from 'styled-components';
 import Button from '../common/Button';
 import { ICONS } from '../../constants/assets';
 import { useNavigate } from 'react-router-dom';
-import { useLevel } from '@/hooks/useLevel';
-import useStore from '@/store/store';
+import { useUserInfo } from '@/hooks/useUserInfo';
 
 function Profile() {
-  const { user } = useStore();
-  const { userLevel } = useLevel();
+  const { userData, userLevel } = useUserInfo();
   const navigate = useNavigate();
 
-  if (!user) return null;
+  if (!userData) return null;
 
   return (
     <Wrapper>
@@ -18,16 +16,16 @@ function Profile() {
       <Container>
         <img src={userLevel.icon} alt='level icon' width={80} height={80} />
         <UserInfo>
-          <h3>{user.nickname}</h3>
+          <h3>{userData.nickname}</h3>
           <span>{`${userLevel.level} ${userLevel.name}`}</span>
         </UserInfo>
         <ActivityInfo>
           <Activity>
-            <h4>{user.totalPosts}개</h4>
+            <h4>{userData.totalPosts}개</h4>
             <span>공유한 지식</span>
           </Activity>
           <Activity>
-            <h4>{user.totalPoints}점</h4>
+            <h4>{userData.totalPoints}점</h4>
             <span>보유 포인트</span>
           </Activity>
         </ActivityInfo>

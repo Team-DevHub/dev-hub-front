@@ -1,34 +1,23 @@
-export interface CommonRes {
-  isSuccess: boolean;
-  message: string;
+import { CommonRes } from './common.model';
+
+export interface PostingReq {
+  categoryId: number;
+  title: string;
+  content: string;
+  links: string[];
 }
 
-export interface LoginRes extends CommonRes {
-  userId?: string;
-  accessToken?: string;
+export interface PostsReq {
+  limit?: number;
+  page?: number;
+  myPage?: boolean;
+  search?: string;
+  categoryId?: number;
 }
 
-export interface EmailCheckRes extends CommonRes {
-  result?: boolean;
-}
-
-export interface UserInfoRes extends CommonRes {
-  result: {
-    userId: string;
-    email: string;
-    joinDate: string;
-    nickname: string;
-    level: number;
-    totalPosts: number;
-    totalPoints: number;
-  };
-}
-
-export interface TopFiveRes extends CommonRes {
-  id: string;
-  name: string;
-  level: number;
-  points: number;
+export interface CommentReq {
+  postId: number;
+  content: string;
 }
 
 export interface PostSummary {
@@ -68,6 +57,7 @@ export interface Pagination {
   currentPage: number;
   totalPosts: number;
 }
+
 export interface PostsRes extends CommonRes {
   result: PostSummary[];
   paginations: Pagination;

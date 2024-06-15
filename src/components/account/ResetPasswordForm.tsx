@@ -7,12 +7,12 @@ import {
 } from '../layouts/AccountLayout';
 import FormInput from '../common/FormInput/FormInput';
 import FormButton from '../common/FormInput/FormButton';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ICONS } from '../../constants/assets';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
-import { userAPI } from '@/api/userAPI';
 import { useForm } from 'react-hook-form';
 import { FormRegex } from '@/utils/regex';
+import { usePassword } from '@/hooks/usePassword';
 
 interface ResetPasswordForm {
   password: string;
@@ -20,7 +20,7 @@ interface ResetPasswordForm {
 }
 
 const ResetPasswordForm = () => {
-  const navigate = useNavigate();
+  const { resetPassword } = usePassword();
   const {
     state: { email },
   } = useLocation();
@@ -38,15 +38,8 @@ const ResetPasswordForm = () => {
     },
   });
 
-  const handleSubmitForm = async (data: ResetPasswordForm) => {
-    await userAPI
-      .resetPassword({ email: email, password: data.password })
-      .then((res) => {
-        if (res.isSuccess) {
-          alert('비밀번호가 정상적으로 재설정되었습니다.');
-          navigate(LOGIN_ROUTER_PATH.login);
-        }
-      });
+  const handleSubmitForm = (data: ResetPasswordForm) => {
+    resetPassword(email, data.password);
   };
 
   return (
