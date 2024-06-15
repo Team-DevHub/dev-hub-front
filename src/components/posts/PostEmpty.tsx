@@ -4,8 +4,8 @@ import { ICONS } from '../../constants/assets';
 function PostEmpty() {
   return (
     <Container>
-      <img src={ICONS.question} alt='question' width={80} height={80} />
-      <p>검색 결과가 존재하지 않습니다.</p>
+      <img src={ICONS.question} alt='question' width={60} height={60} />
+      <p>게시글이 존재하지 않습니다.</p>
     </Container>
   );
 }
