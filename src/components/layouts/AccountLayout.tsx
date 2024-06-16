@@ -89,7 +89,7 @@ const AccountCardTitle = styled.span`
   color: ${({ theme }) => theme.color_textBlack};
   font-weight: 700;
   font-size: 28px;
-  margin-bottom: 24px;
+  margin-bottom: 0px;
 `;
 
 const FormRoot = styled.form`
