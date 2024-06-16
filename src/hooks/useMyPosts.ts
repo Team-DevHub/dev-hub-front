@@ -2,6 +2,7 @@ import { postAPI } from '@/api/requests/postAPI';
 import { useConfirm, usePopUpActions } from '@/store/popUpStore';
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { PostSummary } from '@/models/post.model';
 
 export const useMyPosts = () => {
   const { isConfirmed } = useConfirm();
@@ -9,7 +10,7 @@ export const useMyPosts = () => {
   const [deletePost, setDeletePost] = useState<number | null>(null);
   const queryClient = useQueryClient();
 
-  const { data: myPosts } = useQuery({
+  const { data: myPosts } = useQuery<PostSummary[]>({
     queryKey: ['myPosts'],
     queryFn: async () => {
       const response = await postAPI.posts({ myPage: true });

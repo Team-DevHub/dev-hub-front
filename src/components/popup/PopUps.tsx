@@ -21,7 +21,6 @@ function PopUps() {
     if (isDeleted) {
       setTimeout(() => {
         resetConfirm();
-        location.reload();
       }, 2000);
     }
   }, [isDeleted, resetConfirm]);

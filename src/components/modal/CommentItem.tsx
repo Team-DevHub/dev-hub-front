@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import { postAPI } from '@/api/requests/postAPI';
 import { Comment as IComment } from '@/models/post.model';
 import { formatDate } from '@/utils/format';
 import { LEVEL } from '@/constants/level';
 import { ICONS } from '../../constants/assets';
 import { useUserInfo } from '@/hooks/useUserInfo';
-import usePostStore from '@/store/postStore';
-import { usePopUpActions } from '@/store/popUpStore';
+
+import { useComment } from '@/hooks/useComment';
 
 interface CommentItemProps {
   comment: IComment;
@@ -14,20 +13,13 @@ interface CommentItemProps {
 
 function CommentItem({ comment }: CommentItemProps) {
   const { userData } = useUserInfo();
-  const { setIsOpenAlert } = usePopUpActions();
-  const { selectedPost, setSelectedPost } = usePostStore();
+  const { deleteComment } = useComment();
 
   const levelIcon = LEVEL[comment.writer.level]?.icon ?? '';
   const isCommentWriter = userData?.userId === comment.writer.userId;
 
-  const handleDeleteClick = async () => {
-    const response = await postAPI.deleteComment(comment.commentId);
-
-    if (response?.isSuccess) {
-      setIsOpenAlert(true, 'comment');
-      const updatedPost = await postAPI.post(selectedPost!.postId);
-      setSelectedPost(updatedPost.result);
-    }
+  const handleDeleteClick = () => {
+    deleteComment(comment.commentId);
   };
 
   return (
