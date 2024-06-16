@@ -4,8 +4,9 @@ import { Comment as IComment } from '@/models/post.model';
 import { formatDate } from '@/utils/format';
 import { LEVEL } from '@/constants/level';
 import { ICONS } from '../../constants/assets';
-import useStore from '@/store/store';
 import { useUserInfo } from '@/hooks/useUserInfo';
+import usePostStore from '@/store/postStore';
+import { usePopUpActions } from '@/store/popUpStore';
 
 interface CommentItemProps {
   comment: IComment;
@@ -13,20 +14,19 @@ interface CommentItemProps {
 
 function CommentItem({ comment }: CommentItemProps) {
   const { userData } = useUserInfo();
-  const { selectedPost, setSelectedPost } = useStore();
+  const { setIsOpenAlert } = usePopUpActions();
+  const { selectedPost, setSelectedPost } = usePostStore();
 
   const levelIcon = LEVEL[comment.writer.level]?.icon ?? '';
   const isCommentWriter = userData?.userId === comment.writer.userId;
 
   const handleDeleteClick = async () => {
-    if (isCommentWriter) {
-      const response = await postAPI.deleteComment(comment.commentId);
+    const response = await postAPI.deleteComment(comment.commentId);
 
-      if (response?.isSuccess) {
-        const updatedPost = await postAPI.post(selectedPost!.postId);
-        setSelectedPost(updatedPost.result);
-        alert('댓글이 삭제되었습니다.');
-      }
+    if (response?.isSuccess) {
+      setIsOpenAlert(true, 'comment');
+      const updatedPost = await postAPI.post(selectedPost!.postId);
+      setSelectedPost(updatedPost.result);
     }
   };
 

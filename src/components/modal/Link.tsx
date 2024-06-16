@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import useStore from '@/store/store';
 import { ICONS } from '@/constants/assets';
+import usePostStore from '@/store/postStore';
 
 function Link() {
-  const { selectedPost } = useStore();
+  const { selectedPost } = usePostStore();
   const links = selectedPost?.links.filter((link) => link.trim() !== '');
 
   if (!links || links.length === 0) {

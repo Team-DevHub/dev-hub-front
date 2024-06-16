@@ -9,12 +9,13 @@ function MyLevel() {
   const [open, setOpen] = useState<boolean>(false);
   const { userLevel } = useUserInfo();
 
-  // 팝업 등장 시 뒷배경 스크롤 방지
   if (open) {
     document.body.style.overflow = 'hidden';
   } else {
     document.body.style.overflow = 'auto';
   }
+
+  if (!userLevel) return null;
 
   return (
     <Wrapper>

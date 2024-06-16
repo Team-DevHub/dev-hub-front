@@ -4,6 +4,9 @@ import { useUserInfo } from '@/hooks/useUserInfo';
 
 function MyActivity() {
   const { userData } = useUserInfo();
+
+  if (!userData) return null;
+
   return (
     <Wrapper>
       <h2>나의 활동</h2>

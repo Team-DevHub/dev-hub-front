@@ -1,6 +1,4 @@
 import styled, { css } from 'styled-components';
-import { useEffect, useState } from 'react';
-import { postAPI } from '@/api/requests/postAPI';
 import { getCategoryName } from '@/utils/getCategoryName';
 import { formatDate } from '@/utils/format';
 import PostModal from '../modal/PostModal';
@@ -8,31 +6,15 @@ import { useModal } from '@/hooks/useModal';
 import MyPostEmpty from './MyPostEmpty';
 import { ICONS } from '@/constants/assets';
 import { useUserInfo } from '@/hooks/useUserInfo';
-import { PostSummary } from '@/models/post.model';
+import { AnimatePresence } from 'framer-motion';
+import { useMyPosts } from '@/hooks/useMyPosts';
 
 function MyPostList() {
   const { userData } = useUserInfo();
-  const [myPosts, setMyPosts] = useState<PostSummary[] | null>(null);
+  const { myPosts, handleDelete } = useMyPosts();
   const { isModalOpen, handleClick, closeModal } = useModal();
 
-  useEffect(() => {
-    const fetchMyPosts = async () => {
-      const params = { myPage: true };
-      const response = await postAPI.posts(params);
-      setMyPosts(response.result);
-    };
-    fetchMyPosts();
-  }, []);
-
-  const handleDelete = async (postId: number) => {
-    if (window.confirm('삭제하시겠습니까?')) {
-      const response = await postAPI.deletePost(postId);
-      if (response?.isSuccess) {
-        window.alert('게시글이 삭제되었습니다.');
-        location.reload();
-      }
-    }
-  };
+  if (!userData) return null;
 
   return (
     <Wrapper>
@@ -86,8 +68,9 @@ function MyPostList() {
           <MyPostEmpty />
         )}
       </Container>
-
-      {isModalOpen && <PostModal closeModal={closeModal} />}
+      <AnimatePresence>
+        {isModalOpen && <PostModal closeModal={closeModal} />}
+      </AnimatePresence>
     </Wrapper>
   );
 }

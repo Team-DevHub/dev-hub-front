@@ -1,4 +1,3 @@
-import { Post } from '@/models/post.model';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { persist } from 'zustand/middleware';
@@ -6,11 +5,9 @@ import { persist } from 'zustand/middleware';
 interface Store {
   isLoggedIn: boolean;
   setIsLoggedIn: (value: boolean) => void;
-  selectedPost: Post | null;
-  setSelectedPost: (post: Post | null) => void;
 }
 
-const useStore = create(
+const useSessionStore = create<Store>()(
   devtools(
     persist<Store>(
       (set) => ({
@@ -18,18 +15,12 @@ const useStore = create(
         setIsLoggedIn: (value: boolean) => {
           set(() => ({ isLoggedIn: value }));
         },
-        selectedPost: null,
-        setSelectedPost: (post: Post | null) => {
-          set(() => ({
-            selectedPost: post,
-          }));
-        },
       }),
       {
-        name: 'store',
+        name: 'SessionStore',
       },
     ),
   ),
 );
 
-export default useStore;
+export default useSessionStore;

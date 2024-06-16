@@ -14,7 +14,7 @@ export const ICONS = {
     back: PATH + 'arrow-back.svg',
   },
   delete: {
-    red: PATH + 'delete-red-icon.svg',
+    white: PATH + 'delete-white-icon.svg',
     black: PATH + 'delete-black-icon.svg',
   },
   back: PATH + 'back-icon.svg',

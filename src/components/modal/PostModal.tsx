@@ -6,14 +6,14 @@ import PostDetail from './PostDetail';
 import PostComment from './CommentList';
 import CommentInputBar from './CommmentInpuBar';
 import { motion } from 'framer-motion';
-import useStore from '@/store/store';
+import usePostStore from '@/store/postStore';
 
 interface Props {
   closeModal: () => void;
 }
 
 function PostModal({ closeModal }: Props) {
-  const { selectedPost } = useStore();
+  const { selectedPost } = usePostStore();
   const ref = useRef<HTMLDivElement | null>(null);
 
   useClickOutside(ref, () => closeModal());

@@ -1,11 +1,11 @@
 import { userAPI } from '@/api/requests/userAPI';
 import { LEVEL, LevelKeys, LevelType } from '@/constants/level';
-import useStore from '@/store/store';
+import useSessionStore from '@/store/sessionStore';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
 export const useUserInfo = () => {
-  const { isLoggedIn } = useStore();
+  const { isLoggedIn } = useSessionStore();
   const [userLevel, setUserLevel] = useState<LevelType>(LEVEL[1]);
 
   const { data } = useQuery({

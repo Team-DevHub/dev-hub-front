@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { ChangeEvent, useState, KeyboardEvent } from 'react';
 import { ICONS } from '../../constants/assets';
-import useStore from '@/store/store';
 import { Input } from '@/styles/component';
 import { postAPI } from '@/api/requests/postAPI';
 import { useUserInfo } from '@/hooks/useUserInfo';
+import usePostStore from '@/store/postStore';
 
 interface CommentsForm {
   postId: number;
@@ -13,7 +13,7 @@ interface CommentsForm {
 
 function CommentInputBar() {
   const { userData } = useUserInfo();
-  const { selectedPost, setSelectedPost } = useStore();
+  const { selectedPost, setSelectedPost } = usePostStore();
   const [form, setForm] = useState<CommentsForm>({
     postId: selectedPost?.postId || 0,
     content: '',
@@ -44,6 +44,7 @@ function CommentInputBar() {
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
+      e.preventDefault();
       handleSubmit();
     }
   };
