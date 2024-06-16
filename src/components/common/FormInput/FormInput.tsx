@@ -6,6 +6,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   value?: string;
   errorMessage?: string;
+  successMessage?: string;
   placeholder?: string;
   type?: 'text' | 'password';
   onChange?: ChangeEventHandler<HTMLInputElement>;
@@ -18,6 +19,7 @@ const FormInput = forwardRef<HTMLInputElement, Props>(
       label,
       value,
       errorMessage,
+      successMessage,
       placeholder,
       type = 'text',
       style,
@@ -28,13 +30,19 @@ const FormInput = forwardRef<HTMLInputElement, Props>(
   ) => {
     return (
       <FormInputRoot style={style}>
-        <LabelContainer $isError={Boolean(errorMessage)}>
+        <LabelContainer
+          $isError={Boolean(errorMessage)}
+          $isSuccess={Boolean(successMessage)}>
           <label htmlFor={id} className='label'>
             {label}
           </label>
-          <span className='error-message'>{errorMessage}</span>
+          <span className='message'>
+            {errorMessage ? errorMessage : successMessage ? successMessage : ''}
+          </span>
         </LabelContainer>
-        <InputContainer $isError={Boolean(errorMessage)}>
+        <InputContainer
+          $isError={Boolean(errorMessage)}
+          $isSuccess={Boolean(successMessage)}>
           <input
             className='input'
             ref={ref}
@@ -57,31 +65,31 @@ const FormInputRoot = styled.div`
   max-width: 380px;
 `;
 
-const LabelContainer = styled.div<{ $isError: boolean }>`
+const LabelContainer = styled.div<{ $isError: boolean; $isSuccess: boolean }>`
   height: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: ${({ theme, $isError }) =>
-    $isError ? theme.color_textRed : theme.color_key};
+  color: ${({ theme, $isError, $isSuccess }) =>
+    $isError ? theme.color_textRed : $isSuccess ? 'green' : theme.color_key};
 
   .label {
     font-size: 14px;
     font-weight: 700;
   }
 
-  .error-message {
-    font-size: 10px;
+  .message {
+    font-size: 11px;
     font-weight: 400;
   }
 `;
 
-const InputContainer = styled.div<{ $isError: boolean }>`
+const InputContainer = styled.div<{ $isError: boolean; $isSuccess: boolean }>`
   width: 100%;
   padding: 10px 0;
   border-bottom: 1px solid
-    ${({ theme, $isError }) =>
-      $isError ? theme.color_textRed : theme.color_key};
+    ${({ theme, $isError, $isSuccess }) =>
+      $isError ? theme.color_textRed : $isSuccess ? 'green' : theme.color_key};
 
   .input {
     font-size: 14px;
