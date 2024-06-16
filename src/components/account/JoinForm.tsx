@@ -72,7 +72,11 @@ const JoinForm = () => {
               id={'name-input'}
               label={'Name'}
               placeholder='닉네임을 입력해주세요 (2~6자)'
-              errorMessage={errors.nickname?.message}
+              successMessage={nameCheck.canUse ? nameCheck.message : ''}
+              errorMessage={
+                errors.nickname?.message ||
+                (nameCheck.canUse ? '' : nameCheck.message)
+              }
               {...register('nickname', {
                 onChange: () => {
                   resetNameStatus();
@@ -94,7 +98,6 @@ const JoinForm = () => {
               {'중복확인'}
             </button>
           </InputWithButton>
-          <Message $isError={!nameCheck.canUse}>{nameCheck.message}</Message>
         </InputWrapper>
         <InputWrapper>
           <InputWithButton>
@@ -103,7 +106,11 @@ const JoinForm = () => {
               id={'email-input'}
               label={'Email'}
               placeholder='이메일을 입력해주세요'
-              errorMessage={errors.email?.message}
+              successMessage={emailCheck.canUse ? emailCheck.message : ''}
+              errorMessage={
+                errors.email?.message ||
+                (emailCheck.canUse ? '' : emailCheck.message)
+              }
               {...register('email', {
                 onChange: () => {
                   resetEmailStatus();
@@ -121,7 +128,6 @@ const JoinForm = () => {
               {'중복확인'}
             </button>
           </InputWithButton>
-          <Message $isError={!emailCheck.canUse}>{emailCheck.message}</Message>
         </InputWrapper>
 
         <FormInput
@@ -191,10 +197,4 @@ const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
-`;
-
-const Message = styled.span<{ $isError: boolean }>`
-  width: 100%;
-  color: ${({ theme, $isError }) => ($isError ? theme.color_textRed : 'green')};
-  font-size: ${({ theme }) => theme.fontSize_sm};
 `;
