@@ -1,5 +1,5 @@
 import { authInstance, baseInstance } from '../instance';
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { API_ERROR_MSG } from '@/constants/message';
 import {
   EmailCheckRes,
@@ -98,7 +98,9 @@ export const userAPI = {
       );
       return data;
     } catch (err) {
-      window.alert(API_ERROR_MSG);
+      if (err instanceof AxiosError && err.response?.status !== 401) {
+        window.alert(API_ERROR_MSG);
+      }
     }
   },
   deleteAccount: async () => {
@@ -108,7 +110,9 @@ export const userAPI = {
       );
       return data;
     } catch (err) {
-      window.alert(API_ERROR_MSG);
+      if (err instanceof AxiosError && err.response?.status !== 401) {
+        window.alert(API_ERROR_MSG);
+      }
     }
   },
   getTopFive: async () => {

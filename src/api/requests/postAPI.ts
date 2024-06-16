@@ -19,7 +19,9 @@ export const postAPI = {
       );
       return data;
     } catch (err) {
-      window.alert(API_ERROR_MSG);
+      if (err instanceof AxiosError && err.response?.status !== 401) {
+        window.alert(API_ERROR_MSG);
+      }
     }
   },
   posts: async (params: PostsReq) => {
@@ -41,9 +43,10 @@ export const postAPI = {
               totalPosts: 0,
             },
           };
+        } else if (err.response?.status !== 401) {
+          window.alert(API_ERROR_MSG);
         }
       }
-      window.alert(API_ERROR_MSG);
     }
   },
   post: async (postId: number) => {
@@ -63,7 +66,9 @@ export const postAPI = {
       );
       return data;
     } catch (err) {
-      window.alert(API_ERROR_MSG);
+      if (err instanceof AxiosError && err.response?.status !== 401) {
+        window.alert(API_ERROR_MSG);
+      }
     }
   },
   comments: async (commentsData: CommentReq) => {
@@ -74,7 +79,9 @@ export const postAPI = {
       );
       return data;
     } catch (err) {
-      window.alert(API_ERROR_MSG);
+      if (err instanceof AxiosError && err.response?.status !== 401) {
+        window.alert(API_ERROR_MSG);
+      }
     }
   },
   deleteComment: async (commentId: number) => {
@@ -87,7 +94,9 @@ export const postAPI = {
       );
       return data;
     } catch (err) {
-      window.alert(API_ERROR_MSG);
+      if (err instanceof AxiosError && err.response?.status !== 401) {
+        window.alert(API_ERROR_MSG);
+      }
     }
   },
 };

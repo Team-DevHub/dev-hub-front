@@ -36,7 +36,7 @@ const Background = styled.div`
 `;
 
 const Container = styled.div`
-  width: 100%;
+  width: 70%;
   height: 600px;
   background-color: ${({ theme }) => theme.color_bgWhite};
   box-shadow: 0px 4px 40px 4px rgba(0, 0, 0, 0.04);
