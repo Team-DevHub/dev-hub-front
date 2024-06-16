@@ -1,4 +1,5 @@
 import { TokenKey } from '@/constants/storage';
+import useSessionStore from '@/store/sessionStore';
 import axios from 'axios';
 const baseUrl = 'https://api.devhub-server.site';
 
@@ -21,11 +22,21 @@ baseInstance.interceptors.response.use(
   },
 );
 
+let isAlreadyAlerted = false; // 전역 플래그 변수
+
 authInstance.interceptors.response.use(
   (res) => {
     return res;
   },
   (err) => {
+    if (err.response.status === 401 && !isAlreadyAlerted) {
+      isAlreadyAlerted = true;
+      const setIsLoggedIn = useSessionStore.getState().setIsLoggedIn;
+      setIsLoggedIn(false);
+      window.alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+      localStorage.removeItem(TokenKey);
+      window.location.href = '/account/login';
+    }
     return Promise.reject(err);
   },
 );
