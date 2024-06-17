@@ -43,7 +43,6 @@ const usePopUpStore = create<Store>()(
         },
         resetConfirm: () => {
           set(() => ({
-            isConfirmOpen: false,
             isConfirmed: false,
             isDeleted: false,
           }));
