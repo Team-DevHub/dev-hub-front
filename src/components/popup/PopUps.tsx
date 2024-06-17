@@ -5,9 +5,11 @@ import AlertPopUp from './AlertPopUp';
 import { useNavigate } from 'react-router-dom';
 import { ALERT_TYPE } from '@/constants/alertType';
 import { AnimatePresence } from 'framer-motion';
+import { useUserInfo } from '@/hooks/useUserInfo';
 
 function PopUps() {
   const navigate = useNavigate();
+  const { refetch } = useUserInfo();
   const { isConfirmOpen, isOpenAlert, alertType, isDeleted } = usePopUpStore();
   const { setIsOpenAlert, resetConfirm, setIsConfirmOpen } = usePopUpActions();
 
@@ -21,6 +23,7 @@ function PopUps() {
     if (isDeleted) {
       setTimeout(() => {
         setIsConfirmOpen(false);
+        refetch();
       }, 2000);
     }
   }, [isDeleted, resetConfirm]);
