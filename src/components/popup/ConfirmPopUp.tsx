@@ -8,7 +8,7 @@ import { useConfirm, usePopUpActions } from '@/store/popUpStore';
 
 function ConfirmPopUp() {
   const { isDeleted } = useConfirm();
-  const { setIsConfirmed } = usePopUpActions();
+  const { setIsConfirmed, setIsConfirmOpen } = usePopUpActions();
 
   return (
     <AlertLayout>
@@ -31,7 +31,9 @@ function ConfirmPopUp() {
             <Button $isActive={true} onClick={() => setIsConfirmed(true)}>
               삭제
             </Button>
-            <Button $isActive={false}>취소</Button>
+            <Button $isActive={false} onClick={() => setIsConfirmOpen(false)}>
+              취소
+            </Button>
           </ButtonContainer>
         </Wrapper>
       )}
