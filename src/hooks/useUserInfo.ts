@@ -8,7 +8,7 @@ export const useUserInfo = () => {
   const { isLoggedIn } = useSessionStore();
   const [userLevel, setUserLevel] = useState<LevelType>(LEVEL[1]);
 
-  const { data } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ['userInfo'],
     queryFn: async () => await userAPI.getUserInfo().then((res) => res?.result),
     enabled: isLoggedIn,
@@ -20,5 +20,5 @@ export const useUserInfo = () => {
     }
   }, [isLoggedIn, data?.level]);
 
-  return { userData: isLoggedIn ? data : null, userLevel };
+  return { userData: isLoggedIn ? data : null, userLevel, refetch };
 };
