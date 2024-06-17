@@ -14,11 +14,11 @@ function ActivityBox() {
       <Box>
         <Acivity>
           <span>공유한 지식</span>
-          <h5>19건</h5>
+          <h5>{userData.totalPosts}건</h5>
         </Acivity>
         <Acivity>
           <span>보유 포인트</span>
-          <h5>204점</h5>
+          <h5>{userData.totalPoints}점</h5>
         </Acivity>
       </Box>
     </Container>
