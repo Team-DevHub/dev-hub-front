@@ -9,7 +9,7 @@ import { AnimatePresence } from 'framer-motion';
 function PopUps() {
   const navigate = useNavigate();
   const { isConfirmOpen, isOpenAlert, alertType, isDeleted } = usePopUpStore();
-  const { setIsOpenAlert, resetConfirm } = usePopUpActions();
+  const { setIsOpenAlert, resetConfirm, setIsConfirmOpen } = usePopUpActions();
 
   if (isConfirmOpen || isOpenAlert) {
     document.body.style.overflow = 'hidden';
@@ -20,10 +20,18 @@ function PopUps() {
   useEffect(() => {
     if (isDeleted) {
       setTimeout(() => {
-        resetConfirm();
+        setIsConfirmOpen(false);
       }, 2000);
     }
   }, [isDeleted, resetConfirm]);
+
+  useEffect(() => {
+    if (!isConfirmOpen) {
+      setTimeout(() => {
+        resetConfirm();
+      }, 500);
+    }
+  }, [isConfirmOpen]);
 
   useEffect(() => {
     if (isOpenAlert) {
