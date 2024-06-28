@@ -1,8 +1,17 @@
 import styled from 'styled-components';
 import { ICONS } from '@/constants/assets';
 import { motion } from 'framer-motion';
+import { authAPI } from '@/api/requests/authAPI';
 
 function OAuthButtons() {
+  const onClickSocialLogin = async () => {
+    const result = await authAPI.getGithubLoginUrl();
+
+    if (result) {
+      window.open(result.url, '_blank', 'noopener, noreferrer');
+    }
+  };
+
   return (
     <Container>
       <div className='title'>
@@ -11,7 +20,7 @@ function OAuthButtons() {
         시작해볼까요?
       </div>
       <ButtonWrapper>
-        <Button>
+        <Button type='button'>
           <motion.img
             whileTap={{ scale: 0.95 }}
             src={ICONS.button.google}
@@ -19,7 +28,7 @@ function OAuthButtons() {
           />
           <span>Google</span>
         </Button>
-        <Button>
+        <Button type='button' onClick={onClickSocialLogin}>
           <motion.img
             whileTap={{ scale: 0.95 }}
             src={ICONS.button.github}
@@ -44,6 +53,7 @@ const Container = styled.div`
   border-radius: 12px;
   padding: 24px 64px;
   gap: 24px;
+  color: ${({ theme }) => theme.color_textBlack};
 
   .title {
     font-weight: 500;
