@@ -1,7 +1,6 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { baseInstance } from '../instance';
 import { API_ERROR_MSG } from '@/constants/message';
-// import { CommonRes } from '@/models/common.model';
 import { GetGithubUrlRes } from '@/models/auth.model';
 import { LoginRes } from '@/models/user.model';
 

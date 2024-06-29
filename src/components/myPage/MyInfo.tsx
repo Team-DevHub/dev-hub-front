@@ -27,15 +27,15 @@ function MyInfo() {
         <Content>
           <Info>
             <h4>이름</h4>
-            <span>{userData.nickname}</span>
+            <p>{userData.nickname}</p>
           </Info>
           <Info>
             <h4>이메일</h4>
-            <span>{userData.email}</span>
+            <p>{userData.email}</p>
           </Info>
           <Info>
             <h4>가입일</h4>
-            <span>{userData.joinDate}</span>
+            <p>{userData.joinDate}</p>
           </Info>
         </Content>
         <ButtonContainer>
@@ -74,6 +74,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
 `;
 
 const Content = styled.div`
@@ -91,13 +92,21 @@ const Info = styled.div`
     width: 50px;
   }
 
-  & span {
+  & p {
+    flex: 1;
+    white-space: pre-wrap;
     font-size: ${({ theme }) => theme.fontSize_base};
     font-weight: 400;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
   }
 `;
 
 const ButtonContainer = styled.div`
+  width: 150px;
   display: flex;
   flex-direction: column;
   gap: 15px;
