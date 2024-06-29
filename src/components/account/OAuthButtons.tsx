@@ -8,7 +8,7 @@ function OAuthButtons() {
     const result = await authAPI.getGithubLoginUrl();
 
     if (result) {
-      window.open(result.url, '_blank', 'noopener, noreferrer');
+      window.location.href = result.url;
     }
   };
 
