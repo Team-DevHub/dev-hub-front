@@ -1,3 +1,4 @@
+import { authAPI } from '@/api/requests/authAPI';
 import { userAPI } from '@/api/requests/userAPI';
 import { JoinForm } from '@/components/account/JoinForm';
 import { LoginForm } from '@/components/account/LoginForm';
@@ -51,6 +52,16 @@ export const useAuth = () => {
     });
   };
 
+  const handleGithubLogin = async (code: string) => {
+    const result = await authAPI.requestGithubLogin(code);
+
+    if (result?.isSuccess) {
+      localStorage.setItem(TokenKey, result.accessToken!);
+      setIsLoggedIn(true);
+      navigate('/', { replace: true });
+    }
+  };
+
   const logOut = () => {
     localStorage.removeItem(TokenKey);
     clearStorage();
@@ -76,5 +87,6 @@ export const useAuth = () => {
     logOut,
     loginError,
     deleteAccount,
+    handleGithubLogin,
   };
 };
