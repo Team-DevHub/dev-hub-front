@@ -11,9 +11,13 @@ import { formatDate } from '@/utils/format';
 import { getCategoryName } from '@/utils/getCategoryName';
 import usePostStore from '@/store/postStore';
 import { ICONS } from '@/constants/assets';
+import { useNavigate } from 'react-router-dom';
+import { useUserInfo } from '@/hooks/useUserInfo';
 
 function PostDetail() {
   const { selectedPost } = usePostStore();
+  const { userData } = useUserInfo();
+  const navigate = useNavigate();
 
   if (!selectedPost) {
     return;
@@ -21,6 +25,11 @@ function PostDetail() {
 
   const levelIcon = LEVEL[selectedPost.writer.level]?.icon ?? '';
 
+  const handleEdit = () => {
+    navigate(`/edit-post/${selectedPost.postId}`);
+  };
+
+  const isPostWriter = userData?.userId === selectedPost.writer.userId;
   return (
     <>
       <Container>
@@ -49,10 +58,12 @@ function PostDetail() {
         <Link />
         <BottomBar>
           <Date>{formatDate(selectedPost.createdAt)}</Date>
-          <EditButton>
-            <img src={ICONS.edit} alt='edit' />
-            <span>수정</span>
-          </EditButton>
+          {isPostWriter && (
+            <EditButton onClick={handleEdit}>
+              <img src={ICONS.edit} alt='edit' />
+              <span>수정</span>
+            </EditButton>
+          )}
         </BottomBar>
       </Container>
     </>

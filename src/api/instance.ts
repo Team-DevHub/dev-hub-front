@@ -1,8 +1,7 @@
 import { TokenKey } from '@/constants/storage';
 import useSessionStore from '@/store/sessionStore';
 import axios from 'axios';
-// const baseUrl = import.meta.env.VITE_BASE_URL;
-const baseUrl = 'http://localhost:8888';
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 // token 인증이 필요 없는 요청
 export const baseInstance = axios.create({
