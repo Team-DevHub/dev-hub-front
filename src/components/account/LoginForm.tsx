@@ -2,16 +2,14 @@ import styled from 'styled-components';
 import {
   AccountCardTitle,
   FormRoot,
-  GotoPage,
   InputContainer,
   SubmitContainer,
 } from '../layouts/AccountLayout';
 import FormInput from '../common/FormInput/FormInput';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Checkbox from '../common/FormInput/Checkbox';
 import FormButton from '../common/FormInput/FormButton';
-import { Link } from 'react-router-dom';
-import { ICONS } from '../../constants/assets';
+import { Link, useSearchParams } from 'react-router-dom';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { UserEmailKey, UserPasswordKey } from '@/constants/storage';
 import { useForm } from 'react-hook-form';
@@ -23,7 +21,9 @@ export interface LoginForm {
 }
 
 const LoginForm = () => {
-  const { logIn, loginError } = useAuth();
+  const { logIn, loginError, handleGithubLogin } = useAuth();
+  const [params] = useSearchParams();
+  const code = params.get('code');
   const [isChecked, setIsChecked] = useState(false);
 
   const { register, watch, handleSubmit } = useForm<LoginForm>({
@@ -33,12 +33,14 @@ const LoginForm = () => {
     },
   });
 
-  const handleSubmitForm = async (formData: LoginForm) => {
-    logIn(formData, isChecked);
-  };
+  useEffect(() => {
+    if (code) {
+      handleGithubLogin(code);
+    }
+  }, [code, handleGithubLogin]);
 
   return (
-    <FormRoot onSubmit={handleSubmit(handleSubmitForm)}>
+    <FormRoot onSubmit={handleSubmit((data) => logIn(data, isChecked))}>
       <AccountCardTitle>{'로그인'}</AccountCardTitle>
       <InputContainer>
         <FormInput
@@ -70,37 +72,31 @@ const LoginForm = () => {
             disabled={!watch('email') || !watch('password')}
           />
         </ButtonWrapper>
-        <GotoFindPassword>
-          <Link to={LOGIN_ROUTER_PATH.password.find}>
-            {'비밀번호를 잊으셨나요?'}
+        <LinkWrapper>
+          <Link to={LOGIN_ROUTER_PATH.join}>
+            <span>회원가입</span>
           </Link>
-        </GotoFindPassword>
-        <GotoPage>
-          <img src={ICONS.join} />
-          <Link to={LOGIN_ROUTER_PATH.join}>{'회원가입'}</Link>
-        </GotoPage>
+          <Link to={LOGIN_ROUTER_PATH.password.find}>
+            <span>비밀번호 찾기</span>
+          </Link>
+        </LinkWrapper>
       </SubmitContainer>
     </FormRoot>
   );
 };
 export default LoginForm;
 
-const GotoFindPassword = styled.div`
-  display: flex;
-  justify-content: center;
-
-  a {
-    color: ${({ theme }) => theme.color_textGray};
-    font-size: ${({ theme }) => theme.fontSize_sm};
-    text-decoration: none;
-  }
-`;
-
 const ButtonWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 6px;
+
+  hr {
+    height: 1px;
+    color: black;
+    background-color: black;
+  }
 `;
 
 const ErrorMessage = styled.span`
@@ -109,4 +105,29 @@ const ErrorMessage = styled.span`
   text-align: center;
   color: ${({ theme }) => theme.color_textRed};
   font-size: ${({ theme }) => theme.fontSize_sm};
+`;
+
+const LinkWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    padding: 0 10px;
+  }
+
+  a {
+    color: ${({ theme }) => theme.color_key};
+    font-size: ${({ theme }) => theme.fontSize_base};
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  a::after {
+    content: '|';
+  }
+
+  a:last-child::after {
+    content: '';
+  }
 `;

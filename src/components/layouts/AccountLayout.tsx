@@ -1,10 +1,13 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '@/styles/component';
 import { ICONS, IMAGES, LOGOS } from '@/constants/assets';
+import OAuthButtons from '../account/OAuthButtons';
+import { LOGIN_ROUTER_PATH } from '@/constants/path';
 
 const AccountLayout = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   return (
     <Root>
       <DescriptionContainer>
@@ -23,9 +26,12 @@ const AccountLayout = () => {
         </TextContainer>
         <img src={IMAGES.musseuk.account} alt='musseuk' />
       </DescriptionContainer>
-      <CardContainer>
-        <Outlet />
-      </CardContainer>
+      <Wrapper>
+        <CardContainer>
+          <Outlet />
+        </CardContainer>
+        {pathname === LOGIN_ROUTER_PATH.login && <OAuthButtons />}
+      </Wrapper>
     </Root>
   );
 };
@@ -129,6 +135,12 @@ const GotoPage = styled.div`
     text-decoration: none;
     font-weight: 500;
   }
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 `;
 
 export {
