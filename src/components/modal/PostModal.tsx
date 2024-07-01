@@ -1,6 +1,6 @@
 import { modalBackgroundVariants } from '@/styles/variants';
 import useClickOutside from '@/hooks/useClickOutside';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PostDetail from './PostDetail';
 import PostComment from './CommentList';
@@ -17,6 +17,20 @@ function PostModal({ closeModal }: Props) {
   const ref = useRef<HTMLDivElement | null>(null);
 
   useClickOutside(ref, () => closeModal());
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [closeModal]);
 
   return (
     <>

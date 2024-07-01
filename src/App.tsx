@@ -24,6 +24,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './api/queryClient';
 import useSessionStore from './store/sessionStore';
 import PopUps from './components/popup/PopUps';
+import EditPostPage from './pages/EditPostPage';
 
 const ProtectedRoute = ({ redirectPath = '/' }) => {
   const { isLoggedIn } = useSessionStore();
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: 'posting',
         element: <PostingPage />,
+      },
+      {
+        path: 'edit-post/:postId',
+        element: <EditPostPage />,
       },
     ],
   },

@@ -8,15 +8,21 @@ interface CategoryProps {
   width?: string;
   onCategorySelect?: (id: number) => void;
   mode: 'filter' | 'select';
+  initialSelected?: number;
 }
 
 const Category: React.FC<CategoryProps> = ({
   width = '650px',
   onCategorySelect,
   mode,
+  initialSelected = 0,
 }) => {
-  const [selected, setSelected] = useState<number>(0);
+  const [selected, setSelected] = useState<number>(initialSelected);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    setSelected(initialSelected);
+  }, [initialSelected]);
 
   const handleSelect = (id: number) => {
     if (mode === 'filter') {
@@ -35,13 +41,6 @@ const Category: React.FC<CategoryProps> = ({
     }
     setSelected(id);
   };
-
-  useEffect(() => {
-    const categoryId = searchParams.get('category_id');
-    if (!categoryId) {
-      setSelected(0);
-    }
-  }, [searchParams]);
 
   // filter mode에서만 전체 카테고리 추가
   const categoriesWithAll =
