@@ -112,4 +112,24 @@ export const postAPI = {
       }
     }
   },
+  scrap: async (postId: number) => {
+    try {
+      const { data }: AxiosResponse<CommonRes> = await authInstance.get(
+        `/scrap/${postId}`,
+      );
+      return data;
+    } catch (err) {
+      window.alert(API_ERROR_MSG);
+    }
+  },
+  unscrap: async (postId: number) => {
+    try {
+      const { data }: AxiosResponse<CommonRes> = await authInstance.delete(
+        `/scrap/${postId}`,
+      );
+      return data;
+    } catch (err) {
+      window.alert(API_ERROR_MSG);
+    }
+  },
 };
