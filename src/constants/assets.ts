@@ -17,6 +17,10 @@ export const ICONS = {
     white: PATH + 'delete-white-icon.svg',
     black: PATH + 'delete-black-icon.svg',
   },
+  button: {
+    github: PATH + 'github-button.svg',
+    google: PATH + 'google.svg',
+  },
   scrap: {
     inactive: PATH + 'scrap-inactive.svg',
     active: PATH + 'scrap-active.svg',
@@ -47,6 +51,7 @@ export const ICONS = {
   link: PATH + 'link-icon.svg',
   check: PATH + 'check.svg',
   x: PATH + 'x-icon.svg',
+  edit: PATH + 'edit-icon.svg',
 };
 
 export const IMAGES = {

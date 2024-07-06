@@ -99,4 +99,17 @@ export const postAPI = {
       }
     }
   },
+  editPost: async (postId: number, postData: PostingReq) => {
+    try {
+      const { data }: AxiosResponse<CommonRes> = await authInstance.put(
+        `/posts/${postId}`,
+        postData,
+      );
+      return data;
+    } catch (err) {
+      if (err instanceof AxiosError && err.response?.status !== 401) {
+        window.alert(API_ERROR_MSG);
+      }
+    }
+  },
 };
