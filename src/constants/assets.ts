@@ -17,6 +17,10 @@ export const ICONS = {
     white: PATH + 'delete-white-icon.svg',
     black: PATH + 'delete-black-icon.svg',
   },
+  scrap: {
+    inactive: PATH + 'scrap-inactive.svg',
+    active: PATH + 'scrap-active.svg',
+  },
   back: PATH + 'back-icon.svg',
   comment: PATH + 'comment-icon.svg',
   filter: PATH + 'filter-arrow.svg',

@@ -10,6 +10,7 @@ import { LEVEL } from '@/constants/level';
 import { formatDate } from '@/utils/format';
 import { getCategoryName } from '@/utils/getCategoryName';
 import usePostStore from '@/store/postStore';
+import { ICONS } from '@/constants/assets';
 
 function PostDetail() {
   const { selectedPost } = usePostStore();
@@ -25,6 +26,7 @@ function PostDetail() {
       <Container>
         <TopBar>
           <Tag>{getCategoryName(selectedPost.categoryId)}</Tag>
+          <img src={ICONS.scrap.active} alt='' />
           <UserInfo>
             <span>Lv.{selectedPost.writer.level}</span>
             <h4>{selectedPost.writer.nickname}</h4>
