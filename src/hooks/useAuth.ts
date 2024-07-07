@@ -64,8 +64,8 @@ export const useAuth = () => {
 
   const logOut = () => {
     localStorage.removeItem(TokenKey);
-    clearStorage();
     setIsLoggedIn(false);
+    clearStorage();
     navigate(LOGIN_ROUTER_PATH.login);
   };
 

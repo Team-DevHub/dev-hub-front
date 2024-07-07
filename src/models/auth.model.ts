@@ -1,3 +1,3 @@
-export interface GetGithubUrlRes {
+export interface GetUrlRes {
   url: string;
 }
