@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { ICONS } from '@/constants/assets';
 import { motion } from 'framer-motion';
 import { authAPI } from '@/api/requests/authAPI';
+import { SocialLoginKey } from '@/constants/storage';
 
 function OAuthButtons() {
   const onClickSocialLogin = async (type: 'github' | 'google') => {
@@ -13,6 +14,7 @@ function OAuthButtons() {
     }
 
     if (result) {
+      localStorage.setItem(SocialLoginKey, type);
       window.location.href = result.url;
     }
   };

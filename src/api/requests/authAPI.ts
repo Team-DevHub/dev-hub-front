@@ -42,4 +42,18 @@ export const authAPI = {
       }
     }
   },
+  requestGoogleLogin: async (code: string) => {
+    try {
+      const { data }: AxiosResponse<LoginRes> = await baseInstance.post(
+        `/oauth/google`,
+        { code },
+      );
+      return data;
+    } catch (err) {
+      if (err instanceof AxiosError && err.response?.status !== 401) {
+        console.log(err);
+        window.alert(API_ERROR_MSG);
+      }
+    }
+  },
 };
