@@ -4,6 +4,7 @@ import { API_ERROR_MSG } from '@/constants/message';
 import {
   CommentReq,
   PostRes,
+  PostSummary,
   PostingReq,
   PostsReq,
   PostsRes,
@@ -126,6 +127,16 @@ export const postAPI = {
     try {
       const { data }: AxiosResponse<CommonRes> = await authInstance.delete(
         `/scrap/${postId}`,
+      );
+      return data;
+    } catch (err) {
+      window.alert(API_ERROR_MSG);
+    }
+  },
+  myscrap: async () => {
+    try {
+      const { data }: AxiosResponse = await authInstance.get<PostSummary>(
+        `/scrap`,
       );
       return data;
     } catch (err) {

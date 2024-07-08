@@ -44,7 +44,7 @@ function Table({ data = [], buttonTitle, button, handleClick }: TableProps) {
 }
 
 const Wrapper = styled.div`
-  padding: 20px 0 0 0;
+  padding: 24px 0 0 0;
 `;
 
 const TableContainer = styled.div`
@@ -57,16 +57,15 @@ const TableContainer = styled.div`
   table {
     width: 100%;
     border-collapse: collapse;
-
     border-bottom: 1px solid ${({ theme }) => theme.color_borderGray};
     background-color: ${({ theme }) => theme.color_bgWhite};
 
     th {
       font-weight: 700;
-
       padding: 16px;
       border-bottom: 1px solid ${({ theme }) => theme.color_borderGray};
       text-align: center;
+      vertical-align: middle;
     }
 
     th.title {
@@ -78,6 +77,7 @@ const TableContainer = styled.div`
       padding: 16px;
       border-bottom: 1px solid ${({ theme }) => theme.color_borderGray};
       text-align: center;
+      vertical-align: middle;
     }
 
     td.title {

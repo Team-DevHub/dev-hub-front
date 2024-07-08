@@ -39,5 +39,24 @@ export const useMyPosts = () => {
     }
   }, [isConfirmed, deletePost]);
 
-  return { myPosts, handleDelete };
+  const { data: myScraps } = useQuery<PostSummary[]>({
+    queryKey: ['myScraps'],
+    queryFn: async () => {
+      const response = await postAPI.myscrap();
+      return response.result || [];
+    },
+  });
+
+  const unscrapMutation = useMutation({
+    mutationFn: async (postId: number) => {
+      return await postAPI.unscrap(postId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['myScraps'] });
+    },
+  });
+  const handleUnscrap = async (postId: number) => {
+    unscrapMutation.mutate(postId);
+  };
+  return { myPosts, myScraps, handleDelete, handleUnscrap };
 };

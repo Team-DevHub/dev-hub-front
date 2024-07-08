@@ -4,6 +4,7 @@ import MyLevel from '@/components/myPage/MyLevel';
 import MyActivity from '@/components/myPage/MyActivity';
 import MyPostList from '@/components/myPage/MyPostLIst';
 import BannerWithTitle from '@/components/common/Banner/BannerWithTitle';
+import MyScrapList from '@/components/myPage/MyScrapList';
 
 function MyPage() {
   return (
@@ -15,6 +16,7 @@ function MyPage() {
         <MyActivity />
       </Content>
       <MyPostList />
+      <MyScrapList />
     </Container>
   );
 }

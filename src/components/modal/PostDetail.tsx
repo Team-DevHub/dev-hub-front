@@ -13,12 +13,12 @@ import usePostStore from '@/store/postStore';
 import { ICONS } from '@/constants/assets';
 import { useNavigate } from 'react-router-dom';
 import { useUserInfo } from '@/hooks/useUserInfo';
-import { useLike } from '@/hooks/useLike';
+import { useScrap } from '@/hooks/useScrap';
 
 function PostDetail() {
   const { selectedPost } = usePostStore();
   const { userData } = useUserInfo();
-  const { toggleScrap } = useLike();
+  const { toggleScrap } = useScrap();
 
   const navigate = useNavigate();
 
