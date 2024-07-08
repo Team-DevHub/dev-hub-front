@@ -3,13 +3,20 @@ import { userAPI } from '@/api/requests/userAPI';
 import { JoinForm } from '@/components/account/JoinForm';
 import { LoginForm } from '@/components/account/LoginForm';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
-import { TokenKey, UserEmailKey, UserPasswordKey } from '@/constants/storage';
+import {
+  SocialLoginKey,
+  TokenKey,
+  UserEmailKey,
+  UserPasswordKey,
+} from '@/constants/storage';
 import { usePopUpActions } from '@/store/popUpStore';
 import useSessionStore from '@/store/sessionStore';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export const useAuth = () => {
+  const [params] = useSearchParams();
+  const code = params.get('code');
   const { setIsLoggedIn } = useSessionStore();
   const { setIsOpenAlert } = usePopUpActions();
   const [loginError, setLoginError] = useState<string>('');
@@ -52,20 +59,28 @@ export const useAuth = () => {
     });
   };
 
-  const handleGithubLogin = async (code: string) => {
-    const result = await authAPI.requestGithubLogin(code);
+  const handleSocialLogin = useCallback(async (code: string) => {
+    const type = localStorage.getItem(SocialLoginKey);
+
+    let result;
+    if (type === 'github') {
+      result = await authAPI.requestGithubLogin(code);
+    } else {
+      result = await authAPI.requestGoogleLogin(code);
+    }
 
     if (result?.isSuccess) {
       localStorage.setItem(TokenKey, result.accessToken!);
+      localStorage.removeItem(SocialLoginKey);
       setIsLoggedIn(true);
       navigate('/', { replace: true });
     }
-  };
+  }, []);
 
   const logOut = () => {
     localStorage.removeItem(TokenKey);
-    clearStorage();
     setIsLoggedIn(false);
+    clearStorage();
     navigate(LOGIN_ROUTER_PATH.login);
   };
 
@@ -81,12 +96,17 @@ export const useAuth = () => {
     });
   };
 
+  useEffect(() => {
+    if (code) {
+      handleSocialLogin(code);
+    }
+  }, [code, handleSocialLogin]);
+
   return {
     join,
     logIn,
     logOut,
     loginError,
     deleteAccount,
-    handleGithubLogin,
   };
 };

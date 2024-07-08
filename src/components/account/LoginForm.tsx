@@ -6,10 +6,10 @@ import {
   SubmitContainer,
 } from '../layouts/AccountLayout';
 import FormInput from '../common/FormInput/FormInput';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Checkbox from '../common/FormInput/Checkbox';
 import FormButton from '../common/FormInput/FormButton';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import { UserEmailKey, UserPasswordKey } from '@/constants/storage';
 import { useForm } from 'react-hook-form';
@@ -21,9 +21,7 @@ export interface LoginForm {
 }
 
 const LoginForm = () => {
-  const { logIn, loginError, handleGithubLogin } = useAuth();
-  const [params] = useSearchParams();
-  const code = params.get('code');
+  const { logIn, loginError } = useAuth();
   const [isChecked, setIsChecked] = useState(false);
 
   const { register, watch, handleSubmit } = useForm<LoginForm>({
@@ -32,12 +30,6 @@ const LoginForm = () => {
       password: localStorage.getItem(UserPasswordKey) || '',
     },
   });
-
-  useEffect(() => {
-    if (code) {
-      handleGithubLogin(code);
-    }
-  }, [code, handleGithubLogin]);
 
   return (
     <FormRoot onSubmit={handleSubmit((data) => logIn(data, isChecked))}>

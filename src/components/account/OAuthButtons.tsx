@@ -2,12 +2,19 @@ import styled from 'styled-components';
 import { ICONS } from '@/constants/assets';
 import { motion } from 'framer-motion';
 import { authAPI } from '@/api/requests/authAPI';
+import { SocialLoginKey } from '@/constants/storage';
 
 function OAuthButtons() {
-  const onClickSocialLogin = async () => {
-    const result = await authAPI.getGithubLoginUrl();
+  const onClickSocialLogin = async (type: 'github' | 'google') => {
+    let result;
+    if (type === 'github') {
+      result = await authAPI.getGithubLoginUrl();
+    } else {
+      result = await authAPI.getGoogleLoginUrl();
+    }
 
     if (result) {
+      localStorage.setItem(SocialLoginKey, type);
       window.location.href = result.url;
     }
   };
@@ -20,7 +27,7 @@ function OAuthButtons() {
         시작해볼까요?
       </div>
       <ButtonWrapper>
-        <Button type='button'>
+        <Button type='button' onClick={() => onClickSocialLogin('google')}>
           <motion.img
             whileTap={{ scale: 0.95 }}
             src={ICONS.button.google}
@@ -28,7 +35,7 @@ function OAuthButtons() {
           />
           <span>Google</span>
         </Button>
-        <Button type='button' onClick={onClickSocialLogin}>
+        <Button type='button' onClick={() => onClickSocialLogin('github')}>
           <motion.img
             whileTap={{ scale: 0.95 }}
             src={ICONS.button.github}
