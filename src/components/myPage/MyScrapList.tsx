@@ -3,39 +3,35 @@ import PostModal from '../modal/PostModal';
 import { useModal } from '@/hooks/useModal';
 import PostEmpty from './PostEmpty';
 import { ICONS } from '@/constants/assets';
-import { useUserInfo } from '@/hooks/useUserInfo';
 import { AnimatePresence } from 'framer-motion';
 import { useMyPosts } from '@/hooks/useMyPosts';
 import Table from '../common/Table';
 
-function MyPostList() {
-  const { userData } = useUserInfo();
-  const { myPosts, handleDelete } = useMyPosts();
+function MyScrapList() {
+  const { myScraps, handleUnscrap } = useMyPosts();
   const { isModalOpen, handleClick, closeModal } = useModal();
-
-  if (!userData) return null;
 
   return (
     <Wrapper>
-      {userData!.totalPosts > 0 ? (
+      {myScraps?.length !== 0 ? (
         <Table
-          data={myPosts!}
-          buttonTitle='삭제'
+          data={myScraps!}
+          buttonTitle='스크랩'
           button={(post) => (
             <img
-              src={ICONS.delete.black}
-              alt='delete'
+              src={ICONS.scrap.active}
+              alt='scrap'
               style={{ cursor: 'pointer' }}
-              onClick={() => handleDelete(post.postId)}
+              onClick={() => handleUnscrap(post.postId)}
             />
           )}
           handleClick={handleClick}
         />
       ) : (
         <PostEmpty
-          message='아직 공유한 지식이 없어요'
-          buttonText='지식 공유하러 가기'
-          path='/posting'
+          message='아직 저장한 지식이 없어요'
+          buttonText='지식 구경하러 가기'
+          path='/'
         />
       )}
 
@@ -46,7 +42,7 @@ function MyPostList() {
   );
 }
 
-export default MyPostList;
+export default MyScrapList;
 
 const Wrapper = styled.div`
   width: 100%;

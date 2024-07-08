@@ -21,6 +21,10 @@ export const ICONS = {
     github: PATH + 'github-button.svg',
     google: PATH + 'google.svg',
   },
+  scrap: {
+    inactive: PATH + 'scrap-inactive.svg',
+    active: PATH + 'scrap-active.svg',
+  },
   back: PATH + 'back-icon.svg',
   comment: PATH + 'comment-icon.svg',
   filter: PATH + 'filter-arrow.svg',

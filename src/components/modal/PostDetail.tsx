@@ -13,10 +13,13 @@ import usePostStore from '@/store/postStore';
 import { ICONS } from '@/constants/assets';
 import { useNavigate } from 'react-router-dom';
 import { useUserInfo } from '@/hooks/useUserInfo';
+import { useScrap } from '@/hooks/useScrap';
 
 function PostDetail() {
   const { selectedPost } = usePostStore();
   const { userData } = useUserInfo();
+  const { toggleScrap } = useScrap();
+
   const navigate = useNavigate();
 
   if (!selectedPost) {
@@ -35,6 +38,15 @@ function PostDetail() {
       <Container>
         <TopBar>
           <Tag>{getCategoryName(selectedPost.categoryId)}</Tag>
+          <img
+            src={
+              selectedPost.isScrapped
+                ? ICONS.scrap.active
+                : ICONS.scrap.inactive
+            }
+            alt='scrap'
+            onClick={toggleScrap}
+          />
           <UserInfo>
             <span>Lv.{selectedPost.writer.level}</span>
             <h4>{selectedPost.writer.nickname}</h4>
@@ -99,6 +111,7 @@ const Tag = styled.span`
   padding: 7px 17px;
   border-radius: 10px;
   font-weight: 500;
+  margin-right: 15px;
 `;
 
 const UserInfo = styled.div`

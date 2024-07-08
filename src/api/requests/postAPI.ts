@@ -4,6 +4,7 @@ import { API_ERROR_MSG } from '@/constants/message';
 import {
   CommentReq,
   PostRes,
+  PostSummary,
   PostingReq,
   PostsReq,
   PostsRes,
@@ -110,6 +111,36 @@ export const postAPI = {
       if (err instanceof AxiosError && err.response?.status !== 401) {
         window.alert(API_ERROR_MSG);
       }
+    }
+  },
+  scrap: async (postId: number) => {
+    try {
+      const { data }: AxiosResponse<CommonRes> = await authInstance.get(
+        `/scrap/${postId}`,
+      );
+      return data;
+    } catch (err) {
+      window.alert(API_ERROR_MSG);
+    }
+  },
+  unscrap: async (postId: number) => {
+    try {
+      const { data }: AxiosResponse<CommonRes> = await authInstance.delete(
+        `/scrap/${postId}`,
+      );
+      return data;
+    } catch (err) {
+      window.alert(API_ERROR_MSG);
+    }
+  },
+  myscrap: async () => {
+    try {
+      const { data }: AxiosResponse = await authInstance.get<PostSummary>(
+        `/scrap`,
+      );
+      return data;
+    } catch (err) {
+      window.alert(API_ERROR_MSG);
     }
   },
 };

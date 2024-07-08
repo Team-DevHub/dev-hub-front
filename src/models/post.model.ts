@@ -39,6 +39,7 @@ export interface Post {
   writer: Writer;
   createdAt: string;
   comments: Comment[];
+  isScrapped: boolean;
 }
 
 export interface Comment {
