@@ -5,11 +5,10 @@ import { useNavigate } from 'react-router-dom';
 interface EmptyProps {
   message: string;
   buttonText: string;
-  // buttonClick: (path: string) => void;
   path: string;
 }
 
-function MyPostEmpty({ message, buttonText, path }: EmptyProps) {
+function PostEmpty({ message, buttonText, path }: EmptyProps) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -26,10 +25,10 @@ function MyPostEmpty({ message, buttonText, path }: EmptyProps) {
   );
 }
 
-export default MyPostEmpty;
+export default PostEmpty;
 
 const Container = styled.div`
-  margin-top: 24px;
+  height: 330px;
   background-color: ${({ theme }) => theme.color_bgWhite};
   border: 1px solid ${({ theme }) => theme.color_borderGray};
   border-radius: 12px;
@@ -39,7 +38,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
-  padding: 150px 0;
 
   p {
     font-weight: 500;

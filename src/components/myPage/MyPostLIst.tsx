@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PostModal from '../modal/PostModal';
 import { useModal } from '@/hooks/useModal';
-import MyPostEmpty from './MyPostEmpty';
+import PostEmpty from './PostEmpty';
 import { ICONS } from '@/constants/assets';
 import { useUserInfo } from '@/hooks/useUserInfo';
 import { AnimatePresence } from 'framer-motion';
@@ -17,10 +17,6 @@ function MyPostList() {
 
   return (
     <Wrapper>
-      <Title>
-        <h2>나의 지식</h2>
-      </Title>
-
       {userData!.totalPosts > 0 ? (
         <Table
           data={myPosts!}
@@ -36,7 +32,7 @@ function MyPostList() {
           handleClick={handleClick}
         />
       ) : (
-        <MyPostEmpty
+        <PostEmpty
           message='아직 공유한 지식이 없어요'
           buttonText='지식 공유하러 가기'
           path='/posting'
@@ -55,16 +51,4 @@ export default MyPostList;
 const Wrapper = styled.div`
   width: 100%;
   overflow: hidden;
-`;
-
-const Title = styled.div`
-  display: flex;
-  align-items: flex-end;
-  margin: 0 15px;
-
-  & span {
-    font-weight: 500;
-    font-size: ${({ theme }) => theme.fontSize_base};
-    color: ${({ theme }) => theme.color_textGray};
-  }
 `;
