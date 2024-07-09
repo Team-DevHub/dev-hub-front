@@ -40,17 +40,12 @@ export const useAuth = () => {
   const logIn = async (formData: LoginForm, isChecked: boolean) => {
     await userAPI.login(formData).then((data) => {
       if (data.isSuccess) {
-        localStorage.setItem(TokenKey, data.accessToken!);
-
         // 로그인 정보 저장
         if (isChecked) {
-          localStorage.setItem(UserEmailKey, formData.email);
-          localStorage.setItem(UserPasswordKey, formData.password);
+          localStorage.setItem(TokenKey, data.accessToken!);
         } else {
-          localStorage.removeItem(UserEmailKey);
-          localStorage.removeItem(UserPasswordKey);
+          sessionStorage.setItem(TokenKey, data.accessToken!);
         }
-
         setIsLoggedIn(true);
         navigate('/', { replace: true });
       } else {
