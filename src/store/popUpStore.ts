@@ -9,7 +9,7 @@ interface Actions {
   resetConfirm: () => void;
 }
 
-type AlertType = 'join' | 'posting' | 'reset' | 'comment';
+type AlertType = 'join' | 'posting' | 'reset' | 'comment' | 'editing';
 
 interface Store {
   alertType: AlertType | null;

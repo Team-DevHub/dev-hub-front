@@ -32,7 +32,7 @@ function EditPostPage() {
       links: data.links,
     });
     if (response!.isSuccess) {
-      setIsOpenAlert(true, 'posting');
+      setIsOpenAlert(true, 'editing');
       navigate('/');
     }
   };
