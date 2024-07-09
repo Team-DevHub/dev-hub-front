@@ -53,7 +53,7 @@ const LoginForm = () => {
         <Checkbox
           id={'auto-login-checkbox'}
           checked={isChecked}
-          label={'로그인 정보 저장'}
+          label={'자동 로그인'}
           onClick={() => setIsChecked((prev) => !prev)}
         />
         <ButtonWrapper>
