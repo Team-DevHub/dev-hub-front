@@ -43,7 +43,11 @@ authInstance.interceptors.response.use(
 
 authInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem(TokenKey);
+    let token = localStorage.getItem(TokenKey);
+
+    if (!token) {
+      token = sessionStorage.getItem(TokenKey);
+    }
     config.headers['Authorization'] = `Bearer ${token}`;
     return config;
   },
