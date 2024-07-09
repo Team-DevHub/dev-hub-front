@@ -45,6 +45,7 @@ function PostDetail() {
                 : ICONS.scrap.inactive
             }
             alt='scrap'
+            className='scrap'
             onClick={toggleScrap}
           />
           <UserInfo>
@@ -102,6 +103,10 @@ const TopBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  .scrap {
+    cursor: pointer;
+  }
 `;
 
 const Tag = styled.span`
