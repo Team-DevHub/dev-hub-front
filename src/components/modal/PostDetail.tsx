@@ -38,16 +38,18 @@ function PostDetail() {
       <Container>
         <TopBar>
           <Tag>{getCategoryName(selectedPost.categoryId)}</Tag>
-          <img
-            src={
-              selectedPost.isScrapped
-                ? ICONS.scrap.active
-                : ICONS.scrap.inactive
-            }
-            alt='scrap'
-            className='scrap'
-            onClick={toggleScrap}
-          />
+          {selectedPost.isScrapped !== null && (
+            <img
+              src={
+                selectedPost.isScrapped
+                  ? ICONS.scrap.active
+                  : ICONS.scrap.inactive
+              }
+              alt='scrap'
+              className='scrap'
+              onClick={toggleScrap}
+            />
+          )}
           <UserInfo>
             <span>Lv.{selectedPost.writer.level}</span>
             <h4>{selectedPost.writer.nickname}</h4>

@@ -52,7 +52,7 @@ export const postAPI = {
   },
   post: async (postId: number) => {
     try {
-      const { data }: AxiosResponse = await baseInstance.get<PostRes>(
+      const { data }: AxiosResponse = await authInstance.get<PostRes>(
         `/posts/${postId}`,
       );
       return data;
