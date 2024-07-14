@@ -4,7 +4,6 @@ import { API_ERROR_MSG } from '@/constants/message';
 import {
   CommentReq,
   PostRes,
-  PostSummary,
   PostingReq,
   PostsReq,
   PostsRes,
@@ -27,7 +26,7 @@ export const postAPI = {
   },
   posts: async (params: PostsReq) => {
     try {
-      const myPage = params.myPage === true;
+      const myPage = params.myPage || params.scrap === true;
       const instance = myPage ? authInstance : baseInstance;
 
       const { data }: AxiosResponse = await instance.get<PostsRes>(`/posts`, {
@@ -127,16 +126,6 @@ export const postAPI = {
     try {
       const { data }: AxiosResponse<CommonRes> = await authInstance.delete(
         `posts/${postId}/scrap`,
-      );
-      return data;
-    } catch (err) {
-      window.alert(API_ERROR_MSG);
-    }
-  },
-  myscrap: async () => {
-    try {
-      const { data }: AxiosResponse = await authInstance.get<PostSummary>(
-        `/scrap`,
       );
       return data;
     } catch (err) {

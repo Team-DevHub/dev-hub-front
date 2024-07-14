@@ -11,7 +11,7 @@ export interface PostsReq {
   limit?: number;
   page?: number;
   myPage?: boolean;
-  scrape?: boolean;
+  scrap?: boolean;
   search?: string;
   categoryId?: number;
 }
