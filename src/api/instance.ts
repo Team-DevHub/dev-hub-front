@@ -1,4 +1,4 @@
-import { TokenKey } from '@/constants/storage';
+import { ACCESS_TOKEN_KEY } from '@/constants/storage';
 import useSessionStore from '@/store/sessionStore';
 import axios from 'axios';
 const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -34,7 +34,7 @@ authInstance.interceptors.response.use(
       const setIsLoggedIn = useSessionStore.getState().setIsLoggedIn;
       setIsLoggedIn(false);
       window.alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
-      localStorage.removeItem(TokenKey);
+      localStorage.removeItem(ACCESS_TOKEN_KEY);
       window.location.href = '/account/login';
     }
     return Promise.reject(err);
@@ -43,10 +43,10 @@ authInstance.interceptors.response.use(
 
 authInstance.interceptors.request.use(
   (config) => {
-    let token = localStorage.getItem(TokenKey);
+    let token = localStorage.getItem(ACCESS_TOKEN_KEY);
 
     if (!token) {
-      token = sessionStorage.getItem(TokenKey);
+      token = sessionStorage.getItem(ACCESS_TOKEN_KEY);
     }
     config.headers['Authorization'] = `Bearer ${token}`;
     return config;

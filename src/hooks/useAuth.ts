@@ -4,10 +4,9 @@ import { JoinForm } from '@/components/account/JoinForm';
 import { LoginForm } from '@/components/account/LoginForm';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import {
-  SocialLoginKey,
-  TokenKey,
-  UserEmailKey,
-  UserPasswordKey,
+  ACCESS_TOKEN_KEY,
+  REFRESH_TOKEN_KEY,
+  SOCIAL_TYPE_KEY,
 } from '@/constants/storage';
 import { usePopUpActions } from '@/store/popUpStore';
 import useSessionStore from '@/store/sessionStore';
@@ -42,9 +41,11 @@ export const useAuth = () => {
       if (data.isSuccess) {
         // 로그인 정보 저장
         if (isChecked) {
-          localStorage.setItem(TokenKey, data.accessToken!);
+          localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken!);
+          localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken!);
         } else {
-          sessionStorage.setItem(TokenKey, data.accessToken!);
+          sessionStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken!);
+          sessionStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken!);
         }
         setIsLoggedIn(true);
         navigate('/', { replace: true });
@@ -55,7 +56,7 @@ export const useAuth = () => {
   };
 
   const handleSocialLogin = useCallback(async (code: string) => {
-    const type = localStorage.getItem(SocialLoginKey);
+    const type = localStorage.getItem(SOCIAL_TYPE_KEY);
 
     let result;
     if (type === 'github') {
@@ -65,15 +66,15 @@ export const useAuth = () => {
     }
 
     if (result?.isSuccess) {
-      localStorage.setItem(TokenKey, result.accessToken!);
-      localStorage.removeItem(SocialLoginKey);
+      localStorage.setItem(ACCESS_TOKEN_KEY, result.accessToken!);
+      localStorage.removeItem(SOCIAL_TYPE_KEY);
       setIsLoggedIn(true);
       navigate('/', { replace: true });
     }
   }, []);
 
   const logOut = () => {
-    localStorage.removeItem(TokenKey);
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
     setIsLoggedIn(false);
     clearStorage();
     navigate(LOGIN_ROUTER_PATH.login);
@@ -83,9 +84,7 @@ export const useAuth = () => {
     await userAPI.deleteAccount().then((res) => {
       if (res?.isSuccess) {
         clearStorage();
-        localStorage.removeItem(UserEmailKey);
-        localStorage.removeItem(UserPasswordKey);
-        localStorage.removeItem(TokenKey);
+        localStorage.removeItem(ACCESS_TOKEN_KEY);
         logOut();
       }
     });
