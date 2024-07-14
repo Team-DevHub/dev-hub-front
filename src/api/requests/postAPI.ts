@@ -115,8 +115,8 @@ export const postAPI = {
   },
   scrap: async (postId: number) => {
     try {
-      const { data }: AxiosResponse<CommonRes> = await authInstance.get(
-        `/scrap/${postId}`,
+      const { data }: AxiosResponse<CommonRes> = await authInstance.post(
+        `posts/${postId}/scrap`,
       );
       return data;
     } catch (err) {
@@ -126,7 +126,7 @@ export const postAPI = {
   unscrap: async (postId: number) => {
     try {
       const { data }: AxiosResponse<CommonRes> = await authInstance.delete(
-        `/scrap/${postId}`,
+        `posts/${postId}/scrap`,
       );
       return data;
     } catch (err) {
