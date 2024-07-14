@@ -6,10 +6,12 @@ import { LOGIN_ROUTER_PATH } from '@/constants/path';
 import {
   ACCESS_TOKEN_KEY,
   REFRESH_TOKEN_KEY,
+  REMEMBER_ME,
   SOCIAL_TYPE_KEY,
 } from '@/constants/storage';
 import { usePopUpActions } from '@/store/popUpStore';
 import useSessionStore from '@/store/sessionStore';
+import { removeAllTokens, setToken } from '@/utils/token';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -39,14 +41,12 @@ export const useAuth = () => {
   const logIn = async (formData: LoginForm, isChecked: boolean) => {
     await userAPI.login(formData).then((data) => {
       if (data.isSuccess) {
-        // 로그인 정보 저장
-        if (isChecked) {
-          localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken!);
-          localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken!);
-        } else {
-          sessionStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken!);
-          sessionStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken!);
-        }
+        localStorage.setItem(REMEMBER_ME, isChecked ? 'true' : 'false');
+
+        // 토큰 저장
+        setToken(ACCESS_TOKEN_KEY, data.accessToken!);
+        setToken(REFRESH_TOKEN_KEY, data.refreshToken!);
+
         setIsLoggedIn(true);
         navigate('/', { replace: true });
       } else {
@@ -64,9 +64,12 @@ export const useAuth = () => {
     } else {
       result = await authAPI.requestGoogleLogin(code);
     }
+    localStorage.setItem(REMEMBER_ME, 'true');
 
     if (result?.isSuccess) {
-      localStorage.setItem(ACCESS_TOKEN_KEY, result.accessToken!);
+      setToken(ACCESS_TOKEN_KEY, result.accessToken!);
+      setToken(REFRESH_TOKEN_KEY, result.refreshToken!);
+
       localStorage.removeItem(SOCIAL_TYPE_KEY);
       setIsLoggedIn(true);
       navigate('/', { replace: true });
@@ -74,17 +77,15 @@ export const useAuth = () => {
   }, []);
 
   const logOut = () => {
-    localStorage.removeItem(ACCESS_TOKEN_KEY);
     setIsLoggedIn(false);
     clearStorage();
+    removeAllTokens();
     navigate(LOGIN_ROUTER_PATH.login);
   };
 
   const deleteAccount = async () => {
     await userAPI.deleteAccount().then((res) => {
       if (res?.isSuccess) {
-        clearStorage();
-        localStorage.removeItem(ACCESS_TOKEN_KEY);
         logOut();
       }
     });
