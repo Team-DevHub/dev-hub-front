@@ -19,6 +19,7 @@ export interface RequestResetReq {
 export interface LoginRes extends CommonRes {
   userId?: string;
   accessToken?: string;
+  refreshToken?: string;
 }
 
 export interface EmailCheckRes extends CommonRes {

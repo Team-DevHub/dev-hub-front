@@ -11,7 +11,6 @@ import Checkbox from '../common/FormInput/Checkbox';
 import FormButton from '../common/FormInput/FormButton';
 import { Link } from 'react-router-dom';
 import { LOGIN_ROUTER_PATH } from '@/constants/path';
-import { UserEmailKey, UserPasswordKey } from '@/constants/storage';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '@/hooks/useAuth';
 
@@ -26,8 +25,8 @@ const LoginForm = () => {
 
   const { register, watch, handleSubmit } = useForm<LoginForm>({
     defaultValues: {
-      email: localStorage.getItem(UserEmailKey) || '',
-      password: localStorage.getItem(UserPasswordKey) || '',
+      email: '',
+      password: '',
     },
   });
 
