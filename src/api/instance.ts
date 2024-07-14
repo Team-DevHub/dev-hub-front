@@ -32,7 +32,12 @@ authInstance.interceptors.request.use(
   (config) => {
     const { accessToken } = getAccessToken();
 
-    config.headers['Authorization'] = `Bearer ${accessToken}`;
+    if (accessToken) {
+      config.headers['Authorization'] = `Bearer ${accessToken}`;
+    } else {
+      config.headers['Authorization'] = ''; // accessToken이 null인 경우 빈값으로 설정
+    }
+
     return config;
   },
   (error) => {

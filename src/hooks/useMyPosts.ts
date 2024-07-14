@@ -42,7 +42,7 @@ export const useMyPosts = () => {
   const { data: myScraps } = useQuery<PostSummary[]>({
     queryKey: ['myScraps'],
     queryFn: async () => {
-      const response = await postAPI.myscrap();
+      const response = await postAPI.posts({ scrap: true });
       return response.result || [];
     },
   });

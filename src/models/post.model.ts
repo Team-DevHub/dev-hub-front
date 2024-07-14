@@ -11,6 +11,7 @@ export interface PostsReq {
   limit?: number;
   page?: number;
   myPage?: boolean;
+  scrap?: boolean;
   search?: string;
   categoryId?: number;
 }
@@ -38,8 +39,8 @@ export interface Post {
   totalComments: number;
   writer: Writer;
   createdAt: string;
-  comments: Comment[];
   isScrapped: boolean;
+  comments: Comment[];
 }
 
 export interface Comment {
