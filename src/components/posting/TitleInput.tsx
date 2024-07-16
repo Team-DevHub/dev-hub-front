@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function TitleInput({ value, onChange }: Props) {

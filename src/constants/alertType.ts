@@ -13,6 +13,10 @@ export const ALERT_TYPE = {
     route: '/',
     title: '게시글 작성 완료!',
   },
+  editing: {
+    route: '/',
+    title: '게시글 수정 완료!',
+  },
   comment: {
     title: '댓글 삭제 완료!',
   },

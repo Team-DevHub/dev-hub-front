@@ -21,7 +21,7 @@ export const userAPI = {
       );
       return data;
     } catch (err: any) {
-      if (err.response.status === 401) {
+      if (err.response.status === 403) {
         return err.response.data;
       } else {
         window.alert(API_ERROR_MSG);

@@ -150,8 +150,12 @@ const JoinForm = () => {
           placeholder='비밀번호를 한 번 더 입력해주세요'
           errorMessage={errors.passwordCheck?.message}
           {...register('passwordCheck', {
-            validate: (value) =>
-              value === watch('password') || '비밀번호가 일치하지 않습니다',
+            validate: (value) => {
+              if (!value) return true;
+              return (
+                value === watch('password') || '비밀번호가 일치하지 않습니다'
+              );
+            },
           })}
         />
       </InputContainer>

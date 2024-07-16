@@ -1,4 +1,4 @@
-export const UserKeyFromStorage = '@USER' as const;
-export const UserEmailKey = '@USER_EMAIL' as const;
-export const UserPasswordKey = '@USER_PASSWORD' as const;
-export const TokenKey = '@ACCESS_TOKEN' as const;
+export const ACCESS_TOKEN_KEY = '@DEVHUB_ACCESS_TOKEN';
+export const REFRESH_TOKEN_KEY = '@DEVHUB_REFRESH_TOKEN';
+export const SOCIAL_TYPE_KEY = '@DEVHUB_SOCIAL_TYPE';
+export const REMEMBER_ME = '@DEVHUB_REMEMBER_ME';

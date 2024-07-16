@@ -10,9 +10,17 @@ import { LEVEL } from '@/constants/level';
 import { formatDate } from '@/utils/format';
 import { getCategoryName } from '@/utils/getCategoryName';
 import usePostStore from '@/store/postStore';
+import { ICONS } from '@/constants/assets';
+import { useNavigate } from 'react-router-dom';
+import { useUserInfo } from '@/hooks/useUserInfo';
+import { useScrap } from '@/hooks/useScrap';
 
 function PostDetail() {
   const { selectedPost } = usePostStore();
+  const { userData } = useUserInfo();
+  const { toggleScrap } = useScrap();
+
+  const navigate = useNavigate();
 
   if (!selectedPost) {
     return;
@@ -20,11 +28,28 @@ function PostDetail() {
 
   const levelIcon = LEVEL[selectedPost.writer.level]?.icon ?? '';
 
+  const handleEdit = () => {
+    navigate(`/edit-post/${selectedPost.postId}`);
+  };
+
+  const isPostWriter = userData?.userId === selectedPost.writer.userId;
   return (
     <>
       <Container>
         <TopBar>
           <Tag>{getCategoryName(selectedPost.categoryId)}</Tag>
+          {selectedPost.isScrapped !== null && (
+            <img
+              src={
+                selectedPost.isScrapped
+                  ? ICONS.scrap.active
+                  : ICONS.scrap.inactive
+              }
+              alt='scrap'
+              className='scrap'
+              onClick={toggleScrap}
+            />
+          )}
           <UserInfo>
             <span>Lv.{selectedPost.writer.level}</span>
             <h4>{selectedPost.writer.nickname}</h4>
@@ -46,7 +71,15 @@ function PostDetail() {
           />
         </Post>
         <Link />
-        <Date>{formatDate(selectedPost.createdAt)}</Date>
+        <BottomBar>
+          <Date>{formatDate(selectedPost.createdAt)}</Date>
+          {isPostWriter && (
+            <EditButton onClick={handleEdit}>
+              <img src={ICONS.edit} alt='edit' />
+              <span>수정</span>
+            </EditButton>
+          )}
+        </BottomBar>
       </Container>
     </>
   );
@@ -72,6 +105,10 @@ const TopBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  .scrap {
+    cursor: pointer;
+  }
 `;
 
 const Tag = styled.span`
@@ -81,6 +118,7 @@ const Tag = styled.span`
   padding: 7px 17px;
   border-radius: 10px;
   font-weight: 500;
+  margin-right: 15px;
 `;
 
 const UserInfo = styled.div`
@@ -106,10 +144,31 @@ const Post = styled.div`
   }
 `;
 
+const BottomBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-top: 30px;
+  margin-top: auto;
+  margin-bottom: 5px;
+`;
+
 const Date = styled.span`
   color: ${({ theme }) => theme.color_textGray};
   font-size: ${({ theme }) => theme.fontSize_sm};
   font-weight: 300;
-  padding-top: 30px;
-  margin-top: auto;
+`;
+
+const EditButton = styled.button`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  span {
+    color: ${({ theme }) => theme.color_textGray};
+    font-size: ${({ theme }) => theme.fontSize_sm};
+    font-weight: 300;
+    margin-left: 5px;
+  }
 `;

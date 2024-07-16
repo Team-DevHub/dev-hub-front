@@ -4,6 +4,8 @@ import MyLevel from '@/components/myPage/MyLevel';
 import MyActivity from '@/components/myPage/MyActivity';
 import MyPostList from '@/components/myPage/MyPostLIst';
 import BannerWithTitle from '@/components/common/Banner/BannerWithTitle';
+import MyScrapList from '@/components/myPage/MyScrapList';
+import { Tab, Tabs } from '@/components/common/Tabs';
 
 function MyPage() {
   return (
@@ -14,7 +16,14 @@ function MyPage() {
         <MyLevel />
         <MyActivity />
       </Content>
-      <MyPostList />
+      <Tabs>
+        <Tab title='나의 지식'>
+          <MyPostList />
+        </Tab>
+        <Tab title='저장한 지식'>
+          <MyScrapList />
+        </Tab>
+      </Tabs>
     </Container>
   );
 }
@@ -30,5 +39,5 @@ const Container = styled.div`
 const Content = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 25px 0;
+  padding: 25px 0 40px 0;
 `;

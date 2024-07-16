@@ -26,7 +26,7 @@ export const postAPI = {
   },
   posts: async (params: PostsReq) => {
     try {
-      const myPage = params.myPage === true;
+      const myPage = params.myPage || params.scrap === true;
       const instance = myPage ? authInstance : baseInstance;
 
       const { data }: AxiosResponse = await instance.get<PostsRes>(`/posts`, {
@@ -51,7 +51,7 @@ export const postAPI = {
   },
   post: async (postId: number) => {
     try {
-      const { data }: AxiosResponse = await baseInstance.get<PostRes>(
+      const { data }: AxiosResponse = await authInstance.get<PostRes>(
         `/posts/${postId}`,
       );
       return data;
@@ -97,6 +97,39 @@ export const postAPI = {
       if (err instanceof AxiosError && err.response?.status !== 401) {
         window.alert(API_ERROR_MSG);
       }
+    }
+  },
+  editPost: async (postId: number, postData: PostingReq) => {
+    try {
+      const { data }: AxiosResponse<CommonRes> = await authInstance.put(
+        `/posts/${postId}`,
+        postData,
+      );
+      return data;
+    } catch (err) {
+      if (err instanceof AxiosError && err.response?.status !== 401) {
+        window.alert(API_ERROR_MSG);
+      }
+    }
+  },
+  scrap: async (postId: number) => {
+    try {
+      const { data }: AxiosResponse<CommonRes> = await authInstance.post(
+        `posts/${postId}/scrap`,
+      );
+      return data;
+    } catch (err) {
+      window.alert(API_ERROR_MSG);
+    }
+  },
+  unscrap: async (postId: number) => {
+    try {
+      const { data }: AxiosResponse<CommonRes> = await authInstance.delete(
+        `posts/${postId}/scrap`,
+      );
+      return data;
+    } catch (err) {
+      window.alert(API_ERROR_MSG);
     }
   },
 };

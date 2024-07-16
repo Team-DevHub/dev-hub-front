@@ -2,33 +2,42 @@ import styled from 'styled-components';
 import { ICONS } from '../../constants/assets';
 import { useNavigate } from 'react-router-dom';
 
-function MyPostEmpty() {
+interface EmptyProps {
+  message: string;
+  buttonText: string;
+  path: string;
+}
+
+function PostEmpty({ message, buttonText, path }: EmptyProps) {
   const navigate = useNavigate();
 
-  const handleNavigate = () => {
-    navigate('/posting');
+  const handleClick = () => {
+    navigate(path);
   };
-
   return (
     <Container>
-      <p>아직 공유한 지식이 없어요</p>
-      <Content onClick={handleNavigate}>
-        <span>지식 공유하러 가기</span>
-        <ArrowIcon src={ICONS.back} alt='' />
+      <p>{message}</p>
+      <Content onClick={handleClick}>
+        <span>{buttonText}</span>
+        <ArrowIcon src={ICONS.back} alt='back' />
       </Content>
     </Container>
   );
 }
 
-export default MyPostEmpty;
+export default PostEmpty;
 
 const Container = styled.div`
+  height: 330px;
+  background-color: ${({ theme }) => theme.color_bgWhite};
+  border: 1px solid ${({ theme }) => theme.color_borderGray};
+  border-radius: 12px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px;
-  padding: 150px 0;
 
   p {
     font-weight: 500;
