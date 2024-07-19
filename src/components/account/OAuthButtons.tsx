@@ -15,7 +15,7 @@ function OAuthButtons() {
 
     if (result) {
       localStorage.setItem(SOCIAL_TYPE_KEY, type);
-      window.location.replace(result.url);
+      window.location.href = result.url;
     }
   };
 
